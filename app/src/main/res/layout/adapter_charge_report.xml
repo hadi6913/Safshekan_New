@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="cashDetailDto"
+            type="com.safshekan.parkban.services.dto.CashDetailsResultDto.CashDetailsDto" />
+
+        <variable
+            name="viewModel"
+            type="com.safshekan.parkban.viewmodels.ChargeReportViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_5"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size"
+                android:text="@{cashDetailDto.dayName}"/>
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:text="@{cashDetailDto.jalaliPersistOn}"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_5"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/margin_5"
+                android:gravity="center"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size"
+                android:text="ریال"
+                />
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/margin_5"
+                android:gravity="center"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size"
+                android:text="@{String.valueOf(cashDetailDto.amountIncreas)}"
+                />
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="مبلغ افزایش :"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_5"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/margin_5"
+                android:gravity="center"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size"
+                android:text="ریال"
+                />
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/margin_5"
+                android:gravity="center"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size"
+                android:text="@{String.valueOf(cashDetailDto.amountDecreas)}"
+                />
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="مبلغ کاهش :"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:layout_marginLeft="@dimen/margin_all"
+            android:layout_marginRight="@dimen/margin_all"
+            android:layout_marginTop="@dimen/margin_5"
+            android:background="@color/colorPrimary" />
+
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Header">
+        <attr name="titleHeader" format="string" />
+        <attr name="cameraIcon" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="homeCardView">
+        <attr name="LogoImage" format="integer" />
+        <attr name="Label" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="CardView">
+        <attr name="CardImage" format="integer" />
+        <attr name="Value" format="string" />
+        <attr name="Title" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="EditText">
+        <attr name="BValue" format="string" />
+        <attr name="BTitle" format="string" />
+        <attr name="Image" format="integer" />
+    </declare-styleable>
+
+
+
+</resources>

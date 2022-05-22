@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.safshekan.parkban.R" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.safshekan.parkban.viewmodels.PlateListViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ListPlatesActivity">
+
+        <com.safshekan.parkban.controls.Header
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_height"
+            app:titleHeader="لیست پلاک های ثبت شده" />
+
+        <LinearLayout
+            android:id="@+id/selectLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/header"
+            android:layout_marginTop="5dp"
+            android:background="@color/light_grey"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/previousLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{viewModel::previousClick}"
+                android:orientation="horizontal">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/previous_days_not_send"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/currentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{viewModel::currentDayClick}"
+                android:orientation="horizontal">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/current_day"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/sendClick"
+            android:layout_below="@+id/selectLayout"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_5" />
+
+        <LinearLayout
+            android:id="@+id/sendClick"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:onClick="@{viewModel::sendRecords}"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="ارسال رکوردها"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/send" />
+
+        </LinearLayout>
+
+        <!--<Button-->
+        <!--android:id="@+id/btn_click"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="55dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:text="ثبت عکس جدید" />-->
+
+    </RelativeLayout>
+
+</layout>

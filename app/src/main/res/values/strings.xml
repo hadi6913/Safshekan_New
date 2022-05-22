@@ -1,0 +1,179 @@
+<resources>
+    <string name="app_name">Safshekan</string>
+
+
+    <string name="comman_cost">مبلغ قابل پرداخت : %s ریال</string>
+    <string name="entry_time">زمان ورود : %s</string>
+    <string name="duration_time">مدت توقف : %s</string>
+    <string name="card_number">شماره کارت : %s</string>
+    <string name="ozv_number">شماره عضویت : %s</string>
+    <string name="rial">%s ریال</string>
+
+
+    <string name="user_name">نام کاربری</string>
+    <string name="error_mifare">کارت نامعتبر</string>
+    <string name="ok_mifare">شناسایی موفق</string>
+    <string name="password">کلمه عبور</string>
+    <string name="parking_space">جایگاه های پارک</string>
+    <string name="unknown">نامشخص</string>
+    <string name="title_location_permission">دسترسی به موقعیت یاب</string>
+    <string name="text_location_permission">دسترسی به موقعیت یاب برای برنامه پارکبان نیاز می باشد</string>
+    <string name="ok">تایید</string>
+    <string name="cancel">لغو</string>
+    <string name="eos_product">محصول شرکت علم و صنعت</string>
+    <string name="send_records">ارسال تصاویر</string>
+    <string name="reports">گزارشات</string>
+    <string name="functionality_report">گزارش کارکرد</string>
+    <string name="charge_report">گزارش عملکرد مالی</string>
+    <string name="payment">پرداخت</string>
+    <string name="charge">شارژ</string>
+    <string name="setting">تنظیمات</string>
+    <string name="work_shift">نمایش شیفت</string>
+    <integer name="hidden_camera_icon">0</integer>
+    <string name="send_record_way">نحوه ارسال اطلاعات</string>
+    <string name="automatic_send">ارسال اتوماتیک</string>
+    <string name="user_send">ارسال دستی</string>
+    <string name="from_date">از تاریخ</string>
+    <string name="to_date">تا تاریخ</string>
+    <string name="date">تاریخ</string>
+    <string name="shifts">شیفت ها</string>
+    <string name="show_shift">نمایش شیفت</string>
+    <string name="sent_records">رکوردهای ارسال موفق : </string>
+    <string name="all_records">تعداد کل رکوردها : </string>
+    <string name="failed_records">رکوردهای ارسال ناموفق : </string>
+    <string name="exit_of_park">خروج از پارک</string>
+    <string name="remember_password">ذخیره کلمه عبور</string>
+    <string name="park_space">جایگاه پارک</string>
+    <string name="show_functionality">نمایش کارکرد</string>
+    <string name="car">سواری</string>
+    <string name="motorcycle">موتور سیکلت</string>
+    <string name="charge_amounts">مبالغ شارژ (ریال)</string>
+    <string name="current_day">روز جاری</string>
+    <string name="previous_days_not_send">ارسال نشده روزهای قبل</string>
+
+
+    <!--Messages-->
+
+    <string name="username_required">لطفا نام کاربری خود را وارد نمایید</string>
+    <string name="not_entry">ورود یافت نشد</string>
+    <string name="at_least_one_parameter_requierd">حداقل یکی از  فیلدها  را پر کنید</string>
+    <string name="error_in_access">شما اجازه دسترسی ندارید</string>
+    <string name="device_dont_have_card_reader">دستگاه فاقد کارت خوان است</string>
+    <string name="password_required">لطفا کلمه عبور خود را وارد نمایید</string>
+    <string name="exception_msg">بروز خطا</string>
+    <string name="connection_failed">عدم برقراری ارتباط با سرور</string>
+    <string name="unhandled_error_from_server">یک خطای غیر منتظره در سمت سرور اتفاق افتاده است</string>
+    <string name="save_success">ذخیره اطلاعات با موفقیت انجام شد </string>
+    <string name="save_failed">ذخیره اطلاعات با مشکل مواجه شد \n لطفا دوباره نسبت به ذخیره اطلاعات اقدام نمایید</string>
+    <string name="plate_not_detected">تشخیص پلاک با موفقیت انجام نشد</string>
+    <string name="not_detect">پلاکی جهت شناسایی تشخیص داده نشده است</string>
+    <string name="parking_space_busy">جایگاه انتخابی قبلا اشغال شده است \n آیا از انتخاب آن اطمینان دارید</string>
+    <string name="space_not_selected">جایگاه پارک موردنظر را انتخاب نمایید</string>
+    <string name="fake_location">موقعیت یافت شده معتبر نمی باشد</string>
+    <string name="park_space_busy">این جایگاه توسط خودروی دیگری اشغال شده است \n آیا از انتخاب آن اطمینان دارید؟</string>
+    <string name="anpr_not_load">کتابخانه تشخیص پلاک با مشکل مواجه شده است \n لطفا مجددا وارد برنامه شوید</string>
+    <string name="no_shift">در این زمان شیفتی برای شما تعریف نشده است \n امکان ثبت عکس وجود ندارد</string>
+    <string name="no_record_for_send">اطلاعات جدیدی جهت ارسال یافت نشد</string>pls
+    <string name="update_failed">عملیات با مشکل مواجه شد لطفا مجددا تلاش نمایید</string>
+    <string name="location_permission_deny">امکان اجرای برنامه بدون دسترسی موقعیت یاب فراهم نمی باشد</string>
+    <string name="pls_wait_for_location">لطفا تا دریافت کامل موقعیت شکیبا باشید</string>
+    <string name="login_again">لطفا مجددا وارد برنامه شوید</string>
+    <string name="new_version_exit"> یک نسخه جدید از برنامه در سرور موجود است \n لطفا آن را نصب  کرده و سپس با نسخه جدید وارد شوید</string>
+    <string name="apk_not_found">نسخه برنامه یافت نشد</string>
+    <string name="sd_card_permission">دسترسی به کارت حافظه</string>
+    <string name="new_version_permission"> نسخه جدید از برنامه در سرور موجود است \n به منظور دریافت نسخه جدید دسترسی به کارت حافظه نیاز می باشد </string>
+    <string name="select_park_space">لطفا ابتدا جایگاه پارک را انتخاب نمایید</string>
+    <string name="waiting_for_update">لطفا تا دریافت کامل فایل آپدیت شکیبا باشید ...</string>
+    <string name="no_current_shift">در این زمان شیفتی برای شما تعریف نشده است</string>
+    <string name="save_necessary">آیا مایل به ذخیره تغییرات اعمال شده میباشید ؟ </string>
+    <string name="msg_for_manual_send">با انتخاب حالت دستی اطلاعات مربوط به پارک های ثبت شده به صورت خودکار ارسال نخواهند شد \n و باید قبل از پایان هر روز نسبت به ارسال اطلاعات اقدام نمایید. در غیر اینصورت این اطلاعات در محاسبه کارکرد شما لحاظ نخواهند شد \n \n آیا میخواهید نحوه ارسال اطلاعات دستی باشد ؟  </string>
+    <string name="send_record_failed">عملیات ارسال با مشکل مواجه شده است لطفا مجددا تلاش نمایید</string>
+    <string name="begin_date_smaller_than_end_date">تاریخ شروع بازه از تاریخ انتهای آن بزرگتر می باشد</string>
+    <string name="phone_number_length">لطفا شماره همراه را کامل وارد نمایید</string>
+    <string name="phone_number_format">فرمت شماره همراه صحیح نمی باشد</string>
+    <string name="phone_number_confirm">لطفا تکرار شماره همراه را وارد نمایید</string>
+    <string name="phone_number_confirm_length">لطفا تکرار شماره همراه را کامل وارد نمایید</string>
+    <string name="phone_number_confirm_format">فرمت تکرار شماره همراه صحیح نمی باشد</string>
+    <string name="phone_number_not_same_confirm">شماره همراه و تکرار آن صحیح نمی باشد</string>
+    <string name="payment_failed"> عملیات پرداخت با مشکل مواجه گردید \n لطفا مجددا اقدام نمایید </string>
+    <string name="payment_success"> عملیات پرداخت با موفقیعت انجام گردید  </string>
+    <string name="park_amount_zero">این پارک شامل هزینه نمی باشد</string>
+    <string name="car_plate_insert">شماره پلاک وارد نشده است</string>
+    <string name="phone_number_need">شماره تلفن وارد نشده است</string>
+    <string name="charge_not_confirm"> افزایش اعتبار برای این شماره انجام خواهد شد \n آیا از ادامه شارژ اطمینان دارید ؟ </string>
+    <string name="credit_not_enough">اعتبار شما کافی نمی باشد</string>
+    <string name="Play_services">سرویس Google Play شما نیاز به بروزرسانی دارد</string>
+    <string name="plate_not_complete">شماره پلاک کامل وارد نشده است</string>
+    <string name="no_result_found">اطلاعاتی برای نمایش یافت نشد</string>
+    <string name="click_back_again">برای خروج کلید بازگشت را دوباره فشار دهید</string>
+    <string name="end_shift">شیفت جاری شما پایان یافته است</string>
+    <string name="time_not_refresh"> موقعیت جدیدی یافت نشد \n لطفا موقعیت یاب خود را خاموش و روشن نمایید </string>
+    <string name="charge_no_value">مبلغی برای شارژ تعیین نشده است</string>
+    <string name="no_net_connection">عدم اتصال به اینترنت</string>
+    <string name="un_authorized">محدوده زمانی استفاده از این برنامه به پایان رسیده است. \n لطفا دوباره وارد شوید</string>
+    <string name="warning_new_car_print">راننده محترم شما در محدوده طرح مدیریت پارک حاشیه ای توقف نموده اید و مشخصات پلاک شما در سامانه ثبت نشده است، لطفا با مراجعه به مامور پارکبان نسبت به ثبت پلاک خود اقدام فرمایید.</string>
+    <string name="warning_debt_car_print1">راننده محترم بدهی خودروی شما به سیستم پارک حاشیه ای  </string>
+    <string name="warning_debt_car_print2">  ریال می باشد، در صورت عدم پرداخت مطابق با ماده 150 رسیدگی به تخلفات رانندگی اعمال قانون می گردد. لطفا با مراجعه به مامور پارکبان نسبت به پرداخت بدهی خود اقدام فرمایید. پیشاپیش از توجه و همکاری جنابعالی کمال تشکر را داریم.</string>
+    <string name="no_data_for_print">اطلاعاتی برای چاپ یافت نشد</string>
+    <string name="payment_type">برگه پرداخت</string>
+    <string name="charge_type">افزایش اعتبار</string>
+    <string name="charge_failed">تراکنش ناقص</string>
+    <string name="warning_type">برگه هشدار</string>
+    <string name="debt_type">برگه بدهی</string>
+
+
+
+
+
+
+    <string name="tst_info_paper">پرینتر کاغذ ندارد</string>
+    <string name="tst_info_temperature">حرارت بالای پرینتر</string>
+    <string name="tst_info_voltage">برای پرینت باتری را شارژ کنید</string>
+    <string name="tst_info_busy">پرینتر مشغول است</string>
+    <string name="tst_info_error">خطای پرینتر</string>
+    <string name="tst_info_driver_error">خطای درایور پرینتر</string>
+
+
+    <string name="bitmap_null">bitmap is null</string>
+    <string name="qr_null">شناسه اسکن شده خالی است</string>
+    <string name="failed_payment">پرداخت ناموفق</string>
+
+
+    <string name="mdtp_ok">تایید</string>
+    <string name="mdtp_cancel">لغو</string>
+
+    <!--<string name="image_prompt">الف</string>-->
+    <string-array name="image_array">
+        <item>الف</item>
+        <item>ب</item>
+        <item>پ</item>
+        <item>ت</item>
+        <item>ث</item>
+        <item>ج</item>
+        <item>د</item>
+        <item>ز</item>
+        <item>ژ</item>
+        <item>س</item>
+        <item>ش</item>
+        <item>ص</item>
+        <item>ط</item>
+        <item>ع</item>
+        <item>ف</item>
+        <item>ق</item>
+        <item>ک</item>
+        <item>گ</item>
+        <item>ل</item>
+        <item>م</item>
+        <item>ن</item>
+        <item>و</item>
+<!--        <item>ه</item>-->
+        <item>ﻫ</item>
+        <item>ی</item>
+        <item>S</item>
+        <item>D</item>
+        <item>♿</item>
+
+    </string-array>
+
+
+</resources>

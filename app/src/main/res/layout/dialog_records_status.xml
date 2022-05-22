@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:id="@+id/successRecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/green"/>
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/sent_records"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginBottom="5dp">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:id="@+id/failRecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/red"/>
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/failed_records"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"
+            android:layout_marginRight="@dimen/margin_all"
+            android:layout_marginLeft="@dimen/margin_all"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginBottom="@dimen/margin_5"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginBottom="@dimen/margin_normal">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:id="@+id/allRecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/text_color"/>
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/all_records"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+
+        <variable
+            name="viewModel"
+            type="com.safshekan.parkban.viewmodels.PaymentSafshekanViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        tools:context=".PaymentSafshekanActivity">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="100dp"
+            android:alpha="0.06"
+            animatedVisibilityScale="@{4000}"
+            android:src="@drawable/elomo_sanat_alone_logo" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:id="@+id/layout_pelak_payment_safshekan_activity"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/edit_text_background_white_dd"
+                android:visibility="@{viewModel.pelak ? View.VISIBLE : View.GONE}">
+
+
+                <LinearLayout
+                    android:id="@+id/car_plate_payment_safshekan_activity"
+                    android:layout_width="258dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:background="@drawable/pelak_template"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.car ? View.VISIBLE : View.GONE}">
+
+                    <com.safshekan.parkban.controls.PersianTextView
+                        android:id="@+id/txt_car_plate_first_cell_payment_safshekan_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="22dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:maxLength="2"
+                        android:text="@={viewModel.plate__0}"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="12" />
+
+                    <com.safshekan.parkban.controls.PersianTextView
+                        android:id="@+id/txt_car_plate_second_cell_payment_safshekan_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@={viewModel.plate__1}"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        tools:text="الف" />
+
+
+                    <com.safshekan.parkban.controls.PersianTextView
+                        android:id="@+id/txt_car_plate_third_cell_payment_safshekan_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="13dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@={viewModel.plate__2}"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="123" />
+
+                    <com.safshekan.parkban.controls.PersianTextView
+                        android:id="@+id/txt_car_plate_forth_cell_payment_safshekan_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@={viewModel.plate__3}"
+                        android:textColor="@color/text_color"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        tools:text="77" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/motor_plate_payment_safshekan_activity"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:background="@drawable/motor_plate"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="@{viewModel.motor ? View.VISIBLE : View.GONE}">
+
+                    <com.safshekan.parkban.controls.PersianTextView
+                        android:id="@+id/txt_motor_plate_first_cell_payment_safshekan_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:gravity="center"
+                        android:text="@={viewModel.mplate__0}"
+                        android:textColor="@color/text_color"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        tools:text="128" />
+
+                    <com.safshekan.parkban.controls.PersianTextView
+                        android:id="@+id/txt_motor_plate_second_cell_payment_safshekan_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@={viewModel.mplate__1}"
+                        android:textColor="@color/text_color"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        tools:text="36985" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/radio_group_layout_payment"
+                android:layout_below="@id/layout_pelak_payment_safshekan_activity"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="2dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="298dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:background="#2ADDCD8C"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <com.safshekan.parkban.controls.PersianTextView
+                        android:id="@+id/txt_cost_payment_safshekan_activity"
+                        android:layout_width="290dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edit_text_backgroound"
+                        android:gravity="center_vertical"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text= "@{@string/comman_cost(viewModel.commonCost)}"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="50000 ریال" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="298dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:background="#2ADDCD8C"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <com.safshekan.parkban.controls.PersianTextView
+                        android:id="@+id/txt_enter_time_safshekan_activity"
+                        android:layout_width="290dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edit_text_backgroound"
+                        android:gravity="center_vertical"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text= "@{@string/entry_time(viewModel.solarEnterDateTime)}"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="زمان ورود : 125445" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="298dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:background="#2ADDCD8C"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <com.safshekan.parkban.controls.PersianTextView
+                        android:id="@+id/txt_exit_time_safshekan_activity"
+                        android:layout_width="290dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edit_text_backgroound"
+                        android:gravity="center_vertical"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text= "@{@string/duration_time(viewModel.formatedDuration)}"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="زمان خروج : 13135456" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="298dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:background="#2ADDCD8C"
+                    android:gravity="center"
+                    android:visibility="@{viewModel.member ? View.VISIBLE : View.GONE}"
+                    android:orientation="horizontal">
+
+
+                    <com.safshekan.parkban.controls.PersianTextView
+                        android:id="@+id/txt_ozv_number_safshekan_activity"
+                        android:layout_width="290dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edit_text_backgroound"
+                        android:gravity="center_vertical"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text= "@{@string/ozv_number(viewModel.memberCode)}"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="شماره عضویت : 1321313213" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="298dp"
+                    android:layout_height="60dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:background="#2ADDCD8C"
+                    android:visibility="@{viewModel.kart ? View.VISIBLE : View.GONE}"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <com.safshekan.parkban.controls.PersianTextView
+                        android:id="@+id/txt_card_number_safshekan_activity"
+                        android:layout_width="290dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edit_text_backgroound"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text= "@{@string/card_number(viewModel.cardNumber)}"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="شماره کارت : 21446554" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/radio_group_layout_payment"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_above="@id/sendClick"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_5">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:gravity="center"
+                    android:text="انتخاب روش پرداخت"
+                    android:textColor="#69F0AE"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/payment_type_radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/cash_payment_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="32dp"
+                        android:button="@null"
+                        android:buttonTint="@color/white"
+                        android:checked="@{viewModel.cash_transaction}"
+                        android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                        android:gravity="center"
+                        android:onClick="@{viewModel::cash_payment_CheckClick}"
+                        android:text="پرداخت نقدی"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                    <RadioButton
+                        android:id="@+id/online_payment_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:button="@null"
+                        android:buttonTint="@color/white"
+                        android:checked="@{viewModel.electronic_transaction}"
+                        android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                        android:gravity="center"
+                        android:onClick="@{viewModel::electronic_payment_CheckClick}"
+                        android:text="پرداخت الکترونیک"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/sendClick"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="55dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="#AD10834D"-->
+                <!--android:gravity="center"-->
+                <!--android:onClick="@{viewModel::Pardakht_Onclick}"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<com.safshekan.parkban.controls.PersianTextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="پرداخت"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="20sp" />-->
+
+
+            <!--</LinearLayout>-->
+
+
+            <Button
+                android:id="@+id/sendClick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="16dp"
+                android:background="@drawable/new_new_btn_background_layout"
+                android:onClick="@{viewModel::Pardakht_Onclick}"
+                android:text="پرداخت"
+                android:textColor="@android:color/white"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

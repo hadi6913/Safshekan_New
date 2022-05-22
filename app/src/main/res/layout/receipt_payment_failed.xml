@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400px"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--<ScrollView-->
+    <!--android:layout_width="384px"-->
+    <!--android:layout_height="match_parent">-->
+
+    <RelativeLayout
+        android:layout_width="400px"
+        android:layout_height="wrap_content">
+
+        <com.safshekan.parkban.controls.PersianTextView
+            android:id="@+id/print_type_failed"
+            style="@style/print_text"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"/>
+
+        <LinearLayout
+            android:id="@+id/top_layout_failed"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/print_type_failed"
+            android:layout_marginTop="@dimen/margin_5">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/margin_5"
+                android:src="@drawable/imen_logo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/imen_label_failed"
+                    style="@style/print_text"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="ایمن پارک" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/label2_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imen_label_failed"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="مجری پارکینگ حاشیه ای"
+                    android:textColor="@color/text_color"
+                    android:textSize="11.5sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider_failed"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/top_layout_failed"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_5"
+            android:background="@color/text_color" />
+
+        <LinearLayout
+            android:id="@+id/date_layout_failed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/divider_failed"
+            android:layout_marginTop="@dimen/margin_5"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:id="@+id/date_failed"
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_normal" />
+
+            <com.safshekan.parkban.controls.PersianTextView
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_5"
+                android:text="تاریخ :" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/time_layout_failed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/date_layout_failed"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:id="@+id/time_failed"
+                style="@style/print_text"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:layout_marginRight="@dimen/margin_normal"
+                android:text="14:22" />
+
+            <com.safshekan.parkban.controls.PersianTextView
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_normal"
+
+                android:text="ساعت : " />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/plate_main_layout_failed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/date_layout_failed">
+
+            <LinearLayout
+                android:id="@+id/plate_layout_failed"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_5"
+                android:background="@drawable/pelak_template"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/p0_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="51"
+                    android:textColor="@color/text_color"
+                    android:textSize="13sp" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/p1_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/text_color"
+                    android:textSize="13sp" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/p2_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="668"
+                    android:textColor="@color/text_color"
+                    android:textSize="13sp" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/p3_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="55"
+                    android:textColor="@color/text_color"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/motor_layout_failed"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_5"
+                android:background="@drawable/motor_plate"
+                android:orientation="vertical">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/m0_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="123"
+                    android:textColor="@color/text_color"
+                    android:textSize="13dp" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/m1_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="45678"
+                    android:textColor="@color/text_color"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/receipt_layout_failed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/plate_main_layout_failed"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/cost_layout_failed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_5"
+                android:visibility="gone">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    style="@style/print_text"
+                    android:textSize="10sp"
+                    android:text="ریال"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/cost_value_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="12.5sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:justificationMode="inter_word"
+                    />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    style="@style/print_text"
+                    android:text="مبلغ : "
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/debit_layout_failed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_5"
+                android:visibility="gone">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    style="@style/print_text"
+                    android:textSize="10sp"
+                    android:text="ریال"
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/debit_value_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="12.5sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:justificationMode="inter_word"
+                    />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    style="@style/print_text"
+                    android:text="میزان بدهی : "
+                    android:layout_gravity="center"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <!--<com.eos.parkban.controls.PersianTextView-->
+                <!--android:id="@+id/receipt_label_failed"-->
+               <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:textColor="@color/text_color"-->
+                <!--android:textSize="11.5sp"-->
+                <!--android:layout_below="@+id/plate_main_layout_failed"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="@dimen/margin_5"-->
+                <!--android:gravity="center"-->
+                <!--android:text="شماره پیگیری : " />-->
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:id="@+id/receipt_code_failed"
+                style="@style/print_text"
+                android:layout_below="@+id/receipt_label_failed"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_5" />
+
+            <!--<com.eos.parkban.controls.PersianTextView-->
+                <!--android:id="@+id/receipt_factor_lable_failed"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:textColor="@color/text_color"-->
+                <!--android:textSize="11.5sp"-->
+                <!--android:layout_below="@+id/plate_main_layout_failed"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="@dimen/margin_5"-->
+                <!--android:gravity="center"-->
+                <!--android:text="شماره فاکتور : " />-->
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:id="@+id/receipt_factor_code_failed"
+                style="@style/print_text"
+                android:layout_below="@+id/receipt_label_failed"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_5" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/complaints_layout_failed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/receipt_layout_failed"
+            android:layout_marginTop="1dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:id="@+id/complaints_tel_failed"
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_5"
+                android:gravity="center"/>
+
+            <com.safshekan.parkban.controls.PersianTextView
+                style="@style/print_text"
+                android:text="تلفن پیگیری : "
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tel_layout_failed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/complaints_layout_failed"
+            android:layout_marginTop="1dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:id="@+id/parkban_tel_failed"
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_5"
+                android:gravity="center"/>
+
+            <com.safshekan.parkban.controls.PersianTextView
+                style="@style/print_text"
+                android:text="تلفن پارکبان : "
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/last_text_failed"
+            style="@style/print_text"
+            android:textSize="9sp"
+            android:layout_below="@+id/tel_layout_failed"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="1dp"
+            android:text="تحت نظارت اداره ترافیک و پلیس راهور گرگان"
+            />
+
+        <com.safshekan.parkban.controls.PersianTextView
+            android:id="@+id/eos_site_failed"
+            style="@style/print_text"
+            android:layout_below="@+id/last_text_failed"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:text="www.elmosanat.com"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/eos_site_failed" />
+
+    </RelativeLayout>
+
+    <!--</ScrollView>-->
+
+</LinearLayout>

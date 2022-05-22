@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="header_height">55dp</dimen>
+
+    <dimen name="header_size">18sp</dimen>
+    <dimen name="text_size">15sp</dimen>
+    <dimen name="text_size_small">11sp</dimen>
+
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_normal">10dp</dimen>
+    <dimen name="margin_all">20dp</dimen>
+
+    <!--Persian Date Picker-->
+    <dimen name="mdtp_day_number_size">20sp</dimen>
+    <dimen name="mdtp_month_day_label_text_size">18sp</dimen>
+    <!--titre mah va sal kenare ham-->
+    <dimen name="mdtp_month_label_size">19sp</dimen>
+    <!--header name rooz -->
+    <dimen name="mdtp_date_picker_header_text_size">17sp</dimen>
+    <!--adade sal-->
+    <dimen name="mdtp_selected_date_year_size">30sp</dimen>
+    <!--ok va cancel-->
+    <dimen name="mdtp_material_button_textsize">17sp</dimen>
+    <dimen name="popup_width">600px</dimen>
+    <dimen name="popup_height">1000px</dimen>
+
+</resources>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.safshekan.parkban.viewmodels.ReportViewModel" />
+
+        <variable
+            name="funcDto"
+            type="com.safshekan.parkban.services.dto.ReportDetailDto" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5"
+        android:background="@drawable/background_item_recyclerview"
+        android:padding="@dimen/margin_5">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_date_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_5"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{funcDto.solarCashDateTime}"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="9895313135135" />
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تاریخ : "
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linear_layout_detail_one_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_layout_date_container"
+            android:layout_marginRight="@dimen/margin_5"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:id="@+id/linear_layout_pelak_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{funcDto.plate}"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    tools:text="9895313135135" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="پلاک : "
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear_layout_membercode_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{funcDto.memberCode}"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    tools:text="9895313135135" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="شماره عضو : "
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:id="@+id/linear_layout_amount_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_layout_detail_one_container"
+            android:layout_marginRight="@dimen/margin_5"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/rial(String.valueOf(funcDto.amount))}"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="9895313135135" />
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="مبلغ پرداخت شده : "
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_description_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear_layout_amount_container"
+            android:layout_marginRight="@dimen/margin_5"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{funcDto.description}"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="9895313135135" />
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="توضیحات : "
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</layout>

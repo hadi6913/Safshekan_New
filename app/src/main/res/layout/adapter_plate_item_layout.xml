@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.safshekan.parkban.viewmodels.PlateListViewModel" />
+
+        <variable
+            name="carItem"
+            type="com.safshekan.parkban.persistence.models.CarItems" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:onClick="@{(theView)->viewModel.onCarItemSelected(theView, carItem)}"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <RelativeLayout
+                android:id="@+id/count_layout"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                app:circle_back="@{carItem.allPlateSent}">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@{carItem.carItemSize}"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:id="@+id/time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/count_layout"
+                android:text="@{carItem.lastTime}"
+                android:textColor="@color/text_color"
+                android:textSize="17sp" />
+
+            <LinearLayout
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:background="@drawable/pelak_template"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_5"
+                android:layout_marginBottom="@dimen/margin_5"
+                android:visibility="@{carItem.carType ? View.VISIBLE : View.GONE ,default=gone }">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="@{carItem.part0}"
+                    android:textColor="@color/text_color"
+                    android:textSize="18sp" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="@{carItem.part1}"
+                    android:textColor="@color/text_color"
+                    android:textSize="18sp" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{carItem.part2}"
+                    android:textColor="@color/text_color"
+                    android:textSize="18sp" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="3dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{carItem.part3}"
+                    android:textColor="@color/text_color"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/motor_layout"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:background="@drawable/motor_plate"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_5"
+                android:layout_marginBottom="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_5"
+                android:visibility="@{carItem.carType ? View.GONE : View.VISIBLE ,default=gone}">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/m_part1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:text="@{carItem.part0}"
+                    android:textColor="@color/text_color"
+                    android:textSize="18sp" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:id="@+id/m_part2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:text="@{carItem.part1}"
+                    android:textColor="@color/text_color"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                app:image_src="@{carItem.imageFile}"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#a3a1a1" />
+
+    </LinearLayout>
+
+</layout>

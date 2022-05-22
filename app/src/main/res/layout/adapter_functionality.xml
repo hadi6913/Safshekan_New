@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.safshekan.parkban.viewmodels.FunctionalityReportViewModel"/>
+
+        <variable
+            name="funcDto"
+            type="com.safshekan.parkban.services.dto.FunctionalityDetailDto" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_5"
+                android:text="@{funcDto.solarDayName}"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size" />
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:text="@{funcDto.solarDate}"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_5"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_5"
+                android:text="@{Integer.toString(funcDto.parkCount)}"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size" />
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تعداد تصاویر ثبت شده : "
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_5">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:text="@{Integer.toString(funcDto.totalImageCount)}"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="تعداد پارک ها : "
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:layout_marginLeft="@dimen/margin_all"
+            android:layout_marginRight="@dimen/margin_all"
+            android:layout_marginTop="@dimen/margin_5"
+            android:background="@color/colorPrimary" />
+
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:id="@+id/vehicle_type_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.safshekan.parkban.controls.PersianTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:gravity="center"
+            android:text="انتخاب نوع وسیله نقلیه"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size" />
+
+        <RadioGroup
+            android:id="@+id/plate_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_5"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/car_plate_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                android:gravity="center"
+                android:text="@string/car"
+                android:textColor="@color/text_color" />
+
+            <RadioButton
+                android:id="@+id/motorcycle_plate_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                android:gravity="center"
+                android:text="@string/motorcycle"
+                android:textColor="@color/text_color" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/plate_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vehicle_type_layout"
+        android:layout_marginTop="@dimen/margin_5"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/car_layout"
+            android:layout_width="265dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="@dimen/margin_5"
+            android:background="@drawable/pelak_template"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.PersianEditText
+                android:id="@+id/part0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="22dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                style="@style/spinner_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            <com.safshekan.parkban.controls.PersianEditText
+                android:id="@+id/part1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="13dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            <com.safshekan.parkban.controls.PersianEditText
+                android:id="@+id/part2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textColor="@color/text_color"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/motor_layout"
+            android:layout_width="130dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_5"
+            android:background="@drawable/motor_plate"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.safshekan.parkban.controls.PersianEditText
+                android:id="@+id/mpart0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textColor="@color/text_color"
+                android:textSize="18sp" />
+
+            <com.safshekan.parkban.controls.PersianEditText
+                android:id="@+id/mpart1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="5"
+                android:textColor="@color/text_color"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/confirmClick"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/plate_layout"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_5"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.safshekan.parkban.controls.PersianTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="تایید"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

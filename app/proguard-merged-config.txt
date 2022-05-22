@@ -1,0 +1,1375 @@
+-injars 'D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\libs\PaxGLPage_V1.00.04_20170420.jar'(**.class)
+-injars 'D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\libs\PaxNeptuneLiteApi_V2.01.00_20171025.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\adapters-3.1.4.aar\b64f034660956b2ecc975cf623597a18\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\library-3.1.4.aar\d000852b2e21640038adaa1a61631691\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\com.android.databinding\baseLibrary\3.1.4\df1e7638ba852152abe964e86f60fa4ce12e6a6a\baseLibrary-3.1.4.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\multidex-1.0.3.aar\31fab2e31f08188fd2734b7256fd0c7b\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-8.1.0.aar\33ffd34a497e284e934a02b7328428f2\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-cast-8.1.0.aar\ad21dcad222d7265236ffa716391b08f\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\mediarouter-v7-22.2.0.aar\5b3ff0d1b6fa98f3768370aa64134e2c\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\mediarouter-v7-22.2.0.aar\5b3ff0d1b6fa98f3768370aa64134e2c\jars\libs\internal_impl-22.2.0.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\persianmaterialdatetimepicker-1.2.1.aar\08879362df77cf2ca37c5ce017c009fe\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-measurement-8.1.0.aar\164edcf6422de2241738f64dfd441ab9\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-analytics-8.1.0.aar\39ba4f6b70c550226fe73abb5fe93673\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-ads-8.1.0.aar\eeeb16be47b53390c1b0e40a597a14ca\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-8.1.0.aar\ae152cfdae6483c05da3b58d6253ac2b\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-appinvite-8.1.0.aar\c32400b45b5a753f0f0bc812bd736e8a\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-appstate-8.1.0.aar\177f4204474f88bea0127dad4b9e5f71\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-games-8.1.0.aar\05b9796e9a24bb19c9226a572204550b\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-drive-8.1.0.aar\11fb44ba96b82a176cf86462f8a6083b\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-fitness-8.1.0.aar\1bfdddce4480818e24253b475e5ed539\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-gcm-8.1.0.aar\2ea5e350e5d1631601900170aea1b136\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-wallet-8.1.0.aar\31360e6691a3dc76bdc26bd92ffce018\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-identity-8.1.0.aar\8d7ef80ab2963a4542f44749ee94ce5a\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-location-8.1.0.aar\da873aa56b856225c4f3d3bec5230791\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-maps-8.1.0.aar\6d9833f9a1dff44b0127f3e163197a64\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-nearby-8.1.0.aar\62bb22b648c9f06e2695d0881c4ba9b8\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-panorama-8.1.0.aar\e7e60e59be5cabbdb641885ad2696170\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-plus-8.1.0.aar\c0cb4997234486321523f31c8fc4df8a\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-safetynet-8.1.0.aar\89a7057a8bc299b212bfdbc9c1f6e144\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-vision-8.1.0.aar\d3cb41bd90235b29a61487775d7e6767\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-wearable-8.1.0.aar\85de08a90939252016f0604fcbe7dc49\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-base-8.1.0.aar\86bc44c71bf797fb9e35b263de2c6279\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\play-services-basement-8.1.0.aar\d4da9e42d5c5a6e38e182768f981e51d\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\642e81a9b678da79f84fe9f878a373ec\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\f1a06d5fd41dc7df76de7be36c9e0493\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\ded0a424f9d98193daf553da43339500\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\extensions-1.1.1.aar\e898023913787e8f389b224f748bc0e6\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\aae82ca545484abd343a1af9fad78cb4\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.2.aar\8348ee8140fa4f820644f511291fc649\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.4.0\15d7790ee311d961379c51b00aba12d5967cb7ea\converter-gson-2.4.0.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.4.0\fc4aa382632bfaa7be7b41579efba41d5a71ecf3\retrofit-2.4.0.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.10.0\7ef0f1d95bf4c0b3ba30bbae25e0e562b05cf75e\okhttp-3.10.0.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\Android-SpinKit-1.1.0.aar\08223d075f98d4d6552061af62dfb239\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\Toasty-1.3.0.aar\0502667c93d1ef178b3b6a1ea2cf860b\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\1fa43a636b7c8d2ef2ed465b167bc2ea\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\d53abb02f0f9789cd6e2fb63053fa9f3\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\e850b7f884112b70451e95e11f36c64f\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\6e6fe648f60556ffca03a19d791cb592\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\daa7994528bd0611418f8b16f22c0cae\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\845a0594257025470aebf32dead669e5\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\63d3b00aa0405e65b91c5dc1ae98b918\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\ad8733455be014b470ca6fabff4403d2\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\4e2c7c59080049c7b46f2cc528fc6b1a\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\5c3b7366279b1518fe1275c446fbc933\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\crouton-1.8.5.aar\ba582ee18f2d84b94893892c7e25ee10\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\bd4d615c836dd93ea95bfdacebacdde9\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\a22d6b95de96820b32b7ba96bbb68bb5\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\android.arch.paging\common\1.0.0\9634a5f543f7cc5d97b62780fd1d5e9985fdb4b6\common-1.0.0.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\android.arch.core\common\1.1.1\e55b70d1f5620db124b3e85a7f4bdc7bd48d9f95\common-1.1.1.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\android.arch.lifecycle\common\1.1.1\207a6efae6a3555e326de41f76bdadd9a239cbce\common-1.1.1.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\android.arch.persistence.room\common\1.1.1\8094cc50760b9ac665a8ea76b51888f70042e2b5\common-1.1.1.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.1.aar\6af895d9717a3c361efd609d4e5104d6\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\db-1.1.1.aar\042cd514b5f34929e4e3897c69073c26\jars\classes.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\27.1.1\39ded76b5e1ce1c5b2688e1d25cdc20ecee32007\support-annotations-27.1.1.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\com.android.support.constraint\constraint-layout-solver\1.1.2\bfc967828daffc35ba01c9ee204d98b664930a0f\constraint-layout-solver-1.1.2.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.2\3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf\gson-2.8.2.jar'(**.class)
+-injars 'C:\Users\kordbacheh.s\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.14.0\102d7be47241d781ef95f1581d414b0943053130\okio-1.14.0.jar'(**.class)
+-injars 'D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\libs\opencv\build\intermediates\intermediate-jars\debug\classes.jar'(**.class)
+-injars 'D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\classes\debug'(**.class)
+-injars 'D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\transforms\mergeJavaRes\debug\0.jar'(!**.class)
+-outjars 'D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\transforms\proguard\debug\0.jar'
+
+-libraryjars 'E:\Androids\SDK_Version\ADT-Bundle-Windows-x86_64\sdk\platforms\android-27\android.jar'
+-libraryjars 'E:\Androids\SDK_Version\ADT-Bundle-Windows-x86_64\sdk\platforms\android-27\optional\org.apache.http.legacy.jar'
+
+-forceprocessing
+-printusage 'D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\outputs\mapping\debug\usage.txt'
+-dontoptimize
+-printmapping 'D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\outputs\mapping\debug\mapping.txt'
+-dontusemixedcaseclassnames
+-keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod,*Annotation*,*Annotation*
+-verbose
+-dontnote com.android.vending.licensing.ILicensingService,com.google.vending.licensing.ILicensingService,com.google.android.vending.licensing.ILicensingService,android.support.**
+-dontwarn android.support.**,android.util.FloatMath,okio.**,retrofit2.**,javax.annotation.**,okhttp3.internal.platform.*,android.databinding.ViewDataBinding,android.databinding.ViewDataBinding$LiveDataListener,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,org.apache.http.**,android.arch.persistence.room.paging.**
+-printconfiguration 'D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\proguard-merged-config.txt'
+-dump 'D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\outputs\mapping\debug\dump.txt'
+-printseeds 'D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\outputs\mapping\debug\seeds.txt'
+
+
+-keep public class com.google.vending.licensing.ILicensingService
+
+-keep public class com.android.vending.licensing.ILicensingService
+
+-keep public class com.google.android.vending.licensing.ILicensingService
+
+# For native methods, see http://proguard.sourceforge.net/manual/examples.html#native
+-keepclasseswithmembers,allowshrinking class * {
+    native <methods>;
+}
+
+# Keep setters in Views so that animations can still work.
+-keepclassmembers public class * extends android.view.View {
+    void set*(***);
+    *** get*();
+}
+
+# We want to keep methods in Activity that could be used in the XML attribute onClick.
+-keepclassmembers class * extends android.app.Activity {
+    public void *(android.view.View);
+}
+
+# For enumeration classes, see http://proguard.sourceforge.net/manual/examples.html#enumerations
+-keepclassmembers enum  * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keepclassmembers class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+# Preserve annotated Javascript interface methods.
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface
+    <methods>;
+}
+
+# Understand the @Keep support annotation.
+-keep class android.support.annotation.Keep
+
+-keep @android.support.annotation.Keep class * {
+    <fields>;
+    <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep
+    <methods>;
+}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep
+    <fields>;
+}
+
+-keepclasseswithmembers class * {
+    @android.support.annotation.Keep
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:142
+-keep class android.arch.lifecycle.ProcessLifecycleOwnerInitializer {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:49
+-keep class android.support.v4.content.FileProvider {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_alert_dialog_material.xml:41
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_charge_report.xml:61
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_functionality_report.xml:144
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_shift.xml:59
+-keep class android.support.v4.widget.NestedScrollView {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_select_dialog_material.xml:23
+-keep class android.support.v7.app.AlertController$RecycleListView {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_action_menu_item_layout.xml:17
+-keep class android.support.v7.view.menu.ActionMenuItemView {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_expanded_menu_layout.xml:17
+-keep class android.support.v7.view.menu.ExpandedMenuView {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_list_menu_item_layout.xml:17
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_popup_menu_item_layout.xml:17
+-keep class android.support.v7.view.menu.ListMenuItemView {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout-v26\abc_screen_toolbar.xml:27
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_screen_toolbar.xml:27
+-keep class android.support.v7.widget.ActionBarContainer {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout-v26\abc_screen_toolbar.xml:44
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_action_mode_bar.xml:19
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_screen_toolbar.xml:43
+-keep class android.support.v7.widget.ActionBarContextView {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout-v26\abc_screen_toolbar.xml:17
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_screen_toolbar.xml:17
+-keep class android.support.v7.widget.ActionBarOverlayLayout {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_action_menu_layout.xml:17
+-keep class android.support.v7.widget.ActionMenuView {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_activity_chooser_view.xml:19
+-keep class android.support.v7.widget.ActivityChooserView$InnerLayout {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_alert_dialog_material.xml:18
+-keep class android.support.v7.widget.AlertDialogLayout {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout-watch-v20\abc_alert_dialog_button_bar_material.xml:18
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_alert_dialog_button_bar_material.xml:26
+-keep class android.support.v7.widget.ButtonBarLayout {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_screen_content_include.xml:19
+-keep class android.support.v7.widget.ContentFrameLayout {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout-watch-v20\abc_alert_dialog_title_material.xml:44
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_alert_dialog_title_material.xml:45
+-keep class android.support.v7.widget.DialogTitle {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_screen_simple_overlay_action_mode.xml:23
+-keep class android.support.v7.widget.FitWindowsFrameLayout {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_dialog_title_material.xml:22
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_screen_simple.xml:17
+-keep class android.support.v7.widget.FitWindowsLinearLayout {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_charge_report.xml:77
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_functionality_report.xml:160
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_shift.xml:74
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\fragment_current_cars.xml:18
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\fragment_previous_cars.xml:19
+-keep class android.support.v7.widget.RecyclerView {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_search_view.xml:75
+-keep class android.support.v7.widget.SearchView$SearchAutoComplete {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout-v26\abc_screen_toolbar.xml:37
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_screen_toolbar.xml:36
+-keep class android.support.v7.widget.Toolbar {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_screen_simple.xml:25
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_screen_simple_overlay_action_mode.xml:32
+-keep class android.support.v7.widget.ViewStubCompat {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout-watch-v20\abc_alert_dialog_title_material.xml:53
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_alert_dialog_button_bar_material.xml:43
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_alert_dialog_material.xml:52
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_alert_dialog_material.xml:66
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\ee2a79bd4c05c67381d9758ae3ab5eae\res\layout\abc_alert_dialog_title_material.xml:56
+-keep class android.widget.Space {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:109
+-keep class com.eos.parkban.ChargeReportActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:106
+-keep class com.eos.parkban.DriverChargeActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:99
+-keep class com.eos.parkban.FunctionalityReportActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:69
+-keep class com.eos.parkban.ListPlatesActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:72
+-keep class com.eos.parkban.LoginActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:42
+-keep class com.eos.parkban.MainActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:102
+-keep class com.eos.parkban.PaymentActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:45
+-keep class com.eos.parkban.RecordPlateActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:93
+-keep class com.eos.parkban.SettingActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:96
+-keep class com.eos.parkban.ShiftActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:75
+-keep class com.eos.parkban.SplashActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:465
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_functionality_report.xml:62
+-keep class com.eos.parkban.controls.CardViewControl {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_charge_report.xml:38
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_charge_report.xml:52
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_functionality_report.xml:37
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_functionality_report.xml:52
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_shift.xml:36
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_shift.xml:50
+-keep class com.eos.parkban.controls.DatePickerControls {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_charge_report.xml:23
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:22
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_functionality_report.xml:22
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_list_plates.xml:24
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:20
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:22
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_setting.xml:21
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_shift.xml:21
+-keep class com.eos.parkban.controls.Header {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_main.xml:48
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_main.xml:60
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_main.xml:82
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_main.xml:94
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_main.xml:118
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_reports.xml:51
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_reports.xml:62
+-keep class com.eos.parkban.controls.HomeCardView {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:57
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:87
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:318
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:342
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:355
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:381
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:392
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_login.xml:46
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_login.xml:60
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:356
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:383
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\control_login_edit_text.xml:30
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_charge_value.xml:64
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_plate.xml:84
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_plate.xml:107
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_plate.xml:120
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_plate.xml:146
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_plate.xml:157
+-keep class com.eos.parkban.controls.PersianEditText {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_charge_report.xml:103
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:36
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:75
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:127
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:154
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:162
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:170
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:188
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:208
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:216
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:225
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:245
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_driver_charge.xml:488
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_functionality_report.xml:92
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_functionality_report.xml:101
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_functionality_report.xml:122
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_functionality_report.xml:131
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_functionality_report.xml:186
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_list_plates.xml:49
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_list_plates.xml:77
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_list_plates.xml:111
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_login.xml:85
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_login.xml:137
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_login.xml:148
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:36
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:45
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:56
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:96
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:106
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:116
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:126
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:150
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:160
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:188
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:198
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:208
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:227
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:237
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:247
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:313
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:324
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:371
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:418
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_payment.xml:452
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:98
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:159
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:170
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:181
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:192
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:216
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:226
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:251
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:284
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:302
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:340
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_record_plate.xml:375
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_setting.xml:36
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_setting.xml:109
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_shift.xml:100
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_splash.xml:33
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_splash.xml:44
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_splash.xml:64
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_charge_report.xml:27
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_charge_report.xml:36
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_charge_report.xml:54
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_charge_report.xml:65
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_charge_report.xml:76
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_charge_report.xml:95
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_charge_report.xml:106
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_charge_report.xml:117
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_functionality.xml:26
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_functionality.xml:35
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_functionality.xml:54
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_functionality.xml:62
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_functionality.xml:85
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_functionality.xml:93
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_parkban_shift.xml:27
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_parkban_shift.xml:36
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_parkban_shift.xml:51
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_parkban_shift.xml:68
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_parkban_shift.xml:85
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_parkban_shift.xml:109
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_parkban_shift.xml:117
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_parkban_shift.xml:140
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_parkban_shift.xml:148
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_plate_item_layout.xml:40
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_plate_item_layout.xml:51
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_plate_item_layout.xml:76
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_plate_item_layout.xml:87
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_plate_item_layout.xml:97
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_plate_item_layout.xml:107
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_plate_item_layout.xml:135
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\adapter_plate_item_layout.xml:146
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\adapter_dialog.xml:23
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\adapter_items_time.xml:7
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\adapter_items_time.xml:25
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\adapter_items_time.xml:33
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\control_card_view.xml:13
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\control_card_view.xml:33
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\control_date_card_view.xml:14
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\control_date_card_view.xml:34
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\control_header.xml:7
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\control_home_card_view.xml:15
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\control_login_edit_text.xml:7
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\crouton_debt_view.xml:18
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\crouton_debt_view.xml:27
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\crouton_debt_view.xml:37
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_car_items_times.xml:8
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_charge_value.xml:7
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_charge_value.xml:52
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_charge_value.xml:76
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_charge_value.xml:113
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_charge_value.xml:137
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_confirm_message.xml:7
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_confirm_message.xml:45
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_confirm_message.xml:69
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_park_space.xml:7
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_park_space.xml:19
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_park_space.xml:31
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_park_space.xml:56
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_park_space.xml:98
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_park_space.xml:122
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_plate.xml:16
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_edit_plate.xml:184
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_fragment.xml:7
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_fragment.xml:36
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_fragment.xml:47
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_fragment.xml:57
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_fragment.xml:67
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_fragment.xml:91
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_fragment.xml:101
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_fragment.xml:167
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_fragment.xml:200
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_gps.xml:7
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_gps.xml:23
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_gps.xml:60
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_gps.xml:84
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_items.xml:8
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_location.xml:10
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_location.xml:34
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_payment_result.xml:8
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_payment_result.xml:27
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_payment_result.xml:38
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_payment_result.xml:58
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_payment_result.xml:69
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_payment_result.xml:99
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_records_status.xml:22
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_records_status.xml:30
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_records_status.xml:50
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_records_status.xml:58
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_records_status.xml:87
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_records_status.xml:95
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_reports.xml:18
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\dialog_toast.xml:29
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:17
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:44
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:54
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:91
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:96
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:113
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:120
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:144
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:156
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:167
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:178
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:200
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:211
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:244
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:251
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:264
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:272
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:284
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:309
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:315
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:331
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:337
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\receipt_payment.xml:344
+-keep class com.eos.parkban.controls.PersianTextView {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:31
+-keep class com.eos.parkban.helper.PrintParkbanApp {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_splash.xml:55
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\src\main\res\layout\control_progress_dialog.xml:10
+-keep class com.github.ybq.android.spinkit.SpinKitView {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:130
+-keep class com.google.android.gms.ads.AdActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:134
+-keep class com.google.android.gms.ads.purchase.InAppPurchaseActivity {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:113
+-keep class com.google.android.gms.measurement.AppMeasurementContentProvider {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:118
+-keep class com.google.android.gms.measurement.AppMeasurementReceiver {
+    <init>(...);
+}
+
+# Referenced at D:\Workspaces\KordBache.s\ParkometerProject\ParkometerMobile\Parkban\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:126
+-keep class com.google.android.gms.measurement.AppMeasurementService {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\persianmaterialdatetimepicker-1.2.1.aar\08879362df77cf2ca37c5ce017c009fe\res\layout\mdtp_date_picker_selected_date.xml:28
+-keep class com.mohamadamin.persianmaterialdatetimepicker.AccessibleLinearLayout {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\persianmaterialdatetimepicker-1.2.1.aar\08879362df77cf2ca37c5ce017c009fe\res\layout\mdtp_date_picker_selected_date.xml:63
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\persianmaterialdatetimepicker-1.2.1.aar\08879362df77cf2ca37c5ce017c009fe\res\layout\mdtp_time_header_label.xml:50
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\persianmaterialdatetimepicker-1.2.1.aar\08879362df77cf2ca37c5ce017c009fe\res\layout\mdtp_time_header_label.xml:93
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\persianmaterialdatetimepicker-1.2.1.aar\08879362df77cf2ca37c5ce017c009fe\res\layout\mdtp_time_header_label.xml:103
+-keep class com.mohamadamin.persianmaterialdatetimepicker.AccessibleTextView {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\persianmaterialdatetimepicker-1.2.1.aar\08879362df77cf2ca37c5ce017c009fe\res\layout\mdtp_date_picker_view_animator.xml:16
+-keep class com.mohamadamin.persianmaterialdatetimepicker.date.AccessibleDateAnimator {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\persianmaterialdatetimepicker-1.2.1.aar\08879362df77cf2ca37c5ce017c009fe\res\layout\mdtp_year_label_text_view.xml:16
+-keep class com.mohamadamin.persianmaterialdatetimepicker.date.TextViewWithCircularIndicator {
+    <init>(...);
+}
+
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\persianmaterialdatetimepicker-1.2.1.aar\08879362df77cf2ca37c5ce017c009fe\res\layout-land\mdtp_time_picker_dialog.xml:24
+# Referenced at C:\Users\kordbacheh.s\.gradle\caches\transforms-1\files-1.1\persianmaterialdatetimepicker-1.2.1.aar\08879362df77cf2ca37c5ce017c009fe\res\layout\mdtp_time_picker_dialog.xml:51
+-keep class com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout {
+    <init>(...);
+}
+
+-keep class retrofit.http.** {
+    <fields>;
+    <methods>;
+}
+
+-keep public class * extends android.support.v7.app.ActionBarActivity
+
+-keep public class * extends com.eos.parkban
+
+-keep class android.support.v7.** {
+    <fields>;
+    <methods>;
+}
+
+-keep interface  android.support.v7.** {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.google.gson.** {
+    <fields>;
+    <methods>;
+}
+
+-keepclassmembers enum  * {
+    <fields>;
+    <methods>;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+# Copyright (C) 2018 The Android Open Source Project
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# Ensure that reflectively-loaded inflater is not obfuscated. This can be
+# removed when we stop supporting AAPT1 builds.
+-keep,allowshrinking class android.support.v7.app.AppCompatViewInflater
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected java.lang.Object[][] getContents();
+}
+
+# Keep SafeParcelable value, needed for reflection. This is required to support backwards
+# compatibility of some classes.
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+# Keep the names of classes/members we need for client functionality.
+-keep,allowshrinking @com.google.android.gms.common.annotation.KeepName class *
+
+-keepclassmembers,allowshrinking class * {
+    @com.google.android.gms.common.annotation.KeepName
+    <fields>;
+    @com.google.android.gms.common.annotation.KeepName
+    <methods>;
+}
+
+# Needed for Parcelable/SafeParcelable Creators to not get stripped
+-keep,allowshrinking class * extends android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+# Copyright (C) 2015 The Android Open Source Project
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# When layoutManager xml attribute is used, RecyclerView inflates
+# LayoutManagers' constructors using reflection.
+-keep public class * extends android.support.v7.widget.RecyclerView$LayoutManager {
+    public <init>(...);
+}
+
+-keep class * extends android.arch.lifecycle.AndroidViewModel {
+    <init>(android.app.Application);
+}
+
+-keep public class * extends android.arch.persistence.room.RoomDatabase
+
+-keep class * extends android.arch.lifecycle.ViewModel {
+    <init>();
+}
+
+# Copyright (C) 2016 The Android Open Source Project
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# keep setters in VectorDrawables so that animations can still work.
+-keepclassmembers class android.support.graphics.drawable.VectorDrawableCompat$* {
+    void set*(***);
+    *** get*();
+}
+
+# Copyright (C) 2016 The Android Open Source Project
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# CoordinatorLayout resolves the behaviors of its child components with reflection.
+-keep public class * extends android.support.design.widget.CoordinatorLayout$Behavior {
+    public <init>(android.content.Context,android.util.AttributeSet);
+    public <init>();
+}
+
+# Copyright (C) 2017 The Android Open Source Project
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# Prevent Parcelable objects from being removed or renamed.
+-keep class android.support.v4.media.** extends android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
+
+-keepclassmembers enum  android.arch.lifecycle.Lifecycle$Event {
+    <fields>;
+}
+
+-keep class * extends android.arch.lifecycle.LifecycleObserver
+
+-keep class * extends android.arch.lifecycle.GeneratedAdapter {
+    <init>(...);
+}
+
+-keepclassmembers class ** {
+    @android.arch.lifecycle.OnLifecycleEvent
+    <fields>;
+    @android.arch.lifecycle.OnLifecycleEvent
+    <methods>;
+}

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+<!--        <import type="java.lang.Integer" />-->
+        <import type="android.view.View"/>
+
+        <variable
+            name="viewModel"
+            type="com.safshekan.parkban.viewmodels.FunctionalityReportViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".FunctionalityReportActivity">
+
+        <com.safshekan.parkban.controls.Header
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_height"
+            app:titleHeader="@string/functionality_report" />
+
+        <LinearLayout
+            android:id="@+id/date_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header"
+            android:layout_marginTop="@dimen/margin_5"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <com.safshekan.parkban.controls.DatePickerControls
+                android:id="@+id/toDatePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:Title="@string/to_date"
+                 />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_5"
+                android:background="@color/colorPrimary" />
+
+            <com.safshekan.parkban.controls.DatePickerControls
+                android:id="@+id/fromDatePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:Title="@string/from_date"
+                 />
+
+        </LinearLayout>
+
+        <com.safshekan.parkban.controls.CardViewControl
+            android:id="@+id/shift_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/date_layout"
+            android:layout_marginTop="@dimen/margin_5"
+            app:CardImage="@mipmap/shift"
+            app:Title="شیفت"
+            app:Value="@{viewModel.shiftName}"
+            android:onClick="@{viewModel::shiftClick}"
+            />
+
+        <LinearLayout
+            android:id="@+id/total_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shift_card_view"
+            android:layout_marginTop="@dimen/margin_5"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_5"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:text="@{viewModel.totalImageCount}"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:text="تعداد کل تصاویر ثبت شده : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margin_5"
+                android:layout_marginRight="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_5"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:text="@{viewModel.totalParkCount}"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:text="تعداد کل پارک ها : "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/button_layout"
+            android:layout_below="@+id/total_layout"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="@{viewModel.showList ? View.VISIBLE : View.GONE}">
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    app:data_adapter="@{viewModel.funcAdapter}"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:listitem="@layout/adapter_functionality"
+                    android:nestedScrollingEnabled="false"/>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_height"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:onClick="@{viewModel::showFunctionality}">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/show_functionality"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/func" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

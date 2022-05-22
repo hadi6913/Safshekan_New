@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.safshekan.parkban.viewmodels.SettingViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".SettingActivity">
+
+        <com.safshekan.parkban.controls.Header
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            app:titleHeader="@string/setting"
+            app:cameraIcon="@integer/hidden_camera_icon"/>
+
+        <RelativeLayout
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/header">
+
+            <com.safshekan.parkban.controls.PersianTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/send_record_way"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_gravity="right"
+            android:background="@color/white"
+            android:gravity="right"
+            android:layoutDirection="rtl"
+            android:layout_marginTop="5dp">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:gravity="right"
+                android:inputType="text"
+                android:layoutDirection="rtl"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/automaticButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:button="@null"
+                    android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                    android:gravity="center"
+                    android:text="@string/automatic_send"
+                    android:textSize="@dimen/text_size"
+                    android:onClick="@{viewModel::getAutomaticCheck}"
+                    android:checked="@{viewModel.automatic}"/>
+
+                <RadioButton
+                    android:id="@+id/manualButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:button="@null"
+                    android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+                    android:gravity="center"
+                    android:text="@string/user_send"
+                    android:layout_marginTop="10dp"
+                    android:textSize="@dimen/text_size"
+                    android:onClick="@{viewModel::getManualCheck}"
+                    android:checked="@{viewModel.manual}"
+                    />
+
+            </RadioGroup>
+
+        </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorPrimary"
+                android:onClick="@{viewModel::saveClick}">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="ذخیره"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/save" />
+
+            </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

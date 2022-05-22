@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <import type="android.view.View" />
+
+
+        <variable
+            name="viewModel"
+            type="com.safshekan.parkban.viewmodels.QRcodeReaderViewModel" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+
+        <ImageView
+            animatedVisibilityWink="@{3500}"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="200dp"
+            android:src="@drawable/elomo_sanat_alone_logo" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+            <RelativeLayout
+                android:id="@+id/background_qrcode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="120dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="120dp"
+                android:background="@{viewModel.backgroundAnimationColor}" />
+
+
+            <com.journeyapps.barcodescanner.DecoratedBarcodeView
+                android:id="@+id/barcode_scanner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="128dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="128dp">
+
+            </com.journeyapps.barcodescanner.DecoratedBarcodeView>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:padding="@dimen/margin_5">
+
+            <ImageView
+                android:id="@+id/img_back_from_qrcode_reader"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="16dp"
+                android:adjustViewBounds="true"
+                android:onClick="@{viewModel::Back_Onclick}"
+                android:padding="17dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/close_icon_qr_code" />
+
+            <ImageView
+                android:id="@+id/img_flash"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:adjustViewBounds="true"
+                android:onClick="@{viewModel::Flash_Light_Onclick}"
+                android:scaleType="centerCrop"
+                android:padding="13dp"
+                android:src="@{viewModel.flash_light_status ?  @drawable/flash_light_on :@drawable/flash_light_off}" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</layout>

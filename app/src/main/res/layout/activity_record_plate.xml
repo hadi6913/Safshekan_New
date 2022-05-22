@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="recordViewModel"
+            type="com.safshekan.parkban.viewmodels.RecordPlateViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".RecordPlateActivity">
+
+        <com.safshekan.parkban.controls.Header
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            app:cameraIcon="@integer/hidden_camera_icon"
+            app:titleHeader="ثبت پلاک جدید" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/background">
+
+                    <RelativeLayout
+                        android:id="@+id/camera_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="280dp"
+                        android:background="@color/white"
+                        android:onClick="@{recordViewModel::showCameraClick}"
+                        >
+
+                        <RelativeLayout
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:layout_marginRight="@dimen/margin_5"
+                            android:background="@drawable/circle_header"
+                            android:onClick="@{recordViewModel::printClick}"
+                            android:visibility="@{recordViewModel.printerShow ? View.VISIBLE : View.GONE}">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/printer"
+                                android:layout_centerInParent="true"/>
+
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="230dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginBottom="1dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/camera"
+                            app:image_src="@{recordViewModel.carPlate.plateImage}"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/imageView"
+                            android:layout_marginBottom="0dp"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="1dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="3dp"
+                                android:layout_weight="1"
+                                android:background="@color/light_grey" />
+
+                            <com.safshekan.parkban.controls.PersianTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="ثبت عکس جدید"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="15sp" />
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="1dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="3dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:background="@color/light_grey" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/plate_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/camera_layout"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/white"
+                        android:visibility="@{recordViewModel.carPhoto ? View.VISIBLE : View.GONE}">
+
+                        <RelativeLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/margin_5"
+                            android:onClick="@{recordViewModel::editPlateClick}">
+
+                            <ImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_centerInParent="true"
+                                android:src="@mipmap/edit" />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="270dp"
+                            android:layout_height="60dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerInParent="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:layout_marginBottom="@dimen/margin_5"
+                            android:background="@drawable/pelak_template"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:visibility="@{recordViewModel.carType ? View.VISIBLE : View.GONE}">
+
+                            <com.safshekan.parkban.controls.PersianTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="4dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="@{recordViewModel.carPlate.part0}"
+                                android:textColor="@color/text_color"
+                                android:textSize="26sp" />
+
+                            <com.safshekan.parkban.controls.PersianTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="4dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@{recordViewModel.carPlate.part1}"
+                                android:textColor="@color/text_color"
+                                android:textSize="26sp" />
+
+                            <com.safshekan.parkban.controls.PersianTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="4dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@{recordViewModel.carPlate.part2}"
+                                android:textColor="@color/text_color"
+                                android:textSize="26sp" />
+
+                            <com.safshekan.parkban.controls.PersianTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="8dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@{recordViewModel.carPlate.part3}"
+                                android:textColor="@color/text_color"
+                                android:textSize="22sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="130dp"
+                            android:layout_height="80dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginBottom="@dimen/margin_5"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:background="@drawable/motor_plate"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="@{recordViewModel.motorType ? View.VISIBLE : View.GONE}">
+
+                            <com.safshekan.parkban.controls.PersianTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="3dp"
+                                android:gravity="center"
+                                android:text="@{recordViewModel.carPlate.part0}"
+                                android:textColor="@color/text_color"
+                                android:textSize="27sp" />
+
+                            <com.safshekan.parkban.controls.PersianTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:layout_marginBottom="3dp"
+                                android:text="@{recordViewModel.carPlate.part1}"
+                                android:textColor="@color/text_color"
+                                android:textSize="27sp" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/exitCheck"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/plate_layout"
+
+                        android:layout_marginTop="5dp"
+                        android:background="@color/white"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:visibility="@{recordViewModel.newCar ? View.GONE : View.VISIBLE}">
+
+                        <com.safshekan.parkban.controls.PersianTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/exit_of_park"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <CheckBox
+                            android:id="@+id/remember_password"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:checked="@{recordViewModel.exit}"
+                            android:gravity="center"
+                            android:onClick="@{recordViewModel::getExitCheckStatus}"
+                            android:scaleX="1.2"
+                            android:scaleY="1.2"
+                            android:theme="@style/CustomCheckBox" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:layout_below="@+id/exitCheck"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/white"
+                        android:onClick="@{recordViewModel::parkingSpaceClick}"
+                        app:layout_visibility="@{recordViewModel.showParkingSpace}">
+
+                        <com.safshekan.parkban.controls.PersianTextView
+                            android:id="@+id/streetLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/margin_5"
+                            android:layout_marginTop="@dimen/margin_normal"
+                            android:text="@string/park_space"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/text_size" />
+
+                        <RelativeLayout
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginLeft="@dimen/margin_5"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:background="@mipmap/ic_parking_sign" />
+
+                        <com.safshekan.parkban.controls.PersianTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/streetLabel"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="4dp"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="@{recordViewModel.parkingSpaceName}"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/cameraClick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{recordViewModel::saveAndPayRecordClick}"
+                android:orientation="horizontal"
+                app:save_color="@{recordViewModel.exit}">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="ذخیره و پرداخت"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@mipmap/spay" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="#ffffff" />
+
+            <LinearLayout
+                android:id="@+id/saveClick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{recordViewModel::saveRecordClick}"
+                android:orientation="horizontal"
+                app:save_color="@{recordViewModel.saveEnable}">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="ذخیره"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/save" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

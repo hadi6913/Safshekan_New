@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+
+        <variable
+            name="viewModel"
+            type="com.safshekan.parkban.viewmodels.ReportViewModel" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        tools:context=".ReportActivity">
+
+
+        <ImageView
+            animatedVisibilityScale="@{4000}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="100dp"
+            android:alpha="0.06"
+            android:src="@drawable/elomo_sanat_alone_logo" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:id="@+id/linear_date_picker_container_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.safshekan.parkban.controls.DatePickerControls
+                    android:id="@+id/toDatePicker_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:Title="@string/to_date" />
+
+
+                <com.safshekan.parkban.controls.DatePickerControls
+                    android:id="@+id/fromDatePicker_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:Title="@string/from_date" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linear_mablagh_container_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linear_date_picker_container_main"
+                android:layout_margin="10dp"
+                android:background="@drawable/edit_text_background_white_dd"
+                android:gravity="center"
+                android:visibility="@{viewModel.showTotalAmountLayout ? View.VISIBLE : View.GONE}"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/rial(viewModel.totalCacheAmount)}"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <com.safshekan.parkban.controls.PersianTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="جمع مبالغ دریافتی :  "
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/scroll_report"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/btn_show_report"
+                android:layout_below="@+id/linear_mablagh_container_main"
+                android:layout_margin="@dimen/margin_5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{viewModel.showList ? View.VISIBLE : View.GONE}">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:nestedScrollingEnabled="false"
+                        app:data_adapter="@{viewModel.funcAdapter}"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        tools:listitem="@layout/adapter_functionality" />
+
+                </LinearLayout>
+
+            </android.support.v4.widget.NestedScrollView>
+
+
+            <Button
+                android:id="@+id/btn_show_report"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:onClick="@{viewModel::showReportList}"
+                android:layout_margin="16dp"
+                android:background="@drawable/new_new_btn_background_layout"
+                android:text="نمایش"
+                android:textColor="@android:color/white"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

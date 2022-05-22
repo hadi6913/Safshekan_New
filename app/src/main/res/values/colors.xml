@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#C4382C</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#ffffff</color>
+
+    <color name="list_selector">#4803a9f4</color>
+    <color name="background">#eceff1</color>
+    <color name="white">#ffffff</color>
+    <color name="text_color">#000000</color>
+    <color name="light_grey">#b1b1b3</color>
+    <color name="dark_grey">#616161</color>
+    <color name="transparent">#00000000</color>
+    <color name="red">#ef3333</color>
+    <color name="green">#09bc36</color>
+
+    <color name="infoColor">#57bde4</color>
+    <color name="errorColor">#D50000</color>
+    <color name="successColor">#f509a146</color>
+    <color name="warningColor">#FFA900</color>
+
+    <!--mohamad-amin/PersianMaterialDateTimePicker-->
+    <color name="mdtp_accent_color">#03a9f4</color>
+    <color name="mdtp_accent_color_dark">#0288d1</color>
+</resources>

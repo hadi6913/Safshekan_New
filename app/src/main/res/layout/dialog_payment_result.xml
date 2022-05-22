@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.safshekan.parkban.controls.PersianTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:gravity="center"
+        android:text="پرداخت با موفقیت انجام شد"
+        android:textColor="@color/green"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_all"
+        android:gravity="center">
+
+    <com.safshekan.parkban.controls.PersianTextView
+        android:id="@+id/receipt_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/text_color"
+        android:layout_marginRight="@dimen/margin_5"
+        android:textSize="@dimen/text_size" />
+
+        <com.safshekan.parkban.controls.PersianTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="شماره پیگیری : "
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wallet_driver_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_all"
+        android:gravity="center">
+
+        <com.safshekan.parkban.controls.PersianTextView
+            android:id="@+id/wallet_driver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/text_color"
+            android:layout_marginRight="@dimen/margin_5"
+            android:textSize="@dimen/text_size" />
+
+        <com.safshekan.parkban.controls.PersianTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="موجودی راننده : "
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/QR_image"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_all"
+         />
+
+    <LinearLayout
+        android:id="@+id/confirm_layout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_all">
+
+        <com.safshekan.parkban.controls.PersianTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="تایید"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <!--<ImageView-->
+            <!--android:layout_width="25dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:src="@drawable/send" />-->
+
+    </LinearLayout>
+
+</LinearLayout>
