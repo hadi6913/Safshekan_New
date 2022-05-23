@@ -35,7 +35,7 @@ public class DriverChargeActivity extends BaseActivity implements EasyHelper.Rec
     private int failedLoadLib = 0;
     private static final String TAG = "ANPR";
 
-    //hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+    //hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
     static {
 
         if (!OpenCVLoader.initDebug()) {
