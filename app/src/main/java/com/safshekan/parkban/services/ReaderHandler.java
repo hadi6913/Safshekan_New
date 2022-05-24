@@ -108,6 +108,20 @@ public class ReaderHandler extends Service implements Runnable {
 
 
 
+
+
+    public static long getValue(byte[] input)
+    {
+        long val = 0;
+        for (int i = 0; i < input.length ; i++)
+        {
+            val = (val * 256) + (input[i] & 0xFF);
+        }
+        return val;
+    }
+
+
+
     public interface Callbacks {
         void showOnUi(String serialNumber);
 //
@@ -194,10 +208,17 @@ public class ReaderHandler extends Service implements Runnable {
                 Log.d(TAG, " SN = " + Utils.getInstance().bcdToStr(SN));
                 if(SNLen == 4){
 
-                    int firstPart = SN[1];
+
+
+
+
+
+
+                    int firstPart = (SN[1]&0xff);
                     byte temp[] = new byte[] { SN[2], SN[3]};
-                    BigInteger secondPart = new BigInteger(temp);
-                    activity.showOnUi(firstPart+secondPart.toString());
+                    long secondPart  = getValue(temp);
+
+                    activity.showOnUi(firstPart+secondPart+"");
                 }
 
 
