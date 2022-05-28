@@ -398,7 +398,7 @@ public class MainActivity extends BaseActivity implements ReaderHandler.Callback
                                     break;
                                 case "30":
                                     stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ه").toString();
+                                    actualPurePelak = stringBuffer.replace(2, 4, "ﻫ").toString();
                                     break;
                                 case "31":
                                     stringBuffer = new StringBuffer(pelak_pure);
@@ -422,16 +422,31 @@ public class MainActivity extends BaseActivity implements ReaderHandler.Callback
                                 //car
                                 viewModel.getCar().setValue(true);
                                 viewModel.getMotor().setValue(false);
-                                viewModel.getPlate__0().setValue(actualPurePelak.substring(0, 2));
-                                viewModel.getPlate__2().setValue(actualPurePelak.substring(actualPurePelak.length() - 5, actualPurePelak.length() - 2));
-                                viewModel.getPlate__3().setValue(actualPurePelak.substring(actualPurePelak.length() - 2, actualPurePelak.length()));
+                                String plate0 = actualPurePelak.substring(0, 2);
+                                viewModel.getPlate__0().setValue(plate0);
+                                String plate2 =actualPurePelak.substring(actualPurePelak.length() - 5, actualPurePelak.length() - 2);
+                                viewModel.getPlate__2().setValue(plate2);
+                                String plate3=actualPurePelak.substring(actualPurePelak.length() - 2, actualPurePelak.length());
+                                viewModel.getPlate__3().setValue(plate3);
+
+
+
+
+
                                 if (actualPurePelak.length() > 8) {
                                     //الف pelak
-                                    viewModel.getPlate__1().setValue(actualPurePelak.substring(2, 5));
+                                    String plate1 =actualPurePelak.substring(2, 5);
+                                            viewModel.getPlate__1().setValue(plate1);
                                 } else {
                                     //بدون الف
-                                    viewModel.getPlate__1().setValue(actualPurePelak.substring(2, 3));
+                                    String plate1 =actualPurePelak.substring(2, 3);
+                                            viewModel.getPlate__1().setValue(plate1);
                                 }
+
+
+
+
+
                                 String[] alphabetArray = getResources().getStringArray(R.array.image_array);
                                 for (int i = 1; i < alphabetArray.length; i++) {
                                     if (alphabetArray[i].equals(viewModel.getPlate__1().getValue()))

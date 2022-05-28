@@ -137,6 +137,9 @@ public class LoginViewModel extends ViewModel  {
                     return;
                 }
 
+
+
+
                 userName = FontHelper.removeEnter(FontHelper.convertArabicToPersian(user.getUserName()));
 
 

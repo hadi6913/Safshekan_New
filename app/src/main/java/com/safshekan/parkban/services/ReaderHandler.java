@@ -206,19 +206,14 @@ public class ReaderHandler extends Service implements Runnable {
                 SNLen = piccManager.antisel(SN, sak);
                 Log.d(TAG, " SNLen = " + SNLen);
                 Log.d(TAG, " SN = " + Utils.getInstance().bcdToStr(SN));
+
+
                 if(SNLen == 4){
-
-
-
-
-
-
-
-                    int firstPart = (SN[1]&0xff);
-                    byte temp[] = new byte[] { SN[2], SN[3]};
+                    int firstPart = (SN[2]&0xff);
+                    byte temp[] = new byte[] { SN[1], SN[0]};
                     long secondPart  = getValue(temp);
 
-                    activity.showOnUi(firstPart+secondPart+"");
+                    activity.showOnUi(firstPart+""+secondPart+"");
                 }
 
 
