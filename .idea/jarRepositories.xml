@@ -32,39 +32,9 @@
       <option name="url" value="https://dl.google.com/dl/android/maven2/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="F:\Sdk\extras\google\m2repository" />
-      <option name="name" value="F:\Sdk\extras\google\m2repository" />
-      <option name="url" value="file:/F:/Sdk/extras/google/m2repository/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="F:\Sdk\extras\android\m2repository" />
-      <option name="name" value="F:\Sdk\extras\android\m2repository" />
-      <option name="url" value="file:/F:/Sdk/extras/android/m2repository/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="F:\Sdk\extras\m2repository" />
-      <option name="name" value="F:\Sdk\extras\m2repository" />
-      <option name="url" value="file:/F:/Sdk/extras/m2repository" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="Google2" />
       <option name="name" value="Google2" />
       <option name="url" value="https://maven.google.com/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="C:\Android\sdk_new\extras\android\m2repository" />
-      <option name="name" value="C:\Android\sdk_new\extras\android\m2repository" />
-      <option name="url" value="file:/$PROJECT_DIR$/../../../../Android/sdk_new/extras/android/m2repository/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="C:\Android\sdk_new\extras\m2repository" />
-      <option name="name" value="C:\Android\sdk_new\extras\m2repository" />
-      <option name="url" value="file:/$PROJECT_DIR$/../../../../Android/sdk_new/extras/m2repository" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="C:\Android\sdk_new\extras\google\m2repository" />
-      <option name="name" value="C:\Android\sdk_new\extras\google\m2repository" />
-      <option name="url" value="file:/$PROJECT_DIR$/../../../../Android/sdk_new/extras/google/m2repository/" />
     </remote-repository>
   </component>
 </project>
