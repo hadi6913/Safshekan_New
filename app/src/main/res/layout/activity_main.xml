@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.MainViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.MainViewModel" />
 
     </data>
 
@@ -153,7 +153,7 @@
 
                     android:visibility="@{viewModel.car ? View.VISIBLE : View.GONE}">
 
-                    <com.safshekan.parkban.controls.PersianEditText
+                    <com.khodmohaseb.parkban.controls.PersianEditText
                         android:id="@+id/etxt_car_plate_first_cell"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
                         android:textSize="20sp" />
 
 
-                    <com.safshekan.parkban.controls.PersianEditText
+                    <com.khodmohaseb.parkban.controls.PersianEditText
                         android:id="@+id/etxt_car_plate_third_cell"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
                         android:textSize="20sp"
                         app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
 
-                    <com.safshekan.parkban.controls.PersianEditText
+                    <com.khodmohaseb.parkban.controls.PersianEditText
                         android:id="@+id/etxt_car_plate_forth_cell"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -226,7 +226,7 @@
                     android:orientation="vertical"
                     android:visibility="@{viewModel.motor ? View.VISIBLE : View.GONE}">
 
-                    <com.safshekan.parkban.controls.PersianEditText
+                    <com.khodmohaseb.parkban.controls.PersianEditText
                         android:id="@+id/etxt_motor_plate_first_cell"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -240,7 +240,7 @@
                         android:textSize="17sp"
                         app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
 
-                    <com.safshekan.parkban.controls.PersianEditText
+                    <com.khodmohaseb.parkban.controls.PersianEditText
                         android:id="@+id/etxt_motor_plate_second_cell"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -299,7 +299,7 @@
                         android:orientation="horizontal">
 
 
-                        <com.safshekan.parkban.controls.PersianEditText
+                        <com.khodmohaseb.parkban.controls.PersianEditText
                             android:id="@+id/etxt_main_shomare_ozv"
                             android:layout_width="250dp"
                             android:layout_height="50dp"
@@ -345,7 +345,7 @@
                         android:orientation="horizontal">
 
 
-                        <com.safshekan.parkban.controls.PersianEditText
+                        <com.khodmohaseb.parkban.controls.PersianEditText
                             android:id="@+id/etxt_main_shomare_kart"
                             android:layout_width="250dp"
                             android:layout_height="50dp"

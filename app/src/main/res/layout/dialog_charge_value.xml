@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.safshekan.parkban.controls.PersianTextView
+    <com.khodmohaseb.parkban.controls.PersianTextView
         android:id="@+id/dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         android:layout_marginRight="@dimen/margin_normal"
         android:layout_marginTop="@dimen/margin_5">
 
-        <com.safshekan.parkban.controls.PersianTextView
+        <com.khodmohaseb.parkban.controls.PersianTextView
             android:id="@+id/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_size" />
 
-        <com.safshekan.parkban.controls.PersianEditText
+        <com.khodmohaseb.parkban.controls.PersianEditText
             android:id="@+id/charge_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_size" />
 
-        <com.safshekan.parkban.controls.PersianTextView
+        <com.khodmohaseb.parkban.controls.PersianTextView
             android:id="@+id/rial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -134,7 +134,7 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

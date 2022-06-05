@@ -31,12 +31,12 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/txt_peygiri_ttttt"
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_normal" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_5"
                 android:text="شماره پیگیری :" />
@@ -52,12 +52,12 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/entry_date_ttttttt"
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_normal" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_5"
                 android:text="تاریخ ورود:" />
@@ -72,12 +72,12 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/duration_date_ttttttttt"
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_normal" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_5"
                 android:text="مدت:" />
@@ -92,12 +92,12 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/cost_txt_ttttttttttt"
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_normal" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_5"
                 android:text="مبلغ پرداخت شده:" />
@@ -112,12 +112,12 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/ozv_txt_ttttttttt"
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_normal" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_5"
                 android:text="شماره عضویت:" />
@@ -132,12 +132,12 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/cart_txt_tttttttt"
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_normal" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_5"
                 android:text="شماره کارت:" />
@@ -153,14 +153,14 @@
             android:orientation="horizontal"
             android:visibility="gone">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/time"
                 style="@style/print_text"
                 android:layout_marginLeft="@dimen/margin_5"
                 android:layout_marginRight="@dimen/margin_normal"
                 android:text="14:22" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_normal"
 
@@ -183,7 +183,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/p0_ttttttttttt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -195,7 +195,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="13sp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/p1_ttttttttt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -205,7 +205,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="13sp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/p2_tttttttt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -216,7 +216,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="13sp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/p3_tttttttt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -238,7 +238,7 @@
                 android:background="@drawable/motor_plate"
                 android:orientation="vertical">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/m0_ttttttttt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="13dp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/m1_tttttttt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.QRcodeReaderViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.QRcodeReaderViewModel" />
 
     </data>
 

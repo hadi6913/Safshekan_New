@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.safshekan.parkban">
+    package="com.khodmohaseb.parkban">
 
     <uses-sdk android:name="android.permission.ACCESS_MOCK_LOCATION" />
 
@@ -26,7 +26,7 @@
     <uses-feature android:name="android.hardware.camera.flash" />
 
     <application
-        android:name=".helper.PrintParkbanApp"
+        android:name="com.khodmohaseb.parkban.helper.PrintParkbanApp"
         android:allowBackup="true"
         android:icon="@drawable/elomo_sanat_alone_logo"
         android:label="@string/app_name"
@@ -35,24 +35,24 @@
         android:supportsRtl="false"
         android:theme="@style/FullscreenTheme"
         tools:replace="android:supportsRtl">
-        <activity android:name=".ReportActivity"></activity>
-        <activity android:name=".PaymentSafshekanActivity" />
-        <activity android:name=".MifareCardActivity" />
+        <activity android:name="com.khodmohaseb.parkban.ReportActivity"></activity>
+        <activity android:name="com.khodmohaseb.parkban.PaymentSafshekanActivity" />
+        <activity android:name="com.khodmohaseb.parkban.MifareCardActivity" />
         <activity
-            android:name=".QRcodeReaderActivity"
+            android:name="com.khodmohaseb.parkban.QRcodeReaderActivity"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             tools:replace="screenOrientation" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.khodmohaseb.parkban.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RecordPlateActivity"
+            android:name="com.khodmohaseb.parkban.RecordPlateActivity"
             android:screenOrientation="portrait" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.safshekan.parkban"
+            android:authorities="com.khodmohaseb.parkban"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -68,13 +68,13 @@
         <!-- android:resource="@xml/provider_paths" /> -->
         <!-- </provider> -->
         <activity
-            android:name=".ListPlatesActivity"
+            android:name="com.khodmohaseb.parkban.ListPlatesActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.khodmohaseb.parkban.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.khodmohaseb.parkban.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -89,27 +89,27 @@
         <!-- android:name=".services.SendingRecordsIntentService" -->
         <!-- android:exported="false" /> -->
         <activity
-            android:name=".SettingActivity"
+            android:name="com.khodmohaseb.parkban.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ShiftActivity"
+            android:name="com.khodmohaseb.parkban.ShiftActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".FunctionalityReportActivity"
+            android:name="com.khodmohaseb.parkban.FunctionalityReportActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PaymentActivity"
+            android:name="com.khodmohaseb.parkban.PaymentActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".DriverChargeActivity"
+            android:name="com.khodmohaseb.parkban.DriverChargeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ChargeReportActivity"
+            android:name="com.khodmohaseb.parkban.ChargeReportActivity"
             android:screenOrientation="portrait" />
 
 
-        <service android:name=".services.ReaderHandler"/>
+        <service android:name="com.khodmohaseb.parkban.services.ReaderHandler"/>
     </application>
 
 </manifest>

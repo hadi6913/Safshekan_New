@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.safshekan.parkban.controls.PersianTextView
+    <com.khodmohaseb.parkban.controls.PersianTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -24,7 +24,7 @@
         android:layout_marginTop="@dimen/margin_all"
         android:gravity="center">
 
-    <com.safshekan.parkban.controls.PersianTextView
+    <com.khodmohaseb.parkban.controls.PersianTextView
         android:id="@+id/receipt_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:layout_marginRight="@dimen/margin_5"
         android:textSize="@dimen/text_size" />
 
-        <com.safshekan.parkban.controls.PersianTextView
+        <com.khodmohaseb.parkban.controls.PersianTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -55,7 +55,7 @@
         android:layout_marginTop="@dimen/margin_all"
         android:gravity="center">
 
-        <com.safshekan.parkban.controls.PersianTextView
+        <com.khodmohaseb.parkban.controls.PersianTextView
             android:id="@+id/wallet_driver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
             android:layout_marginRight="@dimen/margin_5"
             android:textSize="@dimen/text_size" />
 
-        <com.safshekan.parkban.controls.PersianTextView
+        <com.khodmohaseb.parkban.controls.PersianTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -96,7 +96,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/margin_all">
 
-        <com.safshekan.parkban.controls.PersianTextView
+        <com.khodmohaseb.parkban.controls.PersianTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

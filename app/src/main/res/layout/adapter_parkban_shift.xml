@@ -6,11 +6,11 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.ShiftViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.ShiftViewModel" />
 
         <variable
             name="shiftDto"
-            type="com.safshekan.parkban.services.dto.ParkbanShiftResultDto.ParkbanShiftDto" />
+            type="com.khodmohaseb.parkban.services.dto.ParkbanShiftResultDto.ParkbanShiftDto" />
 
     </data>
 
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_5">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -33,7 +33,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_5"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_5">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -65,7 +65,7 @@
                 android:layout_marginRight="@dimen/margin_5"
                 android:orientation="horizontal">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -82,7 +82,7 @@
                     android:layout_gravity="center"
                     android:background="@color/colorPrimary" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -106,7 +106,7 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/margin_5"
@@ -114,7 +114,7 @@
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/text_size" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ناحیه : "
@@ -137,7 +137,7 @@
                 android:gravity="right"
                 android:orientation="horizontal">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_5"
@@ -145,7 +145,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/text_size" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="خیابان : "

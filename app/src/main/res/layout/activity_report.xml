@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.ReportViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.ReportViewModel" />
 
     </data>
 
@@ -44,7 +44,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <com.safshekan.parkban.controls.DatePickerControls
+                <com.khodmohaseb.parkban.controls.DatePickerControls
                     android:id="@+id/toDatePicker_new"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     app:Title="@string/to_date" />
 
 
-                <com.safshekan.parkban.controls.DatePickerControls
+                <com.khodmohaseb.parkban.controls.DatePickerControls
                     android:id="@+id/fromDatePicker_new"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{@string/rial(viewModel.totalCacheAmount)}"
@@ -82,7 +82,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="جمع مبالغ دریافتی :  "

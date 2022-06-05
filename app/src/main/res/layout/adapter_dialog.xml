@@ -20,7 +20,7 @@
             android:visibility="visible"
             />
 
-        <com.safshekan.parkban.controls.PersianTextView
+        <com.khodmohaseb.parkban.controls.PersianTextView
             android:id="@+id/item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

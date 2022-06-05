@@ -6,11 +6,11 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.ReportViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.ReportViewModel" />
 
         <variable
             name="funcDto"
-            type="com.safshekan.parkban.services.dto.ReportDetailDto" />
+            type="com.khodmohaseb.parkban.services.dto.ReportDetailDto" />
 
     </data>
 
@@ -29,7 +29,7 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{funcDto.solarCashDateTime}"
@@ -38,7 +38,7 @@
                 android:textStyle="bold"
                 tools:text="9895313135135" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="تاریخ : "
@@ -65,7 +65,7 @@
                 android:gravity="right"
                 android:orientation="horizontal">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{funcDto.plate}"
@@ -74,7 +74,7 @@
                     android:textStyle="bold"
                     tools:text="9895313135135" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="پلاک : "
@@ -92,7 +92,7 @@
                 android:gravity="right"
                 android:orientation="horizontal">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{funcDto.memberCode}"
@@ -101,7 +101,7 @@
                     android:textStyle="bold"
                     tools:text="9895313135135" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="شماره عضو : "
@@ -125,7 +125,7 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{@string/rial(String.valueOf(funcDto.amount))}"
@@ -134,7 +134,7 @@
                 android:textStyle="bold"
                 tools:text="9895313135135" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="مبلغ پرداخت شده : "
@@ -152,7 +152,7 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{funcDto.description}"
@@ -161,7 +161,7 @@
                 android:textStyle="bold"
                 tools:text="9895313135135" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="توضیحات : "

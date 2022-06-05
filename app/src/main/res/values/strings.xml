@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Safshekan</string>
+    <string name="app_name">KhodMohaseb</string>
 
 
     <string name="comman_cost">مبلغ قابل پرداخت : %s ریال</string>
@@ -61,6 +61,7 @@
     <string name="device_dont_have_card_reader">دستگاه فاقد کارت خوان است</string>
     <string name="password_required">لطفا کلمه عبور خود را وارد نمایید</string>
     <string name="exception_msg">بروز خطا</string>
+    <string name="error_server_address">آدرس سرور را درست وارد کنید</string>
     <string name="connection_failed">عدم برقراری ارتباط با سرور</string>
     <string name="unhandled_error_from_server">یک خطای غیر منتظره در سمت سرور اتفاق افتاده است</string>
     <string name="save_success">ذخیره اطلاعات با موفقیت انجام شد </string>

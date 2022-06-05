@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.safshekan.parkban.controls.PersianTextView
+    <com.khodmohaseb.parkban.controls.PersianTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="تاریخچه تصاویر ثبت شده"

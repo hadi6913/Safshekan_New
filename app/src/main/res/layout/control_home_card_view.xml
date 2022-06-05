@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="15dp"/>
 
-    <com.safshekan.parkban.controls.PersianTextView
+    <com.khodmohaseb.parkban.controls.PersianTextView
         android:id="@+id/text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

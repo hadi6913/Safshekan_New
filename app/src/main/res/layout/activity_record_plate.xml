@@ -10,7 +10,7 @@
 
         <variable
             name="recordViewModel"
-            type="com.safshekan.parkban.viewmodels.RecordPlateViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.RecordPlateViewModel" />
 
     </data>
 
@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         tools:context=".RecordPlateActivity">
 
-        <com.safshekan.parkban.controls.Header
+        <com.khodmohaseb.parkban.controls.Header
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="55dp"
@@ -95,7 +95,7 @@
                                 android:layout_weight="1"
                                 android:background="@color/light_grey" />
 
-                            <com.safshekan.parkban.controls.PersianTextView
+                            <com.khodmohaseb.parkban.controls.PersianTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -156,7 +156,7 @@
                             android:orientation="horizontal"
                             android:visibility="@{recordViewModel.carType ? View.VISIBLE : View.GONE}">
 
-                            <com.safshekan.parkban.controls.PersianTextView
+                            <com.khodmohaseb.parkban.controls.PersianTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -167,7 +167,7 @@
                                 android:textColor="@color/text_color"
                                 android:textSize="26sp" />
 
-                            <com.safshekan.parkban.controls.PersianTextView
+                            <com.khodmohaseb.parkban.controls.PersianTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -178,7 +178,7 @@
                                 android:textColor="@color/text_color"
                                 android:textSize="26sp" />
 
-                            <com.safshekan.parkban.controls.PersianTextView
+                            <com.khodmohaseb.parkban.controls.PersianTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -189,7 +189,7 @@
                                 android:textColor="@color/text_color"
                                 android:textSize="26sp" />
 
-                            <com.safshekan.parkban.controls.PersianTextView
+                            <com.khodmohaseb.parkban.controls.PersianTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -213,7 +213,7 @@
                             android:orientation="vertical"
                             android:visibility="@{recordViewModel.motorType ? View.VISIBLE : View.GONE}">
 
-                            <com.safshekan.parkban.controls.PersianTextView
+                            <com.khodmohaseb.parkban.controls.PersianTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -223,7 +223,7 @@
                                 android:textColor="@color/text_color"
                                 android:textSize="27sp" />
 
-                            <com.safshekan.parkban.controls.PersianTextView
+                            <com.khodmohaseb.parkban.controls.PersianTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
@@ -248,7 +248,7 @@
                         android:orientation="horizontal"
                         android:visibility="@{recordViewModel.newCar ? View.GONE : View.VISIBLE}">
 
-                        <com.safshekan.parkban.controls.PersianTextView
+                        <com.khodmohaseb.parkban.controls.PersianTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -281,7 +281,7 @@
                         android:onClick="@{recordViewModel::parkingSpaceClick}"
                         app:layout_visibility="@{recordViewModel.showParkingSpace}">
 
-                        <com.safshekan.parkban.controls.PersianTextView
+                        <com.khodmohaseb.parkban.controls.PersianTextView
                             android:id="@+id/streetLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -299,7 +299,7 @@
                             android:layout_marginTop="@dimen/margin_5"
                             android:background="@mipmap/ic_parking_sign" />
 
-                        <com.safshekan.parkban.controls.PersianTextView
+                        <com.khodmohaseb.parkban.controls.PersianTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/streetLabel"
@@ -337,7 +337,7 @@
                 android:orientation="horizontal"
                 app:save_color="@{recordViewModel.exit}">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -372,7 +372,7 @@
                 android:orientation="horizontal"
                 app:save_color="@{recordViewModel.saveEnable}">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

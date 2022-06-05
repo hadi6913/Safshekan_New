@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@color/background">
 
-    <com.safshekan.parkban.controls.PersianTextView
+    <com.khodmohaseb.parkban.controls.PersianTextView
         android:id="@+id/dialog_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:background="@drawable/pelak_template"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/part1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:textColor="@color/text_color"
                 android:textSize="18sp" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/part2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:textColor="@color/text_color"
                 android:textSize="18sp" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/part3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 android:textColor="@color/text_color"
                 android:textSize="18sp" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/part4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/m_part1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                 android:textColor="@color/text_color"
                 android:textSize="18sp" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/m_part2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -197,7 +197,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.PlateListViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.PlateListViewModel" />
 
     </data>
 

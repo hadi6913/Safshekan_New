@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.PaymentSafshekanViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.PaymentSafshekanViewModel" />
 
     </data>
 
@@ -62,7 +62,7 @@
                     android:orientation="horizontal"
                     android:visibility="@{viewModel.car ? View.VISIBLE : View.GONE}">
 
-                    <com.safshekan.parkban.controls.PersianTextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:id="@+id/txt_car_plate_first_cell_payment_safshekan_activity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                         android:textStyle="bold"
                         tools:text="12" />
 
-                    <com.safshekan.parkban.controls.PersianTextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:id="@+id/txt_car_plate_second_cell_payment_safshekan_activity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                         tools:text="الف" />
 
 
-                    <com.safshekan.parkban.controls.PersianTextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:id="@+id/txt_car_plate_third_cell_payment_safshekan_activity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                         android:textStyle="bold"
                         tools:text="123" />
 
-                    <com.safshekan.parkban.controls.PersianTextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:id="@+id/txt_car_plate_forth_cell_payment_safshekan_activity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                     android:orientation="vertical"
                     android:visibility="@{viewModel.motor ? View.VISIBLE : View.GONE}">
 
-                    <com.safshekan.parkban.controls.PersianTextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:id="@+id/txt_motor_plate_first_cell_payment_safshekan_activity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                         android:textStyle="bold"
                         tools:text="128" />
 
-                    <com.safshekan.parkban.controls.PersianTextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:id="@+id/txt_motor_plate_second_cell_payment_safshekan_activity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                     android:orientation="horizontal">
 
 
-                    <com.safshekan.parkban.controls.PersianTextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:id="@+id/txt_cost_payment_safshekan_activity"
                         android:layout_width="290dp"
                         android:layout_height="50dp"
@@ -213,7 +213,7 @@
                     android:orientation="horizontal">
 
 
-                    <com.safshekan.parkban.controls.PersianTextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:id="@+id/txt_enter_time_safshekan_activity"
                         android:layout_width="290dp"
                         android:layout_height="50dp"
@@ -243,7 +243,7 @@
                     android:orientation="horizontal">
 
 
-                    <com.safshekan.parkban.controls.PersianTextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:id="@+id/txt_exit_time_safshekan_activity"
                         android:layout_width="290dp"
                         android:layout_height="50dp"
@@ -274,7 +274,7 @@
                     android:orientation="horizontal">
 
 
-                    <com.safshekan.parkban.controls.PersianTextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:id="@+id/txt_ozv_number_safshekan_activity"
                         android:layout_width="290dp"
                         android:layout_height="50dp"
@@ -305,7 +305,7 @@
                     android:orientation="horizontal">
 
 
-                    <com.safshekan.parkban.controls.PersianTextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:id="@+id/txt_card_number_safshekan_activity"
                         android:layout_width="290dp"
                         android:layout_height="50dp"

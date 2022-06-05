@@ -5,20 +5,58 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.safshekan.parkban.controls.PersianTextView
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <com.khodmohaseb.parkban.controls.PersianTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:text="لطفاً بعد از اتصال دستگاه به اینترنت ، مشخصات پارکینگ را دریافت کنید"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="13sp"
+        android:textStyle="normal" />
+
+
+
+
+
+
+
+
+
+
+
+    <com.khodmohaseb.parkban.controls.PersianTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_normal"
         android:gravity="center"
-        android:text="لطفاً آدرس سرور را وارد کنید"
+        android:text="آدرس سرور را وارد کنید"
         android:textColor="@android:color/black"
         android:textSize="15sp"
         android:textStyle="bold" />
 
 
 
-    <com.safshekan.parkban.controls.PersianEditText
+    <com.khodmohaseb.parkban.controls.PersianEditText
         android:id="@+id/server_address_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,12 +92,12 @@
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/margin_all">
 
-        <com.safshekan.parkban.controls.PersianTextView
+        <com.khodmohaseb.parkban.controls.PersianTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="تایید"
+            android:text="دریافت مشخصات پارکینگ"
             android:textColor="@color/white"
             android:textSize="15sp" />
 

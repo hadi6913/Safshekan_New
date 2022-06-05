@@ -14,7 +14,7 @@
         android:layout_width="400px"
         android:layout_height="wrap_content">
 
-        <com.safshekan.parkban.controls.PersianTextView
+        <com.khodmohaseb.parkban.controls.PersianTextView
             android:id="@+id/print_type_failed"
             style="@style/print_text"
             android:gravity="center"
@@ -41,7 +41,7 @@
                 android:orientation="vertical">
 
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/imen_label_failed"
                     style="@style/print_text"
                     android:layout_gravity="right"
@@ -51,7 +51,7 @@
                     android:gravity="center"
                     android:text="ایمن پارک" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/label2_failed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,12 +88,12 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/date_failed"
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_normal" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_5"
                 android:text="تاریخ :" />
@@ -110,14 +110,14 @@
             android:orientation="horizontal"
             android:visibility="gone">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/time_failed"
                 style="@style/print_text"
                 android:layout_marginLeft="@dimen/margin_5"
                 android:layout_marginRight="@dimen/margin_normal"
                 android:text="14:22" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_normal"
 
@@ -141,7 +141,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/p0_failed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="13sp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/p1_failed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="13sp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/p2_failed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="13sp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/p3_failed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
                 android:background="@drawable/motor_plate"
                 android:orientation="vertical">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/m0_failed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -207,7 +207,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="13dp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/m1_failed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -240,14 +240,14 @@
                 android:layout_marginTop="@dimen/margin_5"
                 android:visibility="gone">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     style="@style/print_text"
                     android:textSize="10sp"
                     android:text="ریال"
                     android:layout_gravity="center"
                     android:gravity="center"/>
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/cost_value_failed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -260,7 +260,7 @@
                     android:justificationMode="inter_word"
                     />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     style="@style/print_text"
                     android:text="مبلغ : "
                     android:layout_gravity="center"
@@ -278,14 +278,14 @@
                 android:layout_marginTop="@dimen/margin_5"
                 android:visibility="gone">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     style="@style/print_text"
                     android:textSize="10sp"
                     android:text="ریال"
                     android:layout_gravity="center"
                     android:gravity="center"/>
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/debit_value_failed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -298,7 +298,7 @@
                     android:justificationMode="inter_word"
                     />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     style="@style/print_text"
                     android:text="میزان بدهی : "
                     android:layout_gravity="center"
@@ -318,7 +318,7 @@
                 <!--android:gravity="center"-->
                 <!--android:text="شماره پیگیری : " />-->
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/receipt_code_failed"
                 style="@style/print_text"
                 android:layout_below="@+id/receipt_label_failed"
@@ -337,7 +337,7 @@
                 <!--android:gravity="center"-->
                 <!--android:text="شماره فاکتور : " />-->
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/receipt_factor_code_failed"
                 style="@style/print_text"
                 android:layout_below="@+id/receipt_label_failed"
@@ -356,13 +356,13 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/complaints_tel_failed"
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_5"
                 android:gravity="center"/>
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 style="@style/print_text"
                 android:text="تلفن پیگیری : "
                 android:gravity="center"/>
@@ -378,13 +378,13 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/parkban_tel_failed"
                 style="@style/print_text"
                 android:layout_marginRight="@dimen/margin_5"
                 android:gravity="center"/>
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 style="@style/print_text"
                 android:text="تلفن پارکبان : "
                 android:gravity="center"/>
@@ -402,7 +402,7 @@
             android:text="تحت نظارت اداره ترافیک و پلیس راهور گرگان"
             />
 
-        <com.safshekan.parkban.controls.PersianTextView
+        <com.khodmohaseb.parkban.controls.PersianTextView
             android:id="@+id/eos_site_failed"
             style="@style/print_text"
             android:layout_below="@+id/last_text_failed"

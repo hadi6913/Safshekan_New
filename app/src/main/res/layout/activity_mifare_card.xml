@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.MifareCardViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.MifareCardViewModel" />
 
     </data>
 

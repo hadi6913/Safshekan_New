@@ -8,11 +8,11 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.PlateListViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.PlateListViewModel" />
 
         <variable
             name="carItem"
-            type="com.safshekan.parkban.persistence.models.CarItems" />
+            type="com.khodmohaseb.parkban.persistence.models.CarItems" />
 
     </data>
 
@@ -37,7 +37,7 @@
                 android:gravity="center"
                 app:circle_back="@{carItem.allPlateSent}">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -48,7 +48,7 @@
 
             </RelativeLayout>
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:id="@+id/time_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 android:layout_marginBottom="@dimen/margin_5"
                 android:visibility="@{carItem.carType ? View.VISIBLE : View.GONE ,default=gone }">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -84,7 +84,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="18sp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -94,7 +94,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="18sp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -104,7 +104,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="18sp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -132,7 +132,7 @@
                 android:layout_marginTop="@dimen/margin_5"
                 android:visibility="@{carItem.carType ? View.GONE : View.VISIBLE ,default=gone}">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/m_part1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="18sp" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:id="@+id/m_part2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

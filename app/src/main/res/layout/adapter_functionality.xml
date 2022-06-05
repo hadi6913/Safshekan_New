@@ -5,11 +5,11 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.FunctionalityReportViewModel"/>
+            type="com.khodmohaseb.parkban.viewmodels.FunctionalityReportViewModel"/>
 
         <variable
             name="funcDto"
-            type="com.safshekan.parkban.services.dto.FunctionalityDetailDto" />
+            type="com.khodmohaseb.parkban.services.dto.FunctionalityDetailDto" />
 
     </data>
 
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_5">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -32,7 +32,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_5"
@@ -51,7 +51,7 @@
             android:gravity="right"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/margin_5"
@@ -59,7 +59,7 @@
                 android:textColor="@color/text_color"
                 android:textSize="@dimen/text_size" />
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="تعداد تصاویر ثبت شده : "
@@ -82,7 +82,7 @@
                 android:gravity="right"
                 android:orientation="horizontal">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_5"
@@ -90,7 +90,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/text_size" />
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="تعداد پارک ها : "

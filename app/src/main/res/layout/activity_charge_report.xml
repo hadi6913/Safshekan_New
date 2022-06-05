@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.ChargeReportViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.ChargeReportViewModel" />
 
     </data>
 
@@ -20,7 +20,7 @@
         android:background="@color/background"
         tools:context=".ChargeReportActivity">
 
-        <com.safshekan.parkban.controls.Header
+        <com.khodmohaseb.parkban.controls.Header
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="@dimen/header_height"
@@ -35,7 +35,7 @@
             android:background="@color/white"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.DatePickerControls
+            <com.khodmohaseb.parkban.controls.DatePickerControls
                 android:id="@+id/toDatePicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                 android:layout_marginTop="@dimen/margin_5"
                 android:background="@color/colorPrimary" />
 
-            <com.safshekan.parkban.controls.DatePickerControls
+            <com.khodmohaseb.parkban.controls.DatePickerControls
                 android:id="@+id/fromDatePicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             android:onClick="@{viewModel::showReport}"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

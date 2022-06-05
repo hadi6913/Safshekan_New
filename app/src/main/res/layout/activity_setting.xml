@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.SettingViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.SettingViewModel" />
 
     </data>
 
@@ -18,7 +18,7 @@
         android:background="@color/background"
         tools:context=".SettingActivity">
 
-        <com.safshekan.parkban.controls.Header
+        <com.khodmohaseb.parkban.controls.Header
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="55dp"
@@ -33,7 +33,7 @@
             android:layout_marginTop="10dp"
             android:layout_below="@+id/header">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/send_record_way"
@@ -106,7 +106,7 @@
                 android:background="@color/colorPrimary"
                 android:onClick="@{viewModel::saveClick}">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

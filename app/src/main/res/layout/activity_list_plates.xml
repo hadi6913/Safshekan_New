@@ -6,13 +6,13 @@
 
     <data>
 
-        <import type="com.safshekan.parkban.R" />
+        <import type="com.khodmohaseb.parkban.R" />
 
         <import type="android.view.View" />
 
         <variable
             name="viewModel"
-            type="com.safshekan.parkban.viewmodels.PlateListViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.PlateListViewModel" />
 
     </data>
 
@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         tools:context=".ListPlatesActivity">
 
-        <com.safshekan.parkban.controls.Header
+        <com.khodmohaseb.parkban.controls.Header
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="@dimen/header_height"
@@ -46,7 +46,7 @@
                 android:onClick="@{viewModel::previousClick}"
                 android:orientation="horizontal">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -74,7 +74,7 @@
                 android:onClick="@{viewModel::currentDayClick}"
                 android:orientation="horizontal">
 
-                <com.safshekan.parkban.controls.PersianTextView
+                <com.khodmohaseb.parkban.controls.PersianTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -108,7 +108,7 @@
             android:onClick="@{viewModel::sendRecords}"
             android:orientation="horizontal">
 
-            <com.safshekan.parkban.controls.PersianTextView
+            <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
