@@ -48,7 +48,6 @@ public class DriverChargeActivity extends BaseActivity implements EasyHelper.Rec
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,9 +86,6 @@ public class DriverChargeActivity extends BaseActivity implements EasyHelper.Rec
         binding.cashPaymentRadioButton.setVisibility(viewModel.getShouldShowKifePoolDiloag().getValue());
         binding.onlinePaymentRadioButton.setVisibility(viewModel.getShouldShowElectronicPayDiloag().getValue());
         binding.paymentTypeLayout.setVisibility(viewModel.getShouldShowEntirePayDiloag().getValue());
-
-
-
 
 
     }
@@ -176,13 +172,11 @@ public class DriverChargeActivity extends BaseActivity implements EasyHelper.Rec
     }
 
 
-
-
     //hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        viewModel.processActivityResult(this,requestCode,resultCode,data);
+        viewModel.processActivityResult(this, requestCode, resultCode, data);
     }
 
     //hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh

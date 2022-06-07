@@ -88,11 +88,18 @@
             </LinearLayout>
 
 
+
+
+
+
+
+
+
             <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Operator" />
+                android:layout_marginLeft="240dp"
+                android:text="کاربر پارکینگ"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -113,7 +120,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    app:adapter="@{viewModel.langAdapter_user}"
+
+                   app:adapter="@{viewModel.langAdapter_user}"
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:layout_marginLeft="5dp"
@@ -151,8 +159,8 @@
             <com.khodmohaseb.parkban.controls.PersianTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Parking Door"/>
+                android:layout_marginLeft="240dp"
+                android:text="درب پارکینگ"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -173,8 +181,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-
                     app:adapter="@{viewModel.langAdapter_door}"
+
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:layout_marginLeft="5dp"
@@ -233,7 +241,7 @@
                 android:background="@drawable/login_edit_text_background"
                 android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%\'()*+€£¥×÷,-./\:;=?@[]_`{};|~^"
                 android:drawableLeft="@drawable/ic_key_circular_button"
-                android:hint="Password"
+                android:hint="کلمه عبور"
                 android:inputType="textPassword"
                 android:maxLength="20"
                 android:paddingLeft="8dp"
@@ -308,7 +316,7 @@
                 android:elevation="20dp"
                 android:onClick="@{viewModel::loginClick}"
                 android:shadowColor="@color/dark_grey"
-                android:text="Enter"
+                android:text="ورود"
                 android:textColor="@color/white"
                 android:textSize="23sp"
                 android:textStyle="bold" />
@@ -332,19 +340,7 @@
             android:orientation="horizontal"
             android:padding="2dp">
 
-
-
             <com.khodmohaseb.parkban.controls.PersianTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Version "
-                android:textColor="@color/white"
-                android:textSize="13sp" />
-
-            <TextView
                 android:id="@+id/version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -354,6 +350,16 @@
                 android:text="@{viewModel.version}"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
+
+            <com.khodmohaseb.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="نسخه "
+                android:textColor="@color/white"
+                android:textSize="13sp" />
 
         </LinearLayout>
 

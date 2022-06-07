@@ -39,12 +39,12 @@
         <activity android:name="com.khodmohaseb.parkban.PaymentSafshekanActivity" />
         <activity android:name="com.khodmohaseb.parkban.MifareCardActivity" />
         <activity
-            android:name="com.khodmohaseb.parkban.QRcodeReaderActivity"
+            android:name=".QRcodeReaderActivity"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             tools:replace="screenOrientation" />
         <activity
-            android:name="com.khodmohaseb.parkban.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.khodmohaseb.parkban.RecordPlateActivity"
@@ -71,10 +71,10 @@
             android:name="com.khodmohaseb.parkban.ListPlatesActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.khodmohaseb.parkban.LoginActivity"
+            android:name=".LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.khodmohaseb.parkban.SplashActivity"
+            android:name=".SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -109,7 +109,7 @@
             android:screenOrientation="portrait" />
 
 
-        <service android:name="com.khodmohaseb.parkban.services.ReaderHandler"/>
+        <service android:name=".services.ReaderHandler"/>
     </application>
 
 </manifest>

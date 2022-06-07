@@ -49,6 +49,8 @@ import java.util.ArrayList;
 
 public class LoginViewModel extends ViewModel {
 
+    private final static String TAG = "xeagle_LoginViewModel";
+
     private ParkbanRepository parkbanRepository;
     private GetParkingInfoResponse getParkingInfoResponse;
 
@@ -59,11 +61,10 @@ public class LoginViewModel extends ViewModel {
     private String version;
     private boolean loc = false;
     private MutableLiveData<Boolean> rememberPassword;
-    private User user;
 
 
 
-    private  ArrayList<String> userListArray = new ArrayList<String>();
+    private ArrayList<String> userListArray = new ArrayList<String>();
     private ArrayList<String> doorListArray = new ArrayList<String>();
     private String[] userList;
     private String[] doorList;
@@ -71,19 +72,38 @@ public class LoginViewModel extends ViewModel {
     public ArrayAdapter<CharSequence> langAdapter_user;
     public ArrayAdapter<CharSequence> langAdapter_door;
 
+    public  String enteredPassword;
+
     public String parkingName;
 
 
+    public Spinner mUserSpinner;
+    public Spinner mDoorSpinner;
 
-    public User getUser() {
-        return user;
+
+
+
+    private MutableLiveData<String> selectedUserName;
+    private MutableLiveData<String> selectedDoorName;
+
+
+    public MutableLiveData<String> getSelectedUserName() {
+        if (selectedUserName == null)
+            selectedUserName = new MutableLiveData<>();
+        return selectedUserName;
     }
 
-    public LiveData<Boolean> getRememberPassword() {
-        if (rememberPassword == null)
-            rememberPassword = new MutableLiveData<>();
-        return rememberPassword;
+
+    public MutableLiveData<String> getSelectedDoorName() {
+        if (selectedDoorName == null)
+            selectedDoorName = new MutableLiveData<>();
+        return selectedDoorName;
     }
+
+
+
+
+
 
     public String getVersion() {
         if (version == null)
@@ -163,11 +183,17 @@ public class LoginViewModel extends ViewModel {
 
                         try {
 
-                            parkbanRepository.getParkingInformation("\"358351080272763\"",
+//                            parkbanRepository.getParkingInformation("\"358351080272763\"",
+                            parkbanRepository.getParkingInformation("\"868500040082190\"",
                                     new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                         @Override
                                         public void onSuccess(GetParkingInfoResponse result) {
                                             progress.setValue(0);
+
+
+
+
+                                            getParkingInfoResponse = result;
 
                                             Gson gson = new GsonBuilder()
                                                     .serializeNulls()
@@ -178,25 +204,25 @@ public class LoginViewModel extends ViewModel {
                                             editor.commit();
 
 
-                                            //todo init login view
 
 
-                                            parkingName = "پارکینگ "+result.getParkingName();
+
+//                                            parkingName = "پارکینگ " + result.getParkingName();
+                                            parkingName = result.getParkingName();
 
                                             userListArray.clear();
                                             doorListArray.clear();
 
 
-
-                                            for (Operator item:result.getOperators()) {
-                                                if(item.getIsActive()){
+                                            for (Operator item : result.getOperators()) {
+                                                if (item.getIsActive()) {
                                                     userListArray.add(item.getUserName());
                                                 }
                                             }
 
-                                            for (Door item:result.getDoors()) {
+                                            for (Door item : result.getDoors()) {
 
-                                                    userListArray.add(item.getDoorName());
+                                                userListArray.add(item.getDoorName());
 
                                             }
 
@@ -208,20 +234,17 @@ public class LoginViewModel extends ViewModel {
                                             doorList = doorListArray.toArray(doorList);
 
 
-
-                                            langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text,userList);
+                                            langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, userList);
                                             langAdapter_user.setDropDownViewResource(R.layout.simple_spinner_dropdown);
 
 
-
-                                            langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text,doorList);
+                                            langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
                                             langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
 
 
                                             show.dismiss();
 
-                                             ((Activity) context).recreate();
-
+                                            ((Activity) context).recreate();
 
 
                                         }
@@ -267,21 +290,21 @@ public class LoginViewModel extends ViewModel {
 
 
         } else {
-            //todo init login view
-            parkingName = "پارکینگ "+getParkingInfoResponse.getParkingName();
+
+//            parkingName = "پارکینگ " + getParkingInfoResponse.getParkingName();
+            parkingName = getParkingInfoResponse.getParkingName();
 
             userListArray.clear();
             doorListArray.clear();
 
 
-
-            for (Operator item:getParkingInfoResponse.getOperators()) {
-                if(item.getIsActive()){
+            for (Operator item : getParkingInfoResponse.getOperators()) {
+                if (item.getIsActive()) {
                     userListArray.add(item.getUserName());
                 }
             }
 
-            for (Door item:getParkingInfoResponse.getDoors()) {
+            for (Door item : getParkingInfoResponse.getDoors()) {
 
                 doorListArray.add(item.getDoorName());
 
@@ -295,28 +318,19 @@ public class LoginViewModel extends ViewModel {
             doorList = doorListArray.toArray(doorList);
 
 
-
-
-
-
-            langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text,userList);
+            langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, userList);
             langAdapter_user.setDropDownViewResource(R.layout.simple_spinner_dropdown);
 
 
-
-            langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text,doorList);
+            langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
             langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
-
-
-
-
-
 
 
         }
 
 
     }
+
 
     public void loginClick(View view) {
 
@@ -329,160 +343,155 @@ public class LoginViewModel extends ViewModel {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //your code
 
-                EncryptionPassword pass = new EncryptionPassword();
-
-                if (!loc) {
-                    loc = ((LoginActivity) context).checkLocationPermission1(BaseActivity.LoginActivity);
-                    return;
+             Operator selectedUser = null;
+                for (Operator item:getParkingInfoResponse.getOperators()) {
+                    if (item.getUserName().trim().equals(getSelectedUserName().getValue().toString().trim())){
+                        selectedUser = item;
+                    }
                 }
-
-                if (user.getUserName().isEmpty()) {
-                    ShowToast.getInstance().showError(context, R.string.username_required);
-                    return;
-                }
-                if (user.getPassword().isEmpty()) {
-                    ShowToast.getInstance().showError(context, R.string.password_required);
-                    return;
-                }
-
-
-                userName = FontHelper.removeEnter(FontHelper.convertArabicToPersian(user.getUserName()));
-
-
-                StringBuilder newUserName = new StringBuilder(userName);
-
-
-                for (int i = 0; i < userName.length(); i++) {
-                    if (Character.isDigit(userName.charAt(i))) {
-                        switch (userName.charAt(i)) {
-                            case '۰':
-                                newUserName.setCharAt(i, '0');
-                                break;
-                            case '۱':
-                                newUserName.setCharAt(i, '1');
-                                break;
-                            case '۲':
-                                newUserName.setCharAt(i, '2');
-                                break;
-                            case '۳':
-                                newUserName.setCharAt(i, '3');
-                                break;
-                            case '۴':
-                                newUserName.setCharAt(i, '4');
-                                break;
-                            case '۵':
-                                newUserName.setCharAt(i, '5');
-                                break;
-                            case '۶':
-                                newUserName.setCharAt(i, '6');
-                                break;
-                            case '۷':
-                                newUserName.setCharAt(i, '7');
-                                break;
-                            case '۸':
-                                newUserName.setCharAt(i, '8');
-                                break;
-                            case '۹':
-                                newUserName.setCharAt(i, '9');
-                                break;
-
-                        }
+             Door selectedDoor = null;
+                for (Door item:getParkingInfoResponse.getDoors()) {
+                    if (item.getDoorName().trim().equals(getSelectedDoorName().getValue().toString().trim())){
+                        selectedDoor = item;
                     }
                 }
 
-                userName = newUserName.toString();
-                password = FontHelper.toEnglishNumber(FontHelper.removeEnter(user.getPassword()));
+
+                //todo remove below line
+                enteredPassword = "rewq1234@";
 
 
-                try {
-                    byte[] bytes = password.getBytes("ASCII");
-                    finalPassword = FontHelper.removeEnter(pass.encryptAsBase64(bytes));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                if ((enteredPassword!=null)&&(!enteredPassword.trim().equals(""))){
+
+                    if(selectedUser.getUserPass().trim().equals(enteredPassword.trim())){
+                        //todo implement next page logic
+                        Log.d(TAG, "should login now");
+
+
+                        Gson gson = new GsonBuilder()
+                                .serializeNulls()
+                                .create();
+                        SharedPreferences.Editor editor =  PreferenceManager.getDefaultSharedPreferences(context).edit();
+
+                        String json_user = gson.toJson(selectedUser);
+                        editor.putString("currentuser", json_user);
+                        editor.commit();
+
+                        String json_door = gson.toJson(selectedDoor);
+                        editor.putString("currentdoor", json_door);
+                        editor.commit();
+
+
+                        switch (selectedDoor.getDoorType().intValue()){
+
+                            case 0:
+                                //ورود
+                                break;
+
+                            case 1:
+                                //خروج
+                                break;
+
+                            case 2:
+                                //ورود-خروج
+                                break;
+
+
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    }else{
+                        ShowToast.getInstance().showError(context, R.string.wrong_password);
+                    }
+
+
+                }else {
+
+                    ShowToast.getInstance().showError(context, R.string.enter_password);
                 }
 
-                progress.setValue(10);
-                parkbanRepository.login(userName, finalPassword,
-                        new ParkbanRepository.ServiceResultCallBack<LoginResultDto.Parkban>() {
-                            @Override
-                            public void onSuccess(LoginResultDto.Parkban result) {
-                                progress.setValue(0);
-
-//
-//                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//                        //here in below lines we will modify the app menus via access detail code
-//                        Long accessDetailCode = result.getAccessDetails().get(0);
-//                        if ((4&accessDetailCode)==4){
-//                            PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("enablekifepool",true).apply();
-//                            Log.d("xeagle69", "login>>onSuccess>>enable_kife_pool.......>>>>true");
-//                        }else {
-//                            PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("enablekifepool",false).apply();
-//                            Log.d("xeagle69", "login>>onSuccess>>enable_kife_pool.......>>>>false");
-//                        }
-//                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-                                if (userName != null)
-                                    Preferences.setUserName(userName, context);
-//                        if (password != null)
-//                            Preferences.setPassword(password, context);
-                                if (rememberPassword.getValue()) {
-                                    Preferences.setPassword(password, context);
-                                    Preferences.setRememberCheck(true, context);
-                                } else {
-                                    Preferences.setPassword("", context);
-                                    Preferences.setRememberCheck(false, context);
-                                }
-
-//                        ((BaseActivity) context).getPrakbanCurrentShift(result.getParkbanId());
-
-                                ParkbanServiceProvider.setUserToken(result.getUserToken());
-
-//                        BaseActivity.PhoneComplaints = result.getPhoneComplaints();
-//                        BaseActivity.ParkbanPhoneNumber = result.getParkbanPhoneNumber();
-//                        BaseActivity.CurrentUserId = result.getParkbanId();
-//                        BaseActivity.parkingSpaceList = result.getParkingSpaces();
-//                        Log.i("========------==>", "result.getParkingSpaces() " + result.getParkingSpaces().size());
-
-                                ((BaseActivity) context).finish();
-                                Intent i = new Intent(context, MainActivity.class);
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                context.startActivity(i);
-                            }
-
-                            @Override
-                            public void onFailed(ResponseResultType resultType, String message, int errorCode) {
-                                progress.setValue(0);
-                                switch (resultType) {
-                                    case RetrofitError:
-                                        ShowToast.getInstance().showError(context, R.string.exception_msg);
-                                        // Messenger.showErrorMessage(view.getContext(), R.string.exception_msg);
-                                        break;
-                                    case ServerError:
-                                        if (errorCode != 0)
-                                            ShowToast.getInstance().showError(context, errorCode);
-                                        else {
-                                            ShowToast.getInstance().showError(context, R.string.connection_failed);
-                                            Log.d("xhxhxh", "resultType>>" + resultType.getValue() + resultType.getDescription());
-                                            Log.d("xhxhxh", "message>>" + message);
-                                            Log.d("xhxhxh", "errorcode>>" + errorCode);
-                                        }
 
 
-                                        break;
-                                    default:
-                                        ShowToast.getInstance().showError(context, resultType.ordinal());
-                                }
-                            }
-                        });
+
+
+
+
+
+
+
+
+
+
+
+
 
             }
         }, Animation_Constant.ANIMATION_VALUE);
 
 
     }
+
+
+    public void enFaClick(View view) {
+
+        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_bubble_animation);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+        myAnim.setInterpolator(interpolator);
+        view.startAnimation(myAnim);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+
+                String lan =  PreferenceManager.getDefaultSharedPreferences(context).getString("language", "fa");
+
+                if(lan.equals("fa")){
+                    PreferenceManager.getDefaultSharedPreferences(context).edit().putString("language", "en").commit();
+                }else{
+                    PreferenceManager.getDefaultSharedPreferences(context).edit().putString("language", "fa").commit();
+                }
+
+
+
+                ((Activity) context).recreate();
+
+
+
+
+
+
+
+
+
+            }
+        }, Animation_Constant.ANIMATION_VALUE);
+
+
+    }
+
 
 
     public void settingsClick(View view) {
@@ -535,11 +544,13 @@ public class LoginViewModel extends ViewModel {
 
                             try {
 
-                                parkbanRepository.getParkingInformation("\"358351080272763\"",
+//                                parkbanRepository.getParkingInformation("\"358351080272763\"",
+                                parkbanRepository.getParkingInformation("\"868500040082190\"",
                                         new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                             @Override
                                             public void onSuccess(GetParkingInfoResponse result) {
                                                 progress.setValue(0);
+                                                getParkingInfoResponse = result;
 
                                                 Gson gson = new GsonBuilder()
                                                         .serializeNulls()
@@ -550,23 +561,23 @@ public class LoginViewModel extends ViewModel {
                                                 editor.commit();
 
 
-                                                //todo init login view
 
-                                                parkingName = "پارکینگ "+result.getParkingName();
+
+//                                                parkingName = "پارکینگ " + result.getParkingName();
+                                                parkingName =  result.getParkingName();
 
 
                                                 userListArray.clear();
                                                 doorListArray.clear();
 
 
-
-                                                for (Operator item:result.getOperators()) {
-                                                    if(item.getIsActive()){
+                                                for (Operator item : result.getOperators()) {
+                                                    if (item.getIsActive()) {
                                                         userListArray.add(item.getUserName());
                                                     }
                                                 }
 
-                                                for (Door item:result.getDoors()) {
+                                                for (Door item : result.getDoors()) {
 
                                                     userListArray.add(item.getDoorName());
 
@@ -580,12 +591,11 @@ public class LoginViewModel extends ViewModel {
                                                 doorList = doorListArray.toArray(doorList);
 
 
-                                                langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text,userList);
+                                                langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, userList);
                                                 langAdapter_user.setDropDownViewResource(R.layout.simple_spinner_dropdown);
 
 
-
-                                                langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text,doorList);
+                                                langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
                                                 langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
 
                                                 show.dismiss();
@@ -641,32 +651,6 @@ public class LoginViewModel extends ViewModel {
 
     }
 
-    public void fillDefaultUserAndPass(Context context) {
-        String userName = Preferences.getUserName(context);
-        Log.d("xeagle69", "fillDefaultUserAndPass>> username >>>  " + userName);
-        String password = Preferences.getPassword(context);
-        Log.d("xeagle69", "fillDefaultUserAndPass>> password >>>  " + userName);
-        boolean rememberPass = Preferences.getRememberCheck(context);
 
-        if (userName != null) {
-            user.setUserName(userName);
-        }
-//        if (password != null)
-//            setPassword(password);
-        if (rememberPass) {
-            user.setPassword(password);
-            rememberPassword.setValue(true);
-        } else {
-            user.setPassword("");
-            rememberPassword.setValue(false);
-        }
-    }
-
-    public void getRememberPassStatus(View view) {
-        if (rememberPassword.getValue())
-            rememberPassword.setValue(false);
-        else
-            rememberPassword.setValue(true);
-    }
 
 }
