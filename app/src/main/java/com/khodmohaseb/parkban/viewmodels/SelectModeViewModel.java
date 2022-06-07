@@ -45,6 +45,7 @@ import com.khodmohaseb.parkban.persistence.models.CarPlate;
 import com.khodmohaseb.parkban.persistence.models.ResponseResultType;
 import com.khodmohaseb.parkban.repositories.ParkbanRepository;
 import com.khodmohaseb.parkban.services.dto.ExitBillDto;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
 import com.khodmohaseb.parkban.utils.Animation_Constant;
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 import com.pax.dal.IDAL;
@@ -62,14 +63,17 @@ public class SelectModeViewModel extends ViewModel {
     private boolean doubleBackToExitPressedOnce = false;
     private static final long EXIT_TIMEOUT = 3000;
 
+    private GetParkingInfoResponse getParkingInfoResponse;
 
-    public void init(final Context context) {
+
+    public void init(final Context context,GetParkingInfoResponse getParkingInfoResponse) {
         myContext = context;
+        this.getParkingInfoResponse = getParkingInfoResponse;
     }
 
 
 
-    public void Taeed_Onclick(final View view) {
+    public void enter_Onclick(final View view) {
         final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_bubble_animation);
         MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
         myAnim.setInterpolator(interpolator);
@@ -78,6 +82,61 @@ public class SelectModeViewModel extends ViewModel {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
+
+
+
+                if(getParkingInfoResponse.getCardKind().intValue() == 0){
+                    //Mifare
+                }else{
+                    //qr
+                }
+
+
+
+
+
+
+
+
+
+
+
+            }
+        }, Animation_Constant.ANIMATION_VALUE);
+    }
+
+
+    public void exit_Onclick(final View view) {
+        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_bubble_animation);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+        myAnim.setInterpolator(interpolator);
+        view.startAnimation(myAnim);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+
+
+
+
+
+                if(getParkingInfoResponse.getCardKind().intValue() == 0){
+                    //Mifare
+                }else{
+                    //qr
+                }
+
+
+
+
+
+
+
+
+
+
 
             }
         }, Animation_Constant.ANIMATION_VALUE);

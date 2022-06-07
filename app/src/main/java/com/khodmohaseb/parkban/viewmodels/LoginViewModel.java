@@ -24,9 +24,14 @@ import android.widget.Spinner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.khodmohaseb.parkban.BaseActivity;
+import com.khodmohaseb.parkban.EnterMifareActivity;
+import com.khodmohaseb.parkban.EnterQrActivity;
+import com.khodmohaseb.parkban.ExitMifareActivity;
+import com.khodmohaseb.parkban.ExitQrActivity;
 import com.khodmohaseb.parkban.LoginActivity;
 import com.khodmohaseb.parkban.MainActivity;
 import com.khodmohaseb.parkban.R;
+import com.khodmohaseb.parkban.SelectModeActivity;
 import com.khodmohaseb.parkban.helper.EncryptionPassword;
 import com.khodmohaseb.parkban.helper.FontHelper;
 import com.khodmohaseb.parkban.helper.Preferences;
@@ -63,7 +68,6 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<Boolean> rememberPassword;
 
 
-
     private ArrayList<String> userListArray = new ArrayList<String>();
     private ArrayList<String> doorListArray = new ArrayList<String>();
     private String[] userList;
@@ -72,15 +76,13 @@ public class LoginViewModel extends ViewModel {
     public ArrayAdapter<CharSequence> langAdapter_user;
     public ArrayAdapter<CharSequence> langAdapter_door;
 
-    public  String enteredPassword;
+    public String enteredPassword;
 
     public String parkingName;
 
 
     public Spinner mUserSpinner;
     public Spinner mDoorSpinner;
-
-
 
 
     private MutableLiveData<String> selectedUserName;
@@ -99,10 +101,6 @@ public class LoginViewModel extends ViewModel {
             selectedDoorName = new MutableLiveData<>();
         return selectedDoorName;
     }
-
-
-
-
 
 
     public String getVersion() {
@@ -191,8 +189,6 @@ public class LoginViewModel extends ViewModel {
                                             progress.setValue(0);
 
 
-
-
                                             getParkingInfoResponse = result;
 
                                             Gson gson = new GsonBuilder()
@@ -202,9 +198,6 @@ public class LoginViewModel extends ViewModel {
                                             SharedPreferences.Editor editor = preferences.edit();
                                             editor.putString("parkinginfo", json);
                                             editor.commit();
-
-
-
 
 
 //                                            parkingName = "پارکینگ " + result.getParkingName();
@@ -344,15 +337,15 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void run() {
 
-             Operator selectedUser = null;
-                for (Operator item:getParkingInfoResponse.getOperators()) {
-                    if (item.getUserName().trim().equals(getSelectedUserName().getValue().toString().trim())){
+                Operator selectedUser = null;
+                for (Operator item : getParkingInfoResponse.getOperators()) {
+                    if (item.getUserName().trim().equals(getSelectedUserName().getValue().toString().trim())) {
                         selectedUser = item;
                     }
                 }
-             Door selectedDoor = null;
-                for (Door item:getParkingInfoResponse.getDoors()) {
-                    if (item.getDoorName().trim().equals(getSelectedDoorName().getValue().toString().trim())){
+                Door selectedDoor = null;
+                for (Door item : getParkingInfoResponse.getDoors()) {
+                    if (item.getDoorName().trim().equals(getSelectedDoorName().getValue().toString().trim())) {
                         selectedDoor = item;
                     }
                 }
@@ -362,17 +355,17 @@ public class LoginViewModel extends ViewModel {
                 enteredPassword = "rewq1234@";
 
 
-                if ((enteredPassword!=null)&&(!enteredPassword.trim().equals(""))){
+                if ((enteredPassword != null) && (!enteredPassword.trim().equals(""))) {
 
-                    if(selectedUser.getUserPass().trim().equals(enteredPassword.trim())){
-                        //todo implement next page logic
+                    if (selectedUser.getUserPass().trim().equals(enteredPassword.trim())) {
+
                         Log.d(TAG, "should login now");
 
 
                         Gson gson = new GsonBuilder()
                                 .serializeNulls()
                                 .create();
-                        SharedPreferences.Editor editor =  PreferenceManager.getDefaultSharedPreferences(context).edit();
+                        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
 
                         String json_user = gson.toJson(selectedUser);
                         editor.putString("currentuser", json_user);
@@ -383,67 +376,82 @@ public class LoginViewModel extends ViewModel {
                         editor.commit();
 
 
-                        switch (selectedDoor.getDoorType().intValue()){
+                        switch (selectedDoor.getDoorType().intValue()) {
 
                             case 0:
                                 //ورود
+
+
+                                if (getParkingInfoResponse.getCardKind().intValue() == 0) {
+                                    //Mifare
+                                    ((BaseActivity) context).finish();
+                                    Intent i = new Intent(context, EnterMifareActivity.class);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    context.startActivity(i);
+
+                                } else {
+                                    //QR
+                                    ((BaseActivity) context).finish();
+                                    Intent i = new Intent(context, EnterQrActivity.class);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    context.startActivity(i);
+
+                                }
+
+
                                 break;
 
                             case 1:
                                 //خروج
+
+
+                                if (getParkingInfoResponse.getCardKind().intValue() == 0) {
+                                    //Mifare
+
+                                    ((BaseActivity) context).finish();
+                                    Intent i = new Intent(context, ExitMifareActivity.class);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    context.startActivity(i);
+
+                                } else {
+                                    //QR
+
+
+                                    ((BaseActivity) context).finish();
+                                    Intent i = new Intent(context, ExitQrActivity.class);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    context.startActivity(i);
+
+                                }
+
+
                                 break;
 
                             case 2:
                                 //ورود-خروج
+
+
+                                ((BaseActivity) context).finish();
+                                Intent i = new Intent(context, SelectModeActivity.class);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                context.startActivity(i);
+
+
                                 break;
 
 
                         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }else{
+                    } else {
                         ShowToast.getInstance().showError(context, R.string.wrong_password);
                     }
 
 
-                }else {
+                } else {
 
                     ShowToast.getInstance().showError(context, R.string.enter_password);
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             }
@@ -466,24 +474,16 @@ public class LoginViewModel extends ViewModel {
             public void run() {
 
 
-                String lan =  PreferenceManager.getDefaultSharedPreferences(context).getString("language", "fa");
+                String lan = PreferenceManager.getDefaultSharedPreferences(context).getString("language", "fa");
 
-                if(lan.equals("fa")){
+                if (lan.equals("fa")) {
                     PreferenceManager.getDefaultSharedPreferences(context).edit().putString("language", "en").commit();
-                }else{
+                } else {
                     PreferenceManager.getDefaultSharedPreferences(context).edit().putString("language", "fa").commit();
                 }
 
 
-
                 ((Activity) context).recreate();
-
-
-
-
-
-
-
 
 
             }
@@ -491,7 +491,6 @@ public class LoginViewModel extends ViewModel {
 
 
     }
-
 
 
     public void settingsClick(View view) {
@@ -561,10 +560,8 @@ public class LoginViewModel extends ViewModel {
                                                 editor.commit();
 
 
-
-
 //                                                parkingName = "پارکینگ " + result.getParkingName();
-                                                parkingName =  result.getParkingName();
+                                                parkingName = result.getParkingName();
 
 
                                                 userListArray.clear();
@@ -650,7 +647,6 @@ public class LoginViewModel extends ViewModel {
 
 
     }
-
 
 
 }
