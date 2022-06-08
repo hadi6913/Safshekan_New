@@ -25,6 +25,7 @@ import com.khodmohaseb.parkban.databinding.ActivityMainBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
 import com.khodmohaseb.parkban.services.ReaderHandler;
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
+import com.khodmohaseb.parkban.viewmodels.EnterQrViewModel;
 import com.khodmohaseb.parkban.viewmodels.MainViewModel;
 
 import org.opencv.android.OpenCVLoader;
@@ -40,35 +41,15 @@ import java.util.List;
 
 import static ir.shahaabco.ANPRNDK.anpr_create;
 
-//public class MainActivity extends BaseActivity implements ReaderHandler.Callbacks {
+
 public class EnterQrActivity extends BaseActivity implements ReaderHandler.Callbacks {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "EnterQrActivity";
     private int failedLoadLib = 0;
-    private MainViewModel viewModel;
-    private boolean doubleBackToExitPressedOnce = false;
+    private EnterQrViewModel enterQrViewModel;
 
-    //**********************************************************************************************
-    //**********************************************************************************************
-    private Intent readerHandlerIntent;
-    private ReaderHandler readerHandler;
 
-    private ServiceConnection readerHandlerConnection = new ServiceConnection() {
 
-        @Override
-        public void onServiceConnected(ComponentName className,
-                                       IBinder service) {
-            ReaderHandler.LocalBinder binder = (ReaderHandler.LocalBinder) service;
-            readerHandler = binder.getServiceInstance();
-            readerHandler.registerClient(EnterQrActivity.this);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-        }
-    };
-    //**********************************************************************************************
-    //**********************************************************************************************
 
     static {
         if (!OpenCVLoader.initDebug()) {

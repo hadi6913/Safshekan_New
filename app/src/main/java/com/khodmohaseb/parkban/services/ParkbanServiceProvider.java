@@ -21,12 +21,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ParkbanServiceProvider {
 
-    private static final String HEADER_TOKEN = "UserToken";
+    private static final String HEADER_DEVICE_TOKEN = "DeviceToken";
 ////    public static final String BASE_URL = "http://192.168.10.164:3001/api/";
 //    public static String BASE_URL = "";
 
     private static ParkbanService instance;
-    private static String userToken;
+    private static String deviceToken;
 
 
     private ParkbanServiceProvider() {
@@ -149,8 +149,8 @@ public class ParkbanServiceProvider {
                         .addHeader("Accept", "*/*")
                         .addHeader("Content-type", "application/json");
 
-                if (!TextUtils.isEmpty(userToken)) {
-                    requestBuilder.addHeader(HEADER_TOKEN, userToken);
+                if (!TextUtils.isEmpty(deviceToken)) {
+                    requestBuilder.addHeader(HEADER_DEVICE_TOKEN, deviceToken);
                 }
 
                 Request request = requestBuilder.build();
@@ -168,8 +168,8 @@ public class ParkbanServiceProvider {
                 .create(ParkbanService.class);
     }
 
-    public static void setUserToken(String userToken) {
-        ParkbanServiceProvider.userToken = userToken;
+    public static void setDeviceToken(String deviceToken) {
+        ParkbanServiceProvider.deviceToken = deviceToken;
     }
 
 

@@ -47,6 +47,8 @@ public interface ParkbanService {
     //**********************************************************************************************
     //khod-mohaseb
 
+    @POST("DeviceLogin")
+    Call<String> getDeviceToken(@Body RequestBody body);
 
     @POST("GetParkingInfo")
     Call<GetParkingInfoResponse> getParkingInfoFromServer(@Body RequestBody body);

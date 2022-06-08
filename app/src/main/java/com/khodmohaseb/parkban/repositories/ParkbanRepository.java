@@ -142,6 +142,50 @@ public class ParkbanRepository {
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
 
     /**** Khodmohaseb Server Repository ****/
+
+
+
+
+
+
+    public void getDeviceToken(String imei, final ServiceResultCallBack<String> callBack) {
+
+
+        RequestBody body =
+                RequestBody.create(MediaType.parse("application/json"), imei.trim());
+
+
+
+        ParkbanServiceProvider.getInstance().getDeviceToken(body).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    if (response.isSuccessful()) {
+
+                        callBack.onSuccess(response.body());
+
+
+                    } else {
+                        callBack.onFailed(ResponseResultType.ServerError, response.message(), response.code());
+                    }
+                } catch (Exception e) {
+                    callBack.onFailed(ResponseResultType.RetrofitError, "", 0);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                callBack.onFailed(ResponseResultType.ServerError, t.getMessage(), 0);
+
+            }
+        });
+    }
+
+
+
+
+
+
     public void getParkingInformation(String imei, final ServiceResultCallBack<GetParkingInfoResponse> callBack) {
 
 

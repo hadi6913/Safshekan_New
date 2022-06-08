@@ -24,9 +24,11 @@ public class GetParkingInfoResponse {
     @SerializedName("cardKind")
     @Expose
     private Long cardKind;
-    @SerializedName("precepts")
+
+    @SerializedName("maximumOfflineTime")
     @Expose
-    private List<Precept> precepts = null;
+    private Long maximumOfflineTime;
+
     @SerializedName("operators")
     @Expose
     private List<Operator> operators = null;
@@ -35,7 +37,7 @@ public class GetParkingInfoResponse {
     private List<Door> doors = null;
     @SerializedName("tariffs")
     @Expose
-    private List<Tariff> tariffs = null;
+    private Tariff tariffs = null;
 
     /**
      * No args constructor for use in serialization
@@ -51,19 +53,18 @@ public class GetParkingInfoResponse {
      * @param operators
      * @param parkingId
      * @param cardKind
-     * @param precepts
      * @param deviceId
      * @param parkingName
      * @param tariffs
      */
-    public GetParkingInfoResponse(Long deviceId, Long parkingId, String parkingName, String address, Long cardKind, List<Precept> precepts, List<Operator> operators, List<Door> doors, List<Tariff> tariffs) {
+    public GetParkingInfoResponse(Long deviceId, Long parkingId, String parkingName, String address, Long cardKind,Long maximumOfflineTime, List<Operator> operators, List<Door> doors, Tariff tariffs) {
         super();
         this.deviceId = deviceId;
         this.parkingId = parkingId;
         this.parkingName = parkingName;
         this.address = address;
         this.cardKind = cardKind;
-        this.precepts = precepts;
+        this.maximumOfflineTime = maximumOfflineTime;
         this.operators = operators;
         this.doors = doors;
         this.tariffs = tariffs;
@@ -109,13 +110,22 @@ public class GetParkingInfoResponse {
         this.cardKind = cardKind;
     }
 
-    public List<Precept> getPrecepts() {
-        return precepts;
+
+
+
+
+    public Long getMaximumOfflineTime() {
+        return maximumOfflineTime;
     }
 
-    public void setPrecepts(List<Precept> precepts) {
-        this.precepts = precepts;
+    public void setMaximumOfflineTime(Long cardKind) {
+        this.maximumOfflineTime = maximumOfflineTime;
     }
+
+
+
+
+
 
     public List<Operator> getOperators() {
         return operators;
@@ -133,11 +143,11 @@ public class GetParkingInfoResponse {
         this.doors = doors;
     }
 
-    public List<Tariff> getTariffs() {
+    public Tariff getTariffs() {
         return tariffs;
     }
 
-    public void setTariffs(List<Tariff> tariffs) {
+    public void setTariffs(Tariff tariffs) {
         this.tariffs = tariffs;
     }
 

@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -22,9 +23,11 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 
 
+import com.google.gson.Gson;
 import com.khodmohaseb.parkban.databinding.ActivitySelectModeBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
 import com.khodmohaseb.parkban.services.ReaderHandler;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 import com.khodmohaseb.parkban.viewmodels.MainViewModel;
 import com.khodmohaseb.parkban.viewmodels.SelectModeViewModel;
@@ -48,6 +51,7 @@ public class SelectModeActivity extends BaseActivity {
     private static final String TAG = "SelectModeActivity";
 
     private SelectModeViewModel viewModel;
+    private GetParkingInfoResponse getParkingInfoResponse;
 
 
     @Override
@@ -56,7 +60,19 @@ public class SelectModeActivity extends BaseActivity {
         final ActivitySelectModeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_select_mode);
         viewModel = ViewModelProviders.of(this).get(SelectModeViewModel.class);
         binding.setViewModel(viewModel);
-        viewModel.init(this);
+
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Gson gson = new Gson();
+        String json = preferences.getString("parkinginfo", "");
+        if (json.equals("")) {
+            getParkingInfoResponse = null;
+        } else {
+            getParkingInfoResponse = gson.fromJson(json, GetParkingInfoResponse.class);
+        }
+
+
+
+        viewModel.init(this,getParkingInfoResponse);
         binding.setLifecycleOwner(this);
     }
 

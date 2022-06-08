@@ -25,6 +25,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.khodmohaseb.parkban.BaseActivity;
+import com.khodmohaseb.parkban.EnterMifareActivity;
+import com.khodmohaseb.parkban.EnterQrActivity;
+import com.khodmohaseb.parkban.ExitMifareActivity;
+import com.khodmohaseb.parkban.ExitQrActivity;
 import com.khodmohaseb.parkban.MifareCardActivity;
 import com.khodmohaseb.parkban.PaymentSafshekanActivity;
 import com.khodmohaseb.parkban.QRcodeReaderActivity;
@@ -59,7 +63,7 @@ import java.util.List;
 public class SelectModeViewModel extends ViewModel {
 
     public static final String TAG = "SelectModeViewModel";
-    private Context myContext;
+    private Context context;
     private boolean doubleBackToExitPressedOnce = false;
     private static final long EXIT_TIMEOUT = 3000;
 
@@ -67,7 +71,7 @@ public class SelectModeViewModel extends ViewModel {
 
 
     public void init(final Context context,GetParkingInfoResponse getParkingInfoResponse) {
-        myContext = context;
+        this.context = context;
         this.getParkingInfoResponse = getParkingInfoResponse;
     }
 
@@ -88,8 +92,16 @@ public class SelectModeViewModel extends ViewModel {
 
                 if(getParkingInfoResponse.getCardKind().intValue() == 0){
                     //Mifare
+                    ((BaseActivity) context).finish();
+                    Intent i = new Intent(context, EnterMifareActivity.class);
+                    context.startActivity(i);
+
+
                 }else{
                     //qr
+                    ((BaseActivity) context).finish();
+                    Intent i = new Intent(context, EnterQrActivity.class);
+                    context.startActivity(i);
                 }
 
 
@@ -124,8 +136,17 @@ public class SelectModeViewModel extends ViewModel {
 
                 if(getParkingInfoResponse.getCardKind().intValue() == 0){
                     //Mifare
+                    ((BaseActivity) context).finish();
+                    Intent i = new Intent(context, ExitMifareActivity.class);
+                    context.startActivity(i);
+
+
+
                 }else{
                     //qr
+                    ((BaseActivity) context).finish();
+                    Intent i = new Intent(context, ExitQrActivity.class);
+                    context.startActivity(i);
                 }
 
 
