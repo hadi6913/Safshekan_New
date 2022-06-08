@@ -40,7 +40,7 @@ import java.util.List;
 
 import static ir.shahaabco.ANPRNDK.anpr_create;
 
-//public class MainActivity extends BaseActivity implements ReaderHandler.Callbacks {
+
 public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Callbacks {
 
     private static final String TAG = "MainActivity";

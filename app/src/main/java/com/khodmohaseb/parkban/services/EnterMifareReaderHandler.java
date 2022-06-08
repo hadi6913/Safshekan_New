@@ -7,20 +7,21 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.khodmohaseb.parkban.EnterMifareActivity;
 import com.khodmohaseb.parkban.MainActivity;
 import com.khodmohaseb.parkban.utils.Utils;
 
-public class ReaderHandler extends Service implements Runnable {
+public class EnterMifareReaderHandler extends Service implements Runnable {
 
-    private final static String TAG = "xeagle696969";
+    private final static String TAG = "EnterMifareReader";
 
 
 
     private Thread runningThread;
     private boolean stopConditions = false;
-    private static ReaderHandler instance;
+    private static EnterMifareReaderHandler instance;
     Callbacks activity;
-    MainActivity mainActivity;
+    EnterMifareActivity enterMifareActivity;
     private final IBinder mBinder = new LocalBinder();
 
 
@@ -47,7 +48,7 @@ public class ReaderHandler extends Service implements Runnable {
 
     }
 
-    public static ReaderHandler getInstance() {
+    public static EnterMifareReaderHandler getInstance() {
         return instance;
     }
 
@@ -71,14 +72,14 @@ public class ReaderHandler extends Service implements Runnable {
         return mBinder;
     }
 
-    public void registerClient(MainActivity mainActivity) {
-        this.activity = (Callbacks) mainActivity;
-        this.mainActivity = mainActivity;
+    public void registerClient(EnterMifareActivity enterMifareActivity) {
+        this.activity = (Callbacks) enterMifareActivity;
+        this.enterMifareActivity = enterMifareActivity;
     }
 
     public class LocalBinder extends Binder {
-        public ReaderHandler getServiceInstance() {
-            return ReaderHandler.this;
+        public EnterMifareReaderHandler getServiceInstance() {
+            return EnterMifareReaderHandler.this;
         }
     }
 

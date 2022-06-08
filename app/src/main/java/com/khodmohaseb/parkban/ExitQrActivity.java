@@ -21,10 +21,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.EditText;
 
+import com.khodmohaseb.parkban.databinding.ActivityExitQrBinding;
 import com.khodmohaseb.parkban.databinding.ActivityMainBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
-import com.khodmohaseb.parkban.services.ReaderHandler;
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
+import com.khodmohaseb.parkban.viewmodels.ExitQrViewModel;
 import com.khodmohaseb.parkban.viewmodels.MainViewModel;
 
 import org.opencv.android.OpenCVLoader;
@@ -40,35 +41,15 @@ import java.util.List;
 
 import static ir.shahaabco.ANPRNDK.anpr_create;
 
-//public class MainActivity extends BaseActivity implements ReaderHandler.Callbacks {
-public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callbacks {
 
-    private static final String TAG = "MainActivity";
+public class ExitQrActivity extends BaseActivity {
+
+    private static final String TAG = "ExitQrActivity";
     private int failedLoadLib = 0;
-    private MainViewModel viewModel;
+    private ExitQrViewModel exitQrViewModel;
     private boolean doubleBackToExitPressedOnce = false;
 
-    //**********************************************************************************************
-    //**********************************************************************************************
-    private Intent readerHandlerIntent;
-    private ReaderHandler readerHandler;
 
-    private ServiceConnection readerHandlerConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className,
-                                       IBinder service) {
-            ReaderHandler.LocalBinder binder = (ReaderHandler.LocalBinder) service;
-            readerHandler = binder.getServiceInstance();
-            readerHandler.registerClient(ExitQrActivity.this);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-        }
-    };
-    //**********************************************************************************************
-    //**********************************************************************************************
 
     static {
         if (!OpenCVLoader.initDebug()) {
@@ -82,32 +63,32 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        final ActivityExitQrBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_exit_qr);
         copyAssets();
         CreateANPR();
-        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        binding.setViewModel(viewModel);
-        EditText etxtCar = findViewById(R.id.etxt_car_plate_first_cell);
-        EditText etxtMotor = findViewById(R.id.etxt_motor_plate_first_cell);
-        viewModel.init(this, etxtCar, etxtMotor);
-        viewModel.getHasPelak().setValue(true);
-        viewModel.getHasMemberCode().setValue(true);
-        viewModel.getHasCardNumbeer().setValue(true);
+        exitQrViewModel = ViewModelProviders.of(this).get(ExitQrViewModel.class);
+        binding.setViewModel(exitQrViewModel);
+        EditText etxtCar = findViewById(R.id.etxt_car_plate_first_cell_exit_qr);
+        EditText etxtMotor = findViewById(R.id.etxt_motor_plate_first_cell_exit_qr);
+        exitQrViewModel.init(this, etxtCar, etxtMotor);
+        exitQrViewModel.getHasPelak().setValue(true);
+        exitQrViewModel.getHasMemberCode().setValue(true);
+        exitQrViewModel.getHasCardNumbeer().setValue(true);
         binding.setLifecycleOwner(this);
-        viewModel.mSpinner = binding.spinner;
-        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        exitQrViewModel.mSpinner = binding.spinnerExitQr;
+        binding.spinnerExitQr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                viewModel.getPlate__1().setValue(String.valueOf(binding.spinner.getSelectedItem()));
+                exitQrViewModel.getPlate__1().setValue(String.valueOf(binding.spinnerExitQr.getSelectedItem()));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                binding.spinner.setSelection(0);
-                viewModel.getPlate__1().setValue(String.valueOf(binding.spinner.getSelectedItem()));
+                binding.spinnerExitQr.setSelection(0);
+                exitQrViewModel.getPlate__1().setValue(String.valueOf(binding.spinnerExitQr.getSelectedItem()));
             }
         });
-        binding.etxtCarPlateThirdCell.addTextChangedListener(new TextWatcher() {
+        binding.etxtCarPlateThirdCellExitQr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -115,9 +96,9 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 3) {
-                    binding.etxtCarPlateThirdCell.clearFocus();
-                    binding.etxtCarPlateForthCell.requestFocus();
-                    binding.etxtCarPlateForthCell.setCursorVisible(true);
+                    binding.etxtCarPlateThirdCellExitQr.clearFocus();
+                    binding.etxtCarPlateForthCellExitQr.requestFocus();
+                    binding.etxtCarPlateForthCellExitQr.setCursorVisible(true);
                 }
             }
 
@@ -125,7 +106,7 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
             public void afterTextChanged(Editable s) {
             }
         });
-        binding.etxtMotorPlateFirstCell.addTextChangedListener(new TextWatcher() {
+        binding.etxtMotorPlateFirstCellExitQr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -133,9 +114,9 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 3) {
-                    binding.etxtMotorPlateFirstCell.clearFocus();
-                    binding.etxtMotorPlateSecondCell.requestFocus();
-                    binding.etxtMotorPlateSecondCell.setCursorVisible(true);
+                    binding.etxtMotorPlateFirstCellExitQr.clearFocus();
+                    binding.etxtMotorPlateSecondCellExitQr.requestFocus();
+                    binding.etxtMotorPlateSecondCellExitQr.setCursorVisible(true);
                 }
             }
 
@@ -143,7 +124,7 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
             public void afterTextChanged(Editable s) {
             }
         });
-        binding.etxtCarPlateForthCell.addTextChangedListener(new TextWatcher() {
+        binding.etxtCarPlateForthCellExitQr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -151,9 +132,9 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 0) {
-                    binding.etxtCarPlateForthCell.clearFocus();
-                    binding.etxtCarPlateThirdCell.requestFocus();
-                    binding.etxtCarPlateThirdCell.setCursorVisible(true);
+                    binding.etxtCarPlateForthCellExitQr.clearFocus();
+                    binding.etxtCarPlateThirdCellExitQr.requestFocus();
+                    binding.etxtCarPlateThirdCellExitQr.setCursorVisible(true);
                 }
             }
 
@@ -161,7 +142,7 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
             public void afterTextChanged(Editable s) {
             }
         });
-        binding.etxtMotorPlateSecondCell.addTextChangedListener(new TextWatcher() {
+        binding.etxtMotorPlateSecondCellExitQr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -169,9 +150,9 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 0) {
-                    binding.etxtMotorPlateSecondCell.clearFocus();
-                    binding.etxtMotorPlateFirstCell.requestFocus();
-                    binding.etxtMotorPlateFirstCell.setCursorVisible(true);
+                    binding.etxtMotorPlateSecondCellExitQr.clearFocus();
+                    binding.etxtMotorPlateFirstCellExitQr.requestFocus();
+                    binding.etxtMotorPlateFirstCellExitQr.setCursorVisible(true);
                 }
             }
 
@@ -180,27 +161,27 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
             }
         });
         if (getIntent().getBooleanExtra("isfromqr", false)) {
-            viewModel.getHasCardNumbeer().setValue(true);
-            viewModel.getHasMemberCode().setValue(true);
-            viewModel.getHasPelak().setValue(true);
+            exitQrViewModel.getHasCardNumbeer().setValue(true);
+            exitQrViewModel.getHasMemberCode().setValue(true);
+            exitQrViewModel.getHasPelak().setValue(true);
             String General_Qr_Code_String = getIntent().getStringExtra("scanned_string");
             Log.d(TAG, "General_Qr_Code_String_scanned >>>>>>>>>>>>>>>> " + General_Qr_Code_String);
             if (General_Qr_Code_String.equals("") || General_Qr_Code_String.equals(null)) {
-                viewModel.getOzv_code_string().setValue("");
-                viewModel.getCard_code_string().setValue("");
-                viewModel.getCar().setValue(true);
-                viewModel.getMotor().setValue(false);
-                viewModel.getPlate__0().setValue("");
-                viewModel.getPlate__2().setValue("");
-                viewModel.getPlate__3().setValue("");
-                viewModel.getEdit_text_imageview_ozv_status().setValue(false);
-                viewModel.getEdit_text_imageview_kart_status().setValue(false);
+                exitQrViewModel.getOzv_code_string().setValue("");
+                exitQrViewModel.getCard_code_string().setValue("");
+                exitQrViewModel.getCar().setValue(true);
+                exitQrViewModel.getMotor().setValue(false);
+                exitQrViewModel.getPlate__0().setValue("");
+                exitQrViewModel.getPlate__2().setValue("");
+                exitQrViewModel.getPlate__3().setValue("");
+                exitQrViewModel.getEdit_text_imageview_ozv_status().setValue(false);
+                exitQrViewModel.getEdit_text_imageview_kart_status().setValue(false);
                 ShowToast.getInstance().showWarning(this, R.string.qr_null);
             } else {
                 if (General_Qr_Code_String.trim().equals("backback")) {
                 } else {
-                    viewModel.getEdit_text_imageview_ozv_status().setValue(true);
-                    viewModel.getEdit_text_imageview_kart_status().setValue(true);
+                    exitQrViewModel.getEdit_text_imageview_ozv_status().setValue(true);
+                    exitQrViewModel.getEdit_text_imageview_kart_status().setValue(true);
                     try {
 //                        !@^#1380130265321###042911022#62339!@^
 //                        !@^###4834388266#64909!@^
@@ -262,8 +243,8 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
                             String pelak_pure = new StringBuilder(reverse_pelak_pure).reverse().toString();
                             String ozv = new StringBuilder(reverse_ozv).reverse().toString();
                             String card = new StringBuilder(reverse_card).reverse().toString();
-                            viewModel.getOzv_code_string().setValue(ozv);
-                            viewModel.getCard_code_string().setValue(card);
+                            exitQrViewModel.getOzv_code_string().setValue(ozv);
+                            exitQrViewModel.getCard_code_string().setValue(card);
                             boolean isCar;
                             if (pelak_pure.length() == 8) {
                                 isCar = false;
@@ -420,14 +401,14 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
                             Log.d(TAG, "actual plate >>> " + actualPurePelak);
                             if (isCar) {
                                 //car
-                                viewModel.getCar().setValue(true);
-                                viewModel.getMotor().setValue(false);
+                                exitQrViewModel.getCar().setValue(true);
+                                exitQrViewModel.getMotor().setValue(false);
                                 String plate0 = actualPurePelak.substring(0, 2);
-                                viewModel.getPlate__0().setValue(plate0);
+                                exitQrViewModel.getPlate__0().setValue(plate0);
                                 String plate2 =actualPurePelak.substring(actualPurePelak.length() - 5, actualPurePelak.length() - 2);
-                                viewModel.getPlate__2().setValue(plate2);
+                                exitQrViewModel.getPlate__2().setValue(plate2);
                                 String plate3=actualPurePelak.substring(actualPurePelak.length() - 2, actualPurePelak.length());
-                                viewModel.getPlate__3().setValue(plate3);
+                                exitQrViewModel.getPlate__3().setValue(plate3);
 
 
 
@@ -436,11 +417,11 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
                                 if (actualPurePelak.length() > 8) {
                                     //الف pelak
                                     String plate1 =actualPurePelak.substring(2, 5);
-                                            viewModel.getPlate__1().setValue(plate1);
+                                    exitQrViewModel.getPlate__1().setValue(plate1);
                                 } else {
                                     //بدون الف
                                     String plate1 =actualPurePelak.substring(2, 3);
-                                            viewModel.getPlate__1().setValue(plate1);
+                                    exitQrViewModel.getPlate__1().setValue(plate1);
                                 }
 
 
@@ -449,16 +430,16 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
 
                                 String[] alphabetArray = getResources().getStringArray(R.array.image_array);
                                 for (int i = 1; i < alphabetArray.length; i++) {
-                                    if (alphabetArray[i].equals(viewModel.getPlate__1().getValue()))
-                                        binding.spinner.setSelection(i);
+                                    if (alphabetArray[i].equals(exitQrViewModel.getPlate__1().getValue()))
+                                        binding.spinnerExitQr.setSelection(i);
                                 }
                                 Log.d(TAG, "car?????????????????????????????????????????????????????");
                             } else {
                                 //motor
-                                viewModel.getCar().setValue(false);
-                                viewModel.getMotor().setValue(true);
-                                viewModel.getMplate__0().setValue(motor_pelak_pure.substring(0, 3));
-                                viewModel.getMplate__1().setValue(motor_pelak_pure.substring(3));
+                                exitQrViewModel.getCar().setValue(false);
+                                exitQrViewModel.getMotor().setValue(true);
+                                exitQrViewModel.getMplate__0().setValue(motor_pelak_pure.substring(0, 3));
+                                exitQrViewModel.getMplate__1().setValue(motor_pelak_pure.substring(3));
                                 Log.d(TAG, "motor?????????????????????????????????????????????????????");
                             }
 
@@ -494,8 +475,8 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
                             String pelak_pure = new StringBuilder(reverse_pelak_pure).reverse().toString();
                             String ozv = new StringBuilder(reverse_ozv).reverse().toString();
                             String card = new StringBuilder(reverse_card).reverse().toString();
-                            viewModel.getOzv_code_string().setValue(ozv);
-                            viewModel.getCard_code_string().setValue(card);
+                            exitQrViewModel.getOzv_code_string().setValue(ozv);
+                            exitQrViewModel.getCard_code_string().setValue(card);
                             boolean isCar;
                             if (pelak_pure.length() == 8) {
                                 isCar = false;
@@ -652,30 +633,30 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
                             Log.d(TAG, "actual plate >>> " + actualPurePelak);
                             if (isCar) {
                                 //car
-                                viewModel.getCar().setValue(true);
-                                viewModel.getMotor().setValue(false);
-                                viewModel.getPlate__0().setValue(actualPurePelak.substring(0, 2));
-                                viewModel.getPlate__2().setValue(actualPurePelak.substring(actualPurePelak.length() - 5, actualPurePelak.length() - 2));
-                                viewModel.getPlate__3().setValue(actualPurePelak.substring(actualPurePelak.length() - 2, actualPurePelak.length()));
+                                exitQrViewModel.getCar().setValue(true);
+                                exitQrViewModel.getMotor().setValue(false);
+                                exitQrViewModel.getPlate__0().setValue(actualPurePelak.substring(0, 2));
+                                exitQrViewModel.getPlate__2().setValue(actualPurePelak.substring(actualPurePelak.length() - 5, actualPurePelak.length() - 2));
+                                exitQrViewModel.getPlate__3().setValue(actualPurePelak.substring(actualPurePelak.length() - 2, actualPurePelak.length()));
                                 if (actualPurePelak.length() > 8) {
                                     //الف pelak
-                                    viewModel.getPlate__1().setValue(actualPurePelak.substring(2, 5));
+                                    exitQrViewModel.getPlate__1().setValue(actualPurePelak.substring(2, 5));
                                 } else {
                                     //بدون الف
-                                    viewModel.getPlate__1().setValue(actualPurePelak.substring(2, 3));
+                                    exitQrViewModel.getPlate__1().setValue(actualPurePelak.substring(2, 3));
                                 }
                                 String[] alphabetArray = getResources().getStringArray(R.array.image_array);
                                 for (int i = 1; i < alphabetArray.length; i++) {
-                                    if (alphabetArray[i].equals(viewModel.getPlate__1().getValue()))
-                                        binding.spinner.setSelection(i);
+                                    if (alphabetArray[i].equals(exitQrViewModel.getPlate__1().getValue()))
+                                        binding.spinnerExitQr.setSelection(i);
                                 }
                                 Log.d(TAG, "car?????????????????????????????????????????????????????");
                             } else {
                                 //motor
-                                viewModel.getCar().setValue(false);
-                                viewModel.getMotor().setValue(true);
-                                viewModel.getMplate__0().setValue(motor_pelak_pure.substring(0, 3));
-                                viewModel.getMplate__1().setValue(motor_pelak_pure.substring(3));
+                                exitQrViewModel.getCar().setValue(false);
+                                exitQrViewModel.getMotor().setValue(true);
+                                exitQrViewModel.getMplate__0().setValue(motor_pelak_pure.substring(0, 3));
+                                exitQrViewModel.getMplate__1().setValue(motor_pelak_pure.substring(3));
                                 Log.d(TAG, "motor?????????????????????????????????????????????????????");
                             }
                         }
@@ -707,8 +688,7 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
                     final Animation myAnim = AnimationUtils.loadAnimation(ExitQrActivity.this, R.anim.btn_bubble_animation);
                     MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
                     myAnim.setInterpolator(interpolator);
-                    binding.etxtMainShomareKart.startAnimation(myAnim);
-                    binding.etxtMainShomareOzv.startAnimation(myAnim);
+
                 }
             }
         }
@@ -753,7 +733,7 @@ public class ExitQrActivity extends BaseActivity implements ReaderHandler.Callba
 //                }
 //            }
 //        }
-        viewModel.getProgress().observe(this, new Observer<Integer>() {
+        exitQrViewModel.getProgress().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer value) {
                 if (value > 0) {
