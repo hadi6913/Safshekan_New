@@ -3,6 +3,7 @@ package com.khodmohaseb.parkban.services;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.khodmohaseb.parkban.helper.Preferences;
@@ -18,6 +19,7 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ParkbanServiceProvider {
 
@@ -149,6 +151,11 @@ public class ParkbanServiceProvider {
                         .addHeader("Accept", "*/*")
                         .addHeader("Content-type", "application/json");
 
+
+                deviceToken =   preferences.getString("devicetoken", "");
+
+
+
                 if (!TextUtils.isEmpty(deviceToken)) {
                     requestBuilder.addHeader(HEADER_DEVICE_TOKEN, deviceToken);
                 }
@@ -163,6 +170,7 @@ public class ParkbanServiceProvider {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(client)
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ParkbanService.class);

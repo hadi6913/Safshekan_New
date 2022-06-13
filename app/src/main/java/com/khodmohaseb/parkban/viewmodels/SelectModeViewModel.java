@@ -92,14 +92,14 @@ public class SelectModeViewModel extends ViewModel {
 
                 if(getParkingInfoResponse.getCardKind().intValue() == 0){
                     //Mifare
-                    ((BaseActivity) context).finish();
+//                    ((BaseActivity) context).finish();
                     Intent i = new Intent(context, EnterMifareActivity.class);
                     context.startActivity(i);
 
 
                 }else{
                     //qr
-                    ((BaseActivity) context).finish();
+//                    ((BaseActivity) context).finish();
                     Intent i = new Intent(context, EnterQrActivity.class);
                     context.startActivity(i);
                 }
@@ -136,7 +136,7 @@ public class SelectModeViewModel extends ViewModel {
 
                 if(getParkingInfoResponse.getCardKind().intValue() == 0){
                     //Mifare
-                    ((BaseActivity) context).finish();
+//                    ((BaseActivity) context).finish();
                     Intent i = new Intent(context, ExitMifareActivity.class);
                     context.startActivity(i);
 
@@ -144,7 +144,7 @@ public class SelectModeViewModel extends ViewModel {
 
                 }else{
                     //qr
-                    ((BaseActivity) context).finish();
+//                    ((BaseActivity) context).finish();
                     Intent i = new Intent(context, ExitQrActivity.class);
                     context.startActivity(i);
                 }

@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 
 import com.khodmohaseb.parkban.databinding.ActivityEnterMifareBinding;
+import com.khodmohaseb.parkban.databinding.ActivityLoginBinding;
 import com.khodmohaseb.parkban.databinding.ActivityMainBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
 import com.khodmohaseb.parkban.services.EnterMifareReaderHandler;
@@ -49,13 +50,13 @@ public class EnterMifareActivity extends BaseActivity implements EnterMifareRead
     private static final String TAG = "EnterMifareActivity";
     private int failedLoadLib = 0;
     private EnterMifareViewModel enterMifareViewModel;
-    private boolean doubleBackToExitPressedOnce = false;
+    private ActivityEnterMifareBinding binding;
+
 
     //**********************************************************************************************
     //**********************************************************************************************
     private Intent readerHandlerIntent;
     private EnterMifareReaderHandler readerHandler;
-
     private ServiceConnection readerHandlerConnection = new ServiceConnection() {
 
         @Override
@@ -85,9 +86,10 @@ public class EnterMifareActivity extends BaseActivity implements EnterMifareRead
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ActivityEnterMifareBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_enter_mifare);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_enter_mifare);
         copyAssets();
         CreateANPR();
+
         enterMifareViewModel = ViewModelProviders.of(this).get(EnterMifareViewModel.class);
         binding.setViewModel(enterMifareViewModel);
         EditText etxtCar = findViewById(R.id.etxt_car_plate_first_cell_enter_mifare);
@@ -96,6 +98,24 @@ public class EnterMifareActivity extends BaseActivity implements EnterMifareRead
         enterMifareViewModel.getHasPelak().setValue(true);
         binding.setLifecycleOwner(this);
         enterMifareViewModel.mSpinner = binding.spinnerEnterMifare;
+        enterMifareViewModel.mCarTypeSpinner = binding.spinnerCarTypeEnterMifare;
+        binding.spinnerCarTypeEnterMifare.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                enterMifareViewModel.getSelectedCarTypeName().setValue(String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                binding.spinnerCarTypeEnterMifare.setSelection(0);
+                enterMifareViewModel.getSelectedCarTypeName().setValue(String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()));
+            }
+        });
+
+
+
+
+
         binding.spinnerEnterMifare.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -242,7 +262,6 @@ public class EnterMifareActivity extends BaseActivity implements EnterMifareRead
     public void onBackPressed() {
         enterMifareViewModel.backPress(EnterMifareActivity.this);
     }
-
 
 
     private void CreateANPR() {

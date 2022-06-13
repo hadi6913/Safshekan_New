@@ -108,8 +108,21 @@
             android:name="com.khodmohaseb.parkban.ChargeReportActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".EnterQrActivity"
+            android:screenOrientation="portrait"/>
 
-        <service android:name=".services.ReaderHandler"/>
+        <activity android:name=".EnterMifareActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ExitQrActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ExitMifareActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".SelectModeActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

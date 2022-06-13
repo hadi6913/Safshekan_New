@@ -21,10 +21,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.EditText;
 
+import com.khodmohaseb.parkban.databinding.ActivityExitMifareBinding;
 import com.khodmohaseb.parkban.databinding.ActivityMainBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
-import com.khodmohaseb.parkban.services.ReaderHandler;
+
+import com.khodmohaseb.parkban.services.ExitMifareReaderHandler;
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
+import com.khodmohaseb.parkban.viewmodels.ExitMifareViewModel;
 import com.khodmohaseb.parkban.viewmodels.MainViewModel;
 
 import org.opencv.android.OpenCVLoader;
@@ -41,24 +44,24 @@ import java.util.List;
 import static ir.shahaabco.ANPRNDK.anpr_create;
 
 
-public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Callbacks {
+public class ExitMifareActivity extends BaseActivity implements ExitMifareReaderHandler.Callbacks {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "ExitMifareActivity";
     private int failedLoadLib = 0;
-    private MainViewModel viewModel;
+    private ExitMifareViewModel exitMifareViewModel;
     private boolean doubleBackToExitPressedOnce = false;
 
     //**********************************************************************************************
     //**********************************************************************************************
     private Intent readerHandlerIntent;
-    private ReaderHandler readerHandler;
+    private ExitMifareReaderHandler readerHandler;
 
     private ServiceConnection readerHandlerConnection = new ServiceConnection() {
 
         @Override
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
-            ReaderHandler.LocalBinder binder = (ReaderHandler.LocalBinder) service;
+            ExitMifareReaderHandler.LocalBinder binder = (ExitMifareReaderHandler.LocalBinder) service;
             readerHandler = binder.getServiceInstance();
             readerHandler.registerClient(ExitMifareActivity.this);
         }
@@ -82,32 +85,30 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        final ActivityExitMifareBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_exit_mifare);
         copyAssets();
         CreateANPR();
-        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        binding.setViewModel(viewModel);
-        EditText etxtCar = findViewById(R.id.etxt_car_plate_first_cell);
-        EditText etxtMotor = findViewById(R.id.etxt_motor_plate_first_cell);
-        viewModel.init(this, etxtCar, etxtMotor);
-        viewModel.getHasPelak().setValue(true);
-        viewModel.getHasMemberCode().setValue(true);
-        viewModel.getHasCardNumbeer().setValue(true);
+        exitMifareViewModel = ViewModelProviders.of(this).get(ExitMifareViewModel.class);
+        binding.setViewModel(exitMifareViewModel);
+        EditText etxtCar = findViewById(R.id.etxt_car_plate_first_cell_exit_mifare);
+        EditText etxtMotor = findViewById(R.id.etxt_motor_plate_first_cell_exit_mifare);
+        exitMifareViewModel.init(this, etxtCar, etxtMotor);
+        exitMifareViewModel.getHasPelak().setValue(true);
         binding.setLifecycleOwner(this);
-        viewModel.mSpinner = binding.spinner;
-        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        exitMifareViewModel.mSpinner = binding.spinnerExitMifare;
+        binding.spinnerExitMifare.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                viewModel.getPlate__1().setValue(String.valueOf(binding.spinner.getSelectedItem()));
+                exitMifareViewModel.getPlate__1().setValue(String.valueOf(binding.spinnerExitMifare.getSelectedItem()));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                binding.spinner.setSelection(0);
-                viewModel.getPlate__1().setValue(String.valueOf(binding.spinner.getSelectedItem()));
+                binding.spinnerExitMifare.setSelection(0);
+                exitMifareViewModel.getPlate__1().setValue(String.valueOf(binding.spinnerExitMifare.getSelectedItem()));
             }
         });
-        binding.etxtCarPlateThirdCell.addTextChangedListener(new TextWatcher() {
+        binding.etxtCarPlateThirdCellExitMifare.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -115,9 +116,9 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 3) {
-                    binding.etxtCarPlateThirdCell.clearFocus();
-                    binding.etxtCarPlateForthCell.requestFocus();
-                    binding.etxtCarPlateForthCell.setCursorVisible(true);
+                    binding.etxtCarPlateThirdCellExitMifare.clearFocus();
+                    binding.etxtCarPlateForthCellExitMifare.requestFocus();
+                    binding.etxtCarPlateForthCellExitMifare.setCursorVisible(true);
                 }
             }
 
@@ -125,7 +126,7 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
             public void afterTextChanged(Editable s) {
             }
         });
-        binding.etxtMotorPlateFirstCell.addTextChangedListener(new TextWatcher() {
+        binding.etxtMotorPlateFirstCellExitMifare.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -133,9 +134,9 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 3) {
-                    binding.etxtMotorPlateFirstCell.clearFocus();
-                    binding.etxtMotorPlateSecondCell.requestFocus();
-                    binding.etxtMotorPlateSecondCell.setCursorVisible(true);
+                    binding.etxtMotorPlateFirstCellExitMifare.clearFocus();
+                    binding.etxtMotorPlateSecondCellExitMifare.requestFocus();
+                    binding.etxtMotorPlateSecondCellExitMifare.setCursorVisible(true);
                 }
             }
 
@@ -143,7 +144,7 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
             public void afterTextChanged(Editable s) {
             }
         });
-        binding.etxtCarPlateForthCell.addTextChangedListener(new TextWatcher() {
+        binding.etxtCarPlateForthCellExitMifare.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -151,9 +152,9 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 0) {
-                    binding.etxtCarPlateForthCell.clearFocus();
-                    binding.etxtCarPlateThirdCell.requestFocus();
-                    binding.etxtCarPlateThirdCell.setCursorVisible(true);
+                    binding.etxtCarPlateForthCellExitMifare.clearFocus();
+                    binding.etxtCarPlateThirdCellExitMifare.requestFocus();
+                    binding.etxtCarPlateThirdCellExitMifare.setCursorVisible(true);
                 }
             }
 
@@ -161,7 +162,7 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
             public void afterTextChanged(Editable s) {
             }
         });
-        binding.etxtMotorPlateSecondCell.addTextChangedListener(new TextWatcher() {
+        binding.etxtMotorPlateSecondCellExitMifare.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -169,9 +170,9 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 0) {
-                    binding.etxtMotorPlateSecondCell.clearFocus();
-                    binding.etxtMotorPlateFirstCell.requestFocus();
-                    binding.etxtMotorPlateFirstCell.setCursorVisible(true);
+                    binding.etxtMotorPlateSecondCellExitMifare.clearFocus();
+                    binding.etxtMotorPlateFirstCellExitMifare.requestFocus();
+                    binding.etxtMotorPlateFirstCellExitMifare.setCursorVisible(true);
                 }
             }
 
@@ -179,581 +180,8 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
             public void afterTextChanged(Editable s) {
             }
         });
-        if (getIntent().getBooleanExtra("isfromqr", false)) {
-            viewModel.getHasCardNumbeer().setValue(true);
-            viewModel.getHasMemberCode().setValue(true);
-            viewModel.getHasPelak().setValue(true);
-            String General_Qr_Code_String = getIntent().getStringExtra("scanned_string");
-            Log.d(TAG, "General_Qr_Code_String_scanned >>>>>>>>>>>>>>>> " + General_Qr_Code_String);
-            if (General_Qr_Code_String.equals("") || General_Qr_Code_String.equals(null)) {
-                viewModel.getOzv_code_string().setValue("");
-                viewModel.getCard_code_string().setValue("");
-                viewModel.getCar().setValue(true);
-                viewModel.getMotor().setValue(false);
-                viewModel.getPlate__0().setValue("");
-                viewModel.getPlate__2().setValue("");
-                viewModel.getPlate__3().setValue("");
-                viewModel.getEdit_text_imageview_ozv_status().setValue(false);
-                viewModel.getEdit_text_imageview_kart_status().setValue(false);
-                ShowToast.getInstance().showWarning(this, R.string.qr_null);
-            } else {
-                if (General_Qr_Code_String.trim().equals("backback")) {
-                } else {
-                    viewModel.getEdit_text_imageview_ozv_status().setValue(true);
-                    viewModel.getEdit_text_imageview_kart_status().setValue(true);
-                    try {
-//                        !@^#1380130265321###042911022#62339!@^
-//                        !@^###4834388266#64909!@^
-                        String actualStringFromQrcode = General_Qr_Code_String.substring(3, General_Qr_Code_String.length() - 3);
-                        Log.d(TAG, "actualStringFromQrcode >>> " + actualStringFromQrcode);
-                        int crc = Integer.parseInt(actualStringFromQrcode.charAt(3) + "");
-                        int calculatedCrc = 0;
-                        int sumForCalculatedCrc = 0;
-                        String actualStringFromQrcodeWithOutSharp = actualStringFromQrcode.replace("#", "").trim();
-                        Log.d(TAG, "actualStringFromQrcodeWithOutSharp >>> " + actualStringFromQrcodeWithOutSharp);
-                        for (int i = 0; i < actualStringFromQrcodeWithOutSharp.length(); i++) {
-                            Log.d(TAG, "" + Integer.parseInt(actualStringFromQrcodeWithOutSharp.charAt(i) + ""));
-                            sumForCalculatedCrc = sumForCalculatedCrc + Integer.parseInt(actualStringFromQrcodeWithOutSharp.charAt(i) + "");
-                        }
-                        Log.d(TAG, "sumForCalculatedCrc befor minus crc >>> " + sumForCalculatedCrc);
-                        sumForCalculatedCrc = sumForCalculatedCrc - Integer.parseInt(actualStringFromQrcode.charAt(3) + "");
-                        Log.d(TAG, "sumForCalculatedCrc >>> " + sumForCalculatedCrc);
-                        calculatedCrc = (sumForCalculatedCrc % 9);
-                        Log.d(TAG, "calculatedCrc >>> " + calculatedCrc);
-                        Log.d(TAG, "Crc >>> " + crc);
-                        if (calculatedCrc == crc) {
-                            Log.d(TAG, "crc is correct");
-                        } else {
-                            Log.d(TAG, "crc is in-correct");
-                            throw new Exception();
-                        }
-//
-                        StringBuffer stringBuffer1 = new StringBuffer(actualStringFromQrcode);
-                        String acutalStringFromQrCodeWithOutCrc = stringBuffer1.replace(3, 4, "").toString().trim();
-//                          #130130265321
-//                          #
-//                          #
-//                          #042911022
-//                          #62339
-                        Log.d(TAG, "acutalStringFromQrCodeWithOutCrc >>>" + acutalStringFromQrCodeWithOutCrc);
-                        List<String> listString = new ArrayList<String>(Arrays.asList(acutalStringFromQrCodeWithOutCrc.split("#")));
 
-
-
-                        if(listString.size()==6){
-
-                            String reverse_id = listString.get(5);
-                            Log.d(TAG, "reverse_id >>> " + reverse_id);
-                            String reverse_pelak_pure = listString.get(4);
-                            Log.d(TAG, "reverse_pelak_pure >>> " + reverse_pelak_pure);
-                            String reverse_ozv = listString.get(3);
-                            Log.d(TAG, "reverse_ozv >>> " + reverse_ozv);
-                            String cardCrc = listString.get(2);
-                            Log.d(TAG, "cardCrc >>> " + cardCrc);
-                            String reverse_card = null;
-                            if (cardCrc.equals("")) {
-                                reverse_card = "";
-                            } else {
-//                            reverse_card = cardCrc.substring(0, 3) + cardCrc.substring(4, cardCrc.length());
-                                reverse_card = cardCrc;
-                            }
-                            Log.d(TAG, "reverse_card >>> " + reverse_card);
-                            String id = new StringBuilder(reverse_id).reverse().toString();
-                            String pelak_pure = new StringBuilder(reverse_pelak_pure).reverse().toString();
-                            String ozv = new StringBuilder(reverse_ozv).reverse().toString();
-                            String card = new StringBuilder(reverse_card).reverse().toString();
-                            viewModel.getOzv_code_string().setValue(ozv);
-                            viewModel.getCard_code_string().setValue(card);
-                            boolean isCar;
-                            if (pelak_pure.length() == 8) {
-                                isCar = false;
-                            } else {
-                                isCar = true;
-                            }
-                            Log.d(TAG, "pure_pelak with original enum >>> " + pelak_pure);
-                            String motor_pelak_pure = pelak_pure;
-                            Log.d(TAG, "original enum" + pelak_pure.substring(2, 4));
-                            String actualPurePelak = null;
-                            StringBuffer stringBuffer;
-                            switch (pelak_pure.substring(2, 4)) {
-                                case "00":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "الف").toString();
-                                    break;
-                                case "01":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ب").toString();
-                                    break;
-                                case "02":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "پ").toString();
-                                    break;
-                                case "03":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ت").toString();
-                                    break;
-                                case "04":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ث").toString();
-                                    break;
-                                case "05":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ج").toString();
-                                    break;
-                                case "06":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "چ").toString();
-                                    break;
-                                case "07":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ح").toString();
-                                    break;
-                                case "08":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "خ").toString();
-                                    break;
-                                case "09":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "د").toString();
-                                    break;
-                                case "10":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ذ").toString();
-                                    break;
-                                case "11":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ر").toString();
-                                    break;
-                                case "12":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ز").toString();
-                                    break;
-                                case "13":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ژ").toString();
-                                    break;
-                                case "14":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "س").toString();
-                                    break;
-                                case "15":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ش").toString();
-                                    break;
-                                case "16":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ص").toString();
-                                    break;
-                                case "17":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ض").toString();
-                                    break;
-                                case "18":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ط").toString();
-                                    break;
-                                case "19":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ظ").toString();
-                                    break;
-                                case "20":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ع").toString();
-                                    break;
-                                case "21":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "غ").toString();
-                                    break;
-                                case "22":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ف").toString();
-                                    break;
-                                case "23":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ق").toString();
-                                    break;
-                                case "24":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ک").toString();
-                                    break;
-                                case "25":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "گ").toString();
-                                    break;
-                                case "26":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ل").toString();
-                                    break;
-                                case "27":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "م").toString();
-                                    break;
-                                case "28":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ن").toString();
-                                    break;
-                                case "29":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "و").toString();
-                                    break;
-                                case "30":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ﻫ").toString();
-                                    break;
-                                case "31":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ی").toString();
-                                    break;
-                                case "32":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "♿").toString();
-                                    break;
-                                case "33":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "D").toString();
-                                    break;
-                                case "34":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "S").toString();
-                                    break;
-                            }
-                            Log.d(TAG, "actual plate >>> " + actualPurePelak);
-                            if (isCar) {
-                                //car
-                                viewModel.getCar().setValue(true);
-                                viewModel.getMotor().setValue(false);
-                                String plate0 = actualPurePelak.substring(0, 2);
-                                viewModel.getPlate__0().setValue(plate0);
-                                String plate2 =actualPurePelak.substring(actualPurePelak.length() - 5, actualPurePelak.length() - 2);
-                                viewModel.getPlate__2().setValue(plate2);
-                                String plate3=actualPurePelak.substring(actualPurePelak.length() - 2, actualPurePelak.length());
-                                viewModel.getPlate__3().setValue(plate3);
-
-
-
-
-
-                                if (actualPurePelak.length() > 8) {
-                                    //الف pelak
-                                    String plate1 =actualPurePelak.substring(2, 5);
-                                            viewModel.getPlate__1().setValue(plate1);
-                                } else {
-                                    //بدون الف
-                                    String plate1 =actualPurePelak.substring(2, 3);
-                                            viewModel.getPlate__1().setValue(plate1);
-                                }
-
-
-
-
-
-                                String[] alphabetArray = getResources().getStringArray(R.array.image_array);
-                                for (int i = 1; i < alphabetArray.length; i++) {
-                                    if (alphabetArray[i].equals(viewModel.getPlate__1().getValue()))
-                                        binding.spinner.setSelection(i);
-                                }
-                                Log.d(TAG, "car?????????????????????????????????????????????????????");
-                            } else {
-                                //motor
-                                viewModel.getCar().setValue(false);
-                                viewModel.getMotor().setValue(true);
-                                viewModel.getMplate__0().setValue(motor_pelak_pure.substring(0, 3));
-                                viewModel.getMplate__1().setValue(motor_pelak_pure.substring(3));
-                                Log.d(TAG, "motor?????????????????????????????????????????????????????");
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-                        }else{
-                            String reverse_id = listString.get(4);
-                            Log.d(TAG, "reverse_id >>> " + reverse_id);
-                            String reverse_pelak_pure = listString.get(3);
-                            Log.d(TAG, "reverse_pelak_pure >>> " + reverse_pelak_pure);
-                            String reverse_ozv = listString.get(2);
-                            Log.d(TAG, "reverse_ozv >>> " + reverse_ozv);
-                            String cardCrc = listString.get(1);
-                            Log.d(TAG, "cardCrc >>> " + cardCrc);
-                            String reverse_card = null;
-                            if (cardCrc.equals("")) {
-                                reverse_card = "";
-                            } else {
-//                            reverse_card = cardCrc.substring(0, 3) + cardCrc.substring(4, cardCrc.length());
-                                reverse_card = cardCrc;
-                            }
-                            Log.d(TAG, "reverse_card >>> " + reverse_card);
-                            String id = new StringBuilder(reverse_id).reverse().toString();
-                            String pelak_pure = new StringBuilder(reverse_pelak_pure).reverse().toString();
-                            String ozv = new StringBuilder(reverse_ozv).reverse().toString();
-                            String card = new StringBuilder(reverse_card).reverse().toString();
-                            viewModel.getOzv_code_string().setValue(ozv);
-                            viewModel.getCard_code_string().setValue(card);
-                            boolean isCar;
-                            if (pelak_pure.length() == 8) {
-                                isCar = false;
-                            } else {
-                                isCar = true;
-                            }
-                            Log.d(TAG, "pure_pelak with original enum >>> " + pelak_pure);
-                            String motor_pelak_pure = pelak_pure;
-                            Log.d(TAG, "original enum" + pelak_pure.substring(2, 4));
-                            String actualPurePelak = null;
-                            StringBuffer stringBuffer;
-                            switch (pelak_pure.substring(2, 4)) {
-                                case "00":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "الف").toString();
-                                    break;
-                                case "01":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ب").toString();
-                                    break;
-                                case "02":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "پ").toString();
-                                    break;
-                                case "03":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ت").toString();
-                                    break;
-                                case "04":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ث").toString();
-                                    break;
-                                case "05":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ج").toString();
-                                    break;
-                                case "06":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "چ").toString();
-                                    break;
-                                case "07":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ح").toString();
-                                    break;
-                                case "08":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "خ").toString();
-                                    break;
-                                case "09":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "د").toString();
-                                    break;
-                                case "10":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ذ").toString();
-                                    break;
-                                case "11":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ر").toString();
-                                    break;
-                                case "12":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ز").toString();
-                                    break;
-                                case "13":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ژ").toString();
-                                    break;
-                                case "14":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "س").toString();
-                                    break;
-                                case "15":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ش").toString();
-                                    break;
-                                case "16":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ص").toString();
-                                    break;
-                                case "17":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ض").toString();
-                                    break;
-                                case "18":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ط").toString();
-                                    break;
-                                case "19":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ظ").toString();
-                                    break;
-                                case "20":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ع").toString();
-                                    break;
-                                case "21":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "غ").toString();
-                                    break;
-                                case "22":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ف").toString();
-                                    break;
-                                case "23":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ق").toString();
-                                    break;
-                                case "24":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ک").toString();
-                                    break;
-                                case "25":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "گ").toString();
-                                    break;
-                                case "26":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ل").toString();
-                                    break;
-                                case "27":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "م").toString();
-                                    break;
-                                case "28":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ن").toString();
-                                    break;
-                                case "29":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "و").toString();
-                                    break;
-                                case "30":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ه").toString();
-                                    break;
-                                case "31":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "ی").toString();
-                                    break;
-                                case "32":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "♿").toString();
-                                    break;
-                                case "33":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "D").toString();
-                                    break;
-                                case "34":
-                                    stringBuffer = new StringBuffer(pelak_pure);
-                                    actualPurePelak = stringBuffer.replace(2, 4, "S").toString();
-                                    break;
-                            }
-                            Log.d(TAG, "actual plate >>> " + actualPurePelak);
-                            if (isCar) {
-                                //car
-                                viewModel.getCar().setValue(true);
-                                viewModel.getMotor().setValue(false);
-                                viewModel.getPlate__0().setValue(actualPurePelak.substring(0, 2));
-                                viewModel.getPlate__2().setValue(actualPurePelak.substring(actualPurePelak.length() - 5, actualPurePelak.length() - 2));
-                                viewModel.getPlate__3().setValue(actualPurePelak.substring(actualPurePelak.length() - 2, actualPurePelak.length()));
-                                if (actualPurePelak.length() > 8) {
-                                    //الف pelak
-                                    viewModel.getPlate__1().setValue(actualPurePelak.substring(2, 5));
-                                } else {
-                                    //بدون الف
-                                    viewModel.getPlate__1().setValue(actualPurePelak.substring(2, 3));
-                                }
-                                String[] alphabetArray = getResources().getStringArray(R.array.image_array);
-                                for (int i = 1; i < alphabetArray.length; i++) {
-                                    if (alphabetArray[i].equals(viewModel.getPlate__1().getValue()))
-                                        binding.spinner.setSelection(i);
-                                }
-                                Log.d(TAG, "car?????????????????????????????????????????????????????");
-                            } else {
-                                //motor
-                                viewModel.getCar().setValue(false);
-                                viewModel.getMotor().setValue(true);
-                                viewModel.getMplate__0().setValue(motor_pelak_pure.substring(0, 3));
-                                viewModel.getMplate__1().setValue(motor_pelak_pure.substring(3));
-                                Log.d(TAG, "motor?????????????????????????????????????????????????????");
-                            }
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    } catch (Exception e) {
-                        ShowToast.getInstance().showWarning(this, R.string.error_mifare);
-                        return;
-                    }
-                    ShowToast.getInstance().showSuccess(this, R.string.ok_mifare);
-                    final Animation myAnim = AnimationUtils.loadAnimation(ExitMifareActivity.this, R.anim.btn_bubble_animation);
-                    MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-                    myAnim.setInterpolator(interpolator);
-                    binding.etxtMainShomareKart.startAnimation(myAnim);
-                    binding.etxtMainShomareOzv.startAnimation(myAnim);
-                }
-            }
-        }
-//        if (getIntent().getBooleanExtra("isfrommifare", false)) {
-//            viewModel.getHasCardNumbeer().setValue(true);
-//            viewModel.getHasMemberCode().setValue(true);
-//            viewModel.getHasPelak().setValue(true);
-//            String General_Mifare_Code_String = getIntent().getStringExtra("scanned_string");
-//            Log.d(TAG, "General_Mifare_Code_String_scanned >>>>>>>>>>>>>>>> " + General_Mifare_Code_String);
-//            if (General_Mifare_Code_String.equals("") || General_Mifare_Code_String.equals(null)) {
-//                ShowToast.getInstance().showWarning(this, R.string.error_mifare);
-//                viewModel.getEdit_text_imageview_ozv_status().setValue(false);
-//                viewModel.getEdit_text_imageview_kart_status().setValue(false);
-//                viewModel.getOzv_code_string().setValue("");
-//                viewModel.getCard_code_string().setValue("");
-//                viewModel.getCar().setValue(true);
-//                viewModel.getMotor().setValue(false);
-//                viewModel.getPlate__0().setValue("");
-//                viewModel.getPlate__2().setValue("");
-//                viewModel.getPlate__3().setValue("");
-//                binding.spinner.setSelection(0);
-//            } else {
-//                if (General_Mifare_Code_String.equals("backback")) {
-//                } else {
-//                    ShowToast.getInstance().showSuccess(this, R.string.ok_mifare);
-//                    viewModel.getEdit_text_imageview_ozv_status().setValue(false);
-//                    viewModel.getEdit_text_imageview_kart_status().setValue(false);
-//                    binding.etxtMainShomareKart.requestFocus();
-//                    String card = General_Mifare_Code_String;
-//                    viewModel.getPlate__0().setValue("");
-//                    viewModel.getPlate__2().setValue("");
-//                    viewModel.getPlate__3().setValue("");
-//                    binding.spinner.setSelection(0);
-//                    viewModel.getMplate__1().setValue("");
-//                    viewModel.getMplate__0().setValue("");
-//                    viewModel.getCard_code_string().setValue(card);
-//                    viewModel.getOzv_code_string().setValue("");
-//                    final Animation myAnim = AnimationUtils.loadAnimation(com.safshekan.parkban.MainActivity.this, R.anim.btn_bubble_animation);
-//                    MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-//                    myAnim.setInterpolator(interpolator);
-//                    binding.etxtMainShomareKart.startAnimation(myAnim);
-//                }
-//            }
-//        }
-        viewModel.getProgress().observe(this, new Observer<Integer>() {
+        exitMifareViewModel.getProgress().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer value) {
                 if (value > 0) {
@@ -769,7 +197,7 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
 
     private void startServices() {
         try {
-            readerHandlerIntent = new Intent(getApplicationContext(), ReaderHandler.class);
+            readerHandlerIntent = new Intent(getApplicationContext(), ExitMifareReaderHandler.class);
             startService(readerHandlerIntent);
             getApplicationContext().bindService(readerHandlerIntent, readerHandlerConnection, Context.BIND_AUTO_CREATE);
         } catch (Exception ex) {
@@ -780,8 +208,8 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
     private void stopServices() {
         try {
             //Try to stop Reader handler
-            if (ReaderHandler.getInstance() != null)
-                ReaderHandler.getInstance().stopSelf();
+            if (ExitMifareReaderHandler.getInstance() != null)
+                ExitMifareReaderHandler.getInstance().stopSelf();
         } catch (Exception ex) {
             Log.d(TAG, "MainActivity > stopServices():" + ex.getMessage());
         }
@@ -809,19 +237,19 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
         if (PreferenceManager.getDefaultSharedPreferences(ExitMifareActivity.this).getBoolean("comFmPardakhtDialog", false)) {
             PreferenceManager.getDefaultSharedPreferences(ExitMifareActivity.this).edit().putBoolean("comFmPardakhtDialog", false).apply();
             //do refresh
-            viewModel.doRefresh();
+            exitMifareViewModel.doRefresh();
         }
     }
 
     @Override
     public void onBackPressed() {
-        viewModel.backPress(ExitMifareActivity.this);
+        exitMifareViewModel.backPress(ExitMifareActivity.this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        viewModel.processActivityResult(this, requestCode, resultCode, data);
+        exitMifareViewModel.processActivityResult(this, requestCode, resultCode, data);
     }
 
     private void CreateANPR() {
@@ -909,14 +337,7 @@ public class ExitMifareActivity extends BaseActivity implements ReaderHandler.Ca
     }
 
     @Override
-    public void showOnUi(final String serialNumber) {
-        Log.d(TAG, "showOnUi has been called  , actual serial number>> " + serialNumber);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                viewModel.getCard_code_string().setValue(serialNumber);
-                viewModel.getEdit_text_imageview_kart_status().setValue(true);
-            }
-        });
+    public void showOnUi(String serialNumber) {
+
     }
 }

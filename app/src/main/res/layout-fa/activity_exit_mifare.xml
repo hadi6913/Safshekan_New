@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.khodmohaseb.parkban.viewmodels.EnterMifareViewModel" />
+            type="com.khodmohaseb.parkban.viewmodels.ExitMifareViewModel" />
 
     </data>
 
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        tools:context=".EnterMifareActivity">
+        tools:context=".MainActivity">
 
         <ImageView
             animatedVisibilityScale="@{4000}"
@@ -36,7 +36,7 @@
 
 
             <LinearLayout
-                android:id="@+id/linear_button_container_main_enter_mifare"
+                android:id="@+id/linear_button_container_main_exit_mifare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -50,7 +50,7 @@
                     android:gravity="center">
 
                     <Button
-                        android:id="@+id/btn_pelak_khan_enter_mifare"
+                        android:id="@+id/btn_pelak_khan_exit_mifare"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:background="@drawable/btn_pelak_khan_background"
@@ -60,9 +60,9 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/btn_pelak_khan_enter_mifare"
-                        android:layout_alignLeft="@id/btn_pelak_khan_enter_mifare"
-                        android:layout_alignRight="@id/btn_pelak_khan_enter_mifare"
+                        android:layout_below="@id/btn_pelak_khan_exit_mifare"
+                        android:layout_alignLeft="@id/btn_pelak_khan_exit_mifare"
+                        android:layout_alignRight="@id/btn_pelak_khan_exit_mifare"
                         android:gravity="center_horizontal"
                         android:text="پلاک خوان"
                         android:textColor="@android:color/darker_gray"
@@ -72,22 +72,48 @@
 
 
 
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="110dp"-->
+<!--                    android:gravity="center">-->
+
+<!--                    <Button-->
+<!--                        android:id="@+id/btn_cart_khan"-->
+<!--                        android:layout_width="70dp"-->
+<!--                        android:layout_height="70dp"-->
+<!--                        android:background="@drawable/btn_card_khan_background"-->
+<!--                        android:gravity="center"-->
+<!--                        android:onClick="@{viewModel::Card_Khan_Onclick}" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@id/btn_cart_khan"-->
+<!--                        android:layout_alignLeft="@id/btn_cart_khan"-->
+<!--                        android:layout_alignRight="@id/btn_cart_khan"-->
+<!--                        android:gravity="center_horizontal"-->
+<!--                        android:text="کارت خوان"-->
+<!--                        android:textColor="@android:color/darker_gray"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </RelativeLayout>-->
+
 
             </LinearLayout>
 
 
             <RelativeLayout
-                android:id="@+id/layout_pelak_main_enter_mifare"
+                android:id="@+id/layout_pelak_main_exit_mifare"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_below="@id/linear_button_container_main_enter_mifare"
+                android:layout_below="@id/linear_button_container_main_exit_mifare"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="5dp"
                 android:visibility="@{viewModel.hasPelak ? View.VISIBLE : View.GONE}">
 
 
                 <LinearLayout
-                    android:id="@+id/car_plate_enter_mifare"
+                    android:id="@+id/car_plate_exit_mifare"
                     android:layout_width="258dp"
                     android:layout_height="60dp"
                     android:layout_centerInParent="true"
@@ -102,7 +128,7 @@
                     android:visibility="@{viewModel.car ? View.VISIBLE : View.GONE}">
 
                     <com.khodmohaseb.parkban.controls.PersianEditText
-                        android:id="@+id/etxt_car_plate_first_cell_enter_mifare"
+                        android:id="@+id/etxt_car_plate_first_cell_exit_mifare"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
@@ -118,7 +144,7 @@
                          />
 
                     <Spinner
-                        android:id="@+id/spinner_enter_mifare"
+                        android:id="@+id/spinner_exit_mifare"
                         style="@style/spinner_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -130,7 +156,7 @@
 
 
                     <com.khodmohaseb.parkban.controls.PersianEditText
-                        android:id="@+id/etxt_car_plate_third_cell_enter_mifare"
+                        android:id="@+id/etxt_car_plate_third_cell_exit_mifare"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
@@ -146,7 +172,7 @@
                          />
 
                     <com.khodmohaseb.parkban.controls.PersianEditText
-                        android:id="@+id/etxt_car_plate_forth_cell_enter_mifare"
+                        android:id="@+id/etxt_car_plate_forth_cell_exit_mifare"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
@@ -175,7 +201,7 @@
                     android:visibility="@{viewModel.motor ? View.VISIBLE : View.GONE}">
 
                     <com.khodmohaseb.parkban.controls.PersianEditText
-                        android:id="@+id/etxt_motor_plate_first_cell_enter_mifare"
+                        android:id="@+id/etxt_motor_plate_first_cell_exit_mifare"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -189,7 +215,7 @@
                          />
 
                     <com.khodmohaseb.parkban.controls.PersianEditText
-                        android:id="@+id/etxt_motor_plate_second_cell_enter_mifare"
+                        android:id="@+id/etxt_motor_plate_second_cell_exit_mifare"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -205,7 +231,7 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/img_motor_car_change_enter_mifare"
+                    android:id="@+id/img_motor_car_change_exit_mifare"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
@@ -220,65 +246,7 @@
 
             </RelativeLayout>
 
-            <LinearLayout
-                android:layout_below="@id/layout_pelak_main_enter_mifare"
-                android:id="@+id/car_type_container_enter_mifare"
-                android:layout_width="match_parent"
-                android:layout_marginRight="45dp"
-                android:orientation="vertical"
-                android:layout_marginTop="48dp"
-                android:layout_marginLeft="45dp"
-                android:layout_height="wrap_content"
-                >
 
-                <com.khodmohaseb.parkban.controls.PersianTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="150dp"
-                    android:text="نوع خودرو را انتخاب کنید"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="24dp"
-                    android:paddingLeft="8dp"
-                    android:paddingTop="12dp"
-                    android:paddingRight="8dp"
-                    android:paddingBottom="12dp"
-                    android:background="@drawable/login_edit_text_background"
-                    android:orientation="horizontal">
-
-                    <Spinner
-                        android:id="@+id/spinner_car_type_enter_mifare"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        app:adapter="@{viewModel.langAdapter_car_type}"
-
-                        android:background="@android:color/transparent"
-                        android:gravity="center"
-                        android:layout_marginLeft="5dp"
-                        android:spinnerMode="dropdown" />
-
-
-
-
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:src="@drawable/arrow_button" />
-
-                </RelativeLayout>
-
-            </LinearLayout>
 
 
 
@@ -289,7 +257,7 @@
 <!--                android:layout_height="120dp"-->
 <!--                android:layout_above="@id/sendClick"-->
 <!--                android:layout_alignParentLeft="true"-->
-<!--                android:layout_marginLeft="120dp"-->
+<!--                android:layout_marginLeft="12dp"-->
 <!--                android:gravity="center">-->
 
 <!--                <Button-->
@@ -317,19 +285,40 @@
             <Button
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_below="@+id/car_type_container_enter_mifare"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="20dp"
+                android:layout_below="@+id/layout_pelak_main_exit_mifare"
                 android:layout_alignParentRight="true"
+                android:layout_margin="10dp"
                 android:background="@drawable/refresh"
                 android:gravity="center"
                 android:onClick="@{viewModel::Refresh_Page}" />
 
 
+            <!--<LinearLayout-->
+            <!--android:id="@+id/sendClick"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="55dp"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="#B40B72A8"-->
+            <!--android:gravity="center"-->
+            <!--android:onClick="@{viewModel::Taeed_Onclick}"-->
+            <!--android:orientation="horizontal">-->
 
+            <!--<com.safshekan.parkban.controls.PersianTextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:gravity="center"-->
+            <!--android:text="تایید"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="20sp" />-->
+
+
+            <!--</LinearLayout>-->
 
             <Button
-                android:id="@+id/sendClick_enter_mifare"
+                android:id="@+id/sendClick_exit_mifare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -338,7 +327,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/new_new_btn_background_layout"
                 android:onClick="@{viewModel::Taeed_Onclick}"
-                android:text="ثبت کردن روی کارت"
+                android:text="تایید"
                 android:textColor="@android:color/white"
                 android:textSize="21sp"
                 android:textStyle="bold" />

@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -52,6 +53,7 @@ import com.pax.dal.IPrinter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -81,6 +83,21 @@ public class ExitQrViewModel extends ViewModel {
     private MutableLiveData<String> plate__3;
     private MutableLiveData<String> mplate__0;
     private MutableLiveData<String> mplate__1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public Spinner mSpinner;
     private IPrinter iPrinter;
     private MutableLiveData<String> ozv_code_string;
@@ -277,7 +294,7 @@ public class ExitQrViewModel extends ViewModel {
 //                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
 //                        photoURI = Uri.fromFile(photoFile);
 //                    } else
-                            photoURI = FileProvider.getUriForFile(myContext, "com.safshekan.parkban", photoFile);
+                            photoURI = FileProvider.getUriForFile(myContext, "com.khodmohaseb.parkban", photoFile);
                             List<ResolveInfo> resolvedIntentActivities = myContext.getPackageManager().queryIntentActivities(takePictureIntent, PackageManager.MATCH_DEFAULT_ONLY);
                             for (ResolveInfo resolvedIntentInfo : resolvedIntentActivities) {
                                 String packageName = resolvedIntentInfo.activityInfo.packageName;
@@ -404,40 +421,6 @@ public class ExitQrViewModel extends ViewModel {
             @Override
             public void run() {
                 Intent i = new Intent(myContext, QRcodeReaderActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                myContext.startActivity(i);
-            }
-        }, Animation_Constant.ANIMATION_VALUE);
-    }
-
-    public void Card_Khan_Onclick(View view) {
-        view.clearFocus();
-        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_bubble_animation);
-        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-        myAnim.setInterpolator(interpolator);
-        view.startAnimation(myAnim);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(myContext, MifareCardActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                myContext.startActivity(i);
-            }
-        }, Animation_Constant.ANIMATION_VALUE);
-    }
-
-    public void Gozaresh_Onclick(View view) {
-        view.clearFocus();
-        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_bubble_animation);
-        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-        myAnim.setInterpolator(interpolator);
-        view.startAnimation(myAnim);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(myContext, ReportActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 myContext.startActivity(i);
             }
@@ -719,51 +702,6 @@ public class ExitQrViewModel extends ViewModel {
         doRefresh();
     }
 
-    public View.OnFocusChangeListener getOnFocusChangeListener() {
-        return new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean isFocussed) {
-                if (isFocussed) {
-                    EditText editText = (EditText) view;
-                    final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_bubble_animation);
-                    MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-                    myAnim.setInterpolator(interpolator);
-                    switch (editText.getId()) {
-                        case R.id.etxt_main_shomare_ozv:
-                            getEdit_text_imageview_ozv_status().setValue(true);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            view.startAnimation(myAnim);
-                            break;
-                        case R.id.etxt_main_shomare_kart:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(true);
-                            view.startAnimation(myAnim);
-                            break;
-                        case R.id.etxt_car_plate_first_cell:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            break;
-                        case R.id.etxt_car_plate_third_cell:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            break;
-                        case R.id.etxt_car_plate_forth_cell:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            break;
-                        case R.id.etxt_motor_plate_first_cell:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            break;
-                        case R.id.etxt_motor_plate_second_cell:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            break;
-                    }
-                }
-            }
-        };
-    }
 
     public void backPress(Context context) {
         if (doubleBackToExitPressedOnce) {

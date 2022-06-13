@@ -194,11 +194,10 @@ public class LoginViewModel extends ViewModel {
 
                                     ParkbanServiceProvider.setInstanceNull();
 
+                                    //mifare
+//                                    parkbanRepository.getParkingInformation("\"968500040082191\"",
 
-
-
-
-
+                                    //qr
                                     parkbanRepository.getParkingInformation("\"868500040082190\"",
                                             new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                 @Override
@@ -283,34 +282,6 @@ public class LoginViewModel extends ViewModel {
                                             });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                 }
 
                                 @Override
@@ -335,11 +306,6 @@ public class LoginViewModel extends ViewModel {
                                     }
                                 }
                             });
-
-
-
-
-
 
 
                         } catch (Exception e) {
@@ -621,8 +587,6 @@ public class LoginViewModel extends ViewModel {
                             try {
 
 
-
-
                                 parkbanRepository.getDeviceToken("\"868500040082190\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                     @Override
                                     public void onSuccess(String deviceToken) {
@@ -635,11 +599,10 @@ public class LoginViewModel extends ViewModel {
 
                                         ParkbanServiceProvider.setInstanceNull();
 
+                                        //mifare
+//                                    parkbanRepository.getParkingInformation("\"968500040082191\"",
 
-
-
-
-
+                                        //qr
                                         parkbanRepository.getParkingInformation("\"868500040082190\"",
                                                 new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                     @Override
@@ -724,34 +687,6 @@ public class LoginViewModel extends ViewModel {
                                                 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                     }
 
                                     @Override
@@ -776,11 +711,6 @@ public class LoginViewModel extends ViewModel {
                                         }
                                     }
                                 });
-
-
-
-
-
 
 
                             } catch (Exception e) {

@@ -115,7 +115,7 @@
                         android:text="@={viewModel.plate__0}"
                         android:textColor="@color/text_color"
                         android:textSize="20sp"
-                        app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
+                         />
 
                     <Spinner
                         android:id="@+id/spinner_enter_qr"
@@ -143,7 +143,7 @@
                         android:text="@={viewModel.plate__2}"
                         android:textColor="@color/text_color"
                         android:textSize="20sp"
-                        app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
+                         />
 
                     <com.khodmohaseb.parkban.controls.PersianEditText
                         android:id="@+id/etxt_car_plate_forth_cell_enter_qr"
@@ -159,7 +159,7 @@
                         android:text="@={viewModel.plate__3}"
                         android:textColor="@color/text_color"
                         android:textSize="17sp"
-                        app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
+                         />
 
                 </LinearLayout>
 
@@ -186,7 +186,7 @@
                         android:text="@={viewModel.mplate__0}"
                         android:textColor="@color/text_color"
                         android:textSize="17sp"
-                        app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
+                         />
 
                     <com.khodmohaseb.parkban.controls.PersianEditText
                         android:id="@+id/etxt_motor_plate_second_cell_enter_qr"
@@ -200,7 +200,7 @@
                         android:text="@={viewModel.mplate__1}"
                         android:textColor="@color/text_color"
                         android:textSize="17sp"
-                        app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
+                         />
 
                 </LinearLayout>
 
@@ -231,10 +231,13 @@
                 android:layout_height="wrap_content"
                 >
 
+
+
+
                 <com.khodmohaseb.parkban.controls.PersianTextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="150dp"
+                    android:gravity="center"
                     android:text="نوع خودرو را انتخاب کنید"/>
 
                 <RelativeLayout
@@ -256,7 +259,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        app:adapter="@{viewModel.langAdapter_door}"
+                        app:adapter="@{viewModel.langAdapter_car_type}"
 
                         android:background="@android:color/transparent"
                         android:gravity="center"

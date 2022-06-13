@@ -23,7 +23,7 @@ import android.widget.EditText;
 
 import com.khodmohaseb.parkban.databinding.ActivityMainBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
-import com.khodmohaseb.parkban.services.ReaderHandler;
+
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 import com.khodmohaseb.parkban.viewmodels.MainViewModel;
 
@@ -41,43 +41,13 @@ import java.util.List;
 import static ir.shahaabco.ANPRNDK.anpr_create;
 
 //public class MainActivity extends BaseActivity implements ReaderHandler.Callbacks {
-public class MainActivity extends BaseActivity implements ReaderHandler.Callbacks {
+public class MainActivity extends BaseActivity  {
 
     private static final String TAG = "MainActivity";
     private int failedLoadLib = 0;
     private MainViewModel viewModel;
     private boolean doubleBackToExitPressedOnce = false;
 
-    //**********************************************************************************************
-    //**********************************************************************************************
-    private Intent readerHandlerIntent;
-    private ReaderHandler readerHandler;
-
-    private ServiceConnection readerHandlerConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className,
-                                       IBinder service) {
-            ReaderHandler.LocalBinder binder = (ReaderHandler.LocalBinder) service;
-            readerHandler = binder.getServiceInstance();
-            readerHandler.registerClient(MainActivity.this);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-        }
-    };
-    //**********************************************************************************************
-    //**********************************************************************************************
-
-    static {
-        if (!OpenCVLoader.initDebug()) {
-            Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
-        } else {
-            Log.d(TAG, "OpenCV library found inside package. Using it!");
-        }
-        System.loadLibrary("anpr_ndk");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -767,34 +737,6 @@ public class MainActivity extends BaseActivity implements ReaderHandler.Callback
     //**********************************************************************************************
     //**********************************************************************************************
 
-    private void startServices() {
-        try {
-            readerHandlerIntent = new Intent(getApplicationContext(), ReaderHandler.class);
-            startService(readerHandlerIntent);
-            getApplicationContext().bindService(readerHandlerIntent, readerHandlerConnection, Context.BIND_AUTO_CREATE);
-        } catch (Exception ex) {
-            Log.d(TAG, "MainActivity > startServices():" + ex.getMessage());
-        }
-    }
-
-    private void stopServices() {
-        try {
-            //Try to stop Reader handler
-            if (ReaderHandler.getInstance() != null)
-                ReaderHandler.getInstance().stopSelf();
-        } catch (Exception ex) {
-            Log.d(TAG, "MainActivity > stopServices():" + ex.getMessage());
-        }
-    }
-
-    public void stopServicesForOperator() {
-        try {
-            getApplicationContext().unbindService(readerHandlerConnection);
-            stopService(readerHandlerIntent);
-        } catch (Exception ex) {
-            Log.d(TAG, "MainActivity > stopServicesForOperator():" + ex.getMessage());
-        }
-    }
     //**********************************************************************************************
     //**********************************************************************************************
 
@@ -803,7 +745,6 @@ public class MainActivity extends BaseActivity implements ReaderHandler.Callback
         super.onResume();
         //******************************************************************************************
         //******************************************************************************************
-        startServices();
         //******************************************************************************************
         //******************************************************************************************
         if (PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getBoolean("comFmPardakhtDialog", false)) {
@@ -892,31 +833,6 @@ public class MainActivity extends BaseActivity implements ReaderHandler.Callback
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //******************************************************************************************
-        //******************************************************************************************
-        stopServices();
-        //******************************************************************************************
-        //******************************************************************************************
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        stopServicesForOperator();
-    }
 
-    @Override
-    public void showOnUi(final String serialNumber) {
-        Log.d(TAG, "showOnUi has been called  , actual serial number>> " + serialNumber);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                viewModel.getCard_code_string().setValue(serialNumber);
-                viewModel.getEdit_text_imageview_kart_status().setValue(true);
-            }
-        });
-    }
 }

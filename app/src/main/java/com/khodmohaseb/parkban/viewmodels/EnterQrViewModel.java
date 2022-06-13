@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
@@ -14,16 +15,19 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.google.gson.Gson;
 import com.khodmohaseb.parkban.BaseActivity;
 import com.khodmohaseb.parkban.MifareCardActivity;
 import com.khodmohaseb.parkban.PaymentSafshekanActivity;
@@ -45,6 +49,9 @@ import com.khodmohaseb.parkban.persistence.models.CarPlate;
 import com.khodmohaseb.parkban.persistence.models.ResponseResultType;
 import com.khodmohaseb.parkban.repositories.ParkbanRepository;
 import com.khodmohaseb.parkban.services.dto.ExitBillDto;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Door;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Operator;
 import com.khodmohaseb.parkban.utils.Animation_Constant;
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 import com.pax.dal.IDAL;
@@ -52,12 +59,19 @@ import com.pax.dal.IDAL;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class EnterQrViewModel extends ViewModel {
 
     public static final String TAG = "EnterQrViewModel";
+
+
+    private GetParkingInfoResponse getParkingInfoResponse;
+    public Operator selectedUser;
+    public Door selectedDoor;
+
     private static final String MEDIA_FILE_TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss";
     private MutableLiveData<Boolean> car;
     private MutableLiveData<Boolean> motor;
@@ -77,8 +91,18 @@ public class EnterQrViewModel extends ViewModel {
     private MutableLiveData<String> plate__3;
     private MutableLiveData<String> mplate__0;
     private MutableLiveData<String> mplate__1;
+
+    private ArrayList<String> carTypeListArray = new ArrayList<String>();
+    private String[] carTypeList;
+    public ArrayAdapter<CharSequence> langAdapter_car_type;
+    public Spinner mCarTypeSpinner;
+    private MutableLiveData<String> selectedCarTypeName;
+    public MutableLiveData<String> getSelectedCarTypeName() {
+        if (selectedCarTypeName == null)
+            selectedCarTypeName = new MutableLiveData<>();
+        return selectedCarTypeName;
+    }
     public Spinner mSpinner;
-    //todo handle car type spinner
     public MutableLiveData<Integer> progress = new MutableLiveData<>();
     private ParkbanRepository parkbanRepository;
 
@@ -149,6 +173,76 @@ public class EnterQrViewModel extends ViewModel {
         etxt_first_cell_car_plate = editTextCar;
         etxt_first_cell_motor_plate = editTextMotor;
         myContext = context;
+
+
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        Gson gson = new Gson();
+        String json_parkingInfo = preferences.getString("parkinginfo", "");
+        if (json_parkingInfo.equals("")) {
+            getParkingInfoResponse = null;
+        } else {
+            getParkingInfoResponse = gson.fromJson(json_parkingInfo, GetParkingInfoResponse.class);
+        }
+
+
+        String json_selectedUser = preferences.getString("currentuser", "");
+        if (json_selectedUser.equals("")) {
+            selectedUser = null;
+        } else {
+            selectedUser = gson.fromJson(json_selectedUser, Operator.class);
+        }
+
+        String json_selectedDoor = preferences.getString("currentdoor", "");
+        if (json_selectedDoor.equals("")) {
+            selectedDoor = null;
+        } else {
+            selectedDoor = gson.fromJson(json_selectedDoor, Door.class);
+        }
+
+
+        carTypeListArray.clear();
+
+        if (getParkingInfoResponse.getTariffs().getVehicleTariff1() != null) {
+            carTypeListArray.add(getParkingInfoResponse.getTariffs().getVehicleTariff1().getVehicleName());
+        }
+
+        if (getParkingInfoResponse.getTariffs().getVehicleTariff2() != null) {
+            carTypeListArray.add(getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName());
+        }
+
+        if (getParkingInfoResponse.getTariffs().getVehicleTariff3() != null) {
+            carTypeListArray.add(getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName());
+        }
+
+        if (getParkingInfoResponse.getTariffs().getVehicleTariff4() != null) {
+            carTypeListArray.add(getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName());
+        }
+
+        if (getParkingInfoResponse.getTariffs().getVehicleTariff5() != null) {
+            carTypeListArray.add(getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName());
+        }
+
+        if (getParkingInfoResponse.getTariffs().getVehicleTariff6() != null) {
+            carTypeListArray.add(getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName());
+        }
+
+        if (getParkingInfoResponse.getTariffs().getVehicleTariff7() != null) {
+            carTypeListArray.add(getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName());
+        }
+
+        if (getParkingInfoResponse.getTariffs().getVehicleTariff8() != null) {
+            carTypeListArray.add(getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName());
+        }
+
+
+        carTypeList = new String[carTypeListArray.size()];
+        carTypeList = carTypeListArray.toArray(carTypeList);
+
+
+        langAdapter_car_type = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, carTypeList);
+        langAdapter_car_type.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+
         if (car == null)
             car = new MutableLiveData<>();
         car.setValue(true);
@@ -219,7 +313,7 @@ public class EnterQrViewModel extends ViewModel {
 //                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
 //                        photoURI = Uri.fromFile(photoFile);
 //                    } else
-                            photoURI = FileProvider.getUriForFile(myContext, "com.safshekan.parkban", photoFile);
+                            photoURI = FileProvider.getUriForFile(myContext, "com.khodmohaseb.parkban", photoFile);
                             List<ResolveInfo> resolvedIntentActivities = myContext.getPackageManager().queryIntentActivities(takePictureIntent, PackageManager.MATCH_DEFAULT_ONLY);
                             for (ResolveInfo resolvedIntentInfo : resolvedIntentActivities) {
                                 String packageName = resolvedIntentInfo.activityInfo.packageName;
@@ -245,6 +339,10 @@ public class EnterQrViewModel extends ViewModel {
         File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         return File.createTempFile(imageFileName, ".jpg", storageDir);
     }
+
+
+
+
 
     public void processActivityResult(Context context, int requestCode, int resultCode, Intent
             data) {
@@ -381,8 +479,12 @@ public class EnterQrViewModel extends ViewModel {
     }
 
 
-
     public void backPress(Context context) {
+
+
+
+
+
         if (doubleBackToExitPressedOnce) {
             ((BaseActivity) (context)).finish();
         }

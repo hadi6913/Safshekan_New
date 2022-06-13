@@ -26,7 +26,7 @@ import android.widget.EditText;
 import com.google.gson.Gson;
 import com.khodmohaseb.parkban.databinding.ActivitySelectModeBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
-import com.khodmohaseb.parkban.services.ReaderHandler;
+
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 import com.khodmohaseb.parkban.viewmodels.MainViewModel;

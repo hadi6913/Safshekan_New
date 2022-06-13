@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -52,20 +53,17 @@ import com.pax.dal.IPrinter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class ExitMifareViewModel extends ViewModel {
 
-    public static final String TAG = "MainViewModel";
+    public static final String TAG = "ExitMifareViewModel";
     private static final String MEDIA_FILE_TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss";
     private MutableLiveData<Boolean> car;
     private MutableLiveData<Boolean> motor;
-    private MutableLiveData<Boolean> edit_text_imageview_ozv_status;
-    private MutableLiveData<Boolean> edit_text_imageview_kart_status;
     private MutableLiveData<Boolean> hasPelak;
-    private MutableLiveData<Boolean> hasMemberCode;
-    private MutableLiveData<Boolean> hasCardNumbeer;
     private EditText etxt_first_cell_car_plate;
     private EditText etxt_first_cell_motor_plate;
     private Context myContext;
@@ -81,10 +79,22 @@ public class ExitMifareViewModel extends ViewModel {
     private MutableLiveData<String> plate__3;
     private MutableLiveData<String> mplate__0;
     private MutableLiveData<String> mplate__1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public Spinner mSpinner;
-    private IPrinter iPrinter;
-    private MutableLiveData<String> ozv_code_string;
-    private MutableLiveData<String> card_code_string;
     public MutableLiveData<Integer> progress = new MutableLiveData<>();
     private ParkbanRepository parkbanRepository;
 
@@ -98,29 +108,6 @@ public class ExitMifareViewModel extends ViewModel {
         return hasPelak;
     }
 
-    public MutableLiveData<Boolean> getHasMemberCode() {
-        if (hasMemberCode == null)
-            hasMemberCode = new MutableLiveData<>();
-        return hasMemberCode;
-    }
-
-    public MutableLiveData<Boolean> getHasCardNumbeer() {
-        if (hasCardNumbeer == null)
-            hasCardNumbeer = new MutableLiveData<>();
-        return hasCardNumbeer;
-    }
-
-    public MutableLiveData<String> getOzv_code_string() {
-        if (ozv_code_string == null)
-            ozv_code_string = new MutableLiveData<>();
-        return ozv_code_string;
-    }
-
-    public MutableLiveData<String> getCard_code_string() {
-        if (card_code_string == null)
-            card_code_string = new MutableLiveData<>();
-        return card_code_string;
-    }
 
     public MutableLiveData<Boolean> getCar() {
         if (car == null)
@@ -134,17 +121,6 @@ public class ExitMifareViewModel extends ViewModel {
         return motor;
     }
 
-    public MutableLiveData<Boolean> getEdit_text_imageview_kart_status() {
-        if (edit_text_imageview_kart_status == null)
-            edit_text_imageview_kart_status = new MutableLiveData<>();
-        return edit_text_imageview_kart_status;
-    }
-
-    public MutableLiveData<Boolean> getEdit_text_imageview_ozv_status() {
-        if (edit_text_imageview_ozv_status == null)
-            edit_text_imageview_ozv_status = new MutableLiveData<>();
-        return edit_text_imageview_ozv_status;
-    }
 
     public MutableLiveData<String> getPlate__0() {
         if (plate__0 == null)
@@ -195,12 +171,6 @@ public class ExitMifareViewModel extends ViewModel {
         if (motor == null)
             motor = new MutableLiveData<>();
         motor.setValue(false);
-        if (edit_text_imageview_ozv_status == null)
-            edit_text_imageview_ozv_status = new MutableLiveData<>();
-        edit_text_imageview_ozv_status.setValue(false);
-        if (edit_text_imageview_kart_status == null)
-            edit_text_imageview_kart_status = new MutableLiveData<>();
-        edit_text_imageview_kart_status.setValue(false);
         if (plate__0 == null)
             plate__0 = new MutableLiveData<>();
         plate__0.setValue("");
@@ -219,18 +189,6 @@ public class ExitMifareViewModel extends ViewModel {
         if (mplate__1 == null)
             mplate__1 = new MutableLiveData<>();
         mplate__1.setValue("");
-        if (ozv_code_string == null)
-            ozv_code_string = new MutableLiveData<>();
-        ozv_code_string.setValue("");
-        if (card_code_string == null)
-            card_code_string = new MutableLiveData<>();
-        card_code_string.setValue("");
-        try {
-            idal = PrintParkbanApp.getInstance().getIdal();
-            if (idal != null)
-                iPrinter = idal.getPrinter();
-        } catch (Exception e) {
-        }
         if (anprProvider == null) {
             anprProvider = new FarsiOcrAnprProvider(context);
         }
@@ -277,7 +235,7 @@ public class ExitMifareViewModel extends ViewModel {
 //                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
 //                        photoURI = Uri.fromFile(photoFile);
 //                    } else
-                            photoURI = FileProvider.getUriForFile(myContext, "com.safshekan.parkban", photoFile);
+                            photoURI = FileProvider.getUriForFile(myContext, "com.khodmohaseb.parkban", photoFile);
                             List<ResolveInfo> resolvedIntentActivities = myContext.getPackageManager().queryIntentActivities(takePictureIntent, PackageManager.MATCH_DEFAULT_ONLY);
                             for (ResolveInfo resolvedIntentInfo : resolvedIntentActivities) {
                                 String packageName = resolvedIntentInfo.activityInfo.packageName;
@@ -393,56 +351,9 @@ public class ExitMifareViewModel extends ViewModel {
     }
 
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    public void Barcod_Khan_Onclick(View view) {
-        view.clearFocus();
-        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_bubble_animation);
-        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-        myAnim.setInterpolator(interpolator);
-        view.startAnimation(myAnim);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(myContext, QRcodeReaderActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                myContext.startActivity(i);
-            }
-        }, Animation_Constant.ANIMATION_VALUE);
-    }
 
-    public void Card_Khan_Onclick(View view) {
-        view.clearFocus();
-        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_bubble_animation);
-        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-        myAnim.setInterpolator(interpolator);
-        view.startAnimation(myAnim);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(myContext, MifareCardActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                myContext.startActivity(i);
-            }
-        }, Animation_Constant.ANIMATION_VALUE);
-    }
 
-    public void Gozaresh_Onclick(View view) {
-        view.clearFocus();
-        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_bubble_animation);
-        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-        myAnim.setInterpolator(interpolator);
-        view.startAnimation(myAnim);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(myContext, ReportActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                myContext.startActivity(i);
-            }
-        }, Animation_Constant.ANIMATION_VALUE);
-    }
+
 
     public void Motor_Car_Onclick(View view) {
         final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_rotate_animation);
@@ -454,16 +365,12 @@ public class ExitMifareViewModel extends ViewModel {
             getCar().setValue(false);
             getMotor().setValue(true);
             etxt_first_cell_motor_plate.requestFocus();
-            getEdit_text_imageview_ozv_status().setValue(false);
-            getEdit_text_imageview_kart_status().setValue(false);
             ImageView imageView = (ImageView) view;
             imageView.setImageDrawable(view.getContext().getResources().getDrawable(R.drawable.motor_256));
         } else {
             getCar().setValue(true);
             getMotor().setValue(false);
             etxt_first_cell_car_plate.requestFocus();
-            getEdit_text_imageview_ozv_status().setValue(false);
-            getEdit_text_imageview_kart_status().setValue(false);
             ImageView imageView = (ImageView) view;
             imageView.setImageDrawable(view.getContext().getResources().getDrawable(R.drawable.car_256));
         }
@@ -494,16 +401,8 @@ public class ExitMifareViewModel extends ViewModel {
                     if (getMplate__1().getValue().equals("") || getMplate__1().getValue().equals(null))
                         is_pelak_empty = true;
                 }
-                boolean is_membercode_empty = false;
-                if (getOzv_code_string().getValue().isEmpty())
-                    is_membercode_empty = true;
-                boolean is_cardcode_empty = false;
-                if ((getCard_code_string().getValue().equals("")) || (getCard_code_string().getValue().equals(null)))
-                    is_cardcode_empty = true;
                 Log.d(TAG, "pelak status >>> " + is_pelak_empty);
-                Log.d(TAG, "member number status >>> " + is_membercode_empty);
-                Log.d(TAG, "card number status >>> " + is_cardcode_empty);
-                if (is_pelak_empty && is_membercode_empty && is_cardcode_empty) {
+                if(is_pelak_empty) {
                     ShowToast.getInstance().showWarning(view.getContext(), R.string.at_least_one_parameter_requierd);
                     return;
                 }
@@ -562,150 +461,7 @@ public class ExitMifareViewModel extends ViewModel {
                 }
                 pelak = newPelak.toString();
                 Log.d(TAG, "Changed-New pelak >>>  " + pelak);
-                //************************************************************************************************************************
-                //************************************************************************************************************************
-                String ozv_code = "";
-                ozv_code = getOzv_code_string().getValue();
-                Log.d(TAG, "UnChanged-Default ozv_code >>>  " + ozv_code);
-                StringBuilder newOzv_Code = new StringBuilder(ozv_code);
-                for (int i = 0; i < ozv_code.length(); i++) {
-                    if (Character.isDigit(ozv_code.charAt(i))) {
-                        switch (ozv_code.charAt(i)) {
-                            case '۰':
-                                newOzv_Code.setCharAt(i, '0');
-                                break;
-                            case '۱':
-                                newOzv_Code.setCharAt(i, '1');
-                                break;
-                            case '۲':
-                                newOzv_Code.setCharAt(i, '2');
-                                break;
-                            case '۳':
-                                newOzv_Code.setCharAt(i, '3');
-                                break;
-                            case '۴':
-                                newOzv_Code.setCharAt(i, '4');
-                                break;
-                            case '۵':
-                                newOzv_Code.setCharAt(i, '5');
-                                break;
-                            case '۶':
-                                newOzv_Code.setCharAt(i, '6');
-                                break;
-                            case '۷':
-                                newOzv_Code.setCharAt(i, '7');
-                                break;
-                            case '۸':
-                                newOzv_Code.setCharAt(i, '8');
-                                break;
-                            case '۹':
-                                newOzv_Code.setCharAt(i, '9');
-                                break;
-                        }
-                    }
-                }
-                ozv_code = newOzv_Code.toString();
-                Log.d(TAG, "Changed-New ozv_code >>>  " + ozv_code);
-                //************************************************************************************************************************
-                //************************************************************************************************************************
-                String card_code = "";
-                card_code = getCard_code_string().getValue();
-                Log.d(TAG, "UnChanged-Default card_code >>>  " + card_code);
-                StringBuilder newCard_code = new StringBuilder(card_code);
-                for (int i = 0; i < card_code.length(); i++) {
-                    if (Character.isDigit(card_code.charAt(i))) {
-                        switch (card_code.charAt(i)) {
-                            case '۰':
-                                newCard_code.setCharAt(i, '0');
-                                break;
-                            case '۱':
-                                newCard_code.setCharAt(i, '1');
-                                break;
-                            case '۲':
-                                newCard_code.setCharAt(i, '2');
-                                break;
-                            case '۳':
-                                newCard_code.setCharAt(i, '3');
-                                break;
-                            case '۴':
-                                newCard_code.setCharAt(i, '4');
-                                break;
-                            case '۵':
-                                newCard_code.setCharAt(i, '5');
-                                break;
-                            case '۶':
-                                newCard_code.setCharAt(i, '6');
-                                break;
-                            case '۷':
-                                newCard_code.setCharAt(i, '7');
-                                break;
-                            case '۸':
-                                newCard_code.setCharAt(i, '8');
-                                break;
-                            case '۹':
-                                newCard_code.setCharAt(i, '9');
-                                break;
-                        }
-                    }
-                }
-                card_code = newCard_code.toString();
-                Log.d(TAG, "Changed-New card_code >>>  " + card_code);
-                //************************************************************************************************************************
-                //************************************************************************************************************************
-                parkbanRepository.sendBasicInformation(pelak, ozv_code, card_code, new ParkbanRepository.ServiceResultCallBack<ExitBillDto.ExitBillDtoResponse>() {
-                    @Override
-                    public void onSuccess(ExitBillDto.ExitBillDtoResponse result) {
-                        progress.setValue(0);
-                        if (!result.equals(null)) {
-                            Intent intent = new Intent(myContext, PaymentSafshekanActivity.class);
-                            intent.putExtra("isfromtaeed", true);
-                            intent.putExtra("CommonCost", result.getCommonCost()); // long
-                            intent.putExtra("SolarEnterDateTime", result.getSolarEnterDateTime()); //string
-                            intent.putExtra("FormatedDuration", result.getFormatedDuration()); // string
-                            intent.putExtra("AbsolutCarPlate", result.getAbsolutCarPlate()); // string
-                            intent.putExtra("DumpId", result.getDumpId());
-                            if (result.getMemberCode() == null) {
-                                intent.putExtra("MemberCode", ""); // string
-                            } else {
-                                intent.putExtra("MemberCode", result.getMemberCode()); // string
-                            }
-                            if (result.getCardNumber() == null) {
-                                intent.putExtra("CardNumber", ""); // string
-                            } else {
-                                intent.putExtra("CardNumber", result.getCardNumber()); // string
-                            }
-                            myContext.startActivity(intent);
-                        } else {
-                            ShowToast.getInstance().showError(myContext, R.string.connection_failed);
-                        }
-                    }
 
-                    @Override
-                    public void onFailed(ResponseResultType resultType, String message, int errorCode) {
-                        progress.setValue(0);
-                        switch (resultType) {
-                            case NotFoundEntry:
-                                ShowToast.getInstance().showError(myContext, R.string.not_entry);
-                                break;
-                            case RetrofitError:
-                                ShowToast.getInstance().showError(myContext, R.string.exception_msg);
-                                // Messenger.showErrorMessage(view.getContext(), R.string.exception_msg);
-                                break;
-                            case ServerError:
-                                if (errorCode != 0)
-                                    ShowToast.getInstance().showError(myContext, errorCode);
-                                else {
-                                    ShowToast.getInstance().showError(myContext, R.string.connection_failed);
-                                    Log.d("xhxhxh", "resultType>>" + resultType.getValue() + resultType.getDescription());
-                                    Log.d("xhxhxh", "message>>" + message);
-                                    Log.d("xhxhxh", "errorcode>>" + errorCode);
-                                }
-                                break;
-                            default:
-                                ShowToast.getInstance().showError(myContext, resultType.ordinal());
-                        }
-                    }
-                });
             }
         }, Animation_Constant.ANIMATION_VALUE);
     }
@@ -719,51 +475,7 @@ public class ExitMifareViewModel extends ViewModel {
         doRefresh();
     }
 
-    public View.OnFocusChangeListener getOnFocusChangeListener() {
-        return new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean isFocussed) {
-                if (isFocussed) {
-                    EditText editText = (EditText) view;
-                    final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_bubble_animation);
-                    MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-                    myAnim.setInterpolator(interpolator);
-                    switch (editText.getId()) {
-                        case R.id.etxt_main_shomare_ozv:
-                            getEdit_text_imageview_ozv_status().setValue(true);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            view.startAnimation(myAnim);
-                            break;
-                        case R.id.etxt_main_shomare_kart:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(true);
-                            view.startAnimation(myAnim);
-                            break;
-                        case R.id.etxt_car_plate_first_cell:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            break;
-                        case R.id.etxt_car_plate_third_cell:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            break;
-                        case R.id.etxt_car_plate_forth_cell:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            break;
-                        case R.id.etxt_motor_plate_first_cell:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            break;
-                        case R.id.etxt_motor_plate_second_cell:
-                            getEdit_text_imageview_ozv_status().setValue(false);
-                            getEdit_text_imageview_kart_status().setValue(false);
-                            break;
-                    }
-                }
-            }
-        };
-    }
+
 
     public void backPress(Context context) {
         if (doubleBackToExitPressedOnce) {
@@ -787,12 +499,10 @@ public class ExitMifareViewModel extends ViewModel {
         plate__1.setValue("الف");
         plate__2.setValue("");
         plate__3.setValue("");
-        ozv_code_string.setValue("");
-        card_code_string.setValue("");
+
         car.setValue(true);
         motor.setValue(false);
         mSpinner.setSelection(0);
-        edit_text_imageview_ozv_status.setValue(false);
-        getEdit_text_imageview_kart_status().setValue(false);
+
     }
 }

@@ -22,9 +22,10 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 
 import com.khodmohaseb.parkban.databinding.ActivityEnterQrBinding;
+import com.khodmohaseb.parkban.databinding.ActivityLoginBinding;
 import com.khodmohaseb.parkban.databinding.ActivityMainBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
-import com.khodmohaseb.parkban.services.ReaderHandler;
+
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 import com.khodmohaseb.parkban.viewmodels.EnterQrViewModel;
 import com.khodmohaseb.parkban.viewmodels.MainViewModel;
@@ -43,11 +44,12 @@ import java.util.List;
 import static ir.shahaabco.ANPRNDK.anpr_create;
 
 
-public class EnterQrActivity extends BaseActivity  {
+public class EnterQrActivity extends BaseActivity {
 
     private static final String TAG = "EnterQrActivity";
     private int failedLoadLib = 0;
     private EnterQrViewModel enterQrViewModel;
+    private ActivityEnterQrBinding binding;
 
 
     static {
@@ -62,9 +64,10 @@ public class EnterQrActivity extends BaseActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ActivityEnterQrBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_enter_qr);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_enter_qr);
         copyAssets();
         CreateANPR();
+
         enterQrViewModel = ViewModelProviders.of(this).get(EnterQrViewModel.class);
         binding.setViewModel(enterQrViewModel);
         EditText etxtCar = findViewById(R.id.etxt_car_plate_first_cell_enter_qr);
@@ -73,6 +76,23 @@ public class EnterQrActivity extends BaseActivity  {
         enterQrViewModel.getHasPelak().setValue(true);
         binding.setLifecycleOwner(this);
         enterQrViewModel.mSpinner = binding.spinnerEnterQr;
+        enterQrViewModel.mCarTypeSpinner = binding.spinnerCarTypeEnterQr;
+
+
+        binding.spinnerCarTypeEnterQr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                enterQrViewModel.getSelectedCarTypeName().setValue(String.valueOf(binding.spinnerCarTypeEnterQr.getSelectedItem().toString().trim()));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                binding.spinnerCarTypeEnterQr.setSelection(0);
+                enterQrViewModel.getSelectedCarTypeName().setValue(String.valueOf(binding.spinnerCarTypeEnterQr.getSelectedItem().toString().trim()));
+            }
+        });
+
+
         binding.spinnerEnterQr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -172,11 +192,26 @@ public class EnterQrActivity extends BaseActivity  {
     }
 
 
-
     @Override
     public void onBackPressed() {
-        enterQrViewModel.backPress(EnterQrActivity.this);
+
+
+
+
+
+        if (enterQrViewModel.selectedDoor.getDoorType()!=2){
+            enterQrViewModel.backPress(EnterQrActivity.this);
+        }else{
+            super.onBackPressed();
+        }
+
+
+
+
+
+
     }
+
 
 
 
@@ -249,6 +284,12 @@ public class EnterQrActivity extends BaseActivity  {
     }
 
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        enterQrViewModel.processActivityResult(this, requestCode, resultCode, data);
+    }
 
 
 }

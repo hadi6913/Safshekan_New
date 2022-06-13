@@ -692,47 +692,6 @@ public class ExitQrActivity extends BaseActivity {
                 }
             }
         }
-//        if (getIntent().getBooleanExtra("isfrommifare", false)) {
-//            viewModel.getHasCardNumbeer().setValue(true);
-//            viewModel.getHasMemberCode().setValue(true);
-//            viewModel.getHasPelak().setValue(true);
-//            String General_Mifare_Code_String = getIntent().getStringExtra("scanned_string");
-//            Log.d(TAG, "General_Mifare_Code_String_scanned >>>>>>>>>>>>>>>> " + General_Mifare_Code_String);
-//            if (General_Mifare_Code_String.equals("") || General_Mifare_Code_String.equals(null)) {
-//                ShowToast.getInstance().showWarning(this, R.string.error_mifare);
-//                viewModel.getEdit_text_imageview_ozv_status().setValue(false);
-//                viewModel.getEdit_text_imageview_kart_status().setValue(false);
-//                viewModel.getOzv_code_string().setValue("");
-//                viewModel.getCard_code_string().setValue("");
-//                viewModel.getCar().setValue(true);
-//                viewModel.getMotor().setValue(false);
-//                viewModel.getPlate__0().setValue("");
-//                viewModel.getPlate__2().setValue("");
-//                viewModel.getPlate__3().setValue("");
-//                binding.spinner.setSelection(0);
-//            } else {
-//                if (General_Mifare_Code_String.equals("backback")) {
-//                } else {
-//                    ShowToast.getInstance().showSuccess(this, R.string.ok_mifare);
-//                    viewModel.getEdit_text_imageview_ozv_status().setValue(false);
-//                    viewModel.getEdit_text_imageview_kart_status().setValue(false);
-//                    binding.etxtMainShomareKart.requestFocus();
-//                    String card = General_Mifare_Code_String;
-//                    viewModel.getPlate__0().setValue("");
-//                    viewModel.getPlate__2().setValue("");
-//                    viewModel.getPlate__3().setValue("");
-//                    binding.spinner.setSelection(0);
-//                    viewModel.getMplate__1().setValue("");
-//                    viewModel.getMplate__0().setValue("");
-//                    viewModel.getCard_code_string().setValue(card);
-//                    viewModel.getOzv_code_string().setValue("");
-//                    final Animation myAnim = AnimationUtils.loadAnimation(com.safshekan.parkban.MainActivity.this, R.anim.btn_bubble_animation);
-//                    MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-//                    myAnim.setInterpolator(interpolator);
-//                    binding.etxtMainShomareKart.startAnimation(myAnim);
-//                }
-//            }
-//        }
         exitQrViewModel.getProgress().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer value) {
@@ -744,64 +703,26 @@ public class ExitQrActivity extends BaseActivity {
             }
         });
     }
-    //**********************************************************************************************
-    //**********************************************************************************************
-
-    private void startServices() {
-        try {
-            readerHandlerIntent = new Intent(getApplicationContext(), ReaderHandler.class);
-            startService(readerHandlerIntent);
-            getApplicationContext().bindService(readerHandlerIntent, readerHandlerConnection, Context.BIND_AUTO_CREATE);
-        } catch (Exception ex) {
-            Log.d(TAG, "MainActivity > startServices():" + ex.getMessage());
-        }
-    }
-
-    private void stopServices() {
-        try {
-            //Try to stop Reader handler
-            if (ReaderHandler.getInstance() != null)
-                ReaderHandler.getInstance().stopSelf();
-        } catch (Exception ex) {
-            Log.d(TAG, "MainActivity > stopServices():" + ex.getMessage());
-        }
-    }
-
-    public void stopServicesForOperator() {
-        try {
-            getApplicationContext().unbindService(readerHandlerConnection);
-            stopService(readerHandlerIntent);
-        } catch (Exception ex) {
-            Log.d(TAG, "MainActivity > stopServicesForOperator():" + ex.getMessage());
-        }
-    }
-    //**********************************************************************************************
-    //**********************************************************************************************
 
     @Override
     protected void onResume() {
         super.onResume();
-        //******************************************************************************************
-        //******************************************************************************************
-        startServices();
-        //******************************************************************************************
-        //******************************************************************************************
         if (PreferenceManager.getDefaultSharedPreferences(ExitQrActivity.this).getBoolean("comFmPardakhtDialog", false)) {
             PreferenceManager.getDefaultSharedPreferences(ExitQrActivity.this).edit().putBoolean("comFmPardakhtDialog", false).apply();
             //do refresh
-            viewModel.doRefresh();
+            exitQrViewModel.doRefresh();
         }
     }
 
     @Override
     public void onBackPressed() {
-        viewModel.backPress(ExitQrActivity.this);
+        exitQrViewModel.backPress(ExitQrActivity.this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        viewModel.processActivityResult(this, requestCode, resultCode, data);
+        exitQrViewModel.processActivityResult(this, requestCode, resultCode, data);
     }
 
     private void CreateANPR() {
@@ -872,31 +793,7 @@ public class ExitQrActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //******************************************************************************************
-        //******************************************************************************************
-        stopServices();
-        //******************************************************************************************
-        //******************************************************************************************
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        stopServicesForOperator();
-    }
 
-    @Override
-    public void showOnUi(final String serialNumber) {
-        Log.d(TAG, "showOnUi has been called  , actual serial number>> " + serialNumber);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                viewModel.getCard_code_string().setValue(serialNumber);
-                viewModel.getEdit_text_imageview_kart_status().setValue(true);
-            }
-        });
-    }
+
 }

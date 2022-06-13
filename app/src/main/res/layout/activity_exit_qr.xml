@@ -167,7 +167,7 @@
                         android:text="@={viewModel.plate__0}"
                         android:textColor="@color/text_color"
                         android:textSize="20sp"
-                        app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
+                         />
 
                     <Spinner
                         android:id="@+id/spinner_exit_qr"
@@ -195,7 +195,7 @@
                         android:text="@={viewModel.plate__2}"
                         android:textColor="@color/text_color"
                         android:textSize="20sp"
-                        app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
+                         />
 
                     <com.khodmohaseb.parkban.controls.PersianEditText
                         android:id="@+id/etxt_car_plate_forth_cell_exit_qr"
@@ -211,7 +211,7 @@
                         android:text="@={viewModel.plate__3}"
                         android:textColor="@color/text_color"
                         android:textSize="17sp"
-                        app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
+                         />
 
                 </LinearLayout>
 
@@ -238,7 +238,7 @@
                         android:text="@={viewModel.mplate__0}"
                         android:textColor="@color/text_color"
                         android:textSize="17sp"
-                        app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
+                         />
 
                     <com.khodmohaseb.parkban.controls.PersianEditText
                         android:id="@+id/etxt_motor_plate_second_cell_exit_qr"
@@ -252,7 +252,7 @@
                         android:text="@={viewModel.mplate__1}"
                         android:textColor="@color/text_color"
                         android:textSize="17sp"
-                        app:onFocusChange="@{viewModel.OnFocusChangeListener}" />
+                         />
 
                 </LinearLayout>
 

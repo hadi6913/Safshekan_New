@@ -40,9 +40,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
 
-
-
-        String lan =  PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("language", "fa");
+        String lan = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("language", "fa");
 
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
@@ -55,18 +53,13 @@ public class LoginActivity extends BaseActivity {
         res.updateConfiguration(conf, dm);
 
 
-
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         binding.setViewModel(loginViewModel);
 
 
-
-
         binding.setLifecycleOwner(this);
-
 
 
         loginViewModel.mUserSpinner = binding.spinnerSelectUser;
@@ -82,23 +75,6 @@ public class LoginActivity extends BaseActivity {
                 loginViewModel.getSelectedUserName().setValue(String.valueOf(binding.spinnerSelectUser.getSelectedItem().toString().trim()));
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         loginViewModel.mDoorSpinner = binding.spinnerSelectDoor;
@@ -117,35 +93,7 @@ public class LoginActivity extends BaseActivity {
         });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         loginViewModel.init(this);
-
-
-
-
-
-
-
-
 
 
 //        loginViewModel.fillDefaultUserAndPass(this);
@@ -168,19 +116,6 @@ public class LoginActivity extends BaseActivity {
                 requestPermissions(new String[]{Manifest.permission.CAMERA}, 10001);
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

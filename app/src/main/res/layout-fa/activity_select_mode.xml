@@ -78,12 +78,12 @@
             <Button
                 android:id="@+id/btn_show_enter_mode"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                android:layout_below="@+id/linear_button_container_main"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="250dp"
-                android:layout_marginBottom="48dp"
+                android:layout_marginTop="200dp"
+                android:layout_marginBottom="64dp"
                 android:background="@drawable/green_btn_background_layout"
                 android:onClick="@{viewModel::enter_Onclick}"
                 android:text="ثبت تردد ورود"
@@ -95,7 +95,7 @@
             <Button
 
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_below="@+id/btn_show_enter_mode"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
