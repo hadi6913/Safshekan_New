@@ -52,6 +52,13 @@ import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+
+//917384265738265 qr - ورود خروج ورود/خروج  -  ورودی ندارد بدون پرداخت اولیه
+//562837562483719 qr - ورود خروج ورود/خروج  -  ورودی ندارد با پرداخت اولیه
+//968500040082191 mifare - ورود خروج ورود/خروج  -  ورودی ندارد بدون پرداخت اولیه
+//868588840082189 mifare - ورود خروج ورود/خروج  -  ورودی دارد با پرداخت اولیه
+//886597548936875 mifare - ورود خروج ورود/خروج  -  ورودی دارد بدون پرداخت اولیه - تعداد زیاد تعرفه با ورودی بدون ورودی
+
 public class LoginViewModel extends ViewModel {
 
     private final static String TAG = "xeagle_LoginViewModel";
@@ -182,7 +189,7 @@ public class LoginViewModel extends ViewModel {
                         try {
 
 
-                            parkbanRepository.getDeviceToken("\"868500040082190\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                            parkbanRepository.getDeviceToken("\"562837562483719\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                 @Override
                                 public void onSuccess(String deviceToken) {
 
@@ -194,11 +201,8 @@ public class LoginViewModel extends ViewModel {
 
                                     ParkbanServiceProvider.setInstanceNull();
 
-                                    //mifare
-//                                    parkbanRepository.getParkingInformation("\"968500040082191\"",
 
-                                    //qr
-                                    parkbanRepository.getParkingInformation("\"868500040082190\"",
+                                    parkbanRepository.getParkingInformation("\"562837562483719\"",
                                             new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                 @Override
                                                 public void onSuccess(GetParkingInfoResponse result) {
@@ -587,7 +591,7 @@ public class LoginViewModel extends ViewModel {
                             try {
 
 
-                                parkbanRepository.getDeviceToken("\"868500040082190\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                                parkbanRepository.getDeviceToken("\"562837562483719\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                     @Override
                                     public void onSuccess(String deviceToken) {
 
@@ -599,11 +603,8 @@ public class LoginViewModel extends ViewModel {
 
                                         ParkbanServiceProvider.setInstanceNull();
 
-                                        //mifare
-//                                    parkbanRepository.getParkingInformation("\"968500040082191\"",
 
-                                        //qr
-                                        parkbanRepository.getParkingInformation("\"868500040082190\"",
+                                        parkbanRepository.getParkingInformation("\"562837562483719\"",
                                                 new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                     @Override
                                                     public void onSuccess(GetParkingInfoResponse result) {

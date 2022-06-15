@@ -14,7 +14,7 @@ public class Door {
     @SerializedName("doorName")
     @Expose
     private String doorName;
-    @SerializedName("doorType")
+    @SerializedName("doorKind")
     @Expose
     private Long doorType;
     @SerializedName("id")

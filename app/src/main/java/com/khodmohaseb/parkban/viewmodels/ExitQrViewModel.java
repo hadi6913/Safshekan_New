@@ -487,7 +487,7 @@ public class ExitQrViewModel extends ViewModel {
                 Log.d(TAG, "member number status >>> " + is_membercode_empty);
                 Log.d(TAG, "card number status >>> " + is_cardcode_empty);
                 if (is_pelak_empty && is_membercode_empty && is_cardcode_empty) {
-                    ShowToast.getInstance().showWarning(view.getContext(), R.string.at_least_one_parameter_requierd);
+                    ShowToast.getInstance().showWarning(view.getContext(), R.string.enter_car_tag);
                     return;
                 }
                 //************************************************************************************************************************

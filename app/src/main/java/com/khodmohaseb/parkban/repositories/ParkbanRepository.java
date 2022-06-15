@@ -11,6 +11,7 @@ import com.khodmohaseb.parkban.persistence.models.CarPlate;
 import com.khodmohaseb.parkban.persistence.models.ParkingSpace;
 import com.khodmohaseb.parkban.persistence.models.ResponseResultType;
 import com.khodmohaseb.parkban.persistence.models.SendStatus;
+import com.khodmohaseb.parkban.persistence.models.khodmohaseb.EntranceRecord;
 import com.khodmohaseb.parkban.persistence.models.model;
 import com.khodmohaseb.parkban.services.dto.BooleanResultDto;
 import com.khodmohaseb.parkban.services.dto.CarRecordsDto;
@@ -124,16 +125,6 @@ public class ParkbanRepository {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
@@ -144,16 +135,11 @@ public class ParkbanRepository {
     /**** Khodmohaseb Server Repository ****/
 
 
-
-
-
-
     public void getDeviceToken(String imei, final ServiceResultCallBack<String> callBack) {
 
 
         RequestBody body =
                 RequestBody.create(MediaType.parse("application/json"), imei.trim());
-
 
 
         ParkbanServiceProvider.getInstance().getDeviceToken(body).enqueue(new Callback<String>() {
@@ -182,16 +168,11 @@ public class ParkbanRepository {
     }
 
 
-
-
-
-
     public void getParkingInformation(String imei, final ServiceResultCallBack<GetParkingInfoResponse> callBack) {
 
 
         RequestBody body =
                 RequestBody.create(MediaType.parse("application/json"), imei.trim());
-
 
 
         ParkbanServiceProvider.getInstance().getParkingInfoFromServer(body).enqueue(new Callback<GetParkingInfoResponse>() {
@@ -220,48 +201,11 @@ public class ParkbanRepository {
     }
 
 
-
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
@@ -950,6 +894,112 @@ public class ParkbanRepository {
 
 
     /**** DataBase Repository ****/
+
+
+
+
+
+
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+    /**** Khodmohaseb Datebase Repository ****/
+
+    public void saveEntranceRecord(
+            String plate,
+            String entranceDate,
+            int tariffId,
+            long paidAmount,
+            int payType,
+            String electronicPaymentCode,
+            long entranceDoorId,
+            long entranceOperatorId
+            , final DataBaseResultCallBack callBack) {
+        new SaveEntranceRecordAsyncTask(callBack)
+                .execute(database, plate, entranceDate, tariffId, paidAmount,payType,electronicPaymentCode,entranceDoorId,entranceOperatorId);
+    }
+    private static class SaveEntranceRecordAsyncTask extends AsyncTask<Object, Void, Long> {
+
+        private final DataBaseResultCallBack callBack;
+
+        public SaveEntranceRecordAsyncTask(DataBaseResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected Long doInBackground(Object... params) {
+
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            String plate = (String) params[1];
+            String entranceDate = (String) params[2];
+            int tariffId = (int) params[3];
+            long paidAmount = (long) params[4];
+            int payType = (int) params[5];
+            String electronicPaymentCode = (String) params[6];
+            long entranceDoorId = (long) params[7];
+            long entranceOperatorId = (long) params[8];
+
+            EntranceRecord entranceRecord = new EntranceRecord();
+            entranceRecord.setPlate(plate);
+            entranceRecord.setEntranceDate(entranceDate);
+            entranceRecord.setTariffId(tariffId);
+            entranceRecord.setPaidAmount(paidAmount);
+            entranceRecord.setPayType(payType);
+            entranceRecord.setElectronicPaymentCode(electronicPaymentCode);
+            entranceRecord.setEntranceDoorId(entranceDoorId);
+            entranceRecord.setEntranceOperatorId(entranceOperatorId);
+
+
+            try {
+                return database.getEntranceRecordDao().saveEntranceRecord(entranceRecord);
+            } catch (Exception e) {
+                Log.e(TAG, "Error in saveCarPlate", e);
+                return 0L;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Long result) {
+            super.onPostExecute(result);
+            if (result > 0) {
+                callBack.onSuccess(result);
+            } else {
+                callBack.onFailed();
+            }
+        }
+    }
+
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public void saveCarPlate(boolean isNewCar, int carId, CarPlate carPlate, boolean pay, final DataBaseResultCallBack callBack) {
         new SaveCarPlateAsyncTask(callBack)
                 .execute(database, carPlate, isNewCar, carId, pay);

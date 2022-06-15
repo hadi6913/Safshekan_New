@@ -9,7 +9,18 @@
     <string name="wrong_password">رمز عبور نادرست است</string>
     <string name="error_server_address">آدرس سرور را درست وارد کنید</string>
     <string name="connection_failed">عدم برقراری ارتباط با سرور</string>
-
+    <string name="enter_car_tag">پلاک وسیله نقلیه را وارد کنید</string>
+    <string name="print_enter_qr">چاپ بارکد ورود</string>
+    <string name="pay_entrance_fare">پرداخت مبلغ ورودی</string>
+    <string name="should_pay_now">پرداخت هنگام ورود</string>
+    <string name="should_pay_later">پرداخت هنگام خروج</string>
+    <string name="error_in_save_data_base">بروز خطا در ثبت رکورد</string>
+    <string name="tst_info_paper">پرینتر کاغذ ندارد</string>
+    <string name="tst_info_temperature">حرارت بالای پرینتر</string>
+    <string name="tst_info_voltage">برای پرینت باتری را شارژ کنید</string>
+    <string name="tst_info_busy">پرینتر مشغول است</string>
+    <string name="tst_info_error">خطای پرینتر</string>
+    <string name="tst_info_driver_error">خطای درایور پرینتر</string>
 
 
 
@@ -146,7 +157,7 @@
 
     <string name="username_required">لطفا نام کاربری خود را وارد نمایید</string>
     <string name="not_entry">ورود یافت نشد</string>
-    <string name="at_least_one_parameter_requierd">حداقل یکی از  فیلدها  را پر کنید</string>
+
     <string name="error_in_access">شما اجازه دسترسی ندارید</string>
     <string name="device_dont_have_card_reader">دستگاه فاقد کارت خوان است</string>
     <string name="password_required">لطفا کلمه عبور خود را وارد نمایید</string>
@@ -217,12 +228,7 @@
 
 
 
-    <string name="tst_info_paper">پرینتر کاغذ ندارد</string>
-    <string name="tst_info_temperature">حرارت بالای پرینتر</string>
-    <string name="tst_info_voltage">برای پرینت باتری را شارژ کنید</string>
-    <string name="tst_info_busy">پرینتر مشغول است</string>
-    <string name="tst_info_error">خطای پرینتر</string>
-    <string name="tst_info_driver_error">خطای درایور پرینتر</string>
+
 
 
     <string name="bitmap_null">bitmap is null</string>

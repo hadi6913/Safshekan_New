@@ -232,7 +232,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                    android:gravity="center"
-                    android:text="Select the type of vehicle" />
+                    android:text="Select the type of tarrif" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -270,6 +270,53 @@
                         android:src="@drawable/arrow_button" />
 
                 </RelativeLayout>
+
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+
+                    android:orientation="horizontal">
+
+
+
+
+
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Entrance fee : "/>
+
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="2000"
+                        android:gravity="center"
+                        android:text="@{viewModel.selectedTarrifEntranceFee}"/>
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="  Rials"/>
+
+
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+                <com.khodmohaseb.parkban.controls.PersianTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@{viewModel.shouldPayFirst ? @color/red : @color/green}"
+                    android:text="@{viewModel.shouldPayFirst ? @string/should_pay_now : @string/should_pay_later}"/>
+
 
             </LinearLayout>
 
@@ -327,7 +374,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/new_new_btn_background_layout"
                 android:onClick="@{viewModel::Taeed_Onclick}"
-                android:text="Print arrival receipt"
+                android:text="@{viewModel.shouldPayFirst ? @string/pay_entrance_fare : @string/print_enter_qr}"
                 android:textColor="@android:color/white"
                 android:textSize="21sp"
                 android:textStyle="bold" />

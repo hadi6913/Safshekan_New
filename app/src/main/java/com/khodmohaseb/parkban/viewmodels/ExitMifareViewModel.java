@@ -403,7 +403,7 @@ public class ExitMifareViewModel extends ViewModel {
                 }
                 Log.d(TAG, "pelak status >>> " + is_pelak_empty);
                 if(is_pelak_empty) {
-                    ShowToast.getInstance().showWarning(view.getContext(), R.string.at_least_one_parameter_requierd);
+                    ShowToast.getInstance().showWarning(view.getContext(), R.string.enter_car_tag);
                     return;
                 }
                 //************************************************************************************************************************
