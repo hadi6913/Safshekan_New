@@ -15,7 +15,7 @@ import com.khodmohaseb.parkban.databinding.ActivityPaymentSafshekanBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
 import com.khodmohaseb.parkban.viewmodels.PaymentSafshekanViewModel;
 
-public class PaymentSafshekanActivity extends BaseActivity  {
+public class PaymentSafshekanActivity extends BaseActivity {
 
     public static final String TAG = "PaymentSafsActivity";
 

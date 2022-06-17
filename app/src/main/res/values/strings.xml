@@ -21,6 +21,21 @@
     <string name="tst_info_busy">Printer is busy</string>
     <string name="tst_info_error">Printer error</string>
     <string name="tst_info_driver_error">Error in printer driver</string>
+    <string name="car_inserted">Car has been inserted</string>
+    <string name="select_payment_dialog_1">Select payment type</string>
+    <string name="select_payment_dialog_2">Please select your desired payment type</string>
+    <string name="select_payment_dialog_3">Cancel</string>
+    <string name="select_payment_dialog_4">Cash</string>
+    <string name="select_payment_dialog_5">Electronic</string>
+    <string name="failed_payment">Payment failed</string>
+    <string name="write_on_mifare_card">Submit on card</string>
+    <string name="submit_card_dialog_1">Submit on card</string>
+    <string name="submit_card_dialog_2">Put card near nfc sensor</string>
+    <string name="submit_card_dialog_3">Cancel</string>
+    <string name="submit_success">Success Submit</string>
+    <string name="error_mifare">Invalid card</string>
+
+
 
 
 
@@ -67,7 +82,7 @@
     <string name="ozv_number">شماره عضویت : %s</string>
     <string name="rial">%s ریال</string>
     <string name="user_name">نام کاربری</string>
-    <string name="error_mifare">کارت نامعتبر</string>
+
     <string name="ok_mifare">شناسایی موفق</string>
     <string name="password">کلمه عبور</string>
     <string name="parking_space">جایگاه های پارک</string>
@@ -188,7 +203,7 @@
 
     <string name="bitmap_null">bitmap is null</string>
     <string name="qr_null">شناسه اسکن شده خالی است</string>
-    <string name="failed_payment">پرداخت ناموفق</string>
+
 
 
     <string name="mdtp_ok">تایید</string>

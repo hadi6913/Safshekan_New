@@ -99,21 +99,143 @@ public class EnterMifareActivity extends BaseActivity implements EnterMifareRead
         binding.setLifecycleOwner(this);
         enterMifareViewModel.mSpinner = binding.spinnerEnterMifare;
         enterMifareViewModel.mCarTypeSpinner = binding.spinnerCarTypeEnterMifare;
+
+
         binding.spinnerCarTypeEnterMifare.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 enterMifareViewModel.getSelectedCarTypeName().setValue(String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()));
+
+
+                if (String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()).equals(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff1().getVehicleName().trim())) {
+                    enterMifareViewModel.getSelectedTarrifId().setValue(1);
+                    enterMifareViewModel.getSelectedTarrifEntranceFee().setValue(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost().toString());
+                    if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff1().getIsReceiveUponEntrance()) {
+                        enterMifareViewModel.getShouldPayFirst().setValue(true);
+                    } else {
+                        enterMifareViewModel.getShouldPayFirst().setValue(false);
+                    }
+                }
+
+                if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff2() != null) {
+                    if (String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()).equals(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName().trim())) {
+                        enterMifareViewModel.getSelectedTarrifId().setValue(2);
+                        enterMifareViewModel.getSelectedTarrifEntranceFee().setValue(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost().toString());
+
+
+                        if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff2().getIsReceiveUponEntrance()) {
+                            enterMifareViewModel.getShouldPayFirst().setValue(true);
+                        } else {
+                            enterMifareViewModel.getShouldPayFirst().setValue(false);
+                        }
+                    }
+                }
+
+
+                if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff3() != null) {
+                    if (String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()).equals(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName().trim())) {
+                        enterMifareViewModel.getSelectedTarrifId().setValue(3);
+                        enterMifareViewModel.getSelectedTarrifEntranceFee().setValue(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost().toString());
+
+
+                        if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff3().getIsReceiveUponEntrance()) {
+                            enterMifareViewModel.getShouldPayFirst().setValue(true);
+                        } else {
+                            enterMifareViewModel.getShouldPayFirst().setValue(false);
+                        }
+                    }
+                }
+
+                if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff4() != null) {
+                    if (String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()).equals(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName().trim())) {
+                        enterMifareViewModel.getSelectedTarrifId().setValue(4);
+                        enterMifareViewModel.getSelectedTarrifEntranceFee().setValue(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost().toString());
+
+
+                        if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff4().getIsReceiveUponEntrance()) {
+                            enterMifareViewModel.getShouldPayFirst().setValue(true);
+                        } else {
+                            enterMifareViewModel.getShouldPayFirst().setValue(false);
+                        }
+                    }
+                }
+
+
+                if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff5() != null) {
+                    if (String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()).equals(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName().trim())) {
+                        enterMifareViewModel.getSelectedTarrifId().setValue(5);
+                        enterMifareViewModel.getSelectedTarrifEntranceFee().setValue(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost().toString());
+
+
+                        if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff5().getIsReceiveUponEntrance()) {
+                            enterMifareViewModel.getShouldPayFirst().setValue(true);
+                        } else {
+                            enterMifareViewModel.getShouldPayFirst().setValue(false);
+                        }
+                    }
+                }
+
+
+                if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff6() != null) {
+                    if (String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()).equals(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName().trim())) {
+                        enterMifareViewModel.getSelectedTarrifId().setValue(6);
+                        enterMifareViewModel.getSelectedTarrifEntranceFee().setValue(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost().toString());
+
+
+                        if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff6().getIsReceiveUponEntrance()) {
+                            enterMifareViewModel.getShouldPayFirst().setValue(true);
+                        } else {
+                            enterMifareViewModel.getShouldPayFirst().setValue(false);
+                        }
+                    }
+                }
+
+
+                if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff7() != null) {
+                    if (String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()).equals(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName().trim())) {
+                        enterMifareViewModel.getSelectedTarrifId().setValue(7);
+                        enterMifareViewModel.getSelectedTarrifEntranceFee().setValue(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost().toString());
+
+
+                        if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff7().getIsReceiveUponEntrance()) {
+                            enterMifareViewModel.getShouldPayFirst().setValue(true);
+                        } else {
+                            enterMifareViewModel.getShouldPayFirst().setValue(false);
+                        }
+                    }
+                }
+
+                if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff8() != null) {
+                    if (String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()).equals(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName().trim())) {
+                        enterMifareViewModel.getSelectedTarrifId().setValue(8);
+                        enterMifareViewModel.getSelectedTarrifEntranceFee().setValue(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost().toString());
+
+
+                        if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff8().getIsReceiveUponEntrance()) {
+                            enterMifareViewModel.getShouldPayFirst().setValue(true);
+                        } else {
+                            enterMifareViewModel.getShouldPayFirst().setValue(false);
+                        }
+                    }
+                }
+
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 binding.spinnerCarTypeEnterMifare.setSelection(0);
                 enterMifareViewModel.getSelectedCarTypeName().setValue(String.valueOf(binding.spinnerCarTypeEnterMifare.getSelectedItem().toString().trim()));
+                enterMifareViewModel.getSelectedTarrifId().setValue(1);
+                enterMifareViewModel.getSelectedTarrifEntranceFee().setValue(enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost().toString());
+
+
+                if (enterMifareViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff1().getIsReceiveUponEntrance()) {
+                    enterMifareViewModel.getShouldPayFirst().setValue(true);
+                }
             }
         });
-
-
-
 
 
         binding.spinnerEnterMifare.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -216,9 +338,12 @@ public class EnterMifareActivity extends BaseActivity implements EnterMifareRead
     //**********************************************************************************************
     //**********************************************************************************************
 
-    private void startServices() {
+    public void startServices(byte[] block20, byte[] block21, byte[] block22) {
         try {
             readerHandlerIntent = new Intent(getApplicationContext(), EnterMifareReaderHandler.class);
+            readerHandlerIntent.putExtra("bl20", block20);
+            readerHandlerIntent.putExtra("bl21", block21);
+            readerHandlerIntent.putExtra("bl22", block22);
             startService(readerHandlerIntent);
             getApplicationContext().bindService(readerHandlerIntent, readerHandlerConnection, Context.BIND_AUTO_CREATE);
         } catch (Exception ex) {
@@ -226,7 +351,7 @@ public class EnterMifareActivity extends BaseActivity implements EnterMifareRead
         }
     }
 
-    private void stopServices() {
+    public void stopServices() {
         try {
             //Try to stop Reader handler
             if (EnterMifareReaderHandler.getInstance() != null)
@@ -247,20 +372,21 @@ public class EnterMifareActivity extends BaseActivity implements EnterMifareRead
     //**********************************************************************************************
     //**********************************************************************************************
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //******************************************************************************************
-        //******************************************************************************************
-        startServices();
-        //******************************************************************************************
-        //******************************************************************************************
-
-    }
 
     @Override
     public void onBackPressed() {
-        enterMifareViewModel.backPress(EnterMifareActivity.this);
+
+        if (enterMifareViewModel.selectedDoor.getDoorType() != 2) {
+            enterMifareViewModel.backPress(EnterMifareActivity.this);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        enterMifareViewModel.processActivityResult(this, requestCode, resultCode, data);
     }
 
 
@@ -342,15 +468,32 @@ public class EnterMifareActivity extends BaseActivity implements EnterMifareRead
         //******************************************************************************************
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        stopServicesForOperator();
-    }
-
 
     @Override
-    public void showOnUi(String serialNumber) {
+    public void enterMifareResult(boolean result) {
 
+
+        if (result) {
+
+            stopServicesForOperator();
+
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ShowToast.getInstance().showSuccess(EnterMifareActivity.this, R.string.submit_success);
+                    enterMifareViewModel.mifareAlertDialog.dismiss();
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ShowToast.getInstance().showError(EnterMifareActivity.this, R.string.error_mifare);
+                }
+            });
+
+
+        }
     }
 }

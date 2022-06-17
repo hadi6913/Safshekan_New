@@ -19,7 +19,7 @@
         android:layout_height="400px"
         android:scaleType="fitCenter"
         android:layout_marginLeft="20dp"
-        android:paddingRight="60dp"
+        android:paddingRight="40dp"
         android:layout_marginRight="20dp"
 
         />
@@ -40,10 +40,17 @@
 
 
         <com.khodmohaseb.parkban.controls.PersianTextView
+           android:text="جهت خروج وسیله نقلیه ارائه قبض الزامی می باشد"
+            android:textSize="7sp"
+            android:layout_marginBottom="3px"
+            style="@style/print_text"
+            />
+
+
+        <com.khodmohaseb.parkban.controls.PersianTextView
             android:id="@+id/enter_resid_parking_name"
             style="@style/print_text"
-            android:text="پارکینگ قدیری"
-            android:layout_marginRight="@dimen/margin_normal" />
+             />
 
 
 

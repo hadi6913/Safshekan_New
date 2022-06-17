@@ -64,6 +64,18 @@ public class ParkbanRepository {
         void onFailed();
     }
 
+
+    public interface DataBaseInsertedCarPelakCallBack {
+        void onSuccess(EntranceRecord entranceRecord);
+
+        void onFailed();
+    }
+
+
+    //**********************************************************************************************
+    //**********************************************************************************************
+    //**********************************************************************************************
+
     public interface DataBaseResultCustomCallBack {
         void onSuccess(model result);
 
@@ -896,10 +908,6 @@ public class ParkbanRepository {
     /**** DataBase Repository ****/
 
 
-
-
-
-
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
@@ -920,8 +928,9 @@ public class ParkbanRepository {
             long entranceOperatorId
             , final DataBaseResultCallBack callBack) {
         new SaveEntranceRecordAsyncTask(callBack)
-                .execute(database, plate, entranceDate, tariffId, paidAmount,payType,electronicPaymentCode,entranceDoorId,entranceOperatorId);
+                .execute(database, plate, entranceDate, tariffId, paidAmount, payType, electronicPaymentCode, entranceDoorId, entranceOperatorId);
     }
+
     private static class SaveEntranceRecordAsyncTask extends AsyncTask<Object, Void, Long> {
 
         private final DataBaseResultCallBack callBack;
@@ -973,11 +982,102 @@ public class ParkbanRepository {
         }
     }
 
-    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
-    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
-    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
-    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
-    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+    public void isCarInserted(
+            String plate
+            , final DataBaseInsertedCarPelakCallBack callBack) {
+        new IsCarInsertedAsyncTask(callBack)
+                .execute(database, plate);
+    }
+
+    private static class IsCarInsertedAsyncTask extends AsyncTask<Object, Void, EntranceRecord> {
+
+        private final DataBaseInsertedCarPelakCallBack callBack;
+
+        public IsCarInsertedAsyncTask(DataBaseInsertedCarPelakCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected EntranceRecord doInBackground(Object... params) {
+
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            String plate = (String) params[1];
+
+
+            try {
+                return database.getEntranceRecordDao().getEntranceRecordByPlate(plate);
+            } catch (Exception e) {
+                Log.e(TAG, "Error in saveCarPlate", e);
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(EntranceRecord result) {
+            super.onPostExecute(result);
+            if (result != null) {
+                callBack.onSuccess(result);
+            } else {
+                callBack.onFailed();
+            }
+        }
+    }
+
+
+
+
+
+
+
+    public void deleteEntranceRecord(
+            String plate
+            , final DataBaseResultCallBack callBack) {
+        new DeleteEntranceRecordAsyncTask(callBack)
+                .execute(database, plate);
+    }
+
+    private static class DeleteEntranceRecordAsyncTask extends AsyncTask<Object, Void, Long> {
+
+        private final DataBaseResultCallBack callBack;
+
+        public DeleteEntranceRecordAsyncTask(DataBaseResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected Long doInBackground(Object... params) {
+
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            String plate = (String) params[1];
+
+
+
+            try {
+                 database.getEntranceRecordDao().deleteEntranceRecordByPlate(plate);
+                 return 1L;
+            } catch (Exception e) {
+                Log.e(TAG, "Error in saveCarPlate", e);
+                return 0L;
+            }
+        }
+
+
+
+        @Override
+        protected void onPostExecute(Long result) {
+            super.onPostExecute(result);
+            if (result > 0) {
+                callBack.onSuccess(result);
+            } else {
+                callBack.onFailed();
+            }
+        }
+    }
+
+
+
+
 
 
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
@@ -985,19 +1085,14 @@ public class ParkbanRepository {
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
-
-
-
-
-
-
-
-
-
-
-
-
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
 
 
     public void saveCarPlate(boolean isNewCar, int carId, CarPlate carPlate, boolean pay, final DataBaseResultCallBack callBack) {

@@ -1,6 +1,7 @@
 package com.khodmohaseb.parkban.viewmodels;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
@@ -15,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
@@ -23,6 +25,7 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -36,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -61,7 +65,9 @@ import com.khodmohaseb.parkban.helper.ShowToast;
 import com.khodmohaseb.parkban.persistence.ParkbanDatabase;
 import com.khodmohaseb.parkban.persistence.models.CarPlate;
 import com.khodmohaseb.parkban.persistence.models.ResponseResultType;
+import com.khodmohaseb.parkban.persistence.models.khodmohaseb.EntranceRecord;
 import com.khodmohaseb.parkban.repositories.ParkbanRepository;
+import com.khodmohaseb.parkban.services.ParkbanServiceProvider;
 import com.khodmohaseb.parkban.services.dto.ExitBillDto;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Door;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
@@ -436,53 +442,226 @@ public class EnterQrViewModel extends ViewModel {
     }
 
 
+    private String getBundleString(Bundle b) {
+        return
+                "Status   :" + b.getString("result") + '\n' +
+                        "rrn    :" + b.getString("rrn", null) + '\n' +
+                        "date    :" + b.getLong("date", -1) + '\n' +
+                        "trace    :" + b.getString("trace", null) + '\n' +
+                        "pan    :" + b.getString("pan", null) + '\n' +
+                        "amount   :" + b.getString("amount", null) + '\n' +
+                        "res_num   :" + b.getLong("res_num", -1) + '\n' +
+                        "charge_serial    :" + b.getString("charge_serial", null) + '\n' +
+                        "charge_pin    :" + b.getString("charge_pin", null) + '\n' +
+                        "message    :" + b.getString("message", null) + '\n';
+    }
+
+
     public void processActivityResult(Context context, int requestCode, int resultCode, Intent
             data) {
-        if (requestCode == 1369 && resultCode == Activity.RESULT_OK) {
-            Log.d("xxxhhhhhhhhhhhh", "" + newPhotoFilePath);
-            plateBitmap = ImageLoadHelper.getInstance().loadImage(context, newPhotoFilePath);
-            //*****************************************************************************************************
-            try {
-                idal = PrintParkbanApp.getInstance().getIdal();
-                if (idal == null) {
-                    try {
-                        ExifInterface exif = new ExifInterface(newPhotoFilePath);
-                        int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-                        Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
-                        if (rotation == 1) {
-                        } else {
-                            Matrix matrix = new Matrix();
-                            matrix.setRotate(0, 0, 0);
-                            Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
-                            Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-                            plateBitmap = rotatedBitmap;
-                        }
-                    } catch (Exception e) {
-                    }
+
+
+        if (requestCode == 103) {
+
+
+            Bundle b = data.getBundleExtra("response");
+            Log.d(TAG, "onActivityResult:  >>>>>>>>>>>>>>> " + getBundleString(b));
+            if (b.getString("result").trim().equals("succeed")) {
+                Log.d("e_pardakht >>>", "step 2 >>> GOOD_PAYMENT ");
+                Log.d(TAG, "now we should save in database and print recepit");
+
+
+                String pelak = "";
+                if (getCar().getValue()) {
+
+                    pelak = getPlate__0().getValue() + PelakUtility.convertToCode(getPlate__1().getValue()) + getPlate__2().getValue() + getPlate__3().getValue();
+
                 } else {
-                    try {
-                        ExifInterface exif = new ExifInterface(newPhotoFilePath);
-                        int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-                        Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
-                        if (rotation == 0) {
-                        } else {
-                            Matrix matrix = new Matrix();
-                            matrix.setRotate(-90, 0, 0);
-                            Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
-                            Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-                            plateBitmap = rotatedBitmap;
+
+                    pelak = getMplate__0().getValue() + getMplate__1().getValue();
+
+                }
+                //converting persian numbers to english
+                pelak = FontHelper.removeEnter(FontHelper.convertArabicToPersian(pelak));
+                Log.d(TAG, "UnChanged-Default pelak >>>  " + pelak);
+                StringBuilder newPelak = new StringBuilder(pelak);
+                for (int i = 0; i < pelak.length(); i++) {
+                    if (Character.isDigit(pelak.charAt(i))) {
+                        switch (pelak.charAt(i)) {
+                            case '۰':
+                                newPelak.setCharAt(i, '0');
+                                break;
+                            case '۱':
+                                newPelak.setCharAt(i, '1');
+                                break;
+                            case '۲':
+                                newPelak.setCharAt(i, '2');
+                                break;
+                            case '۳':
+                                newPelak.setCharAt(i, '3');
+                                break;
+                            case '۴':
+                                newPelak.setCharAt(i, '4');
+                                break;
+                            case '۵':
+                                newPelak.setCharAt(i, '5');
+                                break;
+                            case '۶':
+                                newPelak.setCharAt(i, '6');
+                                break;
+                            case '۷':
+                                newPelak.setCharAt(i, '7');
+                                break;
+                            case '۸':
+                                newPelak.setCharAt(i, '8');
+                                break;
+                            case '۹':
+                                newPelak.setCharAt(i, '9');
+                                break;
                         }
-                    } catch (Exception e) {
-//
                     }
                 }
-            } catch (Exception e) {
+                pelak = newPelak.toString();
+                Log.d(TAG, "Changed-New pelak >>>  " + pelak);
+                //************************************************************************************************************************
+                // ************************************************************************************************************************
+                final String finalPelak = pelak;
+
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
+                String currentDateandTime = sdf.format(new Date());
+                Log.d(TAG, "current-date time >>>  " + currentDateandTime);
+                //************************************************************************************************************************
+                // ************************************************************************************************************************
+                int tarrifId = 0;
+                if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff1().getVehicleName().trim())) {
+                    tarrifId = 1;
+                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName().trim())) {
+                    tarrifId = 2;
+                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName().trim())) {
+                    tarrifId = 3;
+                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName().trim())) {
+                    tarrifId = 4;
+                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName().trim())) {
+                    tarrifId = 5;
+                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName().trim())) {
+                    tarrifId = 6;
+                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName().trim())) {
+                    tarrifId = 7;
+                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName().trim())) {
+                    tarrifId = 8;
+                }
+                Log.d(TAG, "current-tarrif id >>>  " + tarrifId);
+                //************************************************************************************************************************
+                // ************************************************************************************************************************
+                Log.d(TAG, "paid-entrance >>>  " + getEntranceFeeFromTariffId());
+                //************************************************************************************************************************
+                // ************************************************************************************************************************
+                Log.d(TAG, "operator id >>>  " + selectedUser.getId());
+                //************************************************************************************************************************
+                // ************************************************************************************************************************
+                Log.d(TAG, "door id >>>  " + selectedDoor.getId());
+                //************************************************************************************************************************
+                // ************************************************************************************************************************
+                String crc = currentDateandTime.substring(9, 12) + "6913" + finalPelak.substring(0, 2);
+                Log.d(TAG, "crc >> " + crc);
+                //************************************************************************************************************************
+                // ************************************************************************************************************************
+
+
+                Log.d(TAG, "pelak for save in data base : " + finalPelak);
+
+
+                parkbanRepository.saveEntranceRecord(
+                        finalPelak,
+                        currentDateandTime,
+                        tarrifId,
+                        Long.parseLong(getEntranceFeeFromTariffId()),
+                        1,
+                        "",
+                        selectedDoor.getId().longValue(),
+                        selectedUser.getId().longValue(),
+                        new ParkbanRepository.DataBaseResultCallBack() {
+                            @Override
+                            public void onSuccess(long id) {
+                                Log.d(TAG, "onSuccess in save database , now print process begin");
+                                mBitmap = generateBitmapByLayoutForPayment(myContext, finalPelak, false);
+                                Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
+                                msg.obj = mBitmap;
+                                msg.sendToTarget();
+                                mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
+
+                            }
+
+                            @Override
+                            public void onFailed() {
+                                ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+
+                            }
+                        }
+
+
+                );
+
+
+            } else {
+
+
+                ShowToast.getInstance().showError(myContext, R.string.failed_payment);
             }
-            //*****************************************************************************************************
-            carPlateActual.setPlateImage(plateBitmap);
-            doDetectPlate(context, plateBitmap);
-        } else if (resultCode == Activity.RESULT_CANCELED) {
+
+
+        } else {
+
+            if (requestCode == 1369 && resultCode == Activity.RESULT_OK) {
+                Log.d("xxxhhhhhhhhhhhh", "" + newPhotoFilePath);
+                plateBitmap = ImageLoadHelper.getInstance().loadImage(context, newPhotoFilePath);
+                //*****************************************************************************************************
+                try {
+                    idal = PrintParkbanApp.getInstance().getIdal();
+                    if (idal == null) {
+                        try {
+                            ExifInterface exif = new ExifInterface(newPhotoFilePath);
+                            int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                            Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
+                            if (rotation == 1) {
+                            } else {
+                                Matrix matrix = new Matrix();
+                                matrix.setRotate(0, 0, 0);
+                                Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
+                                Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+                                plateBitmap = rotatedBitmap;
+                            }
+                        } catch (Exception e) {
+                        }
+                    } else {
+                        try {
+                            ExifInterface exif = new ExifInterface(newPhotoFilePath);
+                            int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                            Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
+                            if (rotation == 0) {
+                            } else {
+                                Matrix matrix = new Matrix();
+                                matrix.setRotate(-90, 0, 0);
+                                Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
+                                Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+                                plateBitmap = rotatedBitmap;
+                            }
+                        } catch (Exception e) {
+//
+                        }
+                    }
+                } catch (Exception e) {
+                }
+                //*****************************************************************************************************
+                carPlateActual.setPlateImage(plateBitmap);
+                doDetectPlate(context, plateBitmap);
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+            }
+
         }
+
+
     }
 
     private void doDetectPlate(final Context context, Bitmap plateImage) {
@@ -557,161 +736,319 @@ public class EnterQrViewModel extends ViewModel {
             @Override
             public void run() {
 
-                if (shouldPayFirst.getValue()) {
-                    Log.d(TAG, " should do payment then save in database");
-                    //todo implement payment(cash - electonic) and print entrance qr
+                //************************************************************************************************************************
+                // ************************************************************************************************************************
+                boolean is_pelak_valid = true;
+                if (getCar().getValue()) {
+                    //test car plate
+                    if (getPlate__0().getValue().trim().equals("") || getPlate__0().getValue().equals(null))
+                        is_pelak_valid = false;
+                    if (getPlate__2().getValue().trim().equals("") || getPlate__2().getValue().equals(null))
+                        is_pelak_valid = false;
+                    if (getPlate__3().getValue().trim().equals("") || getPlate__3().getValue().equals(null))
+                        is_pelak_valid = false;
+
+                    if (getPlate__0().getValue().trim().length() != 2)
+                        is_pelak_valid = false;
+                    if (getPlate__2().getValue().trim().length() != 3)
+                        is_pelak_valid = false;
+                    if (getPlate__3().getValue().trim().length() != 2)
+                        is_pelak_valid = false;
+
+
                 } else {
-                    Log.d(TAG, "save in database then print entrance qr and no need to pay now");
-
-                    //************************************************************************************************************************
-                    // ************************************************************************************************************************
-                    boolean is_pelak_valid = true;
-                    if (getCar().getValue()) {
-                        //test car plate
-                        if (getPlate__0().getValue().trim().equals("") || getPlate__0().getValue().equals(null))
-                            is_pelak_valid = false;
-                        if (getPlate__2().getValue().trim().equals("") || getPlate__2().getValue().equals(null))
-                            is_pelak_valid = false;
-                        if (getPlate__3().getValue().trim().equals("") || getPlate__3().getValue().equals(null))
-                            is_pelak_valid = false;
-                    } else {
-                        //test motor plate
-                        if (getMplate__0().getValue().trim().equals("") || getMplate__0().getValue().equals(null))
-                            is_pelak_valid = false;
-                        if (getMplate__1().getValue().trim().equals("") || getMplate__1().getValue().equals(null))
-                            is_pelak_valid = false;
-                    }
-
-                    Log.d(TAG, "pelak status >>> " + is_pelak_valid);
-
-                    if (!is_pelak_valid) {
-                        ShowToast.getInstance().showWarning(view.getContext(), R.string.enter_car_tag);
-                        return;
-                    }
-                    String pelak = "";
-                    if (getCar().getValue()) {
-                        if (is_pelak_valid) {
-                            pelak = getPlate__0().getValue() + PelakUtility.convertToCode(getPlate__1().getValue()) + getPlate__2().getValue() + getPlate__3().getValue();
-                        }
-                    } else {
-                        if (is_pelak_valid) {
-                            pelak = getMplate__0().getValue() + getMplate__1().getValue();
-                        }
-                    }
-                    //converting persian numbers to english
-                    pelak = FontHelper.removeEnter(FontHelper.convertArabicToPersian(pelak));
-                    Log.d(TAG, "UnChanged-Default pelak >>>  " + pelak);
-                    StringBuilder newPelak = new StringBuilder(pelak);
-                    for (int i = 0; i < pelak.length(); i++) {
-                        if (Character.isDigit(pelak.charAt(i))) {
-                            switch (pelak.charAt(i)) {
-                                case '۰':
-                                    newPelak.setCharAt(i, '0');
-                                    break;
-                                case '۱':
-                                    newPelak.setCharAt(i, '1');
-                                    break;
-                                case '۲':
-                                    newPelak.setCharAt(i, '2');
-                                    break;
-                                case '۳':
-                                    newPelak.setCharAt(i, '3');
-                                    break;
-                                case '۴':
-                                    newPelak.setCharAt(i, '4');
-                                    break;
-                                case '۵':
-                                    newPelak.setCharAt(i, '5');
-                                    break;
-                                case '۶':
-                                    newPelak.setCharAt(i, '6');
-                                    break;
-                                case '۷':
-                                    newPelak.setCharAt(i, '7');
-                                    break;
-                                case '۸':
-                                    newPelak.setCharAt(i, '8');
-                                    break;
-                                case '۹':
-                                    newPelak.setCharAt(i, '9');
-                                    break;
-                            }
-                        }
-                    }
-                    pelak = newPelak.toString();
-                    Log.d(TAG, "Changed-New pelak >>>  " + pelak);
-                    //************************************************************************************************************************
-                    // ************************************************************************************************************************
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
-                    String currentDateandTime = sdf.format(new Date());
-                    Log.d(TAG, "current-date time >>>  " + currentDateandTime);
-                    //************************************************************************************************************************
-                    // ************************************************************************************************************************
-                    int tarrifId = 0;
-                    if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff1().getVehicleName().trim())) {
-                        tarrifId = 1;
-                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName().trim())) {
-                        tarrifId = 2;
-                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName().trim())) {
-                        tarrifId = 3;
-                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName().trim())) {
-                        tarrifId = 4;
-                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName().trim())) {
-                        tarrifId = 5;
-                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName().trim())) {
-                        tarrifId = 6;
-                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName().trim())) {
-                        tarrifId = 7;
-                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName().trim())) {
-                        tarrifId = 8;
-                    }
-                    Log.d(TAG, "current-tarrif id >>>  " + tarrifId);
-                    //************************************************************************************************************************
-                    // ************************************************************************************************************************
-                    Log.d(TAG, "paid-entrance >>>  " + 0);
-                    //************************************************************************************************************************
-                    // ************************************************************************************************************************
-                    Log.d(TAG, "operator id >>>  " + selectedUser.getId());
-                    //************************************************************************************************************************
-                    // ************************************************************************************************************************
-                    Log.d(TAG, "door id >>>  " + selectedDoor.getId());
-                    //************************************************************************************************************************
-                    // ************************************************************************************************************************
-                    String crc = currentDateandTime.substring(9, 12) + "6913" + pelak.substring(0, 2);
-                    Log.d(TAG, "crc >> " + crc);
-                    //************************************************************************************************************************
-                    // ************************************************************************************************************************
-
-                    parkbanRepository.saveEntranceRecord(
-                            pelak,
-                            currentDateandTime,
-                            tarrifId,
-                            0,
-                            2,
-                            "",
-                            selectedDoor.getId().longValue(),
-                            selectedUser.getId().longValue(),
-                            new ParkbanRepository.DataBaseResultCallBack() {
-                                @Override
-                                public void onSuccess(long id) {
-                                    Log.d(TAG, "onSuccess in save database , now print process begin");
-                                    mBitmap = generateBitmapByLayoutForNonePayment(myContext);
-                                    Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
-                                    msg.obj = mBitmap;
-                                    msg.sendToTarget();
-                                    mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
-
-                                }
-
-                                @Override
-                                public void onFailed() {
-                                    ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
-                                }
-                            }
-
-
-                    );
+                    //test motor plate
+                    if (getMplate__0().getValue().trim().equals("") || getMplate__0().getValue().equals(null))
+                        is_pelak_valid = false;
+                    if (getMplate__1().getValue().trim().equals("") || getMplate__1().getValue().equals(null))
+                        is_pelak_valid = false;
+                    if (getMplate__0().getValue().trim().length() != 3)
+                        is_pelak_valid = false;
+                    if (getMplate__1().getValue().trim().length() != 5)
+                        is_pelak_valid = false;
                 }
+
+                Log.d(TAG, "pelak status >>> " + is_pelak_valid);
+
+                if (!is_pelak_valid) {
+                    ShowToast.getInstance().showWarning(view.getContext(), R.string.enter_car_tag);
+                    return;
+                }
+                String pelak = "";
+                if (getCar().getValue()) {
+                    if (is_pelak_valid) {
+                        pelak = getPlate__0().getValue() + PelakUtility.convertToCode(getPlate__1().getValue()) + getPlate__2().getValue() + getPlate__3().getValue();
+                    }
+                } else {
+                    if (is_pelak_valid) {
+                        pelak = getMplate__0().getValue() + getMplate__1().getValue();
+                    }
+                }
+                //converting persian numbers to english
+                pelak = FontHelper.removeEnter(FontHelper.convertArabicToPersian(pelak));
+                Log.d(TAG, "UnChanged-Default pelak >>>  " + pelak);
+                StringBuilder newPelak = new StringBuilder(pelak);
+                for (int i = 0; i < pelak.length(); i++) {
+                    if (Character.isDigit(pelak.charAt(i))) {
+                        switch (pelak.charAt(i)) {
+                            case '۰':
+                                newPelak.setCharAt(i, '0');
+                                break;
+                            case '۱':
+                                newPelak.setCharAt(i, '1');
+                                break;
+                            case '۲':
+                                newPelak.setCharAt(i, '2');
+                                break;
+                            case '۳':
+                                newPelak.setCharAt(i, '3');
+                                break;
+                            case '۴':
+                                newPelak.setCharAt(i, '4');
+                                break;
+                            case '۵':
+                                newPelak.setCharAt(i, '5');
+                                break;
+                            case '۶':
+                                newPelak.setCharAt(i, '6');
+                                break;
+                            case '۷':
+                                newPelak.setCharAt(i, '7');
+                                break;
+                            case '۸':
+                                newPelak.setCharAt(i, '8');
+                                break;
+                            case '۹':
+                                newPelak.setCharAt(i, '9');
+                                break;
+                        }
+                    }
+                }
+                pelak = newPelak.toString();
+                Log.d(TAG, "Changed-New pelak >>>  " + pelak);
+                //************************************************************************************************************************
+                // ************************************************************************************************************************
+                final String finalPelak = pelak;
+                parkbanRepository.isCarInserted(finalPelak, new ParkbanRepository.DataBaseInsertedCarPelakCallBack() {
+                    @Override
+                    public void onSuccess(EntranceRecord entranceRecord) {
+                        Log.d(TAG, "onSuccess: yes it was inserted");
+                        ShowToast.getInstance().showWarning(myContext, R.string.car_inserted);
+                    }
+
+                    @Override
+                    public void onFailed() {
+                        Log.d(TAG, "onFailed: no it was not inserted");
+
+
+                        if (shouldPayFirst.getValue()) {
+                            Log.d(TAG, " should do payment then save in database");
+                            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
+                            LayoutInflater inflater = ((Activity) myContext).getLayoutInflater();
+                            View alertView = inflater.inflate(R.layout.dialog_select_payment_type, null);
+                            alertDialog.setView(alertView);
+                            alertDialog.setCancelable(false);
+                            final AlertDialog show = alertDialog.show();
+                            LinearLayout cancelButton = alertView.findViewById(R.id.cancel_layout_select_payment_type);
+                            LinearLayout cashButton = alertView.findViewById(R.id.cash_layout_select_payment_type);
+                            LinearLayout electronicButton = alertView.findViewById(R.id.electronic_layout_select_payment_type);
+
+                            cancelButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    show.dismiss();
+                                }
+                            });
+
+                            cashButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+
+                                    Log.d(TAG, "save in database then print entrance qr and paid by cash");
+
+
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
+                                    String currentDateandTime = sdf.format(new Date());
+                                    Log.d(TAG, "current-date time >>>  " + currentDateandTime);
+                                    //************************************************************************************************************************
+                                    // ************************************************************************************************************************
+                                    int tarrifId = 0;
+                                    if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff1().getVehicleName().trim())) {
+                                        tarrifId = 1;
+                                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName().trim())) {
+                                        tarrifId = 2;
+                                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName().trim())) {
+                                        tarrifId = 3;
+                                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName().trim())) {
+                                        tarrifId = 4;
+                                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName().trim())) {
+                                        tarrifId = 5;
+                                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName().trim())) {
+                                        tarrifId = 6;
+                                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName().trim())) {
+                                        tarrifId = 7;
+                                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName().trim())) {
+                                        tarrifId = 8;
+                                    }
+                                    Log.d(TAG, "current-tarrif id >>>  " + tarrifId);
+                                    //************************************************************************************************************************
+                                    // ************************************************************************************************************************
+                                    Log.d(TAG, "paid-entrance >>>  " + getEntranceFeeFromTariffId());
+                                    //************************************************************************************************************************
+                                    // ************************************************************************************************************************
+                                    Log.d(TAG, "operator id >>>  " + selectedUser.getId());
+                                    //************************************************************************************************************************
+                                    // ************************************************************************************************************************
+                                    Log.d(TAG, "door id >>>  " + selectedDoor.getId());
+                                    //************************************************************************************************************************
+                                    // ************************************************************************************************************************
+                                    String crc = currentDateandTime.substring(9, 12) + "6913" + finalPelak.substring(0, 2);
+                                    Log.d(TAG, "crc >> " + crc);
+                                    //************************************************************************************************************************
+                                    // ************************************************************************************************************************
+
+
+                                    Log.d(TAG, "pelak for save in data base : " + finalPelak);
+
+
+                                    parkbanRepository.saveEntranceRecord(
+                                            finalPelak,
+                                            currentDateandTime,
+                                            tarrifId,
+                                            Long.parseLong(getEntranceFeeFromTariffId()),
+                                            0,
+                                            "",
+                                            selectedDoor.getId().longValue(),
+                                            selectedUser.getId().longValue(),
+                                            new ParkbanRepository.DataBaseResultCallBack() {
+                                                @Override
+                                                public void onSuccess(long id) {
+                                                    Log.d(TAG, "onSuccess in save database , now print process begin");
+                                                    mBitmap = generateBitmapByLayoutForPayment(myContext, finalPelak, true);
+                                                    Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
+                                                    msg.obj = mBitmap;
+                                                    msg.sendToTarget();
+                                                    mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
+                                                    show.dismiss();
+
+                                                }
+
+                                                @Override
+                                                public void onFailed() {
+                                                    ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                    show.dismiss();
+                                                }
+                                            }
+
+
+                                    );
+
+
+                                }
+                            });
+
+                            electronicButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Log.d(TAG, "do payment then save in database");
+
+                                    show.dismiss();
+
+                                    Intent fanavaPaymentIntent = new Intent("ir.totan.pos.view.cart.TXN");
+                                    fanavaPaymentIntent.putExtra("type", 3);
+                                    fanavaPaymentIntent.putExtra("amount", getEntranceFeeFromTariffId());
+                                    fanavaPaymentIntent.putExtra("res_num", Long.parseLong(finalPelak));
+                                    ((Activity) myContext).startActivityForResult(fanavaPaymentIntent, 103);
+
+
+                                }
+                            });
+
+
+                        } else {
+                            Log.d(TAG, "save in database then print entrance qr and no need to pay now");
+
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
+                            String currentDateandTime = sdf.format(new Date());
+                            Log.d(TAG, "current-date time >>>  " + currentDateandTime);
+                            //************************************************************************************************************************
+                            // ************************************************************************************************************************
+                            int tarrifId = 0;
+                            if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff1().getVehicleName().trim())) {
+                                tarrifId = 1;
+                            } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName().trim())) {
+                                tarrifId = 2;
+                            } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName().trim())) {
+                                tarrifId = 3;
+                            } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName().trim())) {
+                                tarrifId = 4;
+                            } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName().trim())) {
+                                tarrifId = 5;
+                            } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName().trim())) {
+                                tarrifId = 6;
+                            } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName().trim())) {
+                                tarrifId = 7;
+                            } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName().trim())) {
+                                tarrifId = 8;
+                            }
+                            Log.d(TAG, "current-tarrif id >>>  " + tarrifId);
+                            //************************************************************************************************************************
+                            // ************************************************************************************************************************
+                            Log.d(TAG, "paid-entrance >>>  " + 0);
+                            //************************************************************************************************************************
+                            // ************************************************************************************************************************
+                            Log.d(TAG, "operator id >>>  " + selectedUser.getId());
+                            //************************************************************************************************************************
+                            // ************************************************************************************************************************
+                            Log.d(TAG, "door id >>>  " + selectedDoor.getId());
+                            //************************************************************************************************************************
+                            // ************************************************************************************************************************
+                            String crc = currentDateandTime.substring(9, 12) + "6913" + finalPelak.substring(0, 2);
+                            Log.d(TAG, "crc >> " + crc);
+                            //************************************************************************************************************************
+                            // ************************************************************************************************************************
+
+
+                            Log.d(TAG, "pelak for save in data base : " + finalPelak);
+
+
+                            parkbanRepository.saveEntranceRecord(
+                                    finalPelak,
+                                    currentDateandTime,
+                                    tarrifId,
+                                    0,
+                                    2,
+                                    "",
+                                    selectedDoor.getId().longValue(),
+                                    selectedUser.getId().longValue(),
+                                    new ParkbanRepository.DataBaseResultCallBack() {
+                                        @Override
+                                        public void onSuccess(long id) {
+                                            Log.d(TAG, "onSuccess in save database , now print process begin");
+                                            mBitmap = generateBitmapByLayoutForNonePayment(myContext, finalPelak);
+                                            Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
+                                            msg.obj = mBitmap;
+                                            msg.sendToTarget();
+                                            mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
+
+                                        }
+
+                                        @Override
+                                        public void onFailed() {
+                                            ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                        }
+                                    }
+
+
+                            );
+                        }
+
+
+                    }
+                });
+
 
             }
         }, Animation_Constant.ANIMATION_VALUE);
@@ -725,7 +1062,6 @@ public class EnterQrViewModel extends ViewModel {
         view.startAnimation(myAnim);
         doRefresh();
     }
-
 
     public void backPress(Context context) {
 
@@ -759,164 +1095,37 @@ public class EnterQrViewModel extends ViewModel {
     }
 
 
-    private String prepareQrString(View view, long paidEntrance) {
-
-        //************************************************************************************************************************
-        // ************************************************************************************************************************
-        boolean is_pelak_valid = true;
-        if (getCar().getValue()) {
-            //test car plate
-            if (getPlate__0().getValue().trim().equals("") || getPlate__0().getValue().equals(null))
-                is_pelak_valid = false;
-            if (getPlate__2().getValue().trim().equals("") || getPlate__2().getValue().equals(null))
-                is_pelak_valid = false;
-            if (getPlate__3().getValue().trim().equals("") || getPlate__3().getValue().equals(null))
-                is_pelak_valid = false;
-        } else {
-            //test motor plate
-            if (getMplate__0().getValue().trim().equals("") || getMplate__0().getValue().equals(null))
-                is_pelak_valid = false;
-            if (getMplate__1().getValue().trim().equals("") || getMplate__1().getValue().equals(null))
-                is_pelak_valid = false;
+    public String getEntranceFeeFromTariffId() {
+        String result = "0";
+        switch (selectedTarrifId.getValue()) {
+            case 1:
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost().toString();
+                break;
+            case 2:
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost().toString();
+                break;
+            case 3:
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost().toString();
+                break;
+            case 4:
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost().toString();
+                break;
+            case 5:
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost().toString();
+                break;
+            case 6:
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost().toString();
+                break;
+            case 7:
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost().toString();
+                break;
+            case 8:
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost().toString();
+                break;
         }
 
-        Log.d(TAG, "pelak status >>> " + is_pelak_valid);
-
-        if (!is_pelak_valid) {
-            ShowToast.getInstance().showWarning(view.getContext(), R.string.enter_car_tag);
-            return "";
-        }
-        String pelak = "";
-        if (getCar().getValue()) {
-            if (is_pelak_valid) {
-                pelak = getPlate__0().getValue() + getPlate__1().getValue() + getPlate__2().getValue() + getPlate__3().getValue();
-            }
-        } else {
-            if (is_pelak_valid) {
-                pelak = getMplate__0().getValue() + getMplate__1().getValue();
-            }
-        }
-        //converting persian numbers to english
-        pelak = FontHelper.removeEnter(FontHelper.convertArabicToPersian(pelak));
-        Log.d(TAG, "UnChanged-Default pelak >>>  " + pelak);
-        StringBuilder newPelak = new StringBuilder(pelak);
-        for (int i = 0; i < pelak.length(); i++) {
-            if (Character.isDigit(pelak.charAt(i))) {
-                switch (pelak.charAt(i)) {
-                    case '۰':
-                        newPelak.setCharAt(i, '0');
-                        break;
-                    case '۱':
-                        newPelak.setCharAt(i, '1');
-                        break;
-                    case '۲':
-                        newPelak.setCharAt(i, '2');
-                        break;
-                    case '۳':
-                        newPelak.setCharAt(i, '3');
-                        break;
-                    case '۴':
-                        newPelak.setCharAt(i, '4');
-                        break;
-                    case '۵':
-                        newPelak.setCharAt(i, '5');
-                        break;
-                    case '۶':
-                        newPelak.setCharAt(i, '6');
-                        break;
-                    case '۷':
-                        newPelak.setCharAt(i, '7');
-                        break;
-                    case '۸':
-                        newPelak.setCharAt(i, '8');
-                        break;
-                    case '۹':
-                        newPelak.setCharAt(i, '9');
-                        break;
-                }
-            }
-        }
-        pelak = newPelak.toString();
-        Log.d(TAG, "Changed-New pelak >>>  " + pelak);
-        //************************************************************************************************************************
-        // ************************************************************************************************************************
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
-        String currentDateandTime = sdf.format(new Date());
-        Log.d(TAG, "current-date time >>>  " + currentDateandTime);
-        //************************************************************************************************************************
-        // ************************************************************************************************************************
-        int tarrifId = 0;
-        if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff1().getVehicleName().trim())) {
-            tarrifId = 1;
-        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName().trim())) {
-            tarrifId = 2;
-        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName().trim())) {
-            tarrifId = 3;
-        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName().trim())) {
-            tarrifId = 4;
-        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName().trim())) {
-            tarrifId = 5;
-        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName().trim())) {
-            tarrifId = 6;
-        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName().trim())) {
-            tarrifId = 7;
-        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName().trim())) {
-            tarrifId = 8;
-        }
-        Log.d(TAG, "current-tarrif id >>>  " + tarrifId);
-        //************************************************************************************************************************
-        // ************************************************************************************************************************
-        Log.d(TAG, "paid-entrance >>>  " + paidEntrance);
-        //************************************************************************************************************************
-        // ************************************************************************************************************************
-        Log.d(TAG, "operator id >>>  " + selectedUser.getId());
-        //************************************************************************************************************************
-        // ************************************************************************************************************************
-        Log.d(TAG, "door id >>>  " + selectedDoor.getId());
-        //************************************************************************************************************************
-        // ************************************************************************************************************************
-        String crc = currentDateandTime.substring(9, 12) + "6913" + pelak.substring(0, 2);
-        Log.d(TAG, "crc >> " + crc);
-        //************************************************************************************************************************
-        // ************************************************************************************************************************
-
-
-        return crc + "#" + pelak.trim() + "#" + currentDateandTime + "#" + tarrifId + "#" + paidEntrance + "#" + selectedUser.getId() + "#" + selectedDoor.getId();
-
+        return result;
     }
-
-
-//    public String getEntranceFeeFromTariffId() {
-//        String result = "0";
-//        switch (selectedTarrifId.getValue()) {
-//            case 1:
-//                result = getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost().toString();
-//                break;
-//            case 2:
-//                result = getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost().toString();
-//                break;
-//            case 3:
-//                result = getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost().toString();
-//                break;
-//            case 4:
-//                result = getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost().toString();
-//                break;
-//            case 5:
-//                result = getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost().toString();
-//                break;
-//            case 6:
-//                result = getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost().toString();
-//                break;
-//            case 7:
-//                result = getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost().toString();
-//                break;
-//            case 8:
-//                result = getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost().toString();
-//                break;
-//        }
-//
-//        return result;
-//    }
 
 
     //***********************************************************************************************
@@ -1065,12 +1274,15 @@ public class EnterQrViewModel extends ViewModel {
     }
 
 
-    public Bitmap generateBitmapByLayoutForNonePayment(Context context) {
+    public Bitmap generateBitmapByLayoutForNonePayment(Context context, String pelak) {
+
+        Log.d(TAG, "generateBitmapByLayoutForNonePayment:  pelak that recived for print : " + pelak);
 
 
         View view = ((Activity) context).getLayoutInflater().inflate(R.layout.receipt_entrance, null);
         ImageView qrImageView = view.findViewById(R.id.enter_resid_qr_image_view);
         TextView entry_date_txt = view.findViewById(R.id.enter_resid_date_time_value);
+        TextView parking_name_txt = view.findViewById(R.id.enter_resid_parking_name);
         TextView paid_amount_txt = view.findViewById(R.id.enter_resid_paid_amount_value);
         TextView tariff_txt = view.findViewById(R.id.enter_resid_tariff_type_value);
         TextView plate_txt_0 = view.findViewById(R.id.p0_enter_resid);
@@ -1085,66 +1297,7 @@ public class EnterQrViewModel extends ViewModel {
 
         //************************************************************************************************************************
         // ************************************************************************************************************************
-
-
-        String pelak = "";
-        if (getCar().getValue()) {
-            plate_txt_0.setText(getPlate__0().getValue());
-            plate_txt_1.setText(getPlate__1().getValue());
-            plate_txt_2.setText(getPlate__2().getValue());
-            plate_txt_3.setText(getPlate__3().getValue());
-
-
-            pelak = getPlate__0().getValue() + PelakUtility.convertToCode(getPlate__1().getValue()) + getPlate__2().getValue() + getPlate__3().getValue();
-
-        } else {
-            m_plate_txt_0.setText(getMplate__0().getValue());
-            m_plate_txt_1.setText(getMplate__1().getValue());
-            pelak = getMplate__0().getValue() + getMplate__1().getValue();
-
-        }
-        //converting persian numbers to english
-        pelak = FontHelper.removeEnter(FontHelper.convertArabicToPersian(pelak));
-        Log.d(TAG, "UnChanged-Default pelak >>>  " + pelak);
-        StringBuilder newPelak = new StringBuilder(pelak);
-        for (int i = 0; i < pelak.length(); i++) {
-            if (Character.isDigit(pelak.charAt(i))) {
-                switch (pelak.charAt(i)) {
-                    case '۰':
-                        newPelak.setCharAt(i, '0');
-                        break;
-                    case '۱':
-                        newPelak.setCharAt(i, '1');
-                        break;
-                    case '۲':
-                        newPelak.setCharAt(i, '2');
-                        break;
-                    case '۳':
-                        newPelak.setCharAt(i, '3');
-                        break;
-                    case '۴':
-                        newPelak.setCharAt(i, '4');
-                        break;
-                    case '۵':
-                        newPelak.setCharAt(i, '5');
-                        break;
-                    case '۶':
-                        newPelak.setCharAt(i, '6');
-                        break;
-                    case '۷':
-                        newPelak.setCharAt(i, '7');
-                        break;
-                    case '۸':
-                        newPelak.setCharAt(i, '8');
-                        break;
-                    case '۹':
-                        newPelak.setCharAt(i, '9');
-                        break;
-                }
-            }
-        }
-        pelak = newPelak.toString();
-        Log.d(TAG, "Changed-New pelak >>>  " + pelak);
+        Log.d(TAG, " pelak >>>  " + pelak);
         //************************************************************************************************************************
         // ************************************************************************************************************************
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
@@ -1236,14 +1389,161 @@ public class EnterQrViewModel extends ViewModel {
 
         tariff_txt.setText(getSelectedCarTypeName().getValue().trim());
 
+        parking_name_txt.setText(getParkingInfoResponse.getParkingName().trim());
 
         pelak_main_layoout.setVisibility(View.VISIBLE);
         if (getCar().getValue()) {
             car_main_layout.setVisibility(View.VISIBLE);
             motor_main_layout.setVisibility(View.GONE);
+            plate_txt_0.setText(pelak.substring(0, 2));
+            plate_txt_1.setText(PelakUtility.convertFromCode(pelak.substring(2, 4)));
+            plate_txt_2.setText(pelak.substring(4, 7));
+            plate_txt_3.setText(pelak.substring(7, 9));
+
+
         } else {
             car_main_layout.setVisibility(View.GONE);
             motor_main_layout.setVisibility(View.VISIBLE);
+            m_plate_txt_0.setText(pelak.substring(0, 3));
+            m_plate_txt_1.setText(pelak.substring(3, 8));
+        }
+
+
+        return PrinterUtils.convertViewToBitmap(view);
+    }
+
+    public Bitmap generateBitmapByLayoutForPayment(Context context, String pelak, boolean cash) {
+
+        Log.d(TAG, "generateBitmapByLayoutForPayment:  pelak that recived for print : " + pelak);
+
+
+        View view = ((Activity) context).getLayoutInflater().inflate(R.layout.receipt_entrance, null);
+        ImageView qrImageView = view.findViewById(R.id.enter_resid_qr_image_view);
+        TextView entry_date_txt = view.findViewById(R.id.enter_resid_date_time_value);
+        TextView parking_name_txt = view.findViewById(R.id.enter_resid_parking_name);
+        TextView paid_amount_txt = view.findViewById(R.id.enter_resid_paid_amount_value);
+        TextView tariff_txt = view.findViewById(R.id.enter_resid_tariff_type_value);
+        TextView plate_txt_0 = view.findViewById(R.id.p0_enter_resid);
+        TextView plate_txt_1 = view.findViewById(R.id.p1_enter_resid);
+        TextView plate_txt_2 = view.findViewById(R.id.p2_enter_resid);
+        TextView plate_txt_3 = view.findViewById(R.id.p3_enter_resid);
+        TextView m_plate_txt_0 = view.findViewById(R.id.m0_enter_resid);
+        TextView m_plate_txt_1 = view.findViewById(R.id.m1_enter_resid);
+        RelativeLayout pelak_main_layoout = view.findViewById(R.id.plate_main_layout_entrance_resid);
+        LinearLayout motor_main_layout = view.findViewById(R.id.motor_layout_enterance_resid);
+        LinearLayout car_main_layout = view.findViewById(R.id.plate_layout_entrance_resid);
+
+        //************************************************************************************************************************
+        // ************************************************************************************************************************
+        Log.d(TAG, " pelak >>>  " + pelak);
+        //************************************************************************************************************************
+        // ************************************************************************************************************************
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
+        Date dateNow = new Date();
+        String currentDateandTime = sdf.format(dateNow);
+        Log.d(TAG, "current-date time >>>  " + currentDateandTime);
+        //************************************************************************************************************************
+        // ************************************************************************************************************************
+        int tarrifId = 0;
+        if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff1().getVehicleName().trim())) {
+            tarrifId = 1;
+        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName().trim())) {
+            tarrifId = 2;
+        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName().trim())) {
+            tarrifId = 3;
+        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName().trim())) {
+            tarrifId = 4;
+        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName().trim())) {
+            tarrifId = 5;
+        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName().trim())) {
+            tarrifId = 6;
+        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName().trim())) {
+            tarrifId = 7;
+        } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName().trim())) {
+            tarrifId = 8;
+        }
+        Log.d(TAG, "current-tarrif id >>>  " + tarrifId);
+        //************************************************************************************************************************
+        // ************************************************************************************************************************
+        Log.d(TAG, "paid-entrance >>>  " + getEntranceFeeFromTariffId());
+        //************************************************************************************************************************
+        // ************************************************************************************************************************
+        Log.d(TAG, "operator id >>>  " + selectedUser.getId());
+        //************************************************************************************************************************
+        // ************************************************************************************************************************
+        Log.d(TAG, "door id >>>  " + selectedDoor.getId());
+        //************************************************************************************************************************
+        // ************************************************************************************************************************
+        String crc = currentDateandTime.substring(9, 12) + "6913" + pelak.substring(0, 2);
+        Log.d(TAG, "crc >> " + crc);
+        //************************************************************************************************************************
+        // ************************************************************************************************************************
+
+
+        String content = crc + "#" + pelak.trim() + "#" + currentDateandTime + "#" + tarrifId + "#" + "0" + "#" + selectedUser.getId() + "#" + selectedDoor.getId() + "#" + ((cash) ? "0" : "1") + "#" + " ";
+
+
+        QRCodeWriter writer = new QRCodeWriter();
+        try {
+            BitMatrix bitMatrix = writer.encode(content, BarcodeFormat.QR_CODE, 512, 512);
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+            Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                }
+            }
+            qrImageView.setImageBitmap(bmp);
+
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+        String lan = PreferenceManager.getDefaultSharedPreferences(context).getString("language", "fa");
+
+        if (lan.equals("fa")) {
+            paid_amount_txt.setText(getEntranceFeeFromTariffId() + " ریال");
+            PersianDate persianDate = new PersianDate(dateNow);
+            PersianDateFormat pdformater1 = new PersianDateFormat("Y/m/d");
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
+
+            String jalaliDate = pdformater1.format(persianDate) + "  " + sdf1.format(dateNow);
+
+
+            entry_date_txt.setText(jalaliDate);
+        } else {
+            paid_amount_txt.setText(getEntranceFeeFromTariffId() + " Rials");
+
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault());
+
+
+            entry_date_txt.setText(sdf1.format(dateNow));
+        }
+
+
+        tariff_txt.setText(getSelectedCarTypeName().getValue().trim());
+
+        parking_name_txt.setText(getParkingInfoResponse.getParkingName().trim());
+
+        pelak_main_layoout.setVisibility(View.VISIBLE);
+        if (getCar().getValue()) {
+            car_main_layout.setVisibility(View.VISIBLE);
+            motor_main_layout.setVisibility(View.GONE);
+            plate_txt_0.setText(pelak.substring(0, 2));
+            plate_txt_1.setText(PelakUtility.convertFromCode(pelak.substring(2, 4)));
+            plate_txt_2.setText(pelak.substring(4, 7));
+            plate_txt_3.setText(pelak.substring(7, 9));
+
+
+        } else {
+            car_main_layout.setVisibility(View.GONE);
+            motor_main_layout.setVisibility(View.VISIBLE);
+            m_plate_txt_0.setText(pelak.substring(0, 3));
+            m_plate_txt_1.setText(pelak.substring(3, 8));
         }
 
 

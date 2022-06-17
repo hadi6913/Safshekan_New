@@ -189,7 +189,7 @@ public class LoginViewModel extends ViewModel {
                         try {
 
 
-                            parkbanRepository.getDeviceToken("\"562837562483719\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                            parkbanRepository.getDeviceToken("\"868588840082189\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                 @Override
                                 public void onSuccess(String deviceToken) {
 
@@ -202,7 +202,7 @@ public class LoginViewModel extends ViewModel {
                                     ParkbanServiceProvider.setInstanceNull();
 
 
-                                    parkbanRepository.getParkingInformation("\"562837562483719\"",
+                                    parkbanRepository.getParkingInformation("\"868588840082189\"",
                                             new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                 @Override
                                                 public void onSuccess(GetParkingInfoResponse result) {
@@ -591,7 +591,7 @@ public class LoginViewModel extends ViewModel {
                             try {
 
 
-                                parkbanRepository.getDeviceToken("\"562837562483719\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                                parkbanRepository.getDeviceToken("\"868588840082189\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                     @Override
                                     public void onSuccess(String deviceToken) {
 
@@ -604,7 +604,7 @@ public class LoginViewModel extends ViewModel {
                                         ParkbanServiceProvider.setInstanceNull();
 
 
-                                        parkbanRepository.getParkingInformation("\"562837562483719\"",
+                                        parkbanRepository.getParkingInformation("\"868588840082189\"",
                                                 new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                     @Override
                                                     public void onSuccess(GetParkingInfoResponse result) {

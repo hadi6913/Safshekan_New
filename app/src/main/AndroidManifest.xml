@@ -123,6 +123,8 @@
         <activity android:name=".SelectModeActivity"
             android:screenOrientation="portrait"/>
 
+        <service android:name=".services.EnterMifareReaderHandler"/>
+
     </application>
 
 </manifest>

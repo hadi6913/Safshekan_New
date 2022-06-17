@@ -279,24 +279,18 @@ public class PaymentSafshekanViewModel extends ViewModel {
 //                                    fanavaPaymentIntent.putExtra("amount",Long.valueOf(getCommonCost().getValue()));
 
 
-
                                 try {
 
                                     Intent fanavaPaymentIntent = new Intent("ir.totan.pos.view.cart.TXN");
-                                    fanavaPaymentIntent.putExtra("type",3);
-                                    fanavaPaymentIntent.putExtra("amount",getCommonCost().getValue());
-                                    fanavaPaymentIntent.putExtra("res_num",result.getFactorId());
+                                    fanavaPaymentIntent.putExtra("type", 3);
+                                    fanavaPaymentIntent.putExtra("amount", getCommonCost().getValue());
+                                    fanavaPaymentIntent.putExtra("res_num", result.getFactorId());
                                     ((Activity) myContext).startActivityForResult(fanavaPaymentIntent, 103);
 
-                                }catch (Exception ex){
+                                } catch (Exception ex) {
                                     Log.d(TAG, "exception is the calling payment intent");
-                                    Log.d(TAG, "exception : "+ex.getMessage());
+                                    Log.d(TAG, "exception : " + ex.getMessage());
                                 }
-
-
-
-
-
 
 
 //                                try {
@@ -344,7 +338,7 @@ public class PaymentSafshekanViewModel extends ViewModel {
         requestObj.setRRN(b.getString("rrn"));
         requestObj.setTraceNo(b.getString("trace"));
         PreferenceManager.getDefaultSharedPreferences(myContext).edit().putString("last_trace_number", b.getString("trace")).apply();
-        requestObj.setApprovalCode("1"+b.getLong("res_num"));
+        requestObj.setApprovalCode("1" + b.getLong("res_num"));
         requestObj.setTransActionDateTime(b.getString("date"));
 
 
@@ -355,14 +349,7 @@ public class PaymentSafshekanViewModel extends ViewModel {
                     try {
 
 
-
-
-                        part4(myContext,b.getLong("res_num")+"");
-
-
-
-
-
+                        part4(myContext, b.getLong("res_num") + "");
 
 
                     } catch (Exception e) {

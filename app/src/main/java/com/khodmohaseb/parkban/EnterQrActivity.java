@@ -325,6 +325,10 @@ public class EnterQrActivity extends BaseActivity {
     }
 
 
+
+
+
+
     @Override
     public void onBackPressed() {
 

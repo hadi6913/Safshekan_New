@@ -15,12 +15,26 @@
     <string name="should_pay_now">پرداخت هنگام ورود</string>
     <string name="should_pay_later">پرداخت هنگام خروج</string>
     <string name="error_in_save_data_base">بروز خطا در ثبت رکورد</string>
+    <string name="car_inserted">ورود وسیله نقلیه ثبت شده است</string>
     <string name="tst_info_paper">پرینتر کاغذ ندارد</string>
     <string name="tst_info_temperature">حرارت بالای پرینتر</string>
     <string name="tst_info_voltage">برای پرینت باتری را شارژ کنید</string>
     <string name="tst_info_busy">پرینتر مشغول است</string>
     <string name="tst_info_error">خطای پرینتر</string>
     <string name="tst_info_driver_error">خطای درایور پرینتر</string>
+    <string name="select_payment_dialog_1">روش پرداخت</string>
+    <string name="select_payment_dialog_2">برای انجام عملیات پرداخت یکی از روش های زیر را انتخاب کنید</string>
+    <string name="select_payment_dialog_3">انصراف</string>
+    <string name="select_payment_dialog_4">نقدی</string>
+    <string name="select_payment_dialog_5">الکترونیک</string>
+    <string name="failed_payment">پرداخت ناموفق</string>
+    <string name="write_on_mifare_card">ثبت روی کارت</string>
+    <string name="submit_card_dialog_1">ثبت روی کارت</string>
+    <string name="submit_card_dialog_2">برای انجام عملیات ثبت ، کارت را نزدیک سنسور دستگاه قرار دهید</string>
+    <string name="submit_card_dialog_3">انصراف</string>
+    <string name="submit_success">ثبت موفق</string>
+    <string name="error_mifare">کارت نامعتبر</string>
+
 
 
 
@@ -112,7 +126,7 @@
 
 
     <string name="user_name">نام کاربری</string>
-    <string name="error_mifare">کارت نامعتبر</string>
+
     <string name="ok_mifare">شناسایی موفق</string>
     <string name="password">کلمه عبور</string>
     <string name="parking_space">جایگاه های پارک</string>
@@ -233,7 +247,7 @@
 
     <string name="bitmap_null">bitmap is null</string>
     <string name="qr_null">شناسه اسکن شده خالی است</string>
-    <string name="failed_payment">پرداخت ناموفق</string>
+
 
 
     <string name="mdtp_ok">تایید</string>
