@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<LinearLayout
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="horizontal"
+    android:layoutDirection="rtl"
+    android:gravity="right"
+    android:paddingRight="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.khodmohaseb.parkban.controls.PersianTextView
+        android:id="@+id/dialog_no_need_pay_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        tools:text ="131312564"
+        android:textColor="@android:color/black"/>
+    <com.khodmohaseb.parkban.controls.PersianTextView
+        android:text="شماره پلاک :  "
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:gravity="right"
+        android:paddingRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:id="@+id/dialog_no_need_pay_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            tools:text ="131312564"
+            android:textColor="@android:color/black"/>
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:text="زمان ورود : "
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:gravity="right"
+        android:paddingRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:id="@+id/dialog_no_need_pay_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            tools:text ="131312564"
+            android:textColor="@android:color/black"/>
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:text="نوع تعرفه :  "
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:gravity="right"
+        android:paddingRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:id="@+id/dialog_no_need_pay_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            tools:text ="131312564"
+            android:textColor="@android:color/black"/>
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:text="درب ورود :  "
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:gravity="right"
+        android:paddingRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:id="@+id/dialog_no_need_pay_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            tools:text ="131312564"
+            android:textColor="@android:color/black"/>
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:text="کاربر ثبت کننده :  "
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:gravity="right"
+        android:paddingRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:id="@+id/dialog_no_need_pay_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            tools:text ="131312564"
+            android:textColor="@android:color/holo_green_dark"/>
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:text="مبلغ پرداختی :  "
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+    <com.khodmohaseb.parkban.controls.PersianTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/select_payment_dialog_2"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="13sp"
+        android:textStyle="normal" />
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_all">
+
+
+        <LinearLayout
+            android:id="@+id/dialog_no_need_pay_7"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:background="@color/red"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+            <com.khodmohaseb.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/select_payment_dialog_3"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15sp" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dialog_no_need_pay_8"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:background="@color/green"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+            <com.khodmohaseb.parkban.controls.PersianTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="ثبت خروج"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

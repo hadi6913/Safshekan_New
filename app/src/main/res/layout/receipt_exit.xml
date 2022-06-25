@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="400px"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
+
+
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="400px"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+
+
+
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:id="@+id/exit_resid_parking_name"
+            style="@style/print_text"
+             />
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+
+
+            <com.khodmohaseb.parkban.controls.PersianTextView
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_5"
+                android:text="Entry Date : " />
+
+            <TextView
+                android:id="@+id/exit_resid_date_time_value"
+                tools:text="2022-12-25"
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_normal" />
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+
+
+            <com.khodmohaseb.parkban.controls.PersianTextView
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_5"
+                android:text="Exit Date : " />
+
+            <TextView
+                android:id="@+id/exit_resid_date_time_value_exit"
+                tools:text="2022-12-25"
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_normal" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+
+
+            <com.khodmohaseb.parkban.controls.PersianTextView
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_5"
+                android:text="Tariff Type : " />
+
+            <com.khodmohaseb.parkban.controls.PersianTextView
+                android:id="@+id/exit_resid_tariff_type_value"
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_normal" />
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+
+            <com.khodmohaseb.parkban.controls.PersianTextView
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_5"
+                android:text="Paid Amount : " />
+
+            <TextView
+                android:id="@+id/exit_resid_paid_amount_value"
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_normal" />
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/time_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <com.khodmohaseb.parkban.controls.PersianTextView
+                android:id="@+id/time"
+                style="@style/print_text"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:layout_marginRight="@dimen/margin_normal"
+                android:text="14:22" />
+
+            <com.khodmohaseb.parkban.controls.PersianTextView
+                style="@style/print_text"
+                android:layout_marginRight="@dimen/margin_normal"
+
+                android:text="ساعت : " />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/plate_main_layout_exit_resid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/plate_layout_exit_resid"
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_5"
+                android:background="@drawable/pelak_template"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.khodmohaseb.parkban.controls.PersianTextView
+                    android:id="@+id/p0_exit_resid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="51"
+                    android:textColor="@color/text_color"
+                    android:textSize="13sp" />
+
+                <com.khodmohaseb.parkban.controls.PersianTextView
+                    android:id="@+id/p1_exit_resid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/text_color"
+                    android:textSize="13sp" />
+
+                <com.khodmohaseb.parkban.controls.PersianTextView
+                    android:id="@+id/p2_exit_resid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="668"
+                    android:textColor="@color/text_color"
+                    android:textSize="13sp" />
+
+                <com.khodmohaseb.parkban.controls.PersianTextView
+                    android:id="@+id/p3_exit_resid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="55"
+                    android:textColor="@color/text_color"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/motor_layout_exit_resid"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_5"
+                android:background="@drawable/motor_plate"
+                android:orientation="vertical">
+
+                <com.khodmohaseb.parkban.controls.PersianTextView
+                    android:id="@+id/m0_exit_resid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="123"
+                    android:textColor="@color/text_color"
+                    android:textSize="13dp" />
+
+                <com.khodmohaseb.parkban.controls.PersianTextView
+                    android:id="@+id/m1_exit_resid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="45678"
+                    android:textColor="@color/text_color"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="www.elmosanat.com"
+            android:textColor="@android:color/black"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

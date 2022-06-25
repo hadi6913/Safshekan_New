@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -185,11 +186,22 @@ public class LoginViewModel extends ViewModel {
                         progress.setValue(10);
                         //todo implement getting imei from device
 
+                        final TelephonyManager telephonyManager = (TelephonyManager)(((LoginActivity)context).getSystemService(Context.TELEPHONY_SERVICE));
+
+                        Log.d(TAG, "IMEI : "+ telephonyManager.getDeviceId());
+
+
+                        editor.putString("imei", telephonyManager.getDeviceId().trim());
+                        editor.commit();
+
+
+
+
 
                         try {
 
 
-                            parkbanRepository.getDeviceToken("\"868588840082189\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                            parkbanRepository.getDeviceToken("\""+telephonyManager.getDeviceId()+"\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                 @Override
                                 public void onSuccess(String deviceToken) {
 
@@ -202,7 +214,7 @@ public class LoginViewModel extends ViewModel {
                                     ParkbanServiceProvider.setInstanceNull();
 
 
-                                    parkbanRepository.getParkingInformation("\"868588840082189\"",
+                                    parkbanRepository.getParkingInformation("\""+telephonyManager.getDeviceId()+"\"",
                                             new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                 @Override
                                                 public void onSuccess(GetParkingInfoResponse result) {
@@ -228,9 +240,9 @@ public class LoginViewModel extends ViewModel {
 
 
                                                     for (Operator item : result.getOperators()) {
-                                                        if (item.getIsActive()) {
+
                                                             userListArray.add(item.getUserName());
-                                                        }
+
                                                     }
 
                                                     for (Door item : result.getDoors()) {
@@ -339,9 +351,9 @@ public class LoginViewModel extends ViewModel {
 
 
             for (Operator item : getParkingInfoResponse.getOperators()) {
-                if (item.getIsActive()) {
+
                     userListArray.add(item.getUserName());
-                }
+
             }
 
             for (Door item : getParkingInfoResponse.getDoors()) {
@@ -398,8 +410,8 @@ public class LoginViewModel extends ViewModel {
                 }
 
 
-                //todo remove below line
-                enteredPassword = "rewq1234@";
+//                //todo remove below line
+//                enteredPassword = "rewq1234@";
 
 
                 if ((enteredPassword != null) && (!enteredPassword.trim().equals(""))) {
@@ -587,11 +599,20 @@ public class LoginViewModel extends ViewModel {
                             progress.setValue(10);
                             //todo implement getting imei from device
 
+                            final TelephonyManager telephonyManager = (TelephonyManager)(((LoginActivity)context).getSystemService(Context.TELEPHONY_SERVICE));
+
+                            Log.d(TAG, "IMEI : "+ telephonyManager.getDeviceId());
+
+
+                            editor.putString("imei", telephonyManager.getDeviceId().trim());
+                            editor.commit();
+
+
 
                             try {
 
 
-                                parkbanRepository.getDeviceToken("\"868588840082189\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                                parkbanRepository.getDeviceToken("\""+telephonyManager.getDeviceId()+"\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                     @Override
                                     public void onSuccess(String deviceToken) {
 
@@ -604,7 +625,7 @@ public class LoginViewModel extends ViewModel {
                                         ParkbanServiceProvider.setInstanceNull();
 
 
-                                        parkbanRepository.getParkingInformation("\"868588840082189\"",
+                                        parkbanRepository.getParkingInformation("\""+telephonyManager.getDeviceId()+"\"",
                                                 new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                     @Override
                                                     public void onSuccess(GetParkingInfoResponse result) {
@@ -630,9 +651,9 @@ public class LoginViewModel extends ViewModel {
 
 
                                                         for (Operator item : result.getOperators()) {
-                                                            if (item.getIsActive()) {
+
                                                                 userListArray.add(item.getUserName());
-                                                            }
+
                                                         }
 
                                                         for (Door item : result.getDoors()) {

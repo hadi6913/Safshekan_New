@@ -17,6 +17,7 @@ import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
+import com.khodmohaseb.parkban.ExitQrActivity;
 import com.khodmohaseb.parkban.MainActivity;
 import com.khodmohaseb.parkban.R;
 import com.khodmohaseb.parkban.utils.Animation_Constant;
@@ -66,13 +67,12 @@ public class QRcodeReaderViewModel extends ViewModel {
 
 
             lastScannedText = result.getText();
-            Log.d(TAG, "lastScannedText >>> "+lastScannedText);
-            Intent intent = new Intent(mContext, MainActivity.class);
+            Log.d(TAG, "lastScannedText >>> " + lastScannedText);
+            Intent intent = new Intent(mContext, ExitQrActivity.class);
             intent.putExtra("isfromqr", true);
             intent.putExtra("scanned_string", lastScannedText);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(intent);
-
 
 
         }
@@ -92,7 +92,6 @@ public class QRcodeReaderViewModel extends ViewModel {
         getFlash_light_status().setValue(false);
 
 
-
         ValueAnimator anim = ValueAnimator.ofFloat(0, 1);
         anim.setDuration(2000);
         hsv = new float[3]; // Transition color
@@ -109,9 +108,6 @@ public class QRcodeReaderViewModel extends ViewModel {
         });
         anim.setRepeatCount(Animation.INFINITE);
         anim.start();
-
-
-
 
 
     }
@@ -133,7 +129,7 @@ public class QRcodeReaderViewModel extends ViewModel {
                 if (lastScannedText.equals(null)) {
                     lastScannedText = "";
                 }
-                Intent intent = new Intent(mContext, MainActivity.class);
+                Intent intent = new Intent(mContext, ExitQrActivity.class);
                 intent.putExtra("isfromqr", true);
                 intent.putExtra("scanned_string", "backback");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -141,9 +137,6 @@ public class QRcodeReaderViewModel extends ViewModel {
 
             }
         }, Animation_Constant.ANIMATION_VALUE);
-
-
-
 
 
     }
@@ -163,10 +156,9 @@ public class QRcodeReaderViewModel extends ViewModel {
             Log.d("QRcodeReaderViewModel", "Flash_Light_Onclick:  off");
             boolean isFlashAvailable = mContext.getApplicationContext().getPackageManager()
                     .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-            if (isFlashAvailable){
+            if (isFlashAvailable) {
                 mBarcodeView.setTorchOff();
             }
-
 
 
         } else {
@@ -174,7 +166,7 @@ public class QRcodeReaderViewModel extends ViewModel {
             Log.d("QRcodeReaderViewModel", "Flash_Light_Onclick:  on");
             boolean isFlashAvailable = mContext.getApplicationContext().getPackageManager()
                     .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-            if (isFlashAvailable){
+            if (isFlashAvailable) {
                 mBarcodeView.setTorchOn();
             }
 

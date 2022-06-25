@@ -14,6 +14,7 @@ import android.device.PrinterManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -254,6 +255,8 @@ public class EnterQrViewModel extends ViewModel {
     //*********************************************************************************************
     //*********************************************************************************************
 
+    public Typeface mFont;
+
 
     public void init(final Context context, EditText editTextCar, EditText editTextMotor) {
         etxt_first_cell_car_plate = editTextCar;
@@ -270,7 +273,7 @@ public class EnterQrViewModel extends ViewModel {
         } else {
             getParkingInfoResponse = gson.fromJson(json_parkingInfo, GetParkingInfoResponse.class);
         }
-
+        mFont = Typeface.createFromAsset(myContext.getAssets(), "irsans.ttf");
 
         String json_selectedUser = preferences.getString("currentuser", "");
         if (json_selectedUser.equals("")) {
@@ -469,7 +472,7 @@ public class EnterQrViewModel extends ViewModel {
             if (b.getString("result").trim().equals("succeed")) {
                 Log.d("e_pardakht >>>", "step 2 >>> GOOD_PAYMENT ");
                 Log.d(TAG, "now we should save in database and print recepit");
-
+                final String rrn = b.getString("rrn").trim();
 
                 String pelak = "";
                 if (getCar().getValue()) {
@@ -573,19 +576,20 @@ public class EnterQrViewModel extends ViewModel {
 
 
                 parkbanRepository.saveEntranceRecord(
+                        getParkingInfoResponse.getDeviceId(),
                         finalPelak,
                         currentDateandTime,
                         tarrifId,
                         Long.parseLong(getEntranceFeeFromTariffId()),
                         1,
-                        "",
+                        rrn,
                         selectedDoor.getId().longValue(),
                         selectedUser.getId().longValue(),
                         new ParkbanRepository.DataBaseResultCallBack() {
                             @Override
                             public void onSuccess(long id) {
                                 Log.d(TAG, "onSuccess in save database , now print process begin");
-                                mBitmap = generateBitmapByLayoutForPayment(myContext, finalPelak, false);
+                                mBitmap = generateBitmapByLayoutForPayment(myContext, finalPelak, false, getEntranceFeeFromTariffId().trim(), rrn);
                                 Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
                                 msg.obj = mBitmap;
                                 msg.sendToTarget();
@@ -704,6 +708,25 @@ public class EnterQrViewModel extends ViewModel {
     }
 
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+    public void Setting_Password_Page(final View view) {
+        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_rotate_animation);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+        myAnim.setInterpolator(interpolator);
+        myAnim.setRepeatMode(1);
+        view.startAnimation(myAnim);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+
+            }
+        }, Animation_Constant.ANIMATION_VALUE);
+
+
+    }
 
     public void Motor_Car_Onclick(View view) {
         final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_rotate_animation);
@@ -913,6 +936,7 @@ public class EnterQrViewModel extends ViewModel {
 
 
                                     parkbanRepository.saveEntranceRecord(
+                                            getParkingInfoResponse.getDeviceId(),
                                             finalPelak,
                                             currentDateandTime,
                                             tarrifId,
@@ -925,7 +949,7 @@ public class EnterQrViewModel extends ViewModel {
                                                 @Override
                                                 public void onSuccess(long id) {
                                                     Log.d(TAG, "onSuccess in save database , now print process begin");
-                                                    mBitmap = generateBitmapByLayoutForPayment(myContext, finalPelak, true);
+                                                    mBitmap = generateBitmapByLayoutForPayment(myContext, finalPelak, true, getEntranceFeeFromTariffId(), " ");
                                                     Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
                                                     msg.obj = mBitmap;
                                                     msg.sendToTarget();
@@ -1015,6 +1039,7 @@ public class EnterQrViewModel extends ViewModel {
 
 
                             parkbanRepository.saveEntranceRecord(
+                                    getParkingInfoResponse.getDeviceId(),
                                     finalPelak,
                                     currentDateandTime,
                                     tarrifId,
@@ -1412,7 +1437,7 @@ public class EnterQrViewModel extends ViewModel {
         return PrinterUtils.convertViewToBitmap(view);
     }
 
-    public Bitmap generateBitmapByLayoutForPayment(Context context, String pelak, boolean cash) {
+    public Bitmap generateBitmapByLayoutForPayment(Context context, String pelak, boolean cash, String paidAmount, String rrn) {
 
         Log.d(TAG, "generateBitmapByLayoutForPayment:  pelak that recived for print : " + pelak);
 
@@ -1480,7 +1505,7 @@ public class EnterQrViewModel extends ViewModel {
         // ************************************************************************************************************************
 
 
-        String content = crc + "#" + pelak.trim() + "#" + currentDateandTime + "#" + tarrifId + "#" + "0" + "#" + selectedUser.getId() + "#" + selectedDoor.getId() + "#" + ((cash) ? "0" : "1") + "#" + " ";
+        String content = crc + "#" + pelak.trim() + "#" + currentDateandTime + "#" + tarrifId + "#" + paidAmount + "#" + selectedUser.getId() + "#" + selectedDoor.getId() + "#" + ((cash) ? "0" : "1") + "#" + rrn;
 
 
         QRCodeWriter writer = new QRCodeWriter();

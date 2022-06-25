@@ -483,6 +483,7 @@ public class EnterMifareActivity extends BaseActivity implements EnterMifareRead
                 public void run() {
                     ShowToast.getInstance().showSuccess(EnterMifareActivity.this, R.string.submit_success);
                     enterMifareViewModel.mifareAlertDialog.dismiss();
+                    enterMifareViewModel.cashTypeAlertDialog.dismiss();
                 }
             });
         } else {

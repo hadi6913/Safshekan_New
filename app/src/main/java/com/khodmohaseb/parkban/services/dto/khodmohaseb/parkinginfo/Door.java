@@ -20,12 +20,6 @@ public class Door {
     @SerializedName("id")
     @Expose
     private Long id;
-    @SerializedName("persistOn")
-    @Expose
-    private String persistOn;
-    @SerializedName("description")
-    @Expose
-    private String description;
 
     /**
      * No args constructor for use in serialization
@@ -39,18 +33,15 @@ public class Door {
      * @param doorName
      * @param parkingId
      * @param doorType
-     * @param description
      * @param id
-     * @param persistOn
      */
-    public Door(Long parkingId, String doorName, Long doorType, Long id, String persistOn, String description) {
+    public Door(Long parkingId, String doorName, Long doorType, Long id) {
         super();
         this.parkingId = parkingId;
         this.doorName = doorName;
         this.doorType = doorType;
         this.id = id;
-        this.persistOn = persistOn;
-        this.description = description;
+
     }
 
     public Long getParkingId() {
@@ -85,20 +76,6 @@ public class Door {
         this.id = id;
     }
 
-    public String getPersistOn() {
-        return persistOn;
-    }
 
-    public void setPersistOn(String persistOn) {
-        this.persistOn = persistOn;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
 }

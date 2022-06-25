@@ -103,7 +103,6 @@ public class DailyHourlyFareCalculator {
         }
     }
 
-
     public static long calculateHourlyDailyFareVehicle3(long roundedTotalStayLength, Tariff tariff) {
         long price = 0;
         if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
@@ -152,7 +151,6 @@ public class DailyHourlyFareCalculator {
             }
         }
     }
-
 
     public static long calculateHourlyDailyFareVehicle4(long roundedTotalStayLength, Tariff tariff) {
         long price = 0;
@@ -203,7 +201,6 @@ public class DailyHourlyFareCalculator {
         }
     }
 
-
     public static long calculateHourlyDailyFareVehicle5(long roundedTotalStayLength, Tariff tariff) {
         long price = 0;
         if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
@@ -252,7 +249,6 @@ public class DailyHourlyFareCalculator {
             }
         }
     }
-
 
     public static long calculateHourlyDailyFareVehicle6(long roundedTotalStayLength, Tariff tariff) {
         long price = 0;
@@ -303,7 +299,6 @@ public class DailyHourlyFareCalculator {
         }
     }
 
-
     public static long calculateHourlyDailyFareVehicle7(long roundedTotalStayLength, Tariff tariff) {
         long price = 0;
         if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
@@ -352,7 +347,6 @@ public class DailyHourlyFareCalculator {
             }
         }
     }
-
 
     public static long calculateHourlyDailyFareVehicle8(long roundedTotalStayLength, Tariff tariff) {
         long price = 0;

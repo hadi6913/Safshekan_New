@@ -14,6 +14,7 @@ import android.device.PrinterManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -133,6 +134,8 @@ public class EnterMifareViewModel extends ViewModel {
     private MutableLiveData<Integer> selectedTarrifId;
     private MutableLiveData<String> selectedTarrifEntranceFee;
     public AlertDialog mifareAlertDialog;
+    public AlertDialog cashTypeAlertDialog;
+
 
 
     public MutableLiveData<String> getSelectedTarrifEntranceFee() {
@@ -226,6 +229,7 @@ public class EnterMifareViewModel extends ViewModel {
 
     private boolean doubleBackToExitPressedOnce = false;
     private static final long EXIT_TIMEOUT = 3000;
+    public Typeface mFont;
 
 
     public void init(final Context context, EditText editTextCar, EditText editTextMotor) {
@@ -258,6 +262,8 @@ public class EnterMifareViewModel extends ViewModel {
             selectedDoor = gson.fromJson(json_selectedDoor, Door.class);
         }
 
+
+        mFont = Typeface.createFromAsset(myContext.getAssets(), "irsans.ttf");
 
         carTypeListArray.clear();
 
@@ -439,12 +445,11 @@ public class EnterMifareViewModel extends ViewModel {
             Bundle b = data.getBundleExtra("response");
 
 
-
-
             Log.d(TAG, "onActivityResult:  >>>>>>>>>>>>>>> " + getBundleString(b));
             if (b.getString("result").trim().equals("succeed")) {
                 Log.d("e_pardakht >>>", "step 2 >>> GOOD_PAYMENT ");
                 Log.d(TAG, "now we should save in database and write on card");
+                final String rrn = b.getString("rrn").trim();
                 String pelak = "";
                 if (getCar().getValue()) {
 
@@ -541,12 +546,13 @@ public class EnterMifareViewModel extends ViewModel {
 
 
                 parkbanRepository.saveEntranceRecord(
+                        getParkingInfoResponse.getDeviceId(),
                         finalPelak,
                         currentDateandTime,
                         tarrifId,
                         Long.parseLong(getEntranceFeeFromTariffId()),
                         1,
-                        "",
+                        rrn,
                         selectedDoor.getId().longValue(),
                         selectedUser.getId().longValue(),
                         new ParkbanRepository.DataBaseResultCallBack() {
@@ -570,7 +576,7 @@ public class EnterMifareViewModel extends ViewModel {
                                 List<Byte> pelakByteArrayList = new ArrayList<>();
                                 pelakByteArrayList = ByteUtils.longToFixedByteArray(Long.parseLong(finalPelak), 4);
                                 List<Byte> perygiriCodeElectronicByteArrayList = new ArrayList<>();
-                                perygiriCodeElectronicByteArrayList = ByteUtils.longToFixedByteArray(0L, 12);
+                                perygiriCodeElectronicByteArrayList = ByteUtils.longToFixedByteArray(Long.parseLong(rrn), 12);
                                 block16ByteList.addAll(pelakByteArrayList);
                                 block16ByteList.addAll(perygiriCodeElectronicByteArrayList);
 
@@ -612,6 +618,10 @@ public class EnterMifareViewModel extends ViewModel {
                                     public void onClick(View v) {
                                         ((EnterMifareActivity) myContext).stopServicesForOperator();
 
+
+                                        List<String> forDeleteFromtable = new ArrayList<>();
+                                        forDeleteFromtable.add(finalPelak);
+
                                         parkbanRepository.deleteEntranceRecord(finalPelak, new ParkbanRepository.DataBaseResultCallBack() {
                                             @Override
                                             public void onSuccess(long id) {
@@ -628,15 +638,6 @@ public class EnterMifareViewModel extends ViewModel {
 
                                     }
                                 });
-
-
-
-
-
-
-
-
-
 
 
                             }
@@ -752,6 +753,24 @@ public class EnterMifareViewModel extends ViewModel {
     }
 
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+    public void Setting_Password_Page(final View view) {
+        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_rotate_animation);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+        myAnim.setInterpolator(interpolator);
+        myAnim.setRepeatMode(1);
+        view.startAnimation(myAnim);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+
+            }
+        }, Animation_Constant.ANIMATION_VALUE);
+
+
+    }
 
     public void Motor_Car_Onclick(View view) {
         final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_rotate_animation);
@@ -897,6 +916,7 @@ public class EnterMifareViewModel extends ViewModel {
                             alertDialog.setView(alertView);
                             alertDialog.setCancelable(false);
                             final AlertDialog show = alertDialog.show();
+                            cashTypeAlertDialog = show;
                             LinearLayout cancelButton = alertView.findViewById(R.id.cancel_layout_select_payment_type);
                             LinearLayout cashButton = alertView.findViewById(R.id.cash_layout_select_payment_type);
                             LinearLayout electronicButton = alertView.findViewById(R.id.electronic_layout_select_payment_type);
@@ -955,6 +975,7 @@ public class EnterMifareViewModel extends ViewModel {
 
 
                                     parkbanRepository.saveEntranceRecord(
+                                            getParkingInfoResponse.getDeviceId(),
                                             finalPelak,
                                             currentDateandTime,
                                             tarrifId,
@@ -967,7 +988,6 @@ public class EnterMifareViewModel extends ViewModel {
                                                 @Override
                                                 public void onSuccess(long id) {
                                                     Log.d(TAG, "onSuccess in save database , now write card process begin");
-
 
 
                                                     final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
@@ -1032,35 +1052,20 @@ public class EnterMifareViewModel extends ViewModel {
                                                                 @Override
                                                                 public void onSuccess(long id) {
                                                                     mifareAlertDialog.dismiss();
+                                                                    show.dismiss();
                                                                 }
 
                                                                 @Override
                                                                 public void onFailed() {
 
                                                                     mifareAlertDialog.dismiss();
+                                                                    show.dismiss();
                                                                 }
                                                             });
 
 
                                                         }
                                                     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                                                 }
@@ -1140,6 +1145,7 @@ public class EnterMifareViewModel extends ViewModel {
 
 
                             parkbanRepository.saveEntranceRecord(
+                                    getParkingInfoResponse.getDeviceId(),
                                     finalPelak,
                                     currentDateandTime,
                                     tarrifId,
@@ -1152,7 +1158,6 @@ public class EnterMifareViewModel extends ViewModel {
                                         @Override
                                         public void onSuccess(long id) {
                                             Log.d(TAG, "onSuccess in save database , now write on card process begin");
-
 
 
                                             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);

@@ -11,8 +11,10 @@ import com.khodmohaseb.parkban.persistence.models.Car;
 import com.khodmohaseb.parkban.persistence.models.CarPlate;
 import com.khodmohaseb.parkban.persistence.models.ParkingSpace;
 import com.khodmohaseb.parkban.persistence.models.khodmohaseb.EntranceRecord;
+import com.khodmohaseb.parkban.persistence.models.khodmohaseb.ExitRecord;
+import com.khodmohaseb.parkban.persistence.models.khodmohaseb.TraffikRecord;
 
-@Database(entities = {CarPlate.class, Car.class , ParkingSpace.class, EntranceRecord.class}, version = 1, exportSchema = false)
+@Database(entities = {CarPlate.class, Car.class , ParkingSpace.class, EntranceRecord.class, ExitRecord.class, TraffikRecord.class}, version = 1, exportSchema = false)
 @TypeConverters({CustomTypeConverter.class})
 public abstract class ParkbanDatabase extends RoomDatabase {
 
@@ -26,7 +28,10 @@ public abstract class ParkbanDatabase extends RoomDatabase {
 
 
 
+
     public abstract EntranceRecordDao getEntranceRecordDao();
+    public abstract ExitRecordDao getExitRecordDao();
+    public abstract TraffikRecordDao getTraffikRecordDao();
 
 
 

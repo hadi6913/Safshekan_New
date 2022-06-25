@@ -57,7 +57,7 @@
                         android:gravity="center"
                         android:onClick="@{viewModel::Pelak_Khan_Onclick}" />
 
-                    <TextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/btn_pelak_khan_exit_qr"
@@ -85,7 +85,7 @@
                         android:gravity="center"
                         android:onClick="@{viewModel::Barcod_Khan_Onclick}" />
 
-                    <TextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/btn_barcod_khan_exit_qr"
@@ -97,6 +97,10 @@
                         android:textStyle="bold" />
 
                 </RelativeLayout>
+
+
+
+
 
 <!--                <RelativeLayout-->
 <!--                    android:layout_width="100dp"-->
@@ -128,14 +132,66 @@
             </LinearLayout>
 
 
+
+            <LinearLayout
+                android:id="@+id/operator_door_information_layout"
+                android:layout_below="@+id/linear_button_container_main_exit_qr"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@{viewModel.selectedUser.userName}"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:text="کاربر : "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:text="@{viewModel.selectedDoor.id.toString()}"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:text="درب : "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
             <RelativeLayout
                 android:id="@+id/layout_pelak_main_exit_qr"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_below="@id/linear_button_container_main_exit_qr"
+                android:layout_below="@id/operator_door_information_layout"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="5dp"
-                android:visibility="@{viewModel.hasPelak ? View.VISIBLE : View.GONE}">
+                >
 
 
                 <LinearLayout
@@ -319,6 +375,19 @@
                 android:onClick="@{viewModel::Refresh_Page}" />
 
 
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_above="@+id/layout_pelak_main_exit_qr"
+                android:layout_margin="10dp"
+                android:background="@drawable/settings"
+                android:elevation="20dp"
+                android:onClick="@{viewModel::Setting_Password_Page}"
+                android:shadowColor="@color/dark_grey"
+                android:text=""
+                />
+
+
             <!--<LinearLayout-->
             <!--android:id="@+id/sendClick"-->
             <!--android:layout_width="match_parent"-->
@@ -343,19 +412,61 @@
 
             <!--</LinearLayout>-->
 
+
+            <LinearLayout
+                android:layout_above="@+id/submit_manual_exit_qr"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/new_new_btn_background_layout"
+                    android:onClick="@{viewModel::Taeed_Onclick}"
+                    android:typeface="@{viewModel.mFont}"
+                    android:text="جستجوی حافظه"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:typeface="@{viewModel.mFont}"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/new_new_btn_background_layout"
+                    android:onClick="@{viewModel::Taeed_Onclick}"
+                    android:text="استعلام از سرور"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
             <Button
-                android:id="@+id/sendClick_exit_qr"
+                android:id="@+id/submit_manual_exit_qr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
+                android:typeface="@{viewModel.mFont}"
                 android:background="@drawable/new_new_btn_background_layout"
                 android:onClick="@{viewModel::Taeed_Onclick}"
-                android:text="تایید"
+                android:text="ثبت ورود دستی"
                 android:textColor="@android:color/white"
-                android:textSize="21sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 

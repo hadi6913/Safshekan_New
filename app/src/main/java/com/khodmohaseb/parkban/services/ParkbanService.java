@@ -28,6 +28,8 @@ import com.khodmohaseb.parkban.services.dto.ThirdElectronicPaymentResponseDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartResponseDto;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendiorecord.SendIoRecordRequest;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendtraffikrecord.SendTraffikRecordRequest;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -53,8 +55,11 @@ public interface ParkbanService {
     @POST("GetParkingInfo")
     Call<GetParkingInfoResponse> getParkingInfoFromServer(@Body RequestBody body);
 
+    @POST("SendIoRecord")
+    Call<String> sendIoRecord(@Body SendIoRecordRequest sendIoRecordRequest);
 
-
+    @POST("SendTraffic")
+    Call<String> sendTraffikRecord(@Body SendTraffikRecordRequest sendTraffikRecordRequest);
 
 
 

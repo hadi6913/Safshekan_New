@@ -12,6 +12,8 @@ import com.khodmohaseb.parkban.persistence.models.ParkingSpace;
 import com.khodmohaseb.parkban.persistence.models.ResponseResultType;
 import com.khodmohaseb.parkban.persistence.models.SendStatus;
 import com.khodmohaseb.parkban.persistence.models.khodmohaseb.EntranceRecord;
+import com.khodmohaseb.parkban.persistence.models.khodmohaseb.ExitRecord;
+import com.khodmohaseb.parkban.persistence.models.khodmohaseb.TraffikRecord;
 import com.khodmohaseb.parkban.persistence.models.model;
 import com.khodmohaseb.parkban.services.dto.BooleanResultDto;
 import com.khodmohaseb.parkban.services.dto.CarRecordsDto;
@@ -42,6 +44,8 @@ import com.khodmohaseb.parkban.services.dto.ThirdElectronicPaymentResponseDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartResponseDto;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendiorecord.SendIoRecordRequest;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendtraffikrecord.SendTraffikRecordRequest;
 
 import java.util.Collections;
 import java.util.Date;
@@ -67,6 +71,25 @@ public class ParkbanRepository {
 
     public interface DataBaseInsertedCarPelakCallBack {
         void onSuccess(EntranceRecord entranceRecord);
+
+        void onFailed();
+    }
+
+
+    public interface DataBaseEntranceRecordResultCallBack {
+        void onSuccess(List<EntranceRecord> entranceRecordList);
+
+        void onFailed();
+    }
+
+    public interface DataBaseExitRecordResultCallBack {
+        void onSuccess(List<ExitRecord> exitRecordList);
+
+        void onFailed();
+    }
+
+    public interface DataBaseTraffikRecordResultCallBack {
+        void onSuccess(List<TraffikRecord> traffikRecordList);
 
         void onFailed();
     }
@@ -210,6 +233,75 @@ public class ParkbanRepository {
 
             }
         });
+    }
+
+
+    public void sendIo(SendIoRecordRequest sendIoRecordRequest, final ServiceResultCallBack<String> callBack) {
+
+
+        ParkbanServiceProvider.getInstance().sendIoRecord(sendIoRecordRequest).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    if (response.isSuccessful()) {
+
+                        if (response.body().trim().equals("Ok")) {
+                            callBack.onSuccess(response.body());
+                        } else {
+                            callBack.onFailed(ResponseResultType.ServerError, response.message(), response.code());
+                        }
+
+
+                    } else {
+                        callBack.onFailed(ResponseResultType.ServerError, response.message(), response.code());
+                    }
+                } catch (Exception e) {
+                    callBack.onFailed(ResponseResultType.RetrofitError, "", 0);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                callBack.onFailed(ResponseResultType.ServerError, t.getMessage(), 0);
+            }
+        });
+
+
+
+    }
+
+    public void sendTraffik(SendTraffikRecordRequest sendTraffikRecordRequest, final ServiceResultCallBack<String> callBack) {
+
+
+        ParkbanServiceProvider.getInstance().sendTraffikRecord(sendTraffikRecordRequest).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    if (response.isSuccessful()) {
+
+                        if (response.body().trim().equals("Ok")) {
+                            callBack.onSuccess(response.body());
+                        } else {
+                            callBack.onFailed(ResponseResultType.ServerError, response.message(), response.code());
+                        }
+
+
+                    } else {
+                        callBack.onFailed(ResponseResultType.ServerError, response.message(), response.code());
+                    }
+                } catch (Exception e) {
+                    callBack.onFailed(ResponseResultType.RetrofitError, "", 0);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                callBack.onFailed(ResponseResultType.ServerError, t.getMessage(), 0);
+            }
+        });
+
+
+
     }
 
 
@@ -918,6 +1010,7 @@ public class ParkbanRepository {
     /**** Khodmohaseb Datebase Repository ****/
 
     public void saveEntranceRecord(
+            long deviceID,
             String plate,
             String entranceDate,
             int tariffId,
@@ -928,7 +1021,7 @@ public class ParkbanRepository {
             long entranceOperatorId
             , final DataBaseResultCallBack callBack) {
         new SaveEntranceRecordAsyncTask(callBack)
-                .execute(database, plate, entranceDate, tariffId, paidAmount, payType, electronicPaymentCode, entranceDoorId, entranceOperatorId);
+                .execute(database, deviceID, plate, entranceDate, tariffId, paidAmount, payType, electronicPaymentCode, entranceDoorId, entranceOperatorId);
     }
 
     private static class SaveEntranceRecordAsyncTask extends AsyncTask<Object, Void, Long> {
@@ -943,16 +1036,18 @@ public class ParkbanRepository {
         protected Long doInBackground(Object... params) {
 
             ParkbanDatabase database = (ParkbanDatabase) params[0];
-            String plate = (String) params[1];
-            String entranceDate = (String) params[2];
-            int tariffId = (int) params[3];
-            long paidAmount = (long) params[4];
-            int payType = (int) params[5];
-            String electronicPaymentCode = (String) params[6];
-            long entranceDoorId = (long) params[7];
-            long entranceOperatorId = (long) params[8];
+            long deviceId = (long) params[1];
+            String plate = (String) params[2];
+            String entranceDate = (String) params[3];
+            int tariffId = (int) params[4];
+            long paidAmount = (long) params[5];
+            int payType = (int) params[6];
+            String electronicPaymentCode = (String) params[7];
+            long entranceDoorId = (long) params[8];
+            long entranceOperatorId = (long) params[9];
 
             EntranceRecord entranceRecord = new EntranceRecord();
+            entranceRecord.setDeviceID(deviceId);
             entranceRecord.setPlate(plate);
             entranceRecord.setEntranceDate(entranceDate);
             entranceRecord.setTariffId(tariffId);
@@ -979,6 +1074,39 @@ public class ParkbanRepository {
             } else {
                 callBack.onFailed();
             }
+        }
+    }
+
+
+    public void getFromEntranceTable(final DataBaseEntranceRecordResultCallBack callBack) {
+        new GetFromEntranceTableAsyncTask(callBack).execute(database);
+    }
+
+    private static class GetFromEntranceTableAsyncTask extends AsyncTask<Object, Void, List<EntranceRecord>> {
+        private final DataBaseEntranceRecordResultCallBack callBack;
+
+        public GetFromEntranceTableAsyncTask(DataBaseEntranceRecordResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected List<EntranceRecord> doInBackground(Object... params) {
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            List<EntranceRecord> entranceRecordList;
+            try {
+                return database.getEntranceRecordDao().getFiveEntranceRecord();
+
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(List<EntranceRecord> entranceRecordList) {
+            super.onPostExecute(entranceRecordList);
+            callBack.onSuccess(entranceRecordList);
+            if (entranceRecordList == null)
+                callBack.onFailed();
         }
     }
 
@@ -1025,20 +1153,11 @@ public class ParkbanRepository {
     }
 
 
-
-
-
-
-
-    public void deleteEntranceRecord(
-            String plate
-            , final DataBaseResultCallBack callBack) {
-        new DeleteEntranceRecordAsyncTask(callBack)
-                .execute(database, plate);
+    public void deleteEntranceRecord(String plate, final DataBaseResultCallBack callBack) {
+        new DeleteEntranceRecordAsyncTask(callBack).execute(database, plate);
     }
 
-    private static class DeleteEntranceRecordAsyncTask extends AsyncTask<Object, Void, Long> {
-
+    private static class DeleteEntranceRecordAsyncTask extends AsyncTask<Object, Void, Boolean> {
         private final DataBaseResultCallBack callBack;
 
         public DeleteEntranceRecordAsyncTask(DataBaseResultCallBack callBack) {
@@ -1046,23 +1165,135 @@ public class ParkbanRepository {
         }
 
         @Override
-        protected Long doInBackground(Object... params) {
-
+        protected Boolean doInBackground(Object... params) {
             ParkbanDatabase database = (ParkbanDatabase) params[0];
             String plate = (String) params[1];
 
-
-
             try {
-                 database.getEntranceRecordDao().deleteEntranceRecordByPlate(plate);
-                 return 1L;
+                database.getEntranceRecordDao().deleteOneEntranceRecordByPlate(plate);
+                return true;
+
             } catch (Exception e) {
-                Log.e(TAG, "Error in saveCarPlate", e);
-                return 0L;
+                return false;
             }
         }
 
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            if (result)
+                callBack.onSuccess(1);
+            else
+                callBack.onFailed();
+        }
+    }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void deleteFromEntranceRecord(List<String> plateList, final DataBaseBooleanCallBack callBack) {
+        new DeleteFromEntranceRecordAsyncTask(callBack).execute(database, plateList);
+    }
+
+    private static class DeleteFromEntranceRecordAsyncTask extends AsyncTask<Object, Void, Boolean> {
+        private final DataBaseBooleanCallBack callBack;
+
+        public DeleteFromEntranceRecordAsyncTask(DataBaseBooleanCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected Boolean doInBackground(Object... params) {
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            List<String> plateList = (List<String>) params[1];
+
+            try {
+                database.getEntranceRecordDao().deleteEntranceRecordByPlate(plateList);
+                return true;
+
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            if (result)
+                callBack.onSuccess(true);
+            else
+                callBack.onFailed();
+        }
+    }
+
+
+    public void saveExitRecord(
+            long deviceID,
+            String plate,
+            String exitDate,
+            int tariffId,
+            long paidAmount,
+            int payType,
+            String electronicPaymentCode,
+            long exitDoorId,
+            long exitOperatorId
+            , final DataBaseResultCallBack callBack) {
+        new SaveExitRecordAsyncTask(callBack)
+                .execute(database, deviceID, plate, exitDate, tariffId, paidAmount, payType, electronicPaymentCode, exitDoorId, exitOperatorId);
+    }
+
+    private static class SaveExitRecordAsyncTask extends AsyncTask<Object, Void, Long> {
+
+        private final DataBaseResultCallBack callBack;
+
+        public SaveExitRecordAsyncTask(DataBaseResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected Long doInBackground(Object... params) {
+
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            long deviceID = (long) params[1];
+            String plate = (String) params[2];
+            String exitDate = (String) params[3];
+            int tariffId = (int) params[4];
+            long paidAmount = (long) params[5];
+            int payType = (int) params[6];
+            String electronicPaymentCode = (String) params[7];
+            long exitDoorId = (long) params[8];
+            long exitOperatorId = (long) params[9];
+
+            ExitRecord exitRecord = new ExitRecord();
+            exitRecord.setDeviceID(deviceID);
+            exitRecord.setPlate(plate);
+            exitRecord.setExitDate(exitDate);
+            exitRecord.setTariffId(tariffId);
+            exitRecord.setPaidAmount(paidAmount);
+            exitRecord.setPayType(payType);
+            exitRecord.setElectronicPaymentCode(electronicPaymentCode);
+            exitRecord.setExitDoorId(exitDoorId);
+            exitRecord.setExitOperatorId(exitOperatorId);
+
+
+            try {
+                return database.getExitRecordDao().saveExitRecord(exitRecord);
+            } catch (Exception e) {
+                Log.e(TAG, "Error in save exit record", e);
+                return 0L;
+            }
+        }
 
         @Override
         protected void onPostExecute(Long result) {
@@ -1078,6 +1309,316 @@ public class ParkbanRepository {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void deleteExitRecord(String plate, final DataBaseResultCallBack callBack) {
+        new DeleteExitRecordAsyncTask(callBack).execute(database, plate);
+    }
+
+    private static class DeleteExitRecordAsyncTask extends AsyncTask<Object, Void, Boolean> {
+        private final DataBaseResultCallBack callBack;
+
+        public DeleteExitRecordAsyncTask(DataBaseResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected Boolean doInBackground(Object... params) {
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            String plate = (String) params[1];
+
+            try {
+                database.getExitRecordDao().deleteOneExitRecordByPlate(plate);
+                return true;
+
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            if (result)
+                callBack.onSuccess(1);
+            else
+                callBack.onFailed();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void getFromExitTable(final DataBaseExitRecordResultCallBack callBack) {
+        new GetFromExitTableAsyncTask(callBack).execute(database);
+    }
+
+    private static class GetFromExitTableAsyncTask extends AsyncTask<Object, Void, List<ExitRecord>> {
+        private final DataBaseExitRecordResultCallBack callBack;
+
+        public GetFromExitTableAsyncTask(DataBaseExitRecordResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected List<ExitRecord> doInBackground(Object... params) {
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            List<ExitRecord> exitRecordList;
+            try {
+                return database.getExitRecordDao().getFiveExitRecord();
+
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(List<ExitRecord> exitRecordList) {
+            super.onPostExecute(exitRecordList);
+            callBack.onSuccess(exitRecordList);
+            if (exitRecordList == null)
+                callBack.onFailed();
+        }
+    }
+
+
+    public void deleteFromExitRecord(List<String> plateList, final DataBaseBooleanCallBack callBack) {
+        new DeleteFromExitRecordAsyncTask(callBack).execute(database, plateList);
+    }
+
+    private static class DeleteFromExitRecordAsyncTask extends AsyncTask<Object, Void, Boolean> {
+        private final DataBaseBooleanCallBack callBack;
+
+        public DeleteFromExitRecordAsyncTask(DataBaseBooleanCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected Boolean doInBackground(Object... params) {
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            List<String> plateList = (List<String>) params[1];
+
+            try {
+                database.getExitRecordDao().deleteExitRecordByPlate(plateList);
+                return true;
+
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            if (result)
+                callBack.onSuccess(true);
+            else
+                callBack.onFailed();
+        }
+    }
+
+
+    public void saveTraffikRecord(
+            long deviceID,
+            String plate,
+            String entranceDate,
+            String exitDate,
+            int tariffId,
+            long paidAmount,
+            int payType,
+            String electronicPaymentCode,
+            long entranceDoorId,
+            long exitDoorId,
+            long entranceOperatorId,
+            long exitOperatorId,
+            String vehicleName
+            , final DataBaseResultCallBack callBack) {
+        new SaveTraffikRecordAsyncTask(callBack)
+                .execute(
+                        database,
+                        deviceID,
+                        plate,
+                        entranceDate,
+                        exitDate,
+                        tariffId,
+                        paidAmount,
+                        payType,
+                        electronicPaymentCode,
+                        entranceDoorId,
+                        exitDoorId,
+                        entranceOperatorId,
+                        exitOperatorId,
+                        vehicleName
+
+                );
+    }
+
+    private static class SaveTraffikRecordAsyncTask extends AsyncTask<Object, Void, Long> {
+
+        private final DataBaseResultCallBack callBack;
+
+        public SaveTraffikRecordAsyncTask(DataBaseResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected Long doInBackground(Object... params) {
+
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            long deviceID = (long) params[1];
+            String plate = (String) params[2];
+            String entranceDate = (String) params[3];
+            String exitDate = (String) params[4];
+            int tariffId = (int) params[5];
+            long paidAmount = (long) params[6];
+            int payType = (int) params[7];
+            String electronicPaymentCode = (String) params[8];
+            long entranceDoorId = (long) params[9];
+            long exitDoorId = (long) params[10];
+            long entranceOperatorId = (long) params[11];
+            long exitOperatorId = (long) params[12];
+            String vehicleName = (String) params[13];
+
+            TraffikRecord traffikRecord = new TraffikRecord();
+            traffikRecord.setDevice_id(deviceID);
+            traffikRecord.setPlate(plate);
+            traffikRecord.setEntranceDate(entranceDate);
+            traffikRecord.setExitDate(exitDate);
+            traffikRecord.setTariffId(tariffId);
+            traffikRecord.setPaidAmount(paidAmount);
+            traffikRecord.setPayType(payType);
+            traffikRecord.setElectronicPaymentCode(electronicPaymentCode);
+            traffikRecord.setEntranceDoorId(entranceDoorId);
+            traffikRecord.setExitDoorId(exitDoorId);
+            traffikRecord.setEntranceOperatorId(entranceOperatorId);
+            traffikRecord.setExitOperatorId(exitOperatorId);
+            traffikRecord.setVehicleName(vehicleName);
+
+
+            try {
+                return database.getTraffikRecordDao().saveTraffikRecord(traffikRecord);
+            } catch (Exception e) {
+                Log.e(TAG, "Error in save traffik record", e);
+                return 0L;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Long result) {
+            super.onPostExecute(result);
+            if (result > 0) {
+                callBack.onSuccess(result);
+            } else {
+                callBack.onFailed();
+            }
+        }
+    }
+
+
+    public void getFromTraffikTable(final DataBaseTraffikRecordResultCallBack callBack) {
+        new GetFromTraffikTableAsyncTask(callBack).execute(database);
+    }
+
+    private static class GetFromTraffikTableAsyncTask extends AsyncTask<Object, Void, List<TraffikRecord>> {
+        private final DataBaseTraffikRecordResultCallBack callBack;
+
+        public GetFromTraffikTableAsyncTask(DataBaseTraffikRecordResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected List<TraffikRecord> doInBackground(Object... params) {
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            List<TraffikRecord> traffikRecordList;
+            try {
+                return database.getTraffikRecordDao().getFiveTraffikRecord();
+
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(List<TraffikRecord> traffikRecordList) {
+            super.onPostExecute(traffikRecordList);
+            callBack.onSuccess(traffikRecordList);
+            if (traffikRecordList == null)
+                callBack.onFailed();
+        }
+    }
+
+
+    public void deleteFromTraffikRecord(List<String> plateList, final DataBaseBooleanCallBack callBack) {
+        new DeleteFromTraffikRecordAsyncTask(callBack).execute(database, plateList);
+    }
+
+    private static class DeleteFromTraffikRecordAsyncTask extends AsyncTask<Object, Void, Boolean> {
+        private final DataBaseBooleanCallBack callBack;
+
+        public DeleteFromTraffikRecordAsyncTask(DataBaseBooleanCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected Boolean doInBackground(Object... params) {
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            List<String> plateList = (List<String>) params[1];
+
+            try {
+                database.getTraffikRecordDao().deleteTraffikRecordByPlate(plateList);
+                return true;
+
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            if (result)
+                callBack.onSuccess(true);
+            else
+                callBack.onFailed();
+        }
+    }
 
 
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))

@@ -2,13 +2,17 @@ package com.khodmohaseb.parkban;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +31,7 @@ import com.khodmohaseb.parkban.persistence.models.CarPlate;
 import com.khodmohaseb.parkban.persistence.models.ResponseResultType;
 import com.khodmohaseb.parkban.persistence.models.SendStatus;
 import com.khodmohaseb.parkban.repositories.ParkbanRepository;
+import com.khodmohaseb.parkban.services.SendRecordHandler;
 import com.khodmohaseb.parkban.services.dto.CarRecordsDto;
 import com.khodmohaseb.parkban.services.dto.CurrentShiftDto;
 import com.khodmohaseb.parkban.services.dto.ParkingSpaceDto;
@@ -38,7 +43,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements SendRecordHandler.Callbacks {
 
     public static long CurrentUserId;
     public static long ParkbanPhoneNumber;
@@ -71,6 +76,31 @@ public class BaseActivity extends AppCompatActivity {
     private static final int ALL_PERMISSIONS_RESULT = 1011;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
+
+
+    //**********************************************************************************************
+    //**********************************************************************************************
+    //**********************************************************************************************
+    Intent sendRecordHandlerIntent;
+    SendRecordHandler sendRecordHandler;
+    private ServiceConnection sendRecordHandlerConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            SendRecordHandler.LocalBinder binder = (SendRecordHandler.LocalBinder) service;
+            sendRecordHandler = binder.getServiceInstance(); //Get instance of your service!
+            sendRecordHandler.registerClient(BaseActivity.this); //Activity register in the service as client for callabcks!
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+        }
+    };
+    //**********************************************************************************************
+    //**********************************************************************************************
+    //**********************************************************************************************
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +122,27 @@ public class BaseActivity extends AppCompatActivity {
 
         if (locationTracker == null)
             locationTracker = new LocationTracker(BaseActivity.this);
+
+
+
+
+        sendRecordHandlerIntent = new Intent(getApplicationContext(), SendRecordHandler.class);
+        Log.d("BaseActivity", "onCreate: MainActivity >>>> Service has been started");
+        startService(sendRecordHandlerIntent);
+        getApplicationContext().bindService(sendRecordHandlerIntent, sendRecordHandlerConnection, Context.BIND_AUTO_CREATE);
+
+
+
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("BaseActivity", "onCreate: MainActivity >>>> Service has been stoped");
+        stopService(sendRecordHandlerIntent);
+        getApplicationContext().unbindService( sendRecordHandlerConnection);
     }
 
     public void showProgress(final boolean show) {
@@ -373,4 +424,8 @@ public class BaseActivity extends AppCompatActivity {
             return false;
     }
 
+    @Override
+    public void sendRecordServiceResult(String message) {
+
+    }
 }

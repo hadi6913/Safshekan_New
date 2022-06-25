@@ -64,7 +64,7 @@
                         android:layout_alignLeft="@id/btn_pelak_khan_enter_qr"
                         android:layout_alignRight="@id/btn_pelak_khan_enter_qr"
                         android:gravity="center_horizontal"
-                        android:text="Car Tag Reader"
+                        android:text="Tag"
                         android:textColor="@android:color/darker_gray"
                         android:textStyle="bold" />
 
@@ -74,11 +74,83 @@
             </LinearLayout>
 
 
+            <LinearLayout
+                android:id="@+id/operator_door_information_layout"
+                android:layout_below="@+id/linear_button_container_main_enter_qr"
+                android:orientation="vertical"
+                android:gravity="left"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+
+                    <TextView
+                        android:text="Operator : "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:text="@{viewModel.selectedUser.userName}"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+
+                    <TextView
+                        android:text="Door : "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:text="@{viewModel.selectedDoor.id.toString()}"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_above="@+id/layout_pelak_main_enter_qr"
+                android:layout_margin="10dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/settings"
+                android:elevation="20dp"
+                android:onClick="@{viewModel::Setting_Password_Page}"
+                android:shadowColor="@color/dark_grey"
+                android:text=""
+                />
+
+
+
             <RelativeLayout
                 android:id="@+id/layout_pelak_main_enter_qr"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_below="@id/linear_button_container_main_enter_qr"
+                android:layout_below="@id/operator_door_information_layout"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="5dp"
                 android:visibility="@{viewModel.hasPelak ? View.VISIBLE : View.GONE}">

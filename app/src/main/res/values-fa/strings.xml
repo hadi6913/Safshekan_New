@@ -34,6 +34,13 @@
     <string name="submit_card_dialog_3">انصراف</string>
     <string name="submit_success">ثبت موفق</string>
     <string name="error_mifare">کارت نامعتبر</string>
+    <string name="qr_null">شناسه اسکن شده خالی است</string>
+    <string name="invalid_qr">بارکد نامعتبر</string>
+
+
+
+
+
 
 
 
@@ -246,7 +253,7 @@
 
 
     <string name="bitmap_null">bitmap is null</string>
-    <string name="qr_null">شناسه اسکن شده خالی است</string>
+
 
 
 

@@ -2,29 +2,14 @@ package com.khodmohaseb.parkban.persistence.models.khodmohaseb;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.graphics.Bitmap;
 
-import com.khodmohaseb.parkban.persistence.models.Car;
-import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Door;
-import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Operator;
-
-import java.sql.Date;
-
-@Entity(tableName = "entrance_table")
-public class EntranceRecord {
+@Entity(tableName = "traffik_table")
+public class TraffikRecord {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private long id;
-
-
-    @ColumnInfo(name = "device_id")
-    private long deviceID;
-
-
 
 
 
@@ -39,13 +24,9 @@ public class EntranceRecord {
         this.isSend = isSend;
     }
 
-    public long getDeviceID() {
-        return deviceID;
-    }
+    @ColumnInfo(name = "device_id")
+    private long device_id;
 
-    public void setDeviceID(long deviceID) {
-        this.deviceID = deviceID;
-    }
 
     @ColumnInfo(name = "plate")
     private String plate;
@@ -53,14 +34,23 @@ public class EntranceRecord {
     @ColumnInfo(name = "entrance_date")
     private String entranceDate;
 
+    @ColumnInfo(name = "exit_date")
+    private String exitDate;
+
     @ColumnInfo(name = "tariffId")
     private int tariffId;
 
     @ColumnInfo(name = "entrance_door_id")
     private long entranceDoorId;
 
+    @ColumnInfo(name = "exit_door_id")
+    private long exitDoorId;
+
     @ColumnInfo(name = "entrance_operator_id")
     private long entranceOperatorId;
+
+    @ColumnInfo(name = "exit_operator_id")
+    private long exitOperatorId;
 
     @ColumnInfo(name = "paid_amount")
     private long paidAmount;
@@ -71,8 +61,11 @@ public class EntranceRecord {
     @ColumnInfo(name = "electronic_payment_code")
     private String electronicPaymentCode;
 
+    @ColumnInfo(name = "vehicle_name")
+    private String vehicleName;
 
-    public EntranceRecord() {
+
+    public TraffikRecord() {
     }
 
     public long getId() {
@@ -145,5 +138,46 @@ public class EntranceRecord {
 
     public void setElectronicPaymentCode(String electronicPaymentCode) {
         this.electronicPaymentCode = electronicPaymentCode;
+    }
+
+
+    public long getDevice_id() {
+        return device_id;
+    }
+
+    public void setDevice_id(long device_id) {
+        this.device_id = device_id;
+    }
+
+    public String getExitDate() {
+        return exitDate;
+    }
+
+    public void setExitDate(String exitDate) {
+        this.exitDate = exitDate;
+    }
+
+    public long getExitDoorId() {
+        return exitDoorId;
+    }
+
+    public void setExitDoorId(long exitDoorId) {
+        this.exitDoorId = exitDoorId;
+    }
+
+    public long getExitOperatorId() {
+        return exitOperatorId;
+    }
+
+    public void setExitOperatorId(long exitOperatorId) {
+        this.exitOperatorId = exitOperatorId;
+    }
+
+    public String getVehicleName() {
+        return vehicleName;
+    }
+
+    public void setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName;
     }
 }

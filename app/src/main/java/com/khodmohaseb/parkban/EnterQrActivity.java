@@ -9,6 +9,7 @@ import android.content.ServiceConnection;
 import android.content.res.AssetManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import com.khodmohaseb.parkban.databinding.ActivityLoginBinding;
 import com.khodmohaseb.parkban.databinding.ActivityMainBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
 
+import com.khodmohaseb.parkban.utils.Animation_Constant;
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 import com.khodmohaseb.parkban.viewmodels.EnterQrViewModel;
 import com.khodmohaseb.parkban.viewmodels.MainViewModel;

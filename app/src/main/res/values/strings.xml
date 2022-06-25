@@ -34,6 +34,8 @@
     <string name="submit_card_dialog_3">Cancel</string>
     <string name="submit_success">Success Submit</string>
     <string name="error_mifare">Invalid card</string>
+    <string name="qr_null">QR barcode is empty</string>
+    <string name="invalid_qr">Invalid QR</string>
 
 
 
@@ -202,7 +204,7 @@
 
 
     <string name="bitmap_null">bitmap is null</string>
-    <string name="qr_null">شناسه اسکن شده خالی است</string>
+
 
 
 

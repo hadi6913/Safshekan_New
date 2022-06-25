@@ -21,8 +21,27 @@ public interface EntranceRecordDao {
     @Query("SELECT * FROM entrance_table WHERE plate=:plate")
     EntranceRecord getEntranceRecordByPlate(String plate);
 
+
+//    @Query("DELETE FROM entrance_table WHERE plate in (:plateList)")
+//    void deleteEntranceRecordByPlate(List<String> plateList);
+//
+
+
+
+
+    @Query("UPDATE entrance_table SET is_send=1  WHERE plate in (:plateList)")
+    void deleteEntranceRecordByPlate(List<String> plateList);
+
+
     @Query("DELETE FROM entrance_table WHERE plate=:plate")
-    void deleteEntranceRecordByPlate(String plate);
+    void deleteOneEntranceRecordByPlate(String plate);
+
+
+    @Query("SELECT * FROM entrance_table WHERE is_send==0 LIMIT 5")
+    List<EntranceRecord> getFiveEntranceRecord();
+
+
+
 
 
 
