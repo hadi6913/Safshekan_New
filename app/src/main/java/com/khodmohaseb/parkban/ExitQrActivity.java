@@ -186,7 +186,7 @@ public class ExitQrActivity extends BaseActivity {
                         String calculatedCrc = enterDateTime.substring(9, 12) + "6913" + pelak.substring(0, 2);
                         if (crc.equals(calculatedCrc)) {
 
-                            exitQrViewModel.handelExit(pelak,enterDateTime,tariffId,paidAmount,enterDoorId,enterOperatorId,paymentType,paymentCode);
+                            exitQrViewModel.handelExit(pelak, enterDateTime, tariffId, paidAmount, enterDoorId, enterOperatorId, paymentType, paymentCode);
 
 
                         } else {

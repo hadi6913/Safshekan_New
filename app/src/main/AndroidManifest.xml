@@ -48,6 +48,8 @@
         <activity
             android:name="com.khodmohaseb.parkban.RecordPlateActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".EnterManullyActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

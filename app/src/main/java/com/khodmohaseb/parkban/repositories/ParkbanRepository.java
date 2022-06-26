@@ -1136,7 +1136,7 @@ public class ParkbanRepository {
             try {
                 return database.getEntranceRecordDao().getEntranceRecordByPlate(plate);
             } catch (Exception e) {
-                Log.e(TAG, "Error in saveCarPlate", e);
+                Log.e(TAG, "Error in search entrance record", e);
                 return null;
             }
         }
@@ -1187,6 +1187,84 @@ public class ParkbanRepository {
                 callBack.onFailed();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void setExitEntranceRecord(String plate, final DataBaseResultCallBack callBack) {
+        new SetExitEntranceRecordAsyncTask(callBack).execute(database, plate);
+    }
+
+    private static class SetExitEntranceRecordAsyncTask extends AsyncTask<Object, Void, Boolean> {
+        private final DataBaseResultCallBack callBack;
+
+        public SetExitEntranceRecordAsyncTask(DataBaseResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected Boolean doInBackground(Object... params) {
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            String plate = (String) params[1];
+
+            try {
+                database.getEntranceRecordDao().setExitEntranceRecordByPlate(plate);
+                return true;
+
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            if (result)
+                callBack.onSuccess(1);
+            else
+                callBack.onFailed();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

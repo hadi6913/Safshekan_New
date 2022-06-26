@@ -142,7 +142,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Enter Door :  "
+            android:text="Enter Door Code :  "
             android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -183,7 +183,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Enter Operator :  "
+            android:text="Enter Operator Code :  "
             android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

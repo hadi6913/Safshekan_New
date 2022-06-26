@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+
+        <variable
+            name="viewModel"
+            type="com.khodmohaseb.parkban.viewmodels.EnterManuallyViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        tools:context=".EnterQrActivity">
+
+        <ImageView
+            animatedVisibilityScale="@{4000}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="100dp"
+            android:alpha="0.06"
+            android:src="@drawable/elomo_sanat_alone_logo" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:id="@+id/linear_button_container_main_enter_manually"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/edit_text_background_white_dd"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+
+                <RelativeLayout
+                    android:id="@+id/layout_pelak_main_enter_manually"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/operator_door_information_layout"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="@{viewModel.hasPelak ? View.VISIBLE : View.GONE}">
+
+
+                    <LinearLayout
+                        android:id="@+id/car_plate_enter_manually"
+                        android:layout_width="258dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:background="@drawable/pelak_template"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+
+                        android:visibility="@{viewModel.car ? View.VISIBLE : View.GONE}">
+
+                        <com.khodmohaseb.parkban.controls.PersianEditText
+                            android:id="@+id/etxt_car_plate_first_cell_enter_manually"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="22dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="**"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:text="@={viewModel.plate__0}"
+                            android:textColor="@color/text_color"
+                            android:textSize="20sp"
+                            />
+
+                        <Spinner
+                            android:id="@+id/spinner_enter_manually"
+                            style="@style/spinner_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:entries="@array/image_array"
+                            android:gravity="center"
+                            android:textColor="@color/text_color"
+                            android:textSize="20sp" />
+
+
+                        <com.khodmohaseb.parkban.controls.PersianEditText
+                            android:id="@+id/etxt_car_plate_third_cell_enter_manually"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="13dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="***"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:text="@={viewModel.plate__2}"
+                            android:textColor="@color/text_color"
+                            android:textSize="20sp"
+                            />
+
+                        <com.khodmohaseb.parkban.controls.PersianEditText
+                            android:id="@+id/etxt_car_plate_forth_cell_enter_manually"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="**"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:text="@={viewModel.plate__3}"
+                            android:textColor="@color/text_color"
+                            android:textSize="17sp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="130dp"
+                        android:layout_height="100dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:background="@drawable/motor_plate"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.motor ? View.VISIBLE : View.GONE}">
+
+                        <com.khodmohaseb.parkban.controls.PersianEditText
+                            android:id="@+id/etxt_motor_plate_first_cell_enter_manually"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:hint="***"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:text="@={viewModel.mplate__0}"
+                            android:textColor="@color/text_color"
+                            android:textSize="17sp"
+                            />
+
+                        <com.khodmohaseb.parkban.controls.PersianEditText
+                            android:id="@+id/etxt_motor_plate_second_cell_enter_manually"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:hint="*****"
+                            android:inputType="number"
+                            android:maxLength="5"
+                            android:text="@={viewModel.mplate__1}"
+                            android:textColor="@color/text_color"
+                            android:textSize="17sp"
+                            />
+
+                    </LinearLayout>
+
+
+
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/operator_door_information_layout"
+                android:layout_below="@+id/linear_button_container_main_enter_manually"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@{viewModel.selectedUser.userName}"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:text="کاربر : "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:text="@{viewModel.selectedDoor.id.toString()}"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:text="درب : "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/linear_button_container_main_enter_manually"
+                android:layout_margin="10dp"
+                android:background="@drawable/settings"
+                android:elevation="20dp"
+                android:onClick="@{viewModel::Setting_Password_Page}"
+                android:shadowColor="@color/dark_grey"
+                android:text=""
+                />
+
+
+
+
+
+            <LinearLayout
+                android:layout_below="@id/operator_door_information_layout"
+                android:id="@+id/car_type_container_enter_manually"
+                android:layout_width="match_parent"
+                android:layout_marginRight="45dp"
+                android:orientation="vertical"
+                android:layout_marginTop="36dp"
+                android:layout_marginLeft="45dp"
+                android:layout_height="wrap_content"
+                >
+
+
+
+
+                <com.khodmohaseb.parkban.controls.PersianTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="نوع تعرفه را انتخاب کنید"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="12dp"
+                    android:background="@drawable/login_edit_text_background"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spinner_car_type_enter_manually"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        app:adapter="@{viewModel.langAdapter_car_type}"
+
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:spinnerMode="dropdown" />
+
+
+
+
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:src="@drawable/arrow_button" />
+
+                </RelativeLayout>
+
+
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+
+                    android:orientation="horizontal">
+
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="  ریال"/>
+
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="2000"
+                        android:gravity="center"
+                        android:text="@{viewModel.selectedTarrifEntranceFee}"/>
+
+
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="مبلغ ورودی : "/>
+
+
+
+                </android.support.v7.widget.LinearLayoutCompat>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_below="@id/car_type_container_enter_manually"
+                android:layout_width="match_parent"
+                android:layout_marginRight="45dp"
+                android:orientation="vertical"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="45dp"
+                android:layout_height="wrap_content"
+                >
+
+
+
+
+                <com.khodmohaseb.parkban.controls.PersianTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="تاریخ ورود را تعیین کنید"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="24dp"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="12dp"
+                    android:onClick="@{viewModel::Select_DateTime_Picker}"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="12dp"
+                    android:background="@drawable/login_edit_text_background"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:text="@{viewModel.enteredDate}"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        />
+
+
+
+
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:src="@drawable/clock_blue" />
+
+                </RelativeLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/btn_gozaresh_layout"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="120dp"-->
+<!--                android:layout_above="@id/sendClick"-->
+<!--                android:layout_alignParentLeft="true"-->
+<!--                android:layout_marginLeft="120dp"-->
+<!--                android:gravity="center">-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/btn_gozaresh"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:background="@drawable/btn_gozaresh_background"-->
+<!--                    android:gravity="center"-->
+<!--                    android:onClick="@{viewModel::Gozaresh_Onclick}" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@id/btn_gozaresh"-->
+<!--                    android:layout_alignLeft="@id/btn_gozaresh"-->
+<!--                    android:layout_alignRight="@id/btn_gozaresh"-->
+<!--                    android:gravity="center_horizontal"-->
+<!--                    android:text="گزارش"-->
+<!--                    android:textColor="@android:color/darker_gray"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--            </RelativeLayout>-->
+
+
+
+
+
+
+
+            <LinearLayout
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/return_enter_manually"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/new_new_btn_background_layout"
+                    android:onClick="@{viewModel::Return_Onclick}"
+                    android:typeface="@{viewModel.mFont}"
+                    android:text="@string/return_title"
+                    android:textColor="@android:color/white"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/submit_enter_manually"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/new_new_btn_background_layout"
+                    android:onClick="@{viewModel::Submit_Onclick}"
+                    android:typeface="@{viewModel.mFont}"
+                    android:text="@string/submit_title"
+                    android:textColor="@android:color/white"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

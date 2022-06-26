@@ -128,7 +128,8 @@ public class BaseActivity extends AppCompatActivity implements SendRecordHandler
 
         sendRecordHandlerIntent = new Intent(getApplicationContext(), SendRecordHandler.class);
         Log.d("BaseActivity", "onCreate: MainActivity >>>> Service has been started");
-        startService(sendRecordHandlerIntent);
+        //todo uncomment below line
+//        startService(sendRecordHandlerIntent);
         getApplicationContext().bindService(sendRecordHandlerIntent, sendRecordHandlerConnection, Context.BIND_AUTO_CREATE);
 
 

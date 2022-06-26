@@ -18,8 +18,27 @@ public interface EntranceRecordDao {
     @Insert
     long saveEntranceRecord(EntranceRecord entranceRecord);
 
-    @Query("SELECT * FROM entrance_table WHERE plate=:plate")
+    @Query("SELECT * FROM entrance_table WHERE plate=:plate AND is_exit==0")
     EntranceRecord getEntranceRecordByPlate(String plate);
+
+
+
+    @Query("UPDATE entrance_table SET is_exit=1  WHERE plate=:inputPlate")
+    void setExitEntranceRecordByPlate(String inputPlate);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //    @Query("DELETE FROM entrance_table WHERE plate in (:plateList)")

@@ -91,11 +91,12 @@ public class SendRecordHandler extends Service implements Runnable {
         this.activity = (Callbacks) baseActivity;
         this.baseActivity = baseActivity;
 
-        //todo implement getting imei
-        final TelephonyManager telephonyManager = (TelephonyManager)(baseActivity.getSystemService(Context.TELEPHONY_SERVICE));
 
+        final TelephonyManager telephonyManager = (TelephonyManager)(baseActivity.getSystemService(Context.TELEPHONY_SERVICE));
         Log.d(TAG, "IMEI : "+ telephonyManager.getDeviceId());
-        imei = telephonyManager.getDeviceId();
+//        imei = telephonyManager.getDeviceId();
+        //todo imei
+        imei = "562837562483719";
 
     }
 

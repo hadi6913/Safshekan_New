@@ -26,7 +26,17 @@ public class EntranceRecord {
 
 
 
+    @ColumnInfo(name = "is_exit")
+    private int isExit = 0;
 
+
+    public int getIsExit() {
+        return isExit;
+    }
+
+    public void setIsExit(int isExit) {
+        this.isExit = isExit;
+    }
 
     @ColumnInfo(name = "is_send")
     private int isSend = 0;

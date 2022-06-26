@@ -144,7 +144,7 @@
 
 
         <TextView
-            android:text="Enter Door :  "
+            android:text="Enter Door Code :  "
             android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -188,7 +188,7 @@
 
 
         <TextView
-            android:text="Operator :  "
+            android:text="Enter Operator Code :  "
             android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -250,19 +250,7 @@
 
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:text="@string/select_payment_dialog_2"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="13sp"
-        android:textStyle="normal" />
+
 
 
 

@@ -5,6 +5,7 @@
     <string name="setting_dialog_3">Enter server address</string>
     <string name="setting_dialog_4">Get parking settings</string>
     <string name="exception_msg">Error occurrence</string>
+    <string name="exception_msg_245">Calculation Error</string>
     <string name="enter_password">Enter the password</string>
     <string name="wrong_password">Password is wrong</string>
     <string name="error_server_address">Format of server address is wrong</string>
@@ -36,7 +37,9 @@
     <string name="error_mifare">Invalid card</string>
     <string name="qr_null">QR barcode is empty</string>
     <string name="invalid_qr">Invalid QR</string>
-
+    <string name="car_not_inserted">No vehicle found</string>
+    <string name="return_title">Return</string>
+    <string name="submit_title">Submit</string>
 
 
 

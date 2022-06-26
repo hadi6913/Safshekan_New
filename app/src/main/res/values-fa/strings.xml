@@ -5,6 +5,7 @@
     <string name="setting_dialog_3">آدرس سرور را وارد کنید</string>
     <string name="setting_dialog_4">دریافت مشخصات پارکینگ</string>
     <string name="exception_msg">بروز خطا</string>
+    <string name="exception_msg_245">بروز خطای محاسباتی</string>
     <string name="enter_password">رمز عبور را وارد کنید</string>
     <string name="wrong_password">رمز عبور نادرست است</string>
     <string name="error_server_address">آدرس سرور را درست وارد کنید</string>
@@ -36,6 +37,9 @@
     <string name="error_mifare">کارت نامعتبر</string>
     <string name="qr_null">شناسه اسکن شده خالی است</string>
     <string name="invalid_qr">بارکد نامعتبر</string>
+    <string name="car_not_inserted">ورود وسیله نقلیه یافت نشد</string>
+    <string name="return_title">بازگشت</string>
+    <string name="submit_title">ثبت</string>
 
 
 
