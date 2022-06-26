@@ -43,6 +43,8 @@ import com.khodmohaseb.parkban.services.dto.ThirdElectronicPaymentRequestDto;
 import com.khodmohaseb.parkban.services.dto.ThirdElectronicPaymentResponseDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartResponseDto;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.forgotrecord.ForgotEntranceRequest;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.forgotrecord.ForgotRecordResponse;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendiorecord.SendIoRecordRequest;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendtraffikrecord.SendTraffikRecordRequest;
@@ -267,7 +269,6 @@ public class ParkbanRepository {
         });
 
 
-
     }
 
     public void sendTraffik(SendTraffikRecordRequest sendTraffikRecordRequest, final ServiceResultCallBack<String> callBack) {
@@ -301,8 +302,42 @@ public class ParkbanRepository {
         });
 
 
+    }
+
+
+
+
+    public void forgotEntrance(ForgotEntranceRequest forgotEntranceRequest, final ServiceResultCallBack<ForgotRecordResponse> callBack) {
+
+
+        ParkbanServiceProvider.getInstance().findEntranceWithoutExit(forgotEntranceRequest).enqueue(new Callback<ForgotRecordResponse>() {
+            @Override
+            public void onResponse(Call<ForgotRecordResponse> call, Response<ForgotRecordResponse> response) {
+                try {
+                    if (response.isSuccessful()) {
+
+                        callBack.onSuccess(response.body());
+
+
+                    } else {
+                        callBack.onFailed(ResponseResultType.ServerError, response.message(), response.code());
+                    }
+                } catch (Exception e) {
+                    callBack.onFailed(ResponseResultType.RetrofitError, "", 0);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ForgotRecordResponse> call, Throwable t) {
+                callBack.onFailed(ResponseResultType.ServerError, t.getMessage(), 0);
+            }
+        });
+
 
     }
+
+
+
 
 
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
@@ -1018,10 +1053,11 @@ public class ParkbanRepository {
             int payType,
             String electronicPaymentCode,
             long entranceDoorId,
-            long entranceOperatorId
+            long entranceOperatorId,
+            int sourceKind
             , final DataBaseResultCallBack callBack) {
         new SaveEntranceRecordAsyncTask(callBack)
-                .execute(database, deviceID, plate, entranceDate, tariffId, paidAmount, payType, electronicPaymentCode, entranceDoorId, entranceOperatorId);
+                .execute(database, deviceID, plate, entranceDate, tariffId, paidAmount, payType, electronicPaymentCode, entranceDoorId, entranceOperatorId, sourceKind);
     }
 
     private static class SaveEntranceRecordAsyncTask extends AsyncTask<Object, Void, Long> {
@@ -1045,6 +1081,7 @@ public class ParkbanRepository {
             String electronicPaymentCode = (String) params[7];
             long entranceDoorId = (long) params[8];
             long entranceOperatorId = (long) params[9];
+            int sourceKind = (int) params[10];
 
             EntranceRecord entranceRecord = new EntranceRecord();
             entranceRecord.setDeviceID(deviceId);
@@ -1056,6 +1093,7 @@ public class ParkbanRepository {
             entranceRecord.setElectronicPaymentCode(electronicPaymentCode);
             entranceRecord.setEntranceDoorId(entranceDoorId);
             entranceRecord.setEntranceOperatorId(entranceOperatorId);
+            entranceRecord.setSourceKind(sourceKind);
 
 
             try {
@@ -1189,28 +1227,6 @@ public class ParkbanRepository {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void setExitEntranceRecord(String plate, final DataBaseResultCallBack callBack) {
         new SetExitEntranceRecordAsyncTask(callBack).execute(database, plate);
     }
@@ -1245,39 +1261,6 @@ public class ParkbanRepository {
                 callBack.onFailed();
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void deleteFromEntranceRecord(List<String> plateList, final DataBaseBooleanCallBack callBack) {
@@ -1325,10 +1308,11 @@ public class ParkbanRepository {
             int payType,
             String electronicPaymentCode,
             long exitDoorId,
-            long exitOperatorId
+            long exitOperatorId,
+            int sourceKind
             , final DataBaseResultCallBack callBack) {
         new SaveExitRecordAsyncTask(callBack)
-                .execute(database, deviceID, plate, exitDate, tariffId, paidAmount, payType, electronicPaymentCode, exitDoorId, exitOperatorId);
+                .execute(database, deviceID, plate, exitDate, tariffId, paidAmount, payType, electronicPaymentCode, exitDoorId, exitOperatorId, sourceKind);
     }
 
     private static class SaveExitRecordAsyncTask extends AsyncTask<Object, Void, Long> {
@@ -1352,6 +1336,7 @@ public class ParkbanRepository {
             String electronicPaymentCode = (String) params[7];
             long exitDoorId = (long) params[8];
             long exitOperatorId = (long) params[9];
+            int sourceKind = (int) params[10];
 
             ExitRecord exitRecord = new ExitRecord();
             exitRecord.setDeviceID(deviceID);
@@ -1363,6 +1348,7 @@ public class ParkbanRepository {
             exitRecord.setElectronicPaymentCode(electronicPaymentCode);
             exitRecord.setExitDoorId(exitDoorId);
             exitRecord.setExitOperatorId(exitOperatorId);
+            exitRecord.setSourceKind(sourceKind);
 
 
             try {
@@ -1383,28 +1369,6 @@ public class ParkbanRepository {
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void deleteExitRecord(String plate, final DataBaseResultCallBack callBack) {
@@ -1441,27 +1405,6 @@ public class ParkbanRepository {
                 callBack.onFailed();
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void getFromExitTable(final DataBaseExitRecordResultCallBack callBack) {

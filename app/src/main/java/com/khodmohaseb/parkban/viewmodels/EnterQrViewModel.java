@@ -585,6 +585,7 @@ public class EnterQrViewModel extends ViewModel {
                         rrn,
                         selectedDoor.getId().longValue(),
                         selectedUser.getId().longValue(),
+                        0,
                         new ParkbanRepository.DataBaseResultCallBack() {
                             @Override
                             public void onSuccess(long id) {
@@ -945,6 +946,7 @@ public class EnterQrViewModel extends ViewModel {
                                             "",
                                             selectedDoor.getId().longValue(),
                                             selectedUser.getId().longValue(),
+                                            0,
                                             new ParkbanRepository.DataBaseResultCallBack() {
                                                 @Override
                                                 public void onSuccess(long id) {
@@ -1048,6 +1050,7 @@ public class EnterQrViewModel extends ViewModel {
                                     "",
                                     selectedDoor.getId().longValue(),
                                     selectedUser.getId().longValue(),
+                                    0,
                                     new ParkbanRepository.DataBaseResultCallBack() {
                                         @Override
                                         public void onSuccess(long id) {

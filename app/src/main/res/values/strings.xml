@@ -5,12 +5,15 @@
     <string name="setting_dialog_3">Enter server address</string>
     <string name="setting_dialog_4">Get parking settings</string>
     <string name="exception_msg">Error occurrence</string>
+    <string name="unregistered_device_msg">Unregistered Device</string>
     <string name="exception_msg_245">Calculation Error</string>
     <string name="enter_password">Enter the password</string>
     <string name="wrong_password">Password is wrong</string>
     <string name="error_server_address">Format of server address is wrong</string>
     <string name="connection_failed">Error in connecting to server</string>
+    <string name="entrance_not_found">Entrance not found</string>
     <string name="enter_car_tag">Enter the tag of the vehicle</string>
+    <string name="enter_entrance_date">Enter entrance date</string>
     <string name="print_enter_qr">Print enter qr</string>
     <string name="pay_entrance_fare">Pay entrance fee</string>
     <string name="should_pay_now">Should pay now</string>

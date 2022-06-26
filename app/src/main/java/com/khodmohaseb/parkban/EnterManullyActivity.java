@@ -6,21 +6,30 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.khodmohaseb.parkban.databinding.ActivityEnterManuallyBinding;
 import com.khodmohaseb.parkban.databinding.ActivityEnterQrBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
+import com.khodmohaseb.parkban.utils.Animation_Constant;
+import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 import com.khodmohaseb.parkban.utils.PelakUtility;
 import com.khodmohaseb.parkban.viewmodels.EnterManuallyViewModel;
 import com.khodmohaseb.parkban.viewmodels.EnterQrViewModel;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
+import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import org.opencv.android.OpenCVLoader;
 
@@ -33,12 +42,16 @@ import java.io.OutputStream;
 import static ir.shahaabco.ANPRNDK.anpr_create;
 
 
-public class EnterManullyActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener {
+public class EnterManullyActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private static final String TAG = "EnterManullyActivity";
     private int failedLoadLib = 0;
     private EnterManuallyViewModel enterManuallyViewModel;
     private ActivityEnterManuallyBinding binding;
+
+    int year_;
+    int month_;
+    int day_;
 
 
     @Override
@@ -49,7 +62,7 @@ public class EnterManullyActivity extends BaseActivity implements DatePickerDial
         binding.setViewModel(enterManuallyViewModel);
         EditText etxtCar = findViewById(R.id.etxt_car_plate_first_cell_enter_manually);
         EditText etxtMotor = findViewById(R.id.etxt_motor_plate_first_cell_enter_manually);
-
+        RelativeLayout datePickerRelativeLayout = findViewById(R.id.fucckingDatePicker);
         String givenPelak = getIntent().getStringExtra("sendedpelak");
 
 
@@ -58,6 +71,37 @@ public class EnterManullyActivity extends BaseActivity implements DatePickerDial
         binding.setLifecycleOwner(this);
         enterManuallyViewModel.mSpinner = binding.spinnerEnterManually;
         enterManuallyViewModel.mCarTypeSpinner = binding.spinnerCarTypeEnterManually;
+
+
+        datePickerRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Animation myAnim = AnimationUtils.loadAnimation(EnterManullyActivity.this, R.anim.btn_bubble_animation);
+                MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+                myAnim.setInterpolator(interpolator);
+                v.startAnimation(myAnim);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        PersianCalendar persianCalendar = new PersianCalendar();
+                        DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
+                                EnterManullyActivity.this,
+                                persianCalendar.getPersianYear(),
+                                persianCalendar.getPersianMonth(),
+                                persianCalendar.getPersianDay()
+                        );
+                        datePickerDialog.show(getFragmentManager(), "Datepickerdialog");
+
+
+                    }
+                }, Animation_Constant.ANIMATION_VALUE);
+
+
+            }
+        });
 
 
         binding.spinnerCarTypeEnterManually.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -255,7 +299,7 @@ public class EnterManullyActivity extends BaseActivity implements DatePickerDial
             enterManuallyViewModel.getPlate__0().setValue(givenPelak.substring(0, 2));
             enterManuallyViewModel.getPlate__2().setValue(givenPelak.substring(4, 7));
             enterManuallyViewModel.getPlate__3().setValue(givenPelak.substring(7, 9));
-            binding.spinnerEnterManually.setSelection(PelakUtility.convert00To0(givenPelak.substring(2, 4))-1);
+            binding.spinnerEnterManually.setSelection(PelakUtility.convert00To0(givenPelak.substring(2, 4)) - 1);
             enterManuallyViewModel.getPlate__1().setValue(String.valueOf(binding.spinnerEnterManually.getSelectedItem()));
 
 
@@ -284,6 +328,36 @@ public class EnterManullyActivity extends BaseActivity implements DatePickerDial
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        Log.d(TAG, "onDateSet: year:" + year + " month:" + monthOfYear + "day:" + dayOfMonth);
+        year_ = year;
+        month_ = monthOfYear;
+        day_ = dayOfMonth;
+
+        TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(
+                EnterManullyActivity.this,
+                12,
+                15,
+                true
+        );
+        timePickerDialog.show(getFragmentManager(), "timepickerdialog");
+
+    }
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+
+
+        String year = Integer.toString(year_);
+        String month = String.format("%02d", month_);
+        String day = String.format("%02d", day_);
+        String hour = String.format("%02d", hourOfDay);
+        String min = String.format("%02d", minute);
+
+        enterManuallyViewModel.getEnteredDate().setValue(year + "/" + month + "/" + day + "   " + hour + " : " + min);
+
+
+        Log.d(TAG, "" + year_ + month_ + day_ + hourOfDay + minute);
+
 
     }
 }

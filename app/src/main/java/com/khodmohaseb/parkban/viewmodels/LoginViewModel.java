@@ -196,7 +196,7 @@ public class LoginViewModel extends ViewModel {
 
 //todo imei
 //                            parkbanRepository.getDeviceToken("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
-                            parkbanRepository.getDeviceToken("\"" + "562837562483719" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                            parkbanRepository.getDeviceToken("\"" + "868500040082190" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                 @Override
                                 public void onSuccess(String deviceToken) {
 
@@ -274,21 +274,27 @@ public class LoginViewModel extends ViewModel {
                                                     progress.setValue(0);
 
 
-                                                    switch (resultType) {
-                                                        case RetrofitError:
-                                                            ShowToast.getInstance().showError(context, R.string.exception_msg);
-                                                            break;
-                                                        case ServerError:
-                                                            if (errorCode != 0)
-                                                                ShowToast.getInstance().showError(context, errorCode);
-                                                            else {
-                                                                ShowToast.getInstance().showError(context, R.string.connection_failed);
+                                                    if(errorCode == 401){
+                                                        ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                                    }else{
+                                                        switch (resultType) {
+                                                            case RetrofitError:
+                                                                ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                                                break;
+                                                            case ServerError:
+                                                                if (errorCode != 0)
+                                                                    ShowToast.getInstance().showError(context, errorCode);
+                                                                else {
+                                                                    ShowToast.getInstance().showError(context, R.string.connection_failed);
 
-                                                            }
-                                                            break;
-                                                        default:
-                                                            ShowToast.getInstance().showError(context, resultType.ordinal());
+                                                                }
+                                                                break;
+                                                            default:
+                                                                ShowToast.getInstance().showError(context, resultType.ordinal());
+                                                        }
                                                     }
+
+
                                                 }
                                             });
 
@@ -603,7 +609,7 @@ public class LoginViewModel extends ViewModel {
 
 //todo imei
 //                                parkbanRepository.getDeviceToken("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
-                                parkbanRepository.getDeviceToken("\"" + "562837562483719" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                                parkbanRepository.getDeviceToken("\"" + "868500040082190" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                     @Override
                                     public void onSuccess(String deviceToken) {
 
@@ -681,21 +687,28 @@ public class LoginViewModel extends ViewModel {
                                                         progress.setValue(0);
 
 
-                                                        switch (resultType) {
-                                                            case RetrofitError:
-                                                                ShowToast.getInstance().showError(context, R.string.exception_msg);
-                                                                break;
-                                                            case ServerError:
-                                                                if (errorCode != 0)
-                                                                    ShowToast.getInstance().showError(context, errorCode);
-                                                                else {
-                                                                    ShowToast.getInstance().showError(context, R.string.connection_failed);
 
-                                                                }
-                                                                break;
-                                                            default:
-                                                                ShowToast.getInstance().showError(context, resultType.ordinal());
+
+                                                        if(errorCode == 401){
+                                                            ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                                        }else{
+                                                            switch (resultType) {
+                                                                case RetrofitError:
+                                                                    ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                                                    break;
+                                                                case ServerError:
+                                                                    if (errorCode != 0)
+                                                                        ShowToast.getInstance().showError(context, errorCode);
+                                                                    else {
+                                                                        ShowToast.getInstance().showError(context, R.string.connection_failed);
+
+                                                                    }
+                                                                    break;
+                                                                default:
+                                                                    ShowToast.getInstance().showError(context, resultType.ordinal());
+                                                            }
                                                         }
+
                                                     }
                                                 });
 

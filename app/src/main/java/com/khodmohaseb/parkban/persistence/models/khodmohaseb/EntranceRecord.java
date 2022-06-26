@@ -26,6 +26,20 @@ public class EntranceRecord {
 
 
 
+    @ColumnInfo(name = "source_kind")
+    private int sourceKind = 0;
+
+
+    public int getSourceKind() {
+        return sourceKind;
+    }
+
+    public void setSourceKind(int sourceKind) {
+        this.sourceKind = sourceKind;
+    }
+
+
+
     @ColumnInfo(name = "is_exit")
     private int isExit = 0;
 

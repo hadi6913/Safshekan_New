@@ -555,6 +555,7 @@ public class EnterMifareViewModel extends ViewModel {
                         rrn,
                         selectedDoor.getId().longValue(),
                         selectedUser.getId().longValue(),
+                        0,
                         new ParkbanRepository.DataBaseResultCallBack() {
                             @Override
                             public void onSuccess(long id) {
@@ -984,6 +985,7 @@ public class EnterMifareViewModel extends ViewModel {
                                             "",
                                             selectedDoor.getId().longValue(),
                                             selectedUser.getId().longValue(),
+                                            0,
                                             new ParkbanRepository.DataBaseResultCallBack() {
                                                 @Override
                                                 public void onSuccess(long id) {
@@ -1154,6 +1156,7 @@ public class EnterMifareViewModel extends ViewModel {
                                     "",
                                     selectedDoor.getId().longValue(),
                                     selectedUser.getId().longValue(),
+                                    0,
                                     new ParkbanRepository.DataBaseResultCallBack() {
                                         @Override
                                         public void onSuccess(long id) {

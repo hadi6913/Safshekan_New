@@ -25,6 +25,7 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.khodmohaseb.parkban.BaseActivity;
 import com.khodmohaseb.parkban.EnterManullyActivity;
 import com.khodmohaseb.parkban.ExitQrActivity;
+import com.khodmohaseb.parkban.LoginActivity;
 import com.khodmohaseb.parkban.MifareCardActivity;
 import com.khodmohaseb.parkban.PaymentSafshekanActivity;
 import com.khodmohaseb.parkban.QRcodeReaderActivity;
@@ -68,6 +70,8 @@ import com.khodmohaseb.parkban.persistence.models.ResponseResultType;
 import com.khodmohaseb.parkban.persistence.models.khodmohaseb.EntranceRecord;
 import com.khodmohaseb.parkban.repositories.ParkbanRepository;
 import com.khodmohaseb.parkban.services.dto.ExitBillDto;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.forgotrecord.ForgotEntranceRequest;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.forgotrecord.ForgotRecordResponse;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Door;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Operator;
@@ -589,6 +593,7 @@ public class ExitQrViewModel extends ViewModel {
                                 "",
                                 selectedDoor.getValue().getId().longValue(),
                                 selectedUser.getValue().getId().longValue(),
+                                0,
                                 new ParkbanRepository.DataBaseResultCallBack() {
                                     @Override
                                     public void onSuccess(long id) {
@@ -611,14 +616,6 @@ public class ExitQrViewModel extends ViewModel {
                                                     public void onSuccess(long id) {
 
 
-
-
-
-
-
-
-
-
                                                         parkbanRepository.setExitEntranceRecord(pelakString, new ParkbanRepository.DataBaseResultCallBack() {
                                                             @Override
                                                             public void onSuccess(long id) {
@@ -632,19 +629,6 @@ public class ExitQrViewModel extends ViewModel {
                                                                 show.dismiss();
                                                             }
                                                         });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                                                     }
@@ -970,6 +954,7 @@ public class ExitQrViewModel extends ViewModel {
                                 "",
                                 selectedDoor.getValue().getId().longValue(),
                                 selectedUser.getValue().getId().longValue(),
+                                0,
                                 new ParkbanRepository.DataBaseResultCallBack() {
                                     @Override
                                     public void onSuccess(long id) {
@@ -992,14 +977,9 @@ public class ExitQrViewModel extends ViewModel {
                                                     public void onSuccess(long id) {
 
 
-
-
-
                                                         parkbanRepository.setExitEntranceRecord(pelakString, new ParkbanRepository.DataBaseResultCallBack() {
                                                             @Override
                                                             public void onSuccess(long id) {
-
-
 
 
                                                                 Log.d(TAG, "onSuccess in save database , now print process begin");
@@ -1017,8 +997,6 @@ public class ExitQrViewModel extends ViewModel {
                                                                 }
 
 
-
-
                                                             }
 
                                                             @Override
@@ -1027,21 +1005,6 @@ public class ExitQrViewModel extends ViewModel {
                                                                 show.dismiss();
                                                             }
                                                         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                                                     }
@@ -1094,11 +1057,9 @@ public class ExitQrViewModel extends ViewModel {
 
         } else {
             // should only show dialog and no need to pay he paid first at entrance
-
-
-
-
-
+            currentDateTime = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
+            enterDateTime= sdf.parse(enterDateTimeString);
 
             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
             LayoutInflater inflater = ((Activity) myContext).getLayoutInflater();
@@ -1134,22 +1095,20 @@ public class ExitQrViewModel extends ViewModel {
             String lan = PreferenceManager.getDefaultSharedPreferences(myContext).getString("language", "fa");
 
             if (lan.equals("fa")) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
                 Date dateNow = sdf.parse(enterDateTimeString);
                 PersianDate persianDate = new PersianDate(dateNow);
                 PersianDateFormat pdformater1 = new PersianDateFormat("Y/m/d");
                 SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.getDefault());
                 String jalaliDate = pdformater1.format(persianDate) + "  " + sdf1.format(dateNow);
                 txtEnterDateTime.setText(jalaliDate);
-                txtPaidCost.setText(paidAmountString+"  ریال");
+                txtPaidCost.setText(paidAmountString + "  ریال");
 
 
             } else {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
                 Date dateNow = sdf.parse(enterDateTimeString);
                 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault());
                 txtEnterDateTime.setText(sdf1.format(dateNow));
-                txtPaidCost.setText(paidAmountString +" Rials");
+                txtPaidCost.setText(paidAmountString + " Rials");
 
             }
 
@@ -1194,6 +1153,7 @@ public class ExitQrViewModel extends ViewModel {
                             electronicPaymentCodeString,
                             selectedDoor.getValue().getId().longValue(),
                             selectedUser.getValue().getId().longValue(),
+                            0,
                             new ParkbanRepository.DataBaseResultCallBack() {
                                 @Override
                                 public void onSuccess(long id) {
@@ -1230,11 +1190,6 @@ public class ExitQrViewModel extends ViewModel {
                                                     });
 
 
-
-
-
-
-
                                                 }
 
                                                 @Override
@@ -1263,13 +1218,6 @@ public class ExitQrViewModel extends ViewModel {
 
                 }
             });
-
-
-
-
-
-
-
 
 
         }
@@ -1387,6 +1335,7 @@ public class ExitQrViewModel extends ViewModel {
                         b.getString("rrn"),
                         selectedDoor.getValue().getId().longValue(),
                         selectedUser.getValue().getId().longValue(),
+                        0,
                         new ParkbanRepository.DataBaseResultCallBack() {
                             @Override
                             public void onSuccess(long id) {
@@ -1409,12 +1358,9 @@ public class ExitQrViewModel extends ViewModel {
                                             public void onSuccess(long id) {
 
 
-
                                                 parkbanRepository.setExitEntranceRecord(pelakString____, new ParkbanRepository.DataBaseResultCallBack() {
                                                     @Override
                                                     public void onSuccess(long id) {
-
-
 
 
                                                         Log.d(TAG, "onSuccess in save database , now print process begin");
@@ -1432,8 +1378,6 @@ public class ExitQrViewModel extends ViewModel {
                                                         }
 
 
-
-
                                                     }
 
                                                     @Override
@@ -1442,23 +1386,6 @@ public class ExitQrViewModel extends ViewModel {
 
                                                     }
                                                 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                                             }
@@ -1633,10 +1560,6 @@ public class ExitQrViewModel extends ViewModel {
             public void run() {
 
 
-
-
-
-
                 //************************************************************************************************************************
                 // ************************************************************************************************************************
                 boolean is_pelak_valid = true;
@@ -1732,14 +1655,8 @@ public class ExitQrViewModel extends ViewModel {
                 final String finalPelak = pelak;
 
 
-
-
-
-
-
-
                 Intent intent = new Intent(myContext, EnterManullyActivity.class);
-                intent.putExtra("sendedpelak",finalPelak);
+                intent.putExtra("sendedpelak", finalPelak);
                 myContext.startActivity(intent);
 
 
@@ -1860,7 +1777,7 @@ public class ExitQrViewModel extends ViewModel {
                         try {
                             handelExit(
                                     entranceRecord.getPlate(),
-                                    entranceRecord.getEntranceDate().replace("_",""),
+                                    entranceRecord.getEntranceDate().replace("_", ""),
                                     Integer.toString(entranceRecord.getTariffId()),
                                     Long.toString(entranceRecord.getPaidAmount()),
                                     Long.toString(entranceRecord.getEntranceDoorId()),
@@ -1869,7 +1786,7 @@ public class ExitQrViewModel extends ViewModel {
                                     entranceRecord.getElectronicPaymentCode()
                             );
                         } catch (Exception exception) {
-                            ShowToast.getInstance().showError(myContext,R.string.exception_msg_245);
+                            ShowToast.getInstance().showError(myContext, R.string.exception_msg_245);
                         }
 
 
@@ -1883,23 +1800,6 @@ public class ExitQrViewModel extends ViewModel {
 
                     }
                 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             }
@@ -2010,8 +1910,73 @@ public class ExitQrViewModel extends ViewModel {
                 //************************************************************************************************************************
                 // ************************************************************************************************************************
                 final String finalPelak = pelak;
+                final TelephonyManager telephonyManager = (TelephonyManager) (((ExitQrActivity) myContext).getSystemService(Context.TELEPHONY_SERVICE));
+                ;
+
+                String pelakForAskFromServer;
+
+                if (finalPelak.length() == 8) {
+                    //motor
+                    pelakForAskFromServer = finalPelak;
+                } else {
+                    //car
+                    pelakForAskFromServer = finalPelak.substring(0, 2) + PelakUtility.convertFromCode(finalPelak.substring(2, 4)) + finalPelak.substring(4, 9);
+                }
 
 
+                ForgotEntranceRequest forgotEntranceRequest = new ForgotEntranceRequest();
+                forgotEntranceRequest.setImei(telephonyManager.getDeviceId().trim());
+                forgotEntranceRequest.setPlate(pelakForAskFromServer);
+
+                parkbanRepository.forgotEntrance(forgotEntranceRequest, new ParkbanRepository.ServiceResultCallBack<ForgotRecordResponse>() {
+                    @Override
+                    public void onSuccess(ForgotRecordResponse result) {
+
+                        String temp1 = result.getTrafficDateTime().replace("-", "");
+                        String temp2 = temp1.replace(":", "");
+                        String temp3 = temp2.replace("T", "");
+                        String validDatabaseEntranceDate = temp3.substring(0, 12);
+
+
+                        try {
+                            handelExit(
+                                    finalPelak,
+                                    validDatabaseEntranceDate,
+                                    Integer.toString(1),
+                                    Long.toString(result.getCost()),
+                                    Long.toString(result.getDoorId()),
+                                    Long.toString(result.getOperatorId()),
+                                    Long.toString(result.getPaymentKind()),
+                                    result.getElectronicPaymentTracingCode()
+                            );
+                        } catch (Exception exception) {
+                            ShowToast.getInstance().showError(myContext, R.string.exception_msg_245);
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+                        progress.setValue(0);
+                        switch (resultType) {
+                            case RetrofitError:
+                                ShowToast.getInstance().showError(myContext, R.string.entrance_not_found);
+                                break;
+                            case ServerError:
+                                if (errorCode != 0)
+                                    ShowToast.getInstance().showError(myContext, errorCode);
+                                else
+                                    ShowToast.getInstance().showError(myContext, R.string.connection_failed);
+                                break;
+                            default:
+                                ShowToast.getInstance().showError(myContext, resultType.ordinal());
+                        }
+                    }
+                });
+
+
+//                parkbanRepository.forgotEntrance();
 
 
             }

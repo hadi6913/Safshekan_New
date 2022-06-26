@@ -386,6 +386,7 @@
                     android:text="Enter Entrance Date"/>
 
                 <RelativeLayout
+                    android:id="@+id/fucckingDatePicker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -393,7 +394,7 @@
                     android:layout_marginBottom="24dp"
                     android:paddingLeft="8dp"
                     android:paddingTop="12dp"
-                    android:onClick="@{viewModel::Select_DateTime_Picker}"
+
                     android:paddingRight="8dp"
                     android:paddingBottom="12dp"
                     android:background="@drawable/login_edit_text_background"
@@ -404,6 +405,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
+                        android:textColor="@android:color/black"
                         android:text="@{viewModel.enteredDate}"
                         android:background="@android:color/transparent"
                         android:gravity="center"

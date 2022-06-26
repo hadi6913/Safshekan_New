@@ -27,6 +27,8 @@ import com.khodmohaseb.parkban.services.dto.ThirdElectronicPaymentRequestDto;
 import com.khodmohaseb.parkban.services.dto.ThirdElectronicPaymentResponseDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartResponseDto;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.forgotrecord.ForgotEntranceRequest;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.forgotrecord.ForgotRecordResponse;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendiorecord.SendIoRecordRequest;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendtraffikrecord.SendTraffikRecordRequest;
@@ -49,11 +51,25 @@ public interface ParkbanService {
     //**********************************************************************************************
     //khod-mohaseb
 
+
+
+
     @POST("DeviceLogin")
     Call<String> getDeviceToken(@Body RequestBody body);
 
+    @POST("IsNeedUpdateDevice")
+    Call<Boolean> isNeedUpdate(@Body RequestBody body);
+
     @POST("GetParkingInfo")
     Call<GetParkingInfoResponse> getParkingInfoFromServer(@Body RequestBody body);
+
+    @POST("SetUpdateDevice")
+    Call<Boolean> setUpdateDevice(@Body RequestBody body);
+
+
+    @POST("FindEntranceWithoutExit")
+    Call<ForgotRecordResponse> findEntranceWithoutExit(@Body ForgotEntranceRequest forgotEntranceRequest);
+
 
     @POST("SendIoRecord")
     Call<String> sendIoRecord(@Body SendIoRecordRequest sendIoRecordRequest);

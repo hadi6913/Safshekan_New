@@ -65,6 +65,10 @@ import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Door;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Operator;
 import com.khodmohaseb.parkban.utils.Animation_Constant;
+import com.khodmohaseb.parkban.utils.CalculateHelperUtility;
+import com.khodmohaseb.parkban.utils.DailyFareCalculator;
+import com.khodmohaseb.parkban.utils.DailyHourlyFareCalculator;
+import com.khodmohaseb.parkban.utils.HourlyFareCalculator;
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 import com.khodmohaseb.parkban.utils.PelakUtility;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
@@ -73,11 +77,13 @@ import com.pax.dal.IDAL;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import saman.zamani.persiandate.PersianDate;
 import saman.zamani.persiandate.PersianDateFormat;
@@ -123,14 +129,11 @@ public class EnterManuallyViewModel extends ViewModel {
     private MutableLiveData<String> selectedTarrifEntranceFee;
 
 
-
-
     public MutableLiveData<String> getEnteredDate() {
         if (enteredDate == null)
             enteredDate = new MutableLiveData<>();
         return enteredDate;
     }
-
 
 
     public MutableLiveData<String> getSelectedTarrifEntranceFee() {
@@ -218,12 +221,6 @@ public class EnterManuallyViewModel extends ViewModel {
     }
 
 
-    public MutableLiveData<String> getenteredDate() {
-        if (enteredDate == null)
-            enteredDate = new MutableLiveData<>();
-        return enteredDate;
-    }
-
     private boolean doubleBackToExitPressedOnce = false;
     private static final long EXIT_TIMEOUT = 3000;
 
@@ -258,6 +255,17 @@ public class EnterManuallyViewModel extends ViewModel {
     //*********************************************************************************************
 
     public Typeface mFont;
+
+
+    String pelakString____;
+    String tariffIdString____;
+    Date enterDateTime;
+    Date currentDateTime;
+    String enterDoorIDString____;
+    String exitDoorIDString____;
+    String enterOperatorIDString____;
+    String exitOperatorIDString____;
+    String paidAmount____;
 
 
     public void init(final Context context, EditText editTextCar, EditText editTextMotor) {
@@ -361,7 +369,7 @@ public class EnterManuallyViewModel extends ViewModel {
         mplate__1.setValue("");
         if (enteredDate == null)
             enteredDate = new MutableLiveData<>();
-        enteredDate.setValue("");
+        enteredDate.setValue("****");
 
 
         if (selectedTarrifId == null)
@@ -390,7 +398,6 @@ public class EnterManuallyViewModel extends ViewModel {
     //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
-
     private String getBundleString(Bundle b) {
         return
                 "Status   :" + b.getString("result") + '\n' +
@@ -403,16 +410,6 @@ public class EnterManuallyViewModel extends ViewModel {
                         "charge_serial    :" + b.getString("charge_serial", null) + '\n' +
                         "charge_pin    :" + b.getString("charge_pin", null) + '\n' +
                         "message    :" + b.getString("message", null) + '\n';
-    }
-
-
-    public void processActivityResult(Context context, int requestCode, int resultCode, Intent
-            data) {
-
-
-
-
-
     }
 
 
@@ -498,7 +495,6 @@ public class EnterManuallyViewModel extends ViewModel {
                 }
                 //converting persian numbers to english
                 pelak = FontHelper.removeEnter(FontHelper.convertArabicToPersian(pelak));
-                Log.d(TAG, "UnChanged-Default pelak >>>  " + pelak);
                 StringBuilder newPelak = new StringBuilder(pelak);
                 for (int i = 0; i < pelak.length(); i++) {
                     if (Character.isDigit(pelak.charAt(i))) {
@@ -537,18 +533,1149 @@ public class EnterManuallyViewModel extends ViewModel {
                     }
                 }
                 pelak = newPelak.toString();
-                Log.d(TAG, "Changed-New pelak >>>  " + pelak);
+                Log.d(TAG, "final pelak >>>  " + pelak);
                 //************************************************************************************************************************
                 // ************************************************************************************************************************
                 final String finalPelak = pelak;
+                if (enteredDate.getValue().length() < 6) {
+                    ShowToast.getInstance().showWarning(view.getContext(), R.string.enter_car_tag);
+                    return;
+                }
+                String temp = enteredDate.getValue();
+                String temp1 = temp.replace("/", "");
+                String temp2 = temp1.replace(":", "");
+                String finalEntranceDate = temp2.replace(" ", "").trim();
+                Log.d(TAG, "final entranceDate >>>  " + finalEntranceDate);
 
 
-
+                try {
+                    handelExit(
+                            finalPelak,
+                            finalEntranceDate,
+                            Integer.toString(selectedTarrifId.getValue()),
+                            "0",
+                            Long.toString(selectedDoor.getId()),
+                            Long.toString(selectedUser.getId()),
+                            "0",
+                            "");
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
 
 
             }
         }, Animation_Constant.ANIMATION_VALUE);
     }
+
+    private String getTariffNameById(String tarrifId) {
+        String result = "";
+        switch (tarrifId) {
+            case "1":
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff1().getVehicleName();
+                break;
+            case "2":
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName();
+                break;
+            case "3":
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName();
+                break;
+            case "4":
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName();
+                break;
+            case "5":
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName();
+                break;
+            case "6":
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName();
+                break;
+            case "7":
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName();
+                break;
+            case "8":
+                result = getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName();
+                break;
+
+        }
+        return result;
+    }
+
+
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    public void handelExit(
+            final String pelakString,
+            String enterDateTimeString,
+            final String tariffIdString,
+            final String paidAmountString,
+            final String enterDoorIDString,
+            final String enterOperatorIDString,
+            final String paymentTypeString,
+            final String electronicPaymentCodeString
+    ) throws Exception {
+        Log.d(TAG, "handelExit in QR Mode");
+        Log.d(TAG, "pelak >" + pelakString);
+        Log.d(TAG, "enterDateTime >" + enterDateTimeString);
+        Log.d(TAG, "tariffId >" + tariffIdString);
+        Log.d(TAG, "paidAmount >" + paidAmountString);
+        Log.d(TAG, "enterDoorID >" + enterDoorIDString);
+        Log.d(TAG, "enterOperatorID >" + enterOperatorIDString);
+        Log.d(TAG, "paymentType >" + paymentTypeString);
+        Log.d(TAG, "electronicPaymentCode >" + electronicPaymentCodeString);
+
+
+        pelakString____ = pelakString;
+        tariffIdString____ = tariffIdString;
+        enterDoorIDString____ = enterDoorIDString;
+        enterOperatorIDString____ = enterOperatorIDString;
+
+
+        long price = 0;
+        long roundedPrice = 0;
+
+        if (Long.parseLong(paidAmountString) == 0) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
+            enterDateTime = dateFormat.parse(enterDateTimeString);
+            currentDateTime = new Date();
+            long totalStayInMinutes;
+            long diffInMillisec = currentDateTime.getTime() - enterDateTime.getTime();
+            totalStayInMinutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillisec);
+            Log.d(TAG, "total stay in minutes : " + totalStayInMinutes);
+            if (totalStayInMinutes <= getParkingInfoResponse.getTariffs().getFreeDuration()) {
+                //  should only show dialog and no need to pay  it is free
+
+
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
+                LayoutInflater inflater = ((Activity) myContext).getLayoutInflater();
+                View alertView = inflater.inflate(R.layout.dialog_no_need_pay, null);
+                alertDialog.setView(alertView);
+                alertDialog.setCancelable(false);
+                final AlertDialog show = alertDialog.show();
+                TextView txtPlate = alertView.findViewById(R.id.dialog_no_need_pay_1);
+                if (pelakString.length() == 8) {
+                    txtPlate.setText(pelakString.substring(0, 3) + " - " + pelakString.substring(3, 8));
+                } else {
+
+
+                    txtPlate.setText(
+
+                            pelakString.substring(4, 9)
+
+
+                                    +
+                                    " - " +
+                                    PelakUtility.convertFromCode(pelakString.substring(2, 4)) +
+                                    " - " +
+
+                                    pelakString.substring(0, 2)
+
+
+                    );
+                }
+
+
+                TextView txtEnterDateTime = alertView.findViewById(R.id.dialog_no_need_pay_2);
+                TextView txtPaidCost = alertView.findViewById(R.id.dialog_no_need_pay_6);
+                String lan = PreferenceManager.getDefaultSharedPreferences(myContext).getString("language", "fa");
+
+                if (lan.equals("fa")) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
+                    Date dateNow = sdf.parse(enterDateTimeString);
+                    PersianDate persianDate = new PersianDate(dateNow);
+                    PersianDateFormat pdformater1 = new PersianDateFormat("Y/m/d");
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.getDefault());
+                    String jalaliDate = pdformater1.format(persianDate) + "  " + sdf1.format(dateNow);
+                    txtEnterDateTime.setText(jalaliDate);
+                    txtPaidCost.setText("رایگان");
+
+
+                } else {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
+                    Date dateNow = sdf.parse(enterDateTimeString);
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault());
+                    txtEnterDateTime.setText(sdf1.format(dateNow));
+                    txtPaidCost.setText("Free");
+
+                }
+
+                TextView txtTariffId = alertView.findViewById(R.id.dialog_no_need_pay_3);
+                txtTariffId.setText(getTariffNameById(tariffIdString));
+                TextView txtEnterDoor = alertView.findViewById(R.id.dialog_no_need_pay_4);
+                txtEnterDoor.setText(enterDoorIDString);
+                TextView txtEnterOperator = alertView.findViewById(R.id.dialog_no_need_pay_5);
+                txtEnterOperator.setText(enterOperatorIDString);
+                LinearLayout cancelButton = alertView.findViewById(R.id.dialog_no_need_pay_7);
+                LinearLayout exitButton = alertView.findViewById(R.id.dialog_no_need_pay_8);
+
+
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        show.dismiss();
+                    }
+                });
+
+
+                exitButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        Log.d(TAG, "save in exit_table then  print recepit and paid by cash");
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
+                        final String exitDateTimeStringForDataBase = sdf.format(currentDateTime);
+                        final String enterDateTimeStringForDataBase = sdf.format(enterDateTime);
+                        final int tarrifId = Integer.parseInt(tariffIdString);
+
+
+                        parkbanRepository.saveEntranceRecord(
+                                getParkingInfoResponse.getDeviceId(),
+                                pelakString,
+                                enterDateTimeStringForDataBase,
+                                tarrifId,
+                                0,
+                                0,
+                                "",
+                                selectedDoor.getId().longValue(),
+                                selectedUser.getId().longValue(),
+                                1,
+                                new ParkbanRepository.DataBaseResultCallBack() {
+                                    @Override
+                                    public void onSuccess(long id) {
+                                        parkbanRepository.saveExitRecord(
+                                                getParkingInfoResponse.getDeviceId(),
+                                                pelakString,
+                                                exitDateTimeStringForDataBase,
+                                                tarrifId,
+                                                0,
+                                                0,
+                                                "",
+                                                selectedDoor.getId().longValue(),
+                                                selectedUser.getId().longValue(),
+                                                1,
+                                                new ParkbanRepository.DataBaseResultCallBack() {
+                                                    @Override
+                                                    public void onSuccess(long id) {
+
+                                                        parkbanRepository.saveTraffikRecord(
+                                                                getParkingInfoResponse.getDeviceId(),
+                                                                pelakString,
+                                                                enterDateTimeStringForDataBase,
+                                                                exitDateTimeStringForDataBase,
+                                                                tarrifId,
+                                                                0,
+                                                                0,
+                                                                "",
+                                                                Long.parseLong(enterDoorIDString),
+                                                                selectedDoor.getId().longValue(),
+                                                                Long.parseLong(enterOperatorIDString),
+                                                                selectedUser.getId().longValue(),
+                                                                getTariffNameById(tariffIdString), new ParkbanRepository.DataBaseResultCallBack() {
+                                                                    @Override
+                                                                    public void onSuccess(long id) {
+
+
+                                                                        parkbanRepository.setExitEntranceRecord(pelakString, new ParkbanRepository.DataBaseResultCallBack() {
+                                                                            @Override
+                                                                            public void onSuccess(long id) {
+                                                                                ShowToast.getInstance().showSuccess(myContext, R.string.submit_success);
+                                                                                show.dismiss();
+                                                                            }
+
+                                                                            @Override
+                                                                            public void onFailed() {
+                                                                                ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                                                show.dismiss();
+                                                                            }
+                                                                        });
+
+
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onFailed() {
+                                                                        ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                                        show.dismiss();
+                                                                    }
+                                                                }
+
+
+                                                        );
+
+
+                                                    }
+
+                                                    @Override
+                                                    public void onFailed() {
+                                                        ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                        show.dismiss();
+                                                    }
+                                                }
+                                        );
+                                    }
+
+                                    @Override
+                                    public void onFailed() {
+
+                                    }
+                                }
+
+
+                        );
+
+
+                    }
+                });
+
+
+            } else {
+                //should call calculate fare
+                long roundedTotalStayInMinutes = CalculateHelperUtility.roundStayLengthTime(totalStayInMinutes, getParkingInfoResponse.getTariffs());
+                Log.d(TAG, "rounded stay in minutes : " + roundedTotalStayInMinutes);
+                if (getParkingInfoResponse.getTariffs().getIsCircadian()) {
+                    // should calculate daily or daily-hourly
+                    if (getParkingInfoResponse.getTariffs().getCircadianCalcKind() == 0) {
+                        //daily
+                        switch (tariffIdString.trim()) {
+                            case "1":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost() +
+                                        DailyFareCalculator.calculateDailyFareVehicle1(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+
+                                break;
+                            case "2":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost() +
+                                        DailyFareCalculator.calculateDailyFareVehicle2(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "3":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost() +
+                                        DailyFareCalculator.calculateDailyFareVehicle3(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "4":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost() +
+                                        DailyFareCalculator.calculateDailyFareVehicle4(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "5":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost() +
+                                        DailyFareCalculator.calculateDailyFareVehicle5(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "6":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost() +
+                                        DailyFareCalculator.calculateDailyFareVehicle6(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "7":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost() +
+                                        DailyFareCalculator.calculateDailyFareVehicle7(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "8":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost() +
+                                        DailyFareCalculator.calculateDailyFareVehicle8(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                        }
+                    } else {
+                        //daily hourly
+                        switch (tariffIdString.trim()) {
+                            case "1":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost() +
+                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle1(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "2":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost() +
+                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle2(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "3":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost() +
+                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle3(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "4":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost() +
+                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle4(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "5":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost() +
+                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle5(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "6":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost() +
+                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle6(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "7":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost() +
+                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle7(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                            case "8":
+                                price = getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost() +
+                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle8(
+                                                roundedTotalStayInMinutes,
+                                                getParkingInfoResponse.getTariffs()
+                                        );
+                                break;
+                        }
+                    }
+
+
+                } else {
+                    // should calculate hourly
+                    switch (tariffIdString.trim()) {
+                        case "1":
+                            price = getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost() +
+                                    HourlyFareCalculator.calculateStepFareVehicle1(
+                                            roundedTotalStayInMinutes,
+                                            getParkingInfoResponse.getTariffs()
+                                    );
+                            break;
+                        case "2":
+                            price = getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost() +
+                                    HourlyFareCalculator.calculateStepFareVehicle2(
+                                            roundedTotalStayInMinutes,
+                                            getParkingInfoResponse.getTariffs()
+                                    );
+                            break;
+                        case "3":
+                            price = getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost() +
+                                    HourlyFareCalculator.calculateStepFareVehicle3(
+                                            roundedTotalStayInMinutes,
+                                            getParkingInfoResponse.getTariffs()
+                                    );
+                            break;
+                        case "4":
+                            price = getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost() +
+                                    HourlyFareCalculator.calculateStepFareVehicle4(
+                                            roundedTotalStayInMinutes,
+                                            getParkingInfoResponse.getTariffs()
+                                    );
+                            break;
+                        case "5":
+                            price = getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost() +
+                                    HourlyFareCalculator.calculateStepFareVehicle5(
+                                            roundedTotalStayInMinutes,
+                                            getParkingInfoResponse.getTariffs()
+                                    );
+                            break;
+                        case "6":
+                            price = getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost() +
+                                    HourlyFareCalculator.calculateStepFareVehicle6(
+                                            roundedTotalStayInMinutes,
+                                            getParkingInfoResponse.getTariffs()
+                                    );
+                            break;
+                        case "7":
+                            price = getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost() +
+                                    HourlyFareCalculator.calculateStepFareVehicle7(
+                                            roundedTotalStayInMinutes,
+                                            getParkingInfoResponse.getTariffs()
+                                    );
+                            break;
+                        case "8":
+                            price = getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost() +
+                                    HourlyFareCalculator.calculateStepFareVehicle8(
+                                            roundedTotalStayInMinutes,
+                                            getParkingInfoResponse.getTariffs()
+                                    );
+                            break;
+
+                    }
+                }
+                roundedPrice = CalculateHelperUtility.roundFarePrice(price, getParkingInfoResponse.getTariffs());
+                paidAmount____ = Long.toString(roundedPrice);
+
+
+                //should show dialog and need to pay
+
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
+                LayoutInflater inflater = ((Activity) myContext).getLayoutInflater();
+                View alertView = inflater.inflate(R.layout.dialog_need_pay, null);
+                alertDialog.setView(alertView);
+                alertDialog.setCancelable(false);
+                final AlertDialog show = alertDialog.show();
+                TextView txtPlate = alertView.findViewById(R.id.dialog_need_pay_1);
+                if (pelakString.length() == 8) {
+                    txtPlate.setText(pelakString.substring(0, 3) + " - " + pelakString.substring(3, 8));
+                } else {
+                    txtPlate.setText(
+                            pelakString.substring(4, 9)
+
+
+                                    + " - " +
+
+
+                                    PelakUtility.convertFromCode(pelakString.substring(2, 4)) +
+
+                                    " - " +
+
+
+                                    pelakString.substring(0, 2)
+
+
+                    );
+                }
+
+
+                TextView txtEnterDateTime = alertView.findViewById(R.id.dialog_need_pay_2);
+                TextView txtShouldPayCost = alertView.findViewById(R.id.dialog_need_pay_6);
+                String lan = PreferenceManager.getDefaultSharedPreferences(myContext).getString("language", "fa");
+
+                if (lan.equals("fa")) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
+                    Date dateNow = sdf.parse(enterDateTimeString);
+                    PersianDate persianDate = new PersianDate(dateNow);
+                    PersianDateFormat pdformater1 = new PersianDateFormat("Y/m/d");
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.getDefault());
+                    String jalaliDate = pdformater1.format(persianDate) + "  " + sdf1.format(dateNow);
+                    txtEnterDateTime.setText(jalaliDate);
+                    txtShouldPayCost.setText(roundedPrice + " ریال");
+
+
+                } else {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
+                    Date dateNow = sdf.parse(enterDateTimeString);
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault());
+                    txtEnterDateTime.setText(sdf1.format(dateNow));
+                    txtShouldPayCost.setText(roundedPrice + " Rials");
+
+                }
+
+                TextView txtTariffId = alertView.findViewById(R.id.dialog_need_pay_3);
+                txtTariffId.setText(getTariffNameById(tariffIdString));
+                TextView txtEnterDoor = alertView.findViewById(R.id.dialog_need_pay_4);
+                txtEnterDoor.setText(enterDoorIDString);
+                TextView txtEnterOperator = alertView.findViewById(R.id.dialog_need_pay_5);
+                txtEnterOperator.setText(enterOperatorIDString);
+                LinearLayout cancelButton = alertView.findViewById(R.id.dialog_need_pay_7);
+                LinearLayout cashButton = alertView.findViewById(R.id.dialog_need_pay_8);
+                LinearLayout electronicButton = alertView.findViewById(R.id.dialog_need_pay_9);
+
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        show.dismiss();
+                    }
+                });
+
+                final long finalRoundedPrice = roundedPrice;
+                cashButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        Log.d(TAG, "save in exit_table then  print recepit and paid by cash");
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
+                        final String exitDateTimeStringForDataBase = sdf.format(currentDateTime);
+                        final String enterDateTimeStringForDataBase = sdf.format(enterDateTime);
+
+                        final int tarrifId = Integer.parseInt(tariffIdString);
+
+
+                        parkbanRepository.saveEntranceRecord(
+                                getParkingInfoResponse.getDeviceId(),
+                                pelakString,
+                                enterDateTimeStringForDataBase,
+                                tarrifId,
+                                0,
+                                0,
+                                "",
+                                selectedDoor.getId().longValue(),
+                                selectedUser.getId().longValue(),
+                                1,
+                                new ParkbanRepository.DataBaseResultCallBack() {
+                                    @Override
+                                    public void onSuccess(long id) {
+                                        parkbanRepository.saveExitRecord(
+                                                getParkingInfoResponse.getDeviceId(),
+                                                pelakString,
+                                                exitDateTimeStringForDataBase,
+                                                tarrifId,
+                                                finalRoundedPrice,
+                                                0,
+                                                "",
+                                                selectedDoor.getId().longValue(),
+                                                selectedUser.getId().longValue(),
+                                                1,
+                                                new ParkbanRepository.DataBaseResultCallBack() {
+                                                    @Override
+                                                    public void onSuccess(long id) {
+
+                                                        parkbanRepository.saveTraffikRecord(
+                                                                getParkingInfoResponse.getDeviceId(),
+                                                                pelakString,
+                                                                enterDateTimeStringForDataBase,
+                                                                exitDateTimeStringForDataBase,
+                                                                tarrifId,
+                                                                finalRoundedPrice,
+                                                                0,
+                                                                "",
+                                                                Long.parseLong(enterDoorIDString),
+                                                                selectedDoor.getId().longValue(),
+                                                                Long.parseLong(enterOperatorIDString),
+                                                                selectedUser.getId().longValue(),
+                                                                getTariffNameById(tariffIdString), new ParkbanRepository.DataBaseResultCallBack() {
+                                                                    @Override
+                                                                    public void onSuccess(long id) {
+
+
+                                                                        parkbanRepository.setExitEntranceRecord(pelakString, new ParkbanRepository.DataBaseResultCallBack() {
+                                                                            @Override
+                                                                            public void onSuccess(long id) {
+
+
+                                                                                Log.d(TAG, "onSuccess in save database , now print process begin");
+
+                                                                                try {
+                                                                                    mBitmap = generateBitmapByLayoutForPayment(myContext, enterDateTimeStringForDataBase, exitDateTimeStringForDataBase, getTariffNameById(tariffIdString), Long.toString(finalRoundedPrice), pelakString);
+                                                                                    Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
+                                                                                    msg.obj = mBitmap;
+                                                                                    msg.sendToTarget();
+                                                                                    mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
+                                                                                    show.dismiss();
+
+                                                                                } catch (Exception exception) {
+
+                                                                                }
+
+
+                                                                            }
+
+                                                                            @Override
+                                                                            public void onFailed() {
+                                                                                ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                                                show.dismiss();
+                                                                            }
+                                                                        });
+
+
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onFailed() {
+                                                                        ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                                        show.dismiss();
+                                                                    }
+                                                                }
+
+
+                                                        );
+
+
+                                                    }
+
+                                                    @Override
+                                                    public void onFailed() {
+                                                        ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                        show.dismiss();
+                                                    }
+                                                }
+
+
+                                        );
+                                    }
+
+                                    @Override
+                                    public void onFailed() {
+
+                                    }
+                                }
+
+
+                        );
+
+
+                    }
+                });
+
+                electronicButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.d(TAG, "do payment then save in database");
+                        show.dismiss();
+                        Intent fanavaPaymentIntent = new Intent("ir.totan.pos.view.cart.TXN");
+                        fanavaPaymentIntent.putExtra("type", 3);
+                        fanavaPaymentIntent.putExtra("amount", Long.toString(finalRoundedPrice));
+                        fanavaPaymentIntent.putExtra("res_num", Long.parseLong(pelakString));
+                        ((Activity) myContext).startActivityForResult(fanavaPaymentIntent, 103);
+
+
+                    }
+                });
+
+
+            }
+
+
+        } else {
+            // should only show dialog and no need to pay he paid first at entrance
+
+
+            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
+            LayoutInflater inflater = ((Activity) myContext).getLayoutInflater();
+            View alertView = inflater.inflate(R.layout.dialog_no_need_pay, null);
+            alertDialog.setView(alertView);
+            alertDialog.setCancelable(false);
+            final AlertDialog show = alertDialog.show();
+            TextView txtPlate = alertView.findViewById(R.id.dialog_no_need_pay_1);
+            if (pelakString.length() == 8) {
+                txtPlate.setText(pelakString.substring(0, 3) + " - " + pelakString.substring(3, 8));
+            } else {
+
+
+                txtPlate.setText(
+
+                        pelakString.substring(4, 9)
+
+
+                                +
+                                " - " +
+                                PelakUtility.convertFromCode(pelakString.substring(2, 4)) +
+                                " - " +
+
+                                pelakString.substring(0, 2)
+
+
+                );
+            }
+
+
+            TextView txtEnterDateTime = alertView.findViewById(R.id.dialog_no_need_pay_2);
+            TextView txtPaidCost = alertView.findViewById(R.id.dialog_no_need_pay_6);
+            String lan = PreferenceManager.getDefaultSharedPreferences(myContext).getString("language", "fa");
+
+            if (lan.equals("fa")) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
+                Date dateNow = sdf.parse(enterDateTimeString);
+                PersianDate persianDate = new PersianDate(dateNow);
+                PersianDateFormat pdformater1 = new PersianDateFormat("Y/m/d");
+                SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.getDefault());
+                String jalaliDate = pdformater1.format(persianDate) + "  " + sdf1.format(dateNow);
+                txtEnterDateTime.setText(jalaliDate);
+                txtPaidCost.setText(paidAmountString + "  ریال");
+
+
+            } else {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
+                Date dateNow = sdf.parse(enterDateTimeString);
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault());
+                txtEnterDateTime.setText(sdf1.format(dateNow));
+                txtPaidCost.setText(paidAmountString + " Rials");
+
+            }
+
+            TextView txtTariffId = alertView.findViewById(R.id.dialog_no_need_pay_3);
+            txtTariffId.setText(getTariffNameById(tariffIdString));
+            TextView txtEnterDoor = alertView.findViewById(R.id.dialog_no_need_pay_4);
+            txtEnterDoor.setText(enterDoorIDString);
+            TextView txtEnterOperator = alertView.findViewById(R.id.dialog_no_need_pay_5);
+            txtEnterOperator.setText(enterOperatorIDString);
+            LinearLayout cancelButton = alertView.findViewById(R.id.dialog_no_need_pay_7);
+            LinearLayout exitButton = alertView.findViewById(R.id.dialog_no_need_pay_8);
+
+
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    show.dismiss();
+                }
+            });
+
+
+            exitButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    Log.d(TAG, "save in exit_table then  print recepit and paid by cash");
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
+                    final String exitDateTimeStringForDataBase = sdf.format(currentDateTime);
+                    final String enterDateTimeStringForDataBase = sdf.format(enterDateTime);
+                    final int tarrifId = Integer.parseInt(tariffIdString);
+
+
+                    parkbanRepository.saveEntranceRecord(
+                            getParkingInfoResponse.getDeviceId(),
+                            pelakString,
+                            enterDateTimeStringForDataBase,
+                            tarrifId,
+                            0,
+                            0,
+                            "",
+                            selectedDoor.getId().longValue(),
+                            selectedUser.getId().longValue(),
+                            1, new ParkbanRepository.DataBaseResultCallBack() {
+                                @Override
+                                public void onSuccess(long id) {
+
+                                    parkbanRepository.saveExitRecord(
+                                            getParkingInfoResponse.getDeviceId(),
+                                            pelakString,
+                                            exitDateTimeStringForDataBase,
+                                            tarrifId,
+                                            Long.parseLong(paidAmountString.trim()),
+                                            Integer.parseInt(paymentTypeString.trim()),
+                                            electronicPaymentCodeString,
+                                            selectedDoor.getId().longValue(),
+                                            selectedUser.getId().longValue(),
+                                            1,
+                                            new ParkbanRepository.DataBaseResultCallBack() {
+                                                @Override
+                                                public void onSuccess(long id) {
+
+                                                    parkbanRepository.saveTraffikRecord(
+                                                            getParkingInfoResponse.getDeviceId(),
+                                                            pelakString,
+                                                            enterDateTimeStringForDataBase,
+                                                            exitDateTimeStringForDataBase,
+                                                            tarrifId,
+                                                            Long.parseLong(paidAmountString.trim()),
+                                                            Integer.parseInt(paymentTypeString.trim()),
+                                                            electronicPaymentCodeString,
+                                                            Long.parseLong(enterDoorIDString),
+                                                            selectedDoor.getId().longValue(),
+                                                            Long.parseLong(enterOperatorIDString),
+                                                            selectedUser.getId().longValue(),
+                                                            getTariffNameById(tariffIdString), new ParkbanRepository.DataBaseResultCallBack() {
+                                                                @Override
+                                                                public void onSuccess(long id) {
+
+                                                                    parkbanRepository.setExitEntranceRecord(pelakString, new ParkbanRepository.DataBaseResultCallBack() {
+                                                                        @Override
+                                                                        public void onSuccess(long id) {
+                                                                            ShowToast.getInstance().showSuccess(myContext, R.string.submit_success);
+                                                                            show.dismiss();
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onFailed() {
+                                                                            ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                                            show.dismiss();
+                                                                        }
+                                                                    });
+
+
+                                                                }
+
+                                                                @Override
+                                                                public void onFailed() {
+                                                                    ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                                    show.dismiss();
+                                                                }
+                                                            }
+
+
+                                                    );
+
+
+                                                }
+
+                                                @Override
+                                                public void onFailed() {
+                                                    ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                    show.dismiss();
+                                                }
+                                            }
+
+
+                                    );
+                                }
+
+                                @Override
+                                public void onFailed() {
+
+                                }
+                            }
+
+
+                    );
+
+
+                }
+            });
+
+
+        }
+
+
+    }
+
+
+    public void processActivityResult(Context context, int requestCode, int resultCode, Intent
+            data) {
+
+
+        if (requestCode == 103) {
+
+
+            final Bundle b = data.getBundleExtra("response");
+            Log.d(TAG, "onActivityResult:  >>>>>>>>>>>>>>> " + getBundleString(b));
+            if (b.getString("result").trim().equals("succeed")) {
+                Log.d("e_pardakht >>>", "step 2 >>> GOOD_PAYMENT ");
+
+                Log.d(TAG, "save in exit_table then delete from entrance print recepit and paid by cash");
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
+                final String exitDateTimeStringForDataBase = sdf.format(currentDateTime);
+                final String enterDateTimeStringForDataBase = sdf.format(enterDateTime);
+
+                final int tarrifId = Integer.parseInt(tariffIdString____);
+
+
+                parkbanRepository.saveEntranceRecord(
+
+
+                        getParkingInfoResponse.getDeviceId(),
+                        pelakString____,
+                        enterDateTimeStringForDataBase,
+                        tarrifId,
+                        0,
+                        0,
+                        "",
+                        selectedDoor.getId().longValue(),
+                        selectedUser.getId().longValue(),
+                        1, new ParkbanRepository.DataBaseResultCallBack() {
+                            @Override
+                            public void onSuccess(long id) {
+                                parkbanRepository.saveExitRecord(
+                                        getParkingInfoResponse.getDeviceId(),
+                                        pelakString____,
+                                        exitDateTimeStringForDataBase,
+                                        tarrifId,
+                                        Long.parseLong(paidAmount____),
+                                        1,
+                                        b.getString("rrn"),
+                                        selectedDoor.getId().longValue(),
+                                        selectedUser.getId().longValue(),
+                                        1,
+                                        new ParkbanRepository.DataBaseResultCallBack() {
+                                            @Override
+                                            public void onSuccess(long id) {
+
+                                                parkbanRepository.saveTraffikRecord(
+                                                        getParkingInfoResponse.getDeviceId(),
+                                                        pelakString____,
+                                                        enterDateTimeStringForDataBase,
+                                                        exitDateTimeStringForDataBase,
+                                                        tarrifId,
+                                                        Long.parseLong(paidAmount____),
+                                                        1,
+                                                        b.getString("rrn"),
+                                                        Long.parseLong(enterDoorIDString____),
+                                                        selectedDoor.getId().longValue(),
+                                                        Long.parseLong(enterOperatorIDString____),
+                                                        selectedUser.getId().longValue(),
+                                                        getTariffNameById(tariffIdString____), new ParkbanRepository.DataBaseResultCallBack() {
+                                                            @Override
+                                                            public void onSuccess(long id) {
+
+
+                                                                parkbanRepository.setExitEntranceRecord(pelakString____, new ParkbanRepository.DataBaseResultCallBack() {
+                                                                    @Override
+                                                                    public void onSuccess(long id) {
+
+
+                                                                        Log.d(TAG, "onSuccess in save database , now print process begin");
+
+                                                                        try {
+                                                                            mBitmap = generateBitmapByLayoutForPayment(myContext, enterDateTimeStringForDataBase, exitDateTimeStringForDataBase, getTariffNameById(tariffIdString____), paidAmount____, pelakString____);
+                                                                            Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
+                                                                            msg.obj = mBitmap;
+                                                                            msg.sendToTarget();
+                                                                            mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
+
+
+                                                                        } catch (Exception exception) {
+
+                                                                        }
+
+
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onFailed() {
+                                                                        ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+
+                                                                    }
+                                                                });
+
+
+                                                            }
+
+                                                            @Override
+                                                            public void onFailed() {
+                                                                ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+
+                                                            }
+                                                        }
+
+
+                                                );
+
+
+                                            }
+
+                                            @Override
+                                            public void onFailed() {
+                                                ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+
+                                            }
+                                        }
+
+
+                                );
+                            }
+
+                            @Override
+                            public void onFailed() {
+
+                            }
+                        }
+
+
+                );
+
+
+            } else {
+
+
+                ShowToast.getInstance().showError(myContext, R.string.failed_payment);
+            }
+
+
+        }
+
+
+    }
+
+
+    public Bitmap generateBitmapByLayoutForPayment(Context context, String enterTime, String exitTime, String vehicelName, String paidAmount, String pelak) throws ParseException {
+
+        Log.d(TAG, "generateBitmapByLayoutForPayment:  pelak that recived for print : " + pelak);
+
+
+        View view = ((Activity) context).getLayoutInflater().inflate(R.layout.receipt_exit, null);
+
+        TextView entry_date_txt = view.findViewById(R.id.exit_resid_date_time_value);
+        TextView exit_date_txt = view.findViewById(R.id.exit_resid_date_time_value_exit);
+        TextView parking_name_txt = view.findViewById(R.id.exit_resid_parking_name);
+        TextView paid_amount_txt = view.findViewById(R.id.exit_resid_paid_amount_value);
+        TextView tariff_txt = view.findViewById(R.id.exit_resid_tariff_type_value);
+        TextView plate_txt_0 = view.findViewById(R.id.p0_exit_resid);
+        TextView plate_txt_1 = view.findViewById(R.id.p1_exit_resid);
+        TextView plate_txt_2 = view.findViewById(R.id.p2_exit_resid);
+        TextView plate_txt_3 = view.findViewById(R.id.p3_exit_resid);
+        TextView m_plate_txt_0 = view.findViewById(R.id.m0_exit_resid);
+        TextView m_plate_txt_1 = view.findViewById(R.id.m1_exit_resid);
+        RelativeLayout pelak_main_layoout = view.findViewById(R.id.plate_main_layout_exit_resid);
+        LinearLayout motor_main_layout = view.findViewById(R.id.motor_layout_exit_resid);
+        LinearLayout car_main_layout = view.findViewById(R.id.plate_layout_exit_resid);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
+        Date enter__ = sdf.parse(enterTime);
+        Date exit__ = sdf.parse(exitTime);
+
+
+        String lan = PreferenceManager.getDefaultSharedPreferences(context).getString("language", "fa");
+
+        if (lan.equals("fa")) {
+            paid_amount_txt.setText(paidAmount + " ریال");
+
+
+            PersianDate persianDate = new PersianDate(enter__);
+            PersianDateFormat pdformater1 = new PersianDateFormat("Y/m/d");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.getDefault());
+            String jalaliDateEnter = pdformater1.format(persianDate) + "  " + sdf1.format(enter__);
+
+
+            PersianDate persianDate___ = new PersianDate(exit__);
+            String jalaliDateExit = pdformater1.format(persianDate___) + "  " + sdf1.format(exit__);
+
+
+            entry_date_txt.setText(jalaliDateEnter);
+            exit_date_txt.setText(jalaliDateExit);
+        } else {
+            paid_amount_txt.setText(paidAmount + " Rials");
+
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd  HH:mm", Locale.getDefault());
+
+
+            entry_date_txt.setText(sdf1.format(enter__));
+            exit_date_txt.setText(sdf1.format(exit__));
+        }
+
+
+        parking_name_txt.setText(getParkingInfoResponse.getParkingName().trim());
+
+        pelak_main_layoout.setVisibility(View.VISIBLE);
+        if (pelak.length() > 8) {
+            car_main_layout.setVisibility(View.VISIBLE);
+            motor_main_layout.setVisibility(View.GONE);
+            plate_txt_0.setText(pelak.substring(0, 2));
+            plate_txt_1.setText(PelakUtility.convertFromCode(pelak.substring(2, 4)));
+            plate_txt_2.setText(pelak.substring(4, 7));
+            plate_txt_3.setText(pelak.substring(7, 9));
+
+
+        } else {
+            car_main_layout.setVisibility(View.GONE);
+            motor_main_layout.setVisibility(View.VISIBLE);
+            m_plate_txt_0.setText(pelak.substring(0, 3));
+            m_plate_txt_1.setText(pelak.substring(3, 8));
+        }
+
+        tariff_txt.setText(vehicelName);
+
+
+        return PrinterUtils.convertViewToBitmap(view);
+    }
+
+
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
     public void Return_Onclick(final View view) {
@@ -562,33 +1689,6 @@ public class EnterManuallyViewModel extends ViewModel {
             public void run() {
 
                 ((EnterManullyActivity) (myContext)).finish();
-
-
-
-            }
-        }, Animation_Constant.ANIMATION_VALUE);
-    }
-
-
-    public void Select_DateTime_Picker(final View view) {
-        final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_bubble_animation);
-        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-        myAnim.setInterpolator(interpolator);
-        view.startAnimation(myAnim);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                PersianCalendar persianCalendar = new PersianCalendar();
-                DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
-                        (EnterManullyActivity)myContext,
-                        persianCalendar.getPersianYear(),
-                        persianCalendar.getPersianMonth(),
-                        persianCalendar.getPersianDay()
-                );
-                datePickerDialog.show(myContext.getFragmentManager(), "Datepickerdialog");
-
 
 
             }

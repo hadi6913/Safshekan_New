@@ -96,7 +96,7 @@ public class SendRecordHandler extends Service implements Runnable {
         Log.d(TAG, "IMEI : "+ telephonyManager.getDeviceId());
 //        imei = telephonyManager.getDeviceId();
         //todo imei
-        imei = "562837562483719";
+        imei = "868500040082190";
 
     }
 
@@ -149,7 +149,7 @@ public class SendRecordHandler extends Service implements Runnable {
                                                 ioRecord.setCost(element.getPaidAmount());
                                                 ioRecord.setPaymentKind((element.getPayType()==2)?0L:element.getPayType());
                                                 ioRecord.setElectronicPaymentTracingCode(element.getElectronicPaymentCode());
-                                                ioRecord.setSourceKindTraffic(0L);
+                                                ioRecord.setSourceKindTraffic(element.getSourceKind());
                                                 ioRecord.setIoKind(0L);
                                                 String date = element.getEntranceDate().substring(0, 4)
                                                         + "-" + element.getEntranceDate().substring(4, 6)
@@ -196,7 +196,7 @@ public class SendRecordHandler extends Service implements Runnable {
                                                                                 ioRecord.setCost(element.getPaidAmount());
                                                                                 ioRecord.setPaymentKind((element.getPayType()==2)?0L:element.getPayType());
                                                                                 ioRecord.setElectronicPaymentTracingCode(element.getElectronicPaymentCode());
-                                                                                ioRecord.setSourceKindTraffic(0L);
+                                                                                ioRecord.setSourceKindTraffic(element.getSourceKind());
                                                                                 ioRecord.setIoKind(1L);
                                                                                 String date = element.getExitDate().substring(0, 4)
                                                                                         + "-" + element.getExitDate().substring(4, 6)
@@ -559,7 +559,7 @@ public class SendRecordHandler extends Service implements Runnable {
                                                             ioRecord.setCost(element.getPaidAmount());
                                                             ioRecord.setPaymentKind((element.getPayType()==2)?0L:element.getPayType());
                                                             ioRecord.setElectronicPaymentTracingCode(element.getElectronicPaymentCode());
-                                                            ioRecord.setSourceKindTraffic(0L);
+                                                            ioRecord.setSourceKindTraffic(element.getSourceKind());
                                                             ioRecord.setIoKind(1L);
                                                             String date = element.getExitDate().substring(0, 4)
                                                                     + "-" + element.getExitDate().substring(4, 6)
@@ -893,7 +893,7 @@ public class SendRecordHandler extends Service implements Runnable {
                                                         ioRecord.setCost(element.getPaidAmount());
                                                         ioRecord.setPaymentKind((element.getPayType()==2)?0L:element.getPayType());
                                                         ioRecord.setElectronicPaymentTracingCode(element.getElectronicPaymentCode());
-                                                        ioRecord.setSourceKindTraffic(0L);
+                                                        ioRecord.setSourceKindTraffic(element.getSourceKind());
                                                         ioRecord.setIoKind(1L);
                                                         String date = element.getExitDate().substring(0, 4)
                                                                 + "-" + element.getExitDate().substring(4, 6)

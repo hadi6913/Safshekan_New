@@ -5,12 +5,15 @@
     <string name="setting_dialog_3">آدرس سرور را وارد کنید</string>
     <string name="setting_dialog_4">دریافت مشخصات پارکینگ</string>
     <string name="exception_msg">بروز خطا</string>
+    <string name="unregistered_device_msg">دستگاه مورد استفاده ، غیرمجاز میباشد</string>
     <string name="exception_msg_245">بروز خطای محاسباتی</string>
     <string name="enter_password">رمز عبور را وارد کنید</string>
     <string name="wrong_password">رمز عبور نادرست است</string>
     <string name="error_server_address">آدرس سرور را درست وارد کنید</string>
     <string name="connection_failed">عدم برقراری ارتباط با سرور</string>
+    <string name="entrance_not_found">رکورد ورود یافت نشد</string>
     <string name="enter_car_tag">پلاک وسیله نقلیه را وارد کنید</string>
+    <string name="enter_entrance_date">تاریخ ورود را وارد کنید</string>
     <string name="print_enter_qr">چاپ بارکد ورود</string>
     <string name="pay_entrance_fare">پرداخت مبلغ ورودی</string>
     <string name="should_pay_now">پرداخت هنگام ورود</string>

@@ -16,6 +16,18 @@ public class ExitRecord {
 
 
 
+    @ColumnInfo(name = "source_kind")
+    private int sourceKind = 0;
+
+
+    public int getSourceKind() {
+        return sourceKind;
+    }
+
+    public void setSourceKind(int sourceKind) {
+        this.sourceKind = sourceKind;
+    }
+
     @ColumnInfo(name = "is_send")
     private int isSend = 0;
 

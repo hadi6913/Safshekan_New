@@ -93,79 +93,71 @@ public class EnterQrActivity extends BaseActivity {
                     enterQrViewModel.getSelectedTarrifEntranceFee().setValue(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost().toString());
                     if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff1().getIsReceiveUponEntrance()) {
                         enterQrViewModel.getShouldPayFirst().setValue(true);
-                    }else {
+                    } else {
                         enterQrViewModel.getShouldPayFirst().setValue(false);
                     }
                 }
 
-                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff2() != null){
+                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff2() != null) {
                     if (String.valueOf(binding.spinnerCarTypeEnterQr.getSelectedItem().toString().trim()).equals(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName().trim())) {
                         enterQrViewModel.getSelectedTarrifId().setValue(2);
                         enterQrViewModel.getSelectedTarrifEntranceFee().setValue(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost().toString());
 
 
-
                         if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff2().getIsReceiveUponEntrance()) {
                             enterQrViewModel.getShouldPayFirst().setValue(true);
-                        }else {
+                        } else {
                             enterQrViewModel.getShouldPayFirst().setValue(false);
                         }
                     }
                 }
 
 
-
-                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff3() != null){
+                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff3() != null) {
                     if (String.valueOf(binding.spinnerCarTypeEnterQr.getSelectedItem().toString().trim()).equals(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName().trim())) {
                         enterQrViewModel.getSelectedTarrifId().setValue(3);
                         enterQrViewModel.getSelectedTarrifEntranceFee().setValue(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost().toString());
 
 
-
                         if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff3().getIsReceiveUponEntrance()) {
                             enterQrViewModel.getShouldPayFirst().setValue(true);
-                        }else {
+                        } else {
                             enterQrViewModel.getShouldPayFirst().setValue(false);
                         }
                     }
                 }
 
-                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff4() != null){
+                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff4() != null) {
                     if (String.valueOf(binding.spinnerCarTypeEnterQr.getSelectedItem().toString().trim()).equals(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName().trim())) {
                         enterQrViewModel.getSelectedTarrifId().setValue(4);
                         enterQrViewModel.getSelectedTarrifEntranceFee().setValue(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost().toString());
 
 
-
-
                         if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff4().getIsReceiveUponEntrance()) {
                             enterQrViewModel.getShouldPayFirst().setValue(true);
-                        }else {
+                        } else {
                             enterQrViewModel.getShouldPayFirst().setValue(false);
                         }
                     }
                 }
 
 
-
-                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff5() != null){
+                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff5() != null) {
                     if (String.valueOf(binding.spinnerCarTypeEnterQr.getSelectedItem().toString().trim()).equals(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName().trim())) {
                         enterQrViewModel.getSelectedTarrifId().setValue(5);
                         enterQrViewModel.getSelectedTarrifEntranceFee().setValue(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost().toString());
 
 
-
-
                         if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff5().getIsReceiveUponEntrance()) {
                             enterQrViewModel.getShouldPayFirst().setValue(true);
-                        }else {
+                        } else {
                             enterQrViewModel.getShouldPayFirst().setValue(false);
                         }
                     }
                 }
 
 
-                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff6() != null){
+                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff6() != null) {
                     if (String.valueOf(binding.spinnerCarTypeEnterQr.getSelectedItem().toString().trim()).equals(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName().trim())) {
                         enterQrViewModel.getSelectedTarrifId().setValue(6);
                         enterQrViewModel.getSelectedTarrifEntranceFee().setValue(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost().toString());
@@ -173,15 +165,14 @@ public class EnterQrActivity extends BaseActivity {
 
                         if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff6().getIsReceiveUponEntrance()) {
                             enterQrViewModel.getShouldPayFirst().setValue(true);
-                        }else {
+                        } else {
                             enterQrViewModel.getShouldPayFirst().setValue(false);
                         }
                     }
                 }
 
 
-
-                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff7() != null){
+                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff7() != null) {
                     if (String.valueOf(binding.spinnerCarTypeEnterQr.getSelectedItem().toString().trim()).equals(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName().trim())) {
                         enterQrViewModel.getSelectedTarrifId().setValue(7);
                         enterQrViewModel.getSelectedTarrifEntranceFee().setValue(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost().toString());
@@ -189,13 +180,13 @@ public class EnterQrActivity extends BaseActivity {
 
                         if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff7().getIsReceiveUponEntrance()) {
                             enterQrViewModel.getShouldPayFirst().setValue(true);
-                        }else {
+                        } else {
                             enterQrViewModel.getShouldPayFirst().setValue(false);
                         }
                     }
                 }
 
-                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff8() != null){
+                if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff8() != null) {
                     if (String.valueOf(binding.spinnerCarTypeEnterQr.getSelectedItem().toString().trim()).equals(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName().trim())) {
                         enterQrViewModel.getSelectedTarrifId().setValue(8);
                         enterQrViewModel.getSelectedTarrifEntranceFee().setValue(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost().toString());
@@ -203,7 +194,7 @@ public class EnterQrActivity extends BaseActivity {
 
                         if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff8().getIsReceiveUponEntrance()) {
                             enterQrViewModel.getShouldPayFirst().setValue(true);
-                        }else {
+                        } else {
                             enterQrViewModel.getShouldPayFirst().setValue(false);
                         }
                     }
@@ -218,7 +209,6 @@ public class EnterQrActivity extends BaseActivity {
                 enterQrViewModel.getSelectedCarTypeName().setValue(String.valueOf(binding.spinnerCarTypeEnterQr.getSelectedItem().toString().trim()));
                 enterQrViewModel.getSelectedTarrifId().setValue(1);
                 enterQrViewModel.getSelectedTarrifEntranceFee().setValue(enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost().toString());
-
 
 
                 if (enterQrViewModel.getParkingInfoResponse.getTariffs().getVehicleTariff1().getIsReceiveUponEntrance()) {
@@ -325,10 +315,6 @@ public class EnterQrActivity extends BaseActivity {
             }
         });
     }
-
-
-
-
 
 
     @Override
