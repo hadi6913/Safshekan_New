@@ -33,6 +33,7 @@ public class HourlyFareCalculator {
 
 
         } else {
+            Log.d(TAG, "calculateStepFareVehicle1: ");
             long remainingStayLength = roundedTotalStayLength - tariff.getVehicleTariff1().getDurationStep1();
             if (remainingStayLength >= 0) {
                 price = price + tariff.getVehicleTariff1().getCostStep1();

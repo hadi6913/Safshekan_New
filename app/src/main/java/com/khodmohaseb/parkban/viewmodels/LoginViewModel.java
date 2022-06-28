@@ -193,15 +193,15 @@ public class LoginViewModel extends ViewModel {
                         //getting imei from device
 
                         final TelephonyManager telephonyManager = (TelephonyManager) (((LoginActivity) context).getSystemService(Context.TELEPHONY_SERVICE));
-                        Log.d(TAG, "IMEI : " + "968500040082191");
-                        editor.putString("imei", "968500040082191".trim());
+                        Log.d(TAG, "IMEI : " + telephonyManager.getDeviceId());
+                        editor.putString("imei", telephonyManager.getDeviceId().trim());
                         editor.commit();
 
 
                         try {
 
 
-                            parkbanRepository.getDeviceToken("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                            parkbanRepository.getDeviceToken("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
 
                                 @Override
                                 public void onSuccess(String deviceToken) {
@@ -215,7 +215,7 @@ public class LoginViewModel extends ViewModel {
                                     ParkbanServiceProvider.setInstanceNull();
 
 
-                                    parkbanRepository.getParkingInformation("\"" + "968500040082191" + "\"",
+                                    parkbanRepository.getParkingInformation("\"" + telephonyManager.getDeviceId() + "\"",
                                             new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                 @Override
                                                 public void onSuccess(GetParkingInfoResponse result) {
@@ -266,7 +266,7 @@ public class LoginViewModel extends ViewModel {
                                                     langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
                                                     langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
 
-                                                    parkbanRepository.setUpdateDevice("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                                    parkbanRepository.setUpdateDevice("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
                                                         @Override
                                                         public void onSuccess(Boolean result) {
                                                             progress.setValue(0);
@@ -625,15 +625,15 @@ public class LoginViewModel extends ViewModel {
                             progress.setValue(10);
                             // getting imei from device
                             final TelephonyManager telephonyManager = (TelephonyManager) (((LoginActivity) context).getSystemService(Context.TELEPHONY_SERVICE));
-                            Log.d(TAG, "IMEI : " + "968500040082191");
-                            editor.putString("imei", "968500040082191".trim());
+                            Log.d(TAG, "IMEI : " + telephonyManager.getDeviceId());
+                            editor.putString("imei", telephonyManager.getDeviceId().trim());
                             editor.commit();
 
 
                             try {
 
 
-                                parkbanRepository.getDeviceToken("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                                parkbanRepository.getDeviceToken("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                     @Override
                                     public void onSuccess(String deviceToken) {
 
@@ -645,11 +645,11 @@ public class LoginViewModel extends ViewModel {
 
                                         ParkbanServiceProvider.setInstanceNull();
 
-                                        parkbanRepository.isNeedUpdateDevice("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                        parkbanRepository.isNeedUpdateDevice("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
                                             @Override
                                             public void onSuccess(Boolean result) {
                                                 if (result) {
-                                                    parkbanRepository.getParkingInformation("\"" + "968500040082191" + "\"",
+                                                    parkbanRepository.getParkingInformation("\"" + telephonyManager.getDeviceId() + "\"",
                                                             new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                                 @Override
                                                                 public void onSuccess(GetParkingInfoResponse result) {
@@ -700,7 +700,7 @@ public class LoginViewModel extends ViewModel {
                                                                     langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
                                                                     langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
 
-                                                                    parkbanRepository.setUpdateDevice("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                                                    parkbanRepository.setUpdateDevice("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
                                                                         @Override
                                                                         public void onSuccess(Boolean result) {
                                                                             progress.setValue(0);
