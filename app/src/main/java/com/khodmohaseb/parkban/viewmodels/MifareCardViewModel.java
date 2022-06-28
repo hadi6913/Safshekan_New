@@ -23,7 +23,7 @@ import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 
 public class MifareCardViewModel extends ViewModel {
 
-    public static final String TAG = "MifareCardViewModel";
+    public static final String TAG = "xeagle6913 MifareCardViewModel";
 
     //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
     //sector 0

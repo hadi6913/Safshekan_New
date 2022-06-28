@@ -40,7 +40,7 @@ import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 
 public class PaymentSafshekanViewModel extends ViewModel {
 
-    public static final String TAG = "PaymentSafViewModel";
+    public static final String TAG = "xeagle6913 PaymentSafViewModel";
 
     private Bitmap mBitmap;
     PrinterManager mPrinterManager;

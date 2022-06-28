@@ -47,7 +47,7 @@ import static ir.shahaabco.ANPRNDK.anpr_create;
 
 public class ExitMifareActivity extends BaseActivity implements ExitMifareReaderHandler.Callbacks {
 
-    private static final String TAG = "ExitMifareActivity";
+    private static final String TAG = "xeagle6913 ExitMifareActivity";
     private int failedLoadLib = 0;
     private ExitMifareViewModel exitMifareViewModel;
     private boolean doubleBackToExitPressedOnce = false;
@@ -348,7 +348,7 @@ public class ExitMifareActivity extends BaseActivity implements ExitMifareReader
                         String paymentType = Integer.toString(ByteUtils.getInt(bl17[8])) ;
                         String paidAmount =  Long.toString(ByteUtils.getValue(bl17,9,7));
                         String enterDoorId = Long.toString( ByteUtils.getValue(bl18,0,8));
-                        String enterOperatorId = Long.toString( ByteUtils.getValue(bl18,7,8));
+                        String enterOperatorId = Long.toString( ByteUtils.getValue(bl18,8,8));
                         exitMifareViewModel.handelExit(
                            pelak,
                            yyyyMMddHHmmEnterDateTime,

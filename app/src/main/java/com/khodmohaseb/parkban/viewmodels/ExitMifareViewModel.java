@@ -39,15 +39,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.khodmohaseb.parkban.BaseActivity;
 import com.khodmohaseb.parkban.EnterManullyActivity;
 import com.khodmohaseb.parkban.EnterMifareActivity;
+import com.khodmohaseb.parkban.EnterQrActivity;
 import com.khodmohaseb.parkban.ExitMifareActivity;
+import com.khodmohaseb.parkban.ExitQrActivity;
 import com.khodmohaseb.parkban.MifareCardActivity;
 import com.khodmohaseb.parkban.PaymentSafshekanActivity;
 import com.khodmohaseb.parkban.QRcodeReaderActivity;
 import com.khodmohaseb.parkban.R;
 import com.khodmohaseb.parkban.ReportActivity;
+import com.khodmohaseb.parkban.SelectModeActivity;
 import com.khodmohaseb.parkban.anpr.farsi_ocr_anpr.FarsiOcrAnprProvider;
 import com.khodmohaseb.parkban.core.anpr.BaseAnprProvider;
 import com.khodmohaseb.parkban.core.anpr.helpers.PlateDetectionState;
@@ -98,7 +102,7 @@ import static com.google.android.gms.internal.zzid.runOnUiThread;
 
 public class ExitMifareViewModel extends ViewModel {
 
-    public static final String TAG = "ExitMifareViewModel";
+    public static final String TAG = "xeagle6913 ExitMifareViewModel";
     private MutableLiveData<Boolean> car;
     private MutableLiveData<Boolean> motor;
     private EditText etxt_first_cell_car_plate;
@@ -1539,8 +1543,6 @@ public class ExitMifareViewModel extends ViewModel {
                 ((ExitMifareActivity) myContext).startServices();
 
 
-
-
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -1548,13 +1550,6 @@ public class ExitMifareViewModel extends ViewModel {
                         mifareAlertDialog.dismiss();
                     }
                 });
-
-
-
-
-
-
-
 
 
             }
@@ -2042,9 +2037,9 @@ public class ExitMifareViewModel extends ViewModel {
                 alertDialog.setView(alertView);
                 alertDialog.setCancelable(false);
                 final AlertDialog show = alertDialog.show();
-                EditText exTxtCurrentPassword = alertView.findViewById(R.id.dialog_change_password_current_pass_etxt);
-                EditText exTxtNewPassword = alertView.findViewById(R.id.dialog_change_password_new_pass_etxt);
-                EditText exTxtConfirmPassword = alertView.findViewById(R.id.dialog_change_password_repeat_new_pass_etxt);
+                final EditText exTxtCurrentPassword = alertView.findViewById(R.id.dialog_change_password_current_pass_etxt);
+                final EditText exTxtNewPassword = alertView.findViewById(R.id.dialog_change_password_new_pass_etxt);
+                final EditText exTxtConfirmPassword = alertView.findViewById(R.id.dialog_change_password_repeat_new_pass_etxt);
                 LinearLayout cancel = alertView.findViewById(R.id.dialog_change_password_cancel_linear);
                 LinearLayout confirm = alertView.findViewById(R.id.dialog_change_password_confirm_linear);
 
@@ -2058,11 +2053,98 @@ public class ExitMifareViewModel extends ViewModel {
                 confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        kjlk
+                        if ((exTxtCurrentPassword.getText().toString().trim() != null) && (!exTxtCurrentPassword.getText().toString().trim().equals(""))) {
+                            if (selectedUser.getValue().getUserPass().trim().equals(exTxtCurrentPassword.getText().toString().trim())) {
+
+                                if ((exTxtNewPassword.getText().toString().trim() != null) && (!exTxtNewPassword.getText().toString().trim().equals(""))) {
+
+                                    if ((exTxtConfirmPassword.getText().toString().trim() != null) && (!exTxtConfirmPassword.getText().toString().trim().equals(""))) {
+
+                                        if (exTxtNewPassword.getText().toString().trim().equals(exTxtConfirmPassword.getText().toString().trim())) {
+                                            //save shared pref
+                                            Gson gson = new GsonBuilder()
+                                                    .serializeNulls()
+                                                    .create();
+                                            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(myContext).edit();
+
+
+                                            Operator operator = new Operator();
+                                            operator.setId(selectedUser.getValue().getId());
+                                            operator.setFirstName(selectedUser.getValue().getFirstName());
+                                            operator.setLastName(selectedUser.getValue().getLastName());
+                                            operator.setUserName(selectedUser.getValue().getUserName());
+                                            operator.setUserPass(exTxtConfirmPassword.getText().toString().trim());
+                                            operator.setParkingId(selectedUser.getValue().getParkingId());
+                                            selectedUser.setValue(operator);
+                                            String json_user = gson.toJson(operator);
+                                            editor.putString("currentuser", json_user);
+                                            editor.commit();
+
+                                            GetParkingInfoResponse getParkingInfoResponse1 = getParkingInfoResponse.getValue();
+
+
+                                            for (Operator item : getParkingInfoResponse1.getOperators()) {
+                                                if (item.getUserName().equals(operator.getUserName())) {
+                                                    item.setUserPass(operator.getUserPass());
+                                                }
+                                            }
+
+
+                                            String json = gson.toJson(getParkingInfoResponse1);
+                                            editor.putString("parkinginfo", json);
+                                            editor.commit();
+
+
+                                            //save in table database
+                                            parkbanRepository.saveChangePassword(
+                                                    operator.getParkingId(),
+                                                    operator.getUserName(),
+                                                    operator.getUserPass(), new ParkbanRepository.DataBaseResultCallBack() {
+                                                        @Override
+                                                        public void onSuccess(long id) {
+                                                            ShowToast.getInstance().showSuccess(myContext, R.string.submit_success);
+                                                            show.dismiss();
+                                                        }
+
+                                                        @Override
+                                                        public void onFailed() {
+                                                            ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                            show.dismiss();
+                                                        }
+                                                    }
+
+                                            );
+
+
+                                        } else {
+                                            ShowToast.getInstance().showError(myContext, R.string.repeat_password_not);
+                                            return;
+                                        }
+
+                                    } else {
+                                        ShowToast.getInstance().showError(myContext, R.string.enter_all_items);
+                                        return;
+                                    }
+
+
+                                } else {
+                                    ShowToast.getInstance().showError(myContext, R.string.enter_all_items);
+                                    return;
+                                }
+
+
+                            } else {
+                                ShowToast.getInstance().showError(myContext, R.string.current_password_not);
+                                return;
+                            }
+                        } else {
+
+                            ShowToast.getInstance().showError(myContext, R.string.enter_all_items);
+                            return;
+                        }
+
                     }
                 });
-
-
 
 
             }

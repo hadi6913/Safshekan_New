@@ -43,7 +43,7 @@ import static ir.shahaabco.ANPRNDK.anpr_create;
 //public class MainActivity extends BaseActivity implements ReaderHandler.Callbacks {
 public class MainActivity extends BaseActivity  {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "xeagle6913 MainActivity";
     private int failedLoadLib = 0;
     private MainViewModel viewModel;
     private boolean doubleBackToExitPressedOnce = false;

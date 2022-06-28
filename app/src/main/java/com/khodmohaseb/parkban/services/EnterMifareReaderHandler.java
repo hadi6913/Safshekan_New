@@ -14,7 +14,7 @@ import com.khodmohaseb.parkban.utils.Utils;
 
 public class EnterMifareReaderHandler extends Service implements Runnable {
 
-    private final static String TAG = "EnterMifareReader";
+    private final static String TAG = "xeagle6913 EnterMifareReader";
 
     private byte[] block16 = new byte[16];
     private byte[] block17 = new byte[16];

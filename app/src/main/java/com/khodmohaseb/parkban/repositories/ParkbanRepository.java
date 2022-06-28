@@ -13,6 +13,7 @@ import com.khodmohaseb.parkban.persistence.models.ResponseResultType;
 import com.khodmohaseb.parkban.persistence.models.SendStatus;
 import com.khodmohaseb.parkban.persistence.models.khodmohaseb.EntranceRecord;
 import com.khodmohaseb.parkban.persistence.models.khodmohaseb.ExitRecord;
+import com.khodmohaseb.parkban.persistence.models.khodmohaseb.PasswordOperatorRecord;
 import com.khodmohaseb.parkban.persistence.models.khodmohaseb.TraffikRecord;
 import com.khodmohaseb.parkban.persistence.models.model;
 import com.khodmohaseb.parkban.services.dto.BooleanResultDto;
@@ -43,6 +44,7 @@ import com.khodmohaseb.parkban.services.dto.ThirdElectronicPaymentRequestDto;
 import com.khodmohaseb.parkban.services.dto.ThirdElectronicPaymentResponseDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartResponseDto;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.changepass.ChangePasswordRequestDto;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.forgotrecord.ForgotEntranceRequest;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.forgotrecord.ForgotRecordResponse;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
@@ -61,7 +63,7 @@ import retrofit2.Response;
 
 public class ParkbanRepository {
 
-    private static final String TAG = "ParkbanRepository";
+    private static final String TAG = "xeagle6913 ParkbanRepository";
     private final ParkbanDatabase database;
 
     public interface DataBaseResultCallBack {
@@ -86,6 +88,12 @@ public class ParkbanRepository {
 
     public interface DataBaseExitRecordResultCallBack {
         void onSuccess(List<ExitRecord> exitRecordList);
+
+        void onFailed();
+    }
+
+    public interface DataBaseChangePasswordRecordResultCallBack {
+        void onSuccess(List<PasswordOperatorRecord> passwordOperatorRecordList);
 
         void onFailed();
     }
@@ -204,6 +212,110 @@ public class ParkbanRepository {
         });
     }
 
+    public void changePassword(ChangePasswordRequestDto changePasswordRequestDto, final ServiceResultCallBack<String> callBack) {
+
+
+        ParkbanServiceProvider.getInstance().changePassword(changePasswordRequestDto).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    if (response.isSuccessful()) {
+
+                        callBack.onSuccess(response.body());
+
+
+                    } else {
+                        callBack.onFailed(ResponseResultType.ServerError, response.message(), response.code());
+                    }
+                } catch (Exception e) {
+                    callBack.onFailed(ResponseResultType.RetrofitError, "", 0);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                callBack.onFailed(ResponseResultType.ServerError, t.getMessage(), 0);
+            }
+        });
+
+
+
+    }
+
+
+    public void isNeedUpdateDevice(String imei, final ServiceResultCallBack<Boolean> callBack) {
+
+
+        RequestBody body =
+                RequestBody.create(MediaType.parse("application/json"), imei.trim());
+
+
+
+        ParkbanServiceProvider.getInstance().isNeedUpdate(body).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                try {
+                    if (response.isSuccessful()) {
+
+                        callBack.onSuccess(response.body());
+
+
+                    } else {
+                        callBack.onFailed(ResponseResultType.ServerError, response.message(), response.code());
+                    }
+                } catch (Exception e) {
+                    callBack.onFailed(ResponseResultType.RetrofitError, "", 0);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                callBack.onFailed(ResponseResultType.ServerError, t.getMessage(), 0);
+            }
+        });
+
+
+
+    }
+
+
+    public void setUpdateDevice(String imei, final ServiceResultCallBack<Boolean> callBack) {
+
+
+        RequestBody body =
+                RequestBody.create(MediaType.parse("application/json"), imei.trim());
+
+
+
+        ParkbanServiceProvider.getInstance().setUpdateDevice(body).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                try {
+                    if (response.isSuccessful()) {
+
+                        callBack.onSuccess(response.body());
+
+
+                    } else {
+                        callBack.onFailed(ResponseResultType.ServerError, response.message(), response.code());
+                    }
+                } catch (Exception e) {
+                    callBack.onFailed(ResponseResultType.RetrofitError, "", 0);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                callBack.onFailed(ResponseResultType.ServerError, t.getMessage(), 0);
+            }
+        });
+
+
+
+    }
+
+
+
 
     public void getParkingInformation(String imei, final ServiceResultCallBack<GetParkingInfoResponse> callBack) {
 
@@ -305,8 +417,6 @@ public class ParkbanRepository {
     }
 
 
-
-
     public void forgotEntrance(ForgotEntranceRequest forgotEntranceRequest, final ServiceResultCallBack<ForgotRecordResponse> callBack) {
 
 
@@ -335,9 +445,6 @@ public class ParkbanRepository {
 
 
     }
-
-
-
 
 
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
@@ -1043,6 +1150,125 @@ public class ParkbanRepository {
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
 
     /**** Khodmohaseb Datebase Repository ****/
+
+    public void saveChangePassword(
+            long parkingId,
+            String userName,
+            String password
+            , final DataBaseResultCallBack callBack) {
+        new SaveChangePasswordAsyncTask(callBack)
+                .execute(database, parkingId, userName, password);
+    }
+
+    private static class SaveChangePasswordAsyncTask extends AsyncTask<Object, Void, Long> {
+
+        private final DataBaseResultCallBack callBack;
+
+        public SaveChangePasswordAsyncTask(DataBaseResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected Long doInBackground(Object... params) {
+
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            long parkingId = (long) params[1];
+            String userName = (String) params[2];
+            String password = (String) params[3];
+
+
+            PasswordOperatorRecord record = new PasswordOperatorRecord();
+            record.setParkingId(parkingId);
+            record.setUserName(userName);
+            record.setPassword(password);
+
+
+            try {
+                return database.getPasswordOperatorRecordDao().savePasswordOperatorRecord(record);
+            } catch (Exception e) {
+                Log.e(TAG, "Error in saveCarPlate", e);
+                return 0L;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Long result) {
+            super.onPostExecute(result);
+            if (result > 0) {
+                callBack.onSuccess(result);
+            } else {
+                callBack.onFailed();
+            }
+        }
+    }
+
+
+    public void getAllFromChangePassword(final DataBaseChangePasswordRecordResultCallBack callBack) {
+        new GetAllFromChangePasswordAsyncTask(callBack).execute(database);
+    }
+
+    private static class GetAllFromChangePasswordAsyncTask extends AsyncTask<Object, Void, List<PasswordOperatorRecord>> {
+        private final DataBaseChangePasswordRecordResultCallBack callBack;
+
+        public GetAllFromChangePasswordAsyncTask(DataBaseChangePasswordRecordResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected List<PasswordOperatorRecord> doInBackground(Object... params) {
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            List<PasswordOperatorRecord> exitRecordList;
+            try {
+                return database.getPasswordOperatorRecordDao().getAllPasswordOperatorRecord();
+
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(List<PasswordOperatorRecord> exitRecordList) {
+            super.onPostExecute(exitRecordList);
+            callBack.onSuccess(exitRecordList);
+            if (exitRecordList == null)
+                callBack.onFailed();
+        }
+    }
+
+
+    public void deleteAllFromChangePassword(final DataBaseResultCallBack callBack) {
+        new DeleteAllFromChangePasswordAsyncTask(callBack).execute(database);
+    }
+
+    private static class DeleteAllFromChangePasswordAsyncTask extends AsyncTask<Object, Void, Integer> {
+        private final DataBaseResultCallBack callBack;
+
+        public DeleteAllFromChangePasswordAsyncTask(DataBaseResultCallBack callBack) {
+            this.callBack = callBack;
+        }
+
+        @Override
+        protected Integer doInBackground(Object... params) {
+            ParkbanDatabase database = (ParkbanDatabase) params[0];
+            try {
+                return database.getPasswordOperatorRecordDao().deleteAllRecords();
+
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+            if (result > 0) {
+                callBack.onSuccess(result);
+            } else {
+                callBack.onFailed();
+            }
+        }
+    }
+
 
     public void saveEntranceRecord(
             long deviceID,

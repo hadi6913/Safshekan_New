@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
@@ -62,10 +63,12 @@ import java.util.List;
 
 public class SelectModeViewModel extends ViewModel {
 
-    public static final String TAG = "SelectModeViewModel";
+    public static final String TAG = "xeagle6913 SelectModeViewModel";
     private Context context;
     private boolean doubleBackToExitPressedOnce = false;
     private static final long EXIT_TIMEOUT = 3000;
+
+    public Typeface mFont;
 
     private GetParkingInfoResponse getParkingInfoResponse;
 
@@ -73,6 +76,8 @@ public class SelectModeViewModel extends ViewModel {
     public void init(final Context context,GetParkingInfoResponse getParkingInfoResponse) {
         this.context = context;
         this.getParkingInfoResponse = getParkingInfoResponse;
+        mFont = Typeface.createFromAsset(context.getAssets(), "irsans.ttf");
+
     }
 
 

@@ -17,7 +17,7 @@ import com.khodmohaseb.parkban.viewmodels.PaymentSafshekanViewModel;
 
 public class PaymentSafshekanActivity extends BaseActivity {
 
-    public static final String TAG = "PaymentSafsActivity";
+    public static final String TAG = "xeagle6913 PaymentSafsActivity";
 
     private PaymentSafshekanViewModel viewModel;
 

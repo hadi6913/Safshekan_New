@@ -8,6 +8,9 @@
     <string name="unregistered_device_msg">Unregistered Device</string>
     <string name="exception_msg_245">Calculation Error</string>
     <string name="enter_password">Enter the password</string>
+    <string name="enter_all_items">Enter all items</string>
+    <string name="current_password_not">Current password is not correct</string>
+    <string name="repeat_password_not">Repeat password is not correct</string>
     <string name="wrong_password">Password is wrong</string>
     <string name="error_server_address">Format of server address is wrong</string>
     <string name="connection_failed">Error in connecting to server</string>
@@ -52,6 +55,7 @@
     <string name="change_password_dialog_4">Repeat New Password</string>
     <string name="change_password_dialog_5">Confirm</string>
     <string name="change_password_dialog_6">Cancel</string>
+    <string name="updated_device">Your device is updated</string>
 
 
 

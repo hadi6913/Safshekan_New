@@ -29,7 +29,7 @@ import java.util.List;
 
 public class QRcodeReaderViewModel extends ViewModel {
 
-    public static final String TAG = "QRcodeReaderViewModel";
+    public static final String TAG = "xeagle6913 QRcodeReaderViewModel";
 
     private String lastScannedText = "";
     private DecoratedBarcodeView mBarcodeView;

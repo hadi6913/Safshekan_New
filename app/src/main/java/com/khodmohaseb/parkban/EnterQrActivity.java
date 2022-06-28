@@ -48,7 +48,7 @@ import static ir.shahaabco.ANPRNDK.anpr_create;
 
 public class EnterQrActivity extends BaseActivity {
 
-    private static final String TAG = "EnterQrActivity";
+    private static final String TAG = "xeagle6913 EnterQrActivity";
     private int failedLoadLib = 0;
     private EnterQrViewModel enterQrViewModel;
     private ActivityEnterQrBinding binding;

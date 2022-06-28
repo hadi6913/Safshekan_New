@@ -4,7 +4,8 @@ package com.khodmohaseb.parkban.persistence.models;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
-import com.khodmohaseb.parkban.BR;
+import com.android.databinding.library.baseAdapters.BR;
+
 
 public class User extends BaseObservable {
 

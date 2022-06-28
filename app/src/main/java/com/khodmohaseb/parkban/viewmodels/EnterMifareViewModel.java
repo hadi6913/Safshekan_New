@@ -98,7 +98,7 @@ import static com.google.android.gms.internal.zzid.runOnUiThread;
 
 public class EnterMifareViewModel extends ViewModel {
 
-    public static final String TAG = "EnterMifareViewModel";
+    public static final String TAG = "xeagle6913 EnterMifareViewModel";
 
 
     public GetParkingInfoResponse getParkingInfoResponse;
@@ -764,7 +764,120 @@ public class EnterMifareViewModel extends ViewModel {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
+                LayoutInflater inflater = ((Activity) myContext).getLayoutInflater();
+                View alertView = inflater.inflate(R.layout.dialog_change_password, null);
+                alertDialog.setView(alertView);
+                alertDialog.setCancelable(false);
+                final AlertDialog show = alertDialog.show();
+                final EditText exTxtCurrentPassword = alertView.findViewById(R.id.dialog_change_password_current_pass_etxt);
+                final EditText exTxtNewPassword = alertView.findViewById(R.id.dialog_change_password_new_pass_etxt);
+                final EditText exTxtConfirmPassword = alertView.findViewById(R.id.dialog_change_password_repeat_new_pass_etxt);
+                LinearLayout cancel = alertView.findViewById(R.id.dialog_change_password_cancel_linear);
+                LinearLayout confirm = alertView.findViewById(R.id.dialog_change_password_confirm_linear);
 
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        show.dismiss();
+                    }
+                });
+
+                confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if ((exTxtCurrentPassword.getText().toString().trim() != null) && (!exTxtCurrentPassword.getText().toString().trim().equals(""))) {
+                            if (selectedUser.getUserPass().trim().equals(exTxtCurrentPassword.getText().toString().trim())) {
+
+                                if ((exTxtNewPassword.getText().toString().trim() != null) && (!exTxtNewPassword.getText().toString().trim().equals(""))) {
+
+                                    if ((exTxtConfirmPassword.getText().toString().trim() != null) && (!exTxtConfirmPassword.getText().toString().trim().equals(""))) {
+
+                                        if (exTxtNewPassword.getText().toString().trim().equals(exTxtConfirmPassword.getText().toString().trim())) {
+                                            //save shared pref
+                                            Gson gson = new GsonBuilder()
+                                                    .serializeNulls()
+                                                    .create();
+                                            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(myContext).edit();
+
+
+                                            Operator operator = new Operator();
+                                            operator.setId(selectedUser.getId());
+                                            operator.setFirstName(selectedUser.getFirstName());
+                                            operator.setLastName(selectedUser.getLastName());
+                                            operator.setUserName(selectedUser.getUserName());
+                                            operator.setUserPass(exTxtConfirmPassword.getText().toString().trim());
+                                            operator.setParkingId(selectedUser.getParkingId());
+                                            selectedUser = operator;
+                                            String json_user = gson.toJson(operator);
+                                            editor.putString("currentuser", json_user);
+                                            editor.commit();
+
+                                            GetParkingInfoResponse getParkingInfoResponse1 = getParkingInfoResponse;
+
+
+                                            for (Operator item : getParkingInfoResponse1.getOperators()) {
+                                                if (item.getUserName().equals(operator.getUserName())) {
+                                                    item.setUserPass(operator.getUserPass());
+                                                }
+                                            }
+
+
+                                            String json = gson.toJson(getParkingInfoResponse1);
+                                            editor.putString("parkinginfo", json);
+                                            editor.commit();
+
+
+                                            //save in table database
+                                            parkbanRepository.saveChangePassword(
+                                                    operator.getParkingId(),
+                                                    operator.getUserName(),
+                                                    operator.getUserPass(), new ParkbanRepository.DataBaseResultCallBack() {
+                                                        @Override
+                                                        public void onSuccess(long id) {
+                                                            ShowToast.getInstance().showSuccess(myContext, R.string.submit_success);
+                                                            show.dismiss();
+                                                        }
+
+                                                        @Override
+                                                        public void onFailed() {
+                                                            ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                            show.dismiss();
+                                                        }
+                                                    }
+
+                                            );
+
+
+                                        } else {
+                                            ShowToast.getInstance().showError(myContext, R.string.repeat_password_not);
+                                            return;
+                                        }
+
+                                    } else {
+                                        ShowToast.getInstance().showError(myContext, R.string.enter_all_items);
+                                        return;
+                                    }
+
+
+                                } else {
+                                    ShowToast.getInstance().showError(myContext, R.string.enter_all_items);
+                                    return;
+                                }
+
+
+                            } else {
+                                ShowToast.getInstance().showError(myContext, R.string.current_password_not);
+                                return;
+                            }
+                        } else {
+
+                            ShowToast.getInstance().showError(myContext, R.string.enter_all_items);
+                            return;
+                        }
+
+                    }
+                });
 
             }
         }, Animation_Constant.ANIMATION_VALUE);

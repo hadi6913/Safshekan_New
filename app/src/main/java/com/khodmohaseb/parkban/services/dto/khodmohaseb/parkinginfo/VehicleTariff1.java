@@ -244,4 +244,6 @@ public class VehicleTariff1 {
         this.vehicleName = vehicleName;
     }
 
+
+
 }

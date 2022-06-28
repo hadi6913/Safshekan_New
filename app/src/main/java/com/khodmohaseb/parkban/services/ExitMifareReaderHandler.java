@@ -14,7 +14,7 @@ import com.khodmohaseb.parkban.utils.Utils;
 
 public class ExitMifareReaderHandler extends Service implements Runnable {
 
-    private final static String TAG = "ExitMifareReader";
+    private final static String TAG = "xeagle6913 ExitMifareReader";
 
     private byte[] block16 = new byte[16];
     private byte[] block17 = new byte[16];

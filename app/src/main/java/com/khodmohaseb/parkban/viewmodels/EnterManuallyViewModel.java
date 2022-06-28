@@ -1,5 +1,6 @@
 package com.khodmohaseb.parkban.viewmodels;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.arch.lifecycle.LiveData;
@@ -25,6 +26,7 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +41,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -92,7 +95,7 @@ import static com.google.android.gms.internal.zzid.runOnUiThread;
 
 public class EnterManuallyViewModel extends ViewModel {
 
-    public static final String TAG = "EnterManuallyViewModel";
+    public static final String TAG = "xeagle6913 EnterManuallyViewModel";
 
 
     public GetParkingInfoResponse getParkingInfoResponse;
@@ -426,6 +429,120 @@ public class EnterManuallyViewModel extends ViewModel {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
+                LayoutInflater inflater = ((Activity) myContext).getLayoutInflater();
+                View alertView = inflater.inflate(R.layout.dialog_change_password, null);
+                alertDialog.setView(alertView);
+                alertDialog.setCancelable(false);
+                final AlertDialog show = alertDialog.show();
+                final EditText exTxtCurrentPassword = alertView.findViewById(R.id.dialog_change_password_current_pass_etxt);
+                final EditText exTxtNewPassword = alertView.findViewById(R.id.dialog_change_password_new_pass_etxt);
+                final EditText exTxtConfirmPassword = alertView.findViewById(R.id.dialog_change_password_repeat_new_pass_etxt);
+                LinearLayout cancel = alertView.findViewById(R.id.dialog_change_password_cancel_linear);
+                LinearLayout confirm = alertView.findViewById(R.id.dialog_change_password_confirm_linear);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        show.dismiss();
+                    }
+                });
+
+                confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if ((exTxtCurrentPassword.getText().toString().trim() != null) && (!exTxtCurrentPassword.getText().toString().trim().equals(""))) {
+                            if (selectedUser.getUserPass().trim().equals(exTxtCurrentPassword.getText().toString().trim())) {
+
+                                if ((exTxtNewPassword.getText().toString().trim() != null) && (!exTxtNewPassword.getText().toString().trim().equals(""))) {
+
+                                    if ((exTxtConfirmPassword.getText().toString().trim() != null) && (!exTxtConfirmPassword.getText().toString().trim().equals(""))) {
+
+                                        if (exTxtNewPassword.getText().toString().trim().equals(exTxtConfirmPassword.getText().toString().trim())) {
+                                            //save shared pref
+                                            Gson gson = new GsonBuilder()
+                                                    .serializeNulls()
+                                                    .create();
+                                            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(myContext).edit();
+
+
+                                            Operator operator = new Operator();
+                                            operator.setId(selectedUser.getId());
+                                            operator.setFirstName(selectedUser.getFirstName());
+                                            operator.setLastName(selectedUser.getLastName());
+                                            operator.setUserName(selectedUser.getUserName());
+                                            operator.setUserPass(exTxtConfirmPassword.getText().toString().trim());
+                                            operator.setParkingId(selectedUser.getParkingId());
+                                            selectedUser = operator;
+                                            String json_user = gson.toJson(operator);
+                                            editor.putString("currentuser", json_user);
+                                            editor.commit();
+
+                                            GetParkingInfoResponse getParkingInfoResponse1 = getParkingInfoResponse;
+
+
+                                            for (Operator item : getParkingInfoResponse1.getOperators()) {
+                                                if (item.getUserName().equals(operator.getUserName())) {
+                                                    item.setUserPass(operator.getUserPass());
+                                                }
+                                            }
+
+
+                                            String json = gson.toJson(getParkingInfoResponse1);
+                                            editor.putString("parkinginfo", json);
+                                            editor.commit();
+
+
+                                            //save in table database
+                                            parkbanRepository.saveChangePassword(
+                                                    operator.getParkingId(),
+                                                    operator.getUserName(),
+                                                    operator.getUserPass(), new ParkbanRepository.DataBaseResultCallBack() {
+                                                        @Override
+                                                        public void onSuccess(long id) {
+                                                            ShowToast.getInstance().showSuccess(myContext, R.string.submit_success);
+                                                            show.dismiss();
+                                                        }
+
+                                                        @Override
+                                                        public void onFailed() {
+                                                            ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+                                                            show.dismiss();
+                                                        }
+                                                    }
+
+                                            );
+
+
+                                        } else {
+                                            ShowToast.getInstance().showError(myContext, R.string.repeat_password_not);
+                                            return;
+                                        }
+
+                                    } else {
+                                        ShowToast.getInstance().showError(myContext, R.string.enter_all_items);
+                                        return;
+                                    }
+
+
+                                } else {
+                                    ShowToast.getInstance().showError(myContext, R.string.enter_all_items);
+                                    return;
+                                }
+
+
+                            } else {
+                                ShowToast.getInstance().showError(myContext, R.string.current_password_not);
+                                return;
+                            }
+                        } else {
+
+                            ShowToast.getInstance().showError(myContext, R.string.enter_all_items);
+                            return;
+                        }
+
+                    }
+                });
 
 
             }
@@ -442,6 +559,7 @@ public class EnterManuallyViewModel extends ViewModel {
         view.startAnimation(myAnim);
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
+            @SuppressLint("LongLogTag")
             @Override
             public void run() {
 
@@ -538,7 +656,7 @@ public class EnterManuallyViewModel extends ViewModel {
                 // ************************************************************************************************************************
                 final String finalPelak = pelak;
                 if (enteredDate.getValue().length() < 6) {
-                    ShowToast.getInstance().showWarning(view.getContext(), R.string.enter_car_tag);
+                    ShowToast.getInstance().showWarning(view.getContext(), R.string.enter_entrance_date);
                     return;
                 }
                 String temp = enteredDate.getValue();
@@ -546,12 +664,30 @@ public class EnterManuallyViewModel extends ViewModel {
                 String temp2 = temp1.replace(":", "");
                 String finalEntranceDate = temp2.replace(" ", "").trim();
                 Log.d(TAG, "final entranceDate >>>  " + finalEntranceDate);
+                PersianDate persianDate = new PersianDate();
+
+
+                int[] dateGeorg = persianDate.jalali_to_gregorian(
+                        Integer.parseInt(finalEntranceDate.substring(0, 4)),
+                        Integer.parseInt(finalEntranceDate.substring(4, 6)),
+                        Integer.parseInt(finalEntranceDate.substring(6, 8))
+                );
+
+                String year = Integer.toString(dateGeorg[0]);
+                String month = String.format("%02d", dateGeorg[1] + 1);
+                String day = String.format("%02d", dateGeorg[2]);
+                String hour = finalEntranceDate.substring(8, 10);
+                String min = finalEntranceDate.substring(10, 12);
+
+                String actualFinalDate = year + month + day + hour + min;
 
 
                 try {
+
+
                     handelExit(
                             finalPelak,
-                            finalEntranceDate,
+                            actualFinalDate,
                             Integer.toString(selectedTarrifId.getValue()),
                             "0",
                             Long.toString(selectedDoor.getId()),
@@ -603,6 +739,7 @@ public class EnterManuallyViewModel extends ViewModel {
     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    @SuppressLint("LongLogTag")
     public void handelExit(
             final String pelakString,
             String enterDateTimeString,
@@ -1442,6 +1579,7 @@ public class EnterManuallyViewModel extends ViewModel {
     }
 
 
+    @SuppressLint("LongLogTag")
     public void processActivityResult(Context context, int requestCode, int resultCode, Intent
             data) {
 

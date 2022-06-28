@@ -1,10 +1,14 @@
 package com.khodmohaseb.parkban.utils;
 
+import android.util.Log;
+
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Tariff;
 
 public class DailyFareCalculator {
+    private final  static String TAG = "xeagle6913";
 
     public static long calculateDailyFareVehicle1(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateDailyFareVehicle1 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= 1440) {
             price = tariff.getVehicleTariff1().getCostNight1();
@@ -41,6 +45,7 @@ public class DailyFareCalculator {
 
 
     public static long calculateDailyFareVehicle2(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateDailyFareVehicle2 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= 1440) {
             price = tariff.getVehicleTariff2().getCostNight1();
@@ -77,6 +82,7 @@ public class DailyFareCalculator {
 
 
     public static long calculateDailyFareVehicle3(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateDailyFareVehicle3 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= 1440) {
             price = tariff.getVehicleTariff3().getCostNight1();
@@ -113,6 +119,7 @@ public class DailyFareCalculator {
 
 
     public static long calculateDailyFareVehicle4(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateDailyFareVehicle4 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= 1440) {
             price = tariff.getVehicleTariff4().getCostNight1();
@@ -149,6 +156,7 @@ public class DailyFareCalculator {
 
 
     public static long calculateDailyFareVehicle5(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateDailyFareVehicle5 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= 1440) {
             price = tariff.getVehicleTariff5().getCostNight1();
@@ -185,6 +193,7 @@ public class DailyFareCalculator {
 
 
     public static long calculateDailyFareVehicle6(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateDailyFareVehicle6 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= 1440) {
             price = tariff.getVehicleTariff6().getCostNight1();
@@ -220,6 +229,7 @@ public class DailyFareCalculator {
     }
 
     public static long calculateDailyFareVehicle7(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateDailyFareVehicle7 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= 1440) {
             price = tariff.getVehicleTariff7().getCostNight1();
@@ -256,6 +266,7 @@ public class DailyFareCalculator {
 
 
     public static long calculateDailyFareVehicle8(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateDailyFareVehicle8 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= 1440) {
             price = tariff.getVehicleTariff8().getCostNight1();

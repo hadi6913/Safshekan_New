@@ -48,7 +48,7 @@ import static ir.shahaabco.ANPRNDK.anpr_create;
 
 public class SelectModeActivity extends BaseActivity {
 
-    private static final String TAG = "SelectModeActivity";
+    private static final String TAG = "xeagle6913 SelectModeActivity";
 
     private SelectModeViewModel viewModel;
     private GetParkingInfoResponse getParkingInfoResponse;

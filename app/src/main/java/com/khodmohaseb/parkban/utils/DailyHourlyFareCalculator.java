@@ -1,11 +1,14 @@
 package com.khodmohaseb.parkban.utils;
 
+import android.util.Log;
+
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Tariff;
 
 public class DailyHourlyFareCalculator {
-
+    private final  static String TAG = "xeagle6913";
 
     public static long calculateHourlyDailyFareVehicle1(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateHourlyDailyFareVehicle1 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
 
@@ -55,6 +58,7 @@ public class DailyHourlyFareCalculator {
     }
 
     public static long calculateHourlyDailyFareVehicle2(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateHourlyDailyFareVehicle2 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
 
@@ -104,6 +108,7 @@ public class DailyHourlyFareCalculator {
     }
 
     public static long calculateHourlyDailyFareVehicle3(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateHourlyDailyFareVehicle3 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
 
@@ -153,6 +158,7 @@ public class DailyHourlyFareCalculator {
     }
 
     public static long calculateHourlyDailyFareVehicle4(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateHourlyDailyFareVehicle4 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
 
@@ -202,6 +208,7 @@ public class DailyHourlyFareCalculator {
     }
 
     public static long calculateHourlyDailyFareVehicle5(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateHourlyDailyFareVehicle5 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
 
@@ -251,6 +258,7 @@ public class DailyHourlyFareCalculator {
     }
 
     public static long calculateHourlyDailyFareVehicle6(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateHourlyDailyFareVehicle6 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
 
@@ -300,6 +308,7 @@ public class DailyHourlyFareCalculator {
     }
 
     public static long calculateHourlyDailyFareVehicle7(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateHourlyDailyFareVehicle7 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
 
@@ -349,6 +358,7 @@ public class DailyHourlyFareCalculator {
     }
 
     public static long calculateHourlyDailyFareVehicle8(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateHourlyDailyFareVehicle8 > roundedTime:"+roundedTotalStayLength );
         long price = 0;
         if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
 

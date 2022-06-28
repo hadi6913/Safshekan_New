@@ -44,7 +44,7 @@ import static ir.shahaabco.ANPRNDK.anpr_create;
 
 public class EnterManullyActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    private static final String TAG = "EnterManullyActivity";
+    private static final String TAG = "xeagle6913 EnterManullyActivity";
     private int failedLoadLib = 0;
     private EnterManuallyViewModel enterManuallyViewModel;
     private ActivityEnterManuallyBinding binding;

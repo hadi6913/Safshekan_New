@@ -47,7 +47,7 @@ import static ir.shahaabco.ANPRNDK.anpr_create;
 
 public class EnterMifareActivity extends BaseActivity implements EnterMifareReaderHandler.Callbacks {
 
-    private static final String TAG = "EnterMifareActivity";
+    private static final String TAG = "xeagle6913 EnterMifareActivity";
     private int failedLoadLib = 0;
     private EnterMifareViewModel enterMifareViewModel;
     private ActivityEnterMifareBinding binding;

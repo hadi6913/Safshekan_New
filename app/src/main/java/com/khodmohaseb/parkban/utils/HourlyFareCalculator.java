@@ -1,11 +1,14 @@
 package com.khodmohaseb.parkban.utils;
 
+import android.util.Log;
+
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Tariff;
 
 public class HourlyFareCalculator {
-
+    private final  static String TAG = "xeagle6913";
 
     public static long calculateStepFareVehicle1(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateStepFareVehicle1: > roundedTime:"+roundedTotalStayLength);
         long price = 0;
 
 
@@ -98,6 +101,7 @@ public class HourlyFareCalculator {
 
 
     public static long calculateStepFareVehicle2(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateStepFareVehicle2: > roundedTime:"+roundedTotalStayLength);
         long price = 0;
 
 
@@ -189,6 +193,7 @@ public class HourlyFareCalculator {
 
 
     public static long calculateStepFareVehicle3(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateStepFareVehicle3: > roundedTime:"+roundedTotalStayLength);
         long price = 0;
 
 
@@ -281,6 +286,7 @@ public class HourlyFareCalculator {
 
 
     public static long calculateStepFareVehicle4(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateStepFareVehicle4: > roundedTime:"+roundedTotalStayLength);
         long price = 0;
 
 
@@ -372,6 +378,7 @@ public class HourlyFareCalculator {
 
 
     public static long calculateStepFareVehicle5(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateStepFareVehicle5: > roundedTime:"+roundedTotalStayLength);
         long price = 0;
 
 
@@ -466,6 +473,7 @@ public class HourlyFareCalculator {
 
 
     public static long calculateStepFareVehicle6(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateStepFareVehicle6: > roundedTime:"+roundedTotalStayLength);
         long price = 0;
 
 
@@ -561,6 +569,7 @@ public class HourlyFareCalculator {
 
 
     public static long calculateStepFareVehicle7(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateStepFareVehicle7: > roundedTime:"+roundedTotalStayLength);
         long price = 0;
 
 
@@ -656,6 +665,7 @@ public class HourlyFareCalculator {
 
 
     public static long calculateStepFareVehicle8(long roundedTotalStayLength, Tariff tariff) {
+        Log.d(TAG, "calculateStepFareVehicle8: > roundedTime:"+roundedTotalStayLength);
         long price = 0;
 
 

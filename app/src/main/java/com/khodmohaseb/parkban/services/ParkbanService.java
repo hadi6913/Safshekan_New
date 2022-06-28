@@ -27,6 +27,7 @@ import com.khodmohaseb.parkban.services.dto.ThirdElectronicPaymentRequestDto;
 import com.khodmohaseb.parkban.services.dto.ThirdElectronicPaymentResponseDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartDto;
 import com.khodmohaseb.parkban.services.dto.ThirdPartResponseDto;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.changepass.ChangePasswordRequestDto;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.forgotrecord.ForgotEntranceRequest;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.forgotrecord.ForgotRecordResponse;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
@@ -65,6 +66,9 @@ public interface ParkbanService {
 
     @POST("SetUpdateDevice")
     Call<Boolean> setUpdateDevice(@Body RequestBody body);
+
+    @POST("ChangeOperatorPassowrd")
+    Call<String> changePassword(@Body ChangePasswordRequestDto body);
 
 
     @POST("FindEntranceWithoutExit")

@@ -57,7 +57,7 @@ import java.util.List;
 
 public class MainViewModel extends ViewModel {
 
-    public static final String TAG = "MainViewModel";
+    public static final String TAG = "xeagle6913 MainViewModel";
     private static final String MEDIA_FILE_TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss";
     private MutableLiveData<Boolean> car;
     private MutableLiveData<Boolean> motor;

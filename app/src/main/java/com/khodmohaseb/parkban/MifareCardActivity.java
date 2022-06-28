@@ -125,7 +125,7 @@ public class MifareCardActivity extends BaseActivity {
     public static final int DETECT_SUCCESS = 0;
 
 
-    public static final String TAG = "MifareCardActivity";
+    public static final String TAG = "xeagle6913 MifareCardActivity";
 
 
     private MifareCardViewModel viewModel;

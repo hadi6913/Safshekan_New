@@ -8,6 +8,9 @@
     <string name="unregistered_device_msg">دستگاه مورد استفاده ، غیرمجاز میباشد</string>
     <string name="exception_msg_245">بروز خطای محاسباتی</string>
     <string name="enter_password">رمز عبور را وارد کنید</string>
+    <string name="enter_all_items">لطفا همه مقادیر را وارد کنید</string>
+    <string name="current_password_not">کلمه عبور فعلی نادرست است</string>
+    <string name="repeat_password_not">تکرار کلمه های عبور نادرست است</string>
     <string name="wrong_password">رمز عبور نادرست است</string>
     <string name="error_server_address">آدرس سرور را درست وارد کنید</string>
     <string name="connection_failed">عدم برقراری ارتباط با سرور</string>
@@ -52,6 +55,7 @@
     <string name="change_password_dialog_4">تکرار کلمه عبور جدید</string>
     <string name="change_password_dialog_5">تایید</string>
     <string name="change_password_dialog_6">انصراف</string>
+    <string name="updated_device">دستگاه شما بروز است</string>
 
 
 

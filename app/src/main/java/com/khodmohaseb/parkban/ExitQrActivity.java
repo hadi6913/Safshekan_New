@@ -44,7 +44,7 @@ import static ir.shahaabco.ANPRNDK.anpr_create;
 
 public class ExitQrActivity extends BaseActivity {
 
-    private static final String TAG = "ExitQrActivity";
+    private static final String TAG = "xeagle6913 ExitQrActivity";
     private int failedLoadLib = 0;
     private ExitQrViewModel exitQrViewModel;
     private boolean doubleBackToExitPressedOnce = false;

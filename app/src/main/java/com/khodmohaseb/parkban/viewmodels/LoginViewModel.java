@@ -8,6 +8,7 @@ import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -93,6 +94,8 @@ public class LoginViewModel extends ViewModel {
     public Spinner mUserSpinner;
     public Spinner mDoorSpinner;
 
+    public Typeface mFont;
+
 
     private MutableLiveData<String> selectedUserName;
     private MutableLiveData<String> selectedDoorName;
@@ -147,6 +150,8 @@ public class LoginViewModel extends ViewModel {
         } else {
             getParkingInfoResponse = gson.fromJson(json, GetParkingInfoResponse.class);
         }
+        mFont = Typeface.createFromAsset(context.getAssets(), "irsans.ttf");
+
 
 
         if (getParkingInfoResponse == null) {
@@ -196,7 +201,7 @@ public class LoginViewModel extends ViewModel {
                         try {
 
 
-                           parkbanRepository.getDeviceToken("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                            parkbanRepository.getDeviceToken("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
 
                                 @Override
                                 public void onSuccess(String deviceToken) {
@@ -214,7 +219,6 @@ public class LoginViewModel extends ViewModel {
                                             new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                 @Override
                                                 public void onSuccess(GetParkingInfoResponse result) {
-                                                    progress.setValue(0);
 
 
                                                     getParkingInfoResponse = result;
@@ -262,11 +266,27 @@ public class LoginViewModel extends ViewModel {
                                                     langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
                                                     langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
 
+                                                    parkbanRepository.setUpdateDevice("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                                        @Override
+                                                        public void onSuccess(Boolean result) {
+                                                            progress.setValue(0);
+                                                            show.dismiss();
 
-                                                    show.dismiss();
+                                                            ((Activity) context).recreate();
 
-                                                    ((Activity) context).recreate();
+                                                        }
 
+                                                        @Override
+                                                        public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+
+                                                            progress.setValue(0);
+                                                            show.dismiss();
+
+                                                            ((Activity) context).recreate();
+
+
+                                                        }
+                                                    });
 
                                                 }
 
@@ -275,9 +295,9 @@ public class LoginViewModel extends ViewModel {
                                                     progress.setValue(0);
 
 
-                                                    if(errorCode == 401){
+                                                    if (errorCode == 401) {
                                                         ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
-                                                    }else{
+                                                    } else {
                                                         switch (resultType) {
                                                             case RetrofitError:
                                                                 ShowToast.getInstance().showError(context, R.string.exception_msg);
@@ -307,20 +327,24 @@ public class LoginViewModel extends ViewModel {
                                     progress.setValue(0);
 
 
-                                    switch (resultType) {
-                                        case RetrofitError:
-                                            ShowToast.getInstance().showError(context, R.string.exception_msg);
-                                            break;
-                                        case ServerError:
-                                            if (errorCode != 0)
-                                                ShowToast.getInstance().showError(context, errorCode);
-                                            else {
-                                                ShowToast.getInstance().showError(context, R.string.connection_failed);
+                                    if (errorCode == 401) {
+                                        ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                    } else {
+                                        switch (resultType) {
+                                            case RetrofitError:
+                                                ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                                break;
+                                            case ServerError:
+                                                if (errorCode != 0)
+                                                    ShowToast.getInstance().showError(context, errorCode);
+                                                else {
+                                                    ShowToast.getInstance().showError(context, R.string.connection_failed);
 
-                                            }
-                                            break;
-                                        default:
-                                            ShowToast.getInstance().showError(context, resultType.ordinal());
+                                                }
+                                                break;
+                                            default:
+                                                ShowToast.getInstance().showError(context, resultType.ordinal());
+                                        }
                                     }
                                 }
                             });
@@ -352,15 +376,16 @@ public class LoginViewModel extends ViewModel {
             doorListArray.clear();
 
 
-            for (Operator item : getParkingInfoResponse.getOperators()) {
-
-                userListArray.add(item.getUserName());
-
-            }
-
             for (Door item : getParkingInfoResponse.getDoors()) {
 
                 doorListArray.add(item.getDoorName());
+
+            }
+
+
+            for (Operator item : getParkingInfoResponse.getOperators()) {
+
+                userListArray.add(item.getUserName());
 
             }
 
@@ -410,7 +435,6 @@ public class LoginViewModel extends ViewModel {
                         selectedDoor = item;
                     }
                 }
-
 
 
 //                enteredPassword = "rewq1234@";
@@ -621,96 +645,141 @@ public class LoginViewModel extends ViewModel {
 
                                         ParkbanServiceProvider.setInstanceNull();
 
+                                        parkbanRepository.isNeedUpdateDevice("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                            @Override
+                                            public void onSuccess(Boolean result) {
+                                                if (result) {
+                                                    parkbanRepository.getParkingInformation("\"" + "968500040082191" + "\"",
+                                                            new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
+                                                                @Override
+                                                                public void onSuccess(GetParkingInfoResponse result) {
 
-                                        parkbanRepository.getParkingInformation("\"" + "968500040082191" + "\"",
-                                                new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
-                                                    @Override
-                                                    public void onSuccess(GetParkingInfoResponse result) {
-                                                        progress.setValue(0);
 
+                                                                    getParkingInfoResponse = result;
 
-                                                        getParkingInfoResponse = result;
-
-                                                        Gson gson = new GsonBuilder()
-                                                                .serializeNulls()
-                                                                .create();
-                                                        String json = gson.toJson(result);
-                                                        SharedPreferences.Editor editor = preferences.edit();
-                                                        editor.putString("parkinginfo", json);
-                                                        editor.commit();
+                                                                    Gson gson = new GsonBuilder()
+                                                                            .serializeNulls()
+                                                                            .create();
+                                                                    String json = gson.toJson(result);
+                                                                    SharedPreferences.Editor editor = preferences.edit();
+                                                                    editor.putString("parkinginfo", json);
+                                                                    editor.commit();
 
 
 //                                            parkingName = "پارکینگ " + result.getParkingName();
-                                                        parkingName = result.getParkingName();
+                                                                    parkingName = result.getParkingName();
 
-                                                        userListArray.clear();
-                                                        doorListArray.clear();
-
-
-                                                        for (Operator item : result.getOperators()) {
-
-                                                            userListArray.add(item.getUserName());
-
-                                                        }
-
-                                                        for (Door item : result.getDoors()) {
-
-                                                            userListArray.add(item.getDoorName());
-
-                                                        }
+                                                                    userListArray.clear();
+                                                                    doorListArray.clear();
 
 
-                                                        userList = new String[userListArray.size()];
-                                                        userList = userListArray.toArray(userList);
+                                                                    for (Operator item : result.getOperators()) {
 
-                                                        doorList = new String[doorListArray.size()];
-                                                        doorList = doorListArray.toArray(doorList);
-
-
-                                                        langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, userList);
-                                                        langAdapter_user.setDropDownViewResource(R.layout.simple_spinner_dropdown);
-
-
-                                                        langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
-                                                        langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
-
-
-                                                        show.dismiss();
-
-                                                        ((Activity) context).recreate();
-
-
-                                                    }
-
-                                                    @Override
-                                                    public void onFailed(ResponseResultType resultType, String message, int errorCode) {
-                                                        progress.setValue(0);
-
-
-
-
-                                                        if(errorCode == 401){
-                                                            ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
-                                                        }else{
-                                                            switch (resultType) {
-                                                                case RetrofitError:
-                                                                    ShowToast.getInstance().showError(context, R.string.exception_msg);
-                                                                    break;
-                                                                case ServerError:
-                                                                    if (errorCode != 0)
-                                                                        ShowToast.getInstance().showError(context, errorCode);
-                                                                    else {
-                                                                        ShowToast.getInstance().showError(context, R.string.connection_failed);
+                                                                        userListArray.add(item.getUserName());
 
                                                                     }
-                                                                    break;
-                                                                default:
-                                                                    ShowToast.getInstance().showError(context, resultType.ordinal());
-                                                            }
-                                                        }
 
+                                                                    for (Door item : result.getDoors()) {
+
+                                                                        userListArray.add(item.getDoorName());
+
+                                                                    }
+
+
+                                                                    userList = new String[userListArray.size()];
+                                                                    userList = userListArray.toArray(userList);
+
+                                                                    doorList = new String[doorListArray.size()];
+                                                                    doorList = doorListArray.toArray(doorList);
+
+
+                                                                    langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, userList);
+                                                                    langAdapter_user.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+
+                                                                    langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
+                                                                    langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+                                                                    parkbanRepository.setUpdateDevice("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                                                        @Override
+                                                                        public void onSuccess(Boolean result) {
+                                                                            progress.setValue(0);
+                                                                            show.dismiss();
+                                                                            ((Activity) context).recreate();
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+                                                                            progress.setValue(0);
+                                                                            show.dismiss();
+                                                                            ((Activity) context).recreate();
+                                                                        }
+                                                                    });
+
+
+                                                                }
+
+                                                                @Override
+                                                                public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+                                                                    progress.setValue(0);
+
+
+                                                                    if (errorCode == 401) {
+                                                                        ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                                                    } else {
+                                                                        switch (resultType) {
+                                                                            case RetrofitError:
+                                                                                ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                                                                break;
+                                                                            case ServerError:
+                                                                                if (errorCode != 0)
+                                                                                    ShowToast.getInstance().showError(context, errorCode);
+                                                                                else {
+                                                                                    ShowToast.getInstance().showError(context, R.string.connection_failed);
+
+                                                                                }
+                                                                                break;
+                                                                            default:
+                                                                                ShowToast.getInstance().showError(context, resultType.ordinal());
+                                                                        }
+                                                                    }
+
+                                                                }
+                                                            });
+                                                } else {
+                                                    ShowToast.getInstance().showSuccess(context, R.string.updated_device);
+                                                    progress.setValue(0);
+                                                    show.dismiss();
+                                                }
+
+                                            }
+
+                                            @Override
+                                            public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+                                                if (errorCode == 401) {
+                                                    ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                                } else {
+                                                    switch (resultType) {
+                                                        case RetrofitError:
+                                                            ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                                            break;
+                                                        case ServerError:
+                                                            if (errorCode != 0)
+                                                                ShowToast.getInstance().showError(context, errorCode);
+                                                            else {
+                                                                ShowToast.getInstance().showError(context, R.string.connection_failed);
+
+                                                            }
+                                                            break;
+                                                        default:
+                                                            ShowToast.getInstance().showError(context, resultType.ordinal());
                                                     }
-                                                });
+                                                }
+                                                progress.setValue(0);
+                                                show.dismiss();
+
+                                            }
+                                        });
 
 
                                     }
@@ -718,23 +787,28 @@ public class LoginViewModel extends ViewModel {
                                     @Override
                                     public void onFailed(ResponseResultType resultType, String message, int errorCode) {
                                         progress.setValue(0);
+                                        if (errorCode == 401) {
+                                            ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                        } else {
+                                            switch (resultType) {
+                                                case RetrofitError:
+                                                    ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                                    break;
+                                                case ServerError:
+                                                    if (errorCode != 0)
+                                                        ShowToast.getInstance().showError(context, errorCode);
+                                                    else {
+                                                        ShowToast.getInstance().showError(context, R.string.connection_failed);
 
-
-                                        switch (resultType) {
-                                            case RetrofitError:
-                                                ShowToast.getInstance().showError(context, R.string.exception_msg);
-                                                break;
-                                            case ServerError:
-                                                if (errorCode != 0)
-                                                    ShowToast.getInstance().showError(context, errorCode);
-                                                else {
-                                                    ShowToast.getInstance().showError(context, R.string.connection_failed);
-
-                                                }
-                                                break;
-                                            default:
-                                                ShowToast.getInstance().showError(context, resultType.ordinal());
+                                                    }
+                                                    break;
+                                                default:
+                                                    ShowToast.getInstance().showError(context, resultType.ordinal());
+                                            }
                                         }
+
+                                        progress.setValue(0);
+                                        show.dismiss();
                                     }
                                 });
 
