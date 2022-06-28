@@ -94,7 +94,7 @@ public class EnterMifareReaderHandler extends Service implements Runnable {
         while (!stopConditions) {
             try {
                 handleCard();
-                Thread.sleep(100);
+                Thread.sleep(300);
             } catch (Exception ex) {
                 Log.d(TAG, "exception outside handleCard : " + ex.getMessage());
             }
@@ -163,21 +163,21 @@ public class EnterMifareReaderHandler extends Service implements Runnable {
                     Log.d(TAG, "write block 18  >>>  "+result3);
 
 //
-//                    byte[] bufferblock16 = new byte[16];
-//                    byte[] bufferblock17 = new byte[16];
-//                    byte[] bufferblock18 = new byte[16];
-//                    int result20 = piccManager.m1_readBlock(16, bufferblock16);
-//                    int result21 = piccManager.m1_readBlock(17, bufferblock17);
-//                    int result22 = piccManager.m1_readBlock(18, bufferblock18);
-//                    Log.d(TAG, "after write: \n" +
-//                            "\nauth result : " + auth +
-//                            "\nresult20 : " + result20 +
-//                            "\nvalue20 : " + ByteUtils.ByteArrToHex(bufferblock16) +
-//                            "\nresult21 : " + result21 +
-//                            "\nvalue21 : " + ByteUtils.ByteArrToHex(bufferblock17) +
-//                            "\nresult22 : " + result22 +
-//                            "\nvalue22 : " + ByteUtils.ByteArrToHex(bufferblock18)
-//                    );
+                    byte[] bufferblock16 = new byte[16];
+                    byte[] bufferblock17 = new byte[16];
+                    byte[] bufferblock18 = new byte[16];
+                    int result16 = piccManager.m1_readBlock(16, bufferblock16);
+                    int result17 = piccManager.m1_readBlock(17, bufferblock17);
+                    int result18 = piccManager.m1_readBlock(18, bufferblock18);
+                    Log.d(TAG, "after write: \n" +
+                            "\nauth result : " + auth +
+                            "\nresult16 : " + result16 +
+                            "\nvalue16 : " + ByteUtils.ByteArrToHex(bufferblock16) +
+                            "\nresult17 : " + result17 +
+                            "\nvalue17 : " + ByteUtils.ByteArrToHex(bufferblock17) +
+                            "\nresult18 : " + result18 +
+                            "\nvalue18 : " + ByteUtils.ByteArrToHex(bufferblock18)
+                    );
 
 
 

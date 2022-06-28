@@ -137,7 +137,6 @@ public class EnterMifareViewModel extends ViewModel {
     public AlertDialog cashTypeAlertDialog;
 
 
-
     public MutableLiveData<String> getSelectedTarrifEntranceFee() {
         if (selectedTarrifEntranceFee == null)
             selectedTarrifEntranceFee = new MutableLiveData<>();

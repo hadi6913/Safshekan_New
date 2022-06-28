@@ -59,6 +59,7 @@ import java.util.ArrayList;
 //968500040082191 mifare - ورود خروج ورود/خروج  -  ورودی ندارد بدون پرداخت اولیه
 //868588840082189 mifare - ورود خروج ورود/خروج  -  ورودی دارد با پرداخت اولیه
 //886597548936875 mifare - ورود خروج ورود/خروج  -  ورودی دارد بدون پرداخت اولیه - تعداد زیاد تعرفه با ورودی بدون ورودی
+//telephonyManager.getDeviceId()
 
 public class LoginViewModel extends ViewModel {
 
@@ -187,16 +188,16 @@ public class LoginViewModel extends ViewModel {
                         //getting imei from device
 
                         final TelephonyManager telephonyManager = (TelephonyManager) (((LoginActivity) context).getSystemService(Context.TELEPHONY_SERVICE));
-                        Log.d(TAG, "IMEI : " + telephonyManager.getDeviceId());
-                        editor.putString("imei", telephonyManager.getDeviceId().trim());
+                        Log.d(TAG, "IMEI : " + "968500040082191");
+                        editor.putString("imei", "968500040082191".trim());
                         editor.commit();
 
 
                         try {
 
-//todo imei
-//                            parkbanRepository.getDeviceToken("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
-                            parkbanRepository.getDeviceToken("\"" + "868500040082190" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+
+                           parkbanRepository.getDeviceToken("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+
                                 @Override
                                 public void onSuccess(String deviceToken) {
 
@@ -209,7 +210,7 @@ public class LoginViewModel extends ViewModel {
                                     ParkbanServiceProvider.setInstanceNull();
 
 
-                                    parkbanRepository.getParkingInformation("\"" + telephonyManager.getDeviceId() + "\"",
+                                    parkbanRepository.getParkingInformation("\"" + "968500040082191" + "\"",
                                             new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                 @Override
                                                 public void onSuccess(GetParkingInfoResponse result) {
@@ -600,16 +601,15 @@ public class LoginViewModel extends ViewModel {
                             progress.setValue(10);
                             // getting imei from device
                             final TelephonyManager telephonyManager = (TelephonyManager) (((LoginActivity) context).getSystemService(Context.TELEPHONY_SERVICE));
-                            Log.d(TAG, "IMEI : " + telephonyManager.getDeviceId());
-                            editor.putString("imei", telephonyManager.getDeviceId().trim());
+                            Log.d(TAG, "IMEI : " + "968500040082191");
+                            editor.putString("imei", "968500040082191".trim());
                             editor.commit();
 
 
                             try {
 
-//todo imei
-//                                parkbanRepository.getDeviceToken("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
-                                parkbanRepository.getDeviceToken("\"" + "868500040082190" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+
+                                parkbanRepository.getDeviceToken("\"" + "968500040082191" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                     @Override
                                     public void onSuccess(String deviceToken) {
 
@@ -622,7 +622,7 @@ public class LoginViewModel extends ViewModel {
                                         ParkbanServiceProvider.setInstanceNull();
 
 
-                                        parkbanRepository.getParkingInformation("\"" + telephonyManager.getDeviceId() + "\"",
+                                        parkbanRepository.getParkingInformation("\"" + "968500040082191" + "\"",
                                                 new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                     @Override
                                                     public void onSuccess(GetParkingInfoResponse result) {

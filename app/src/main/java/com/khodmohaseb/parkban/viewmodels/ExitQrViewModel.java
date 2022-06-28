@@ -101,7 +101,7 @@ import saman.zamani.persiandate.PersianDateFormat;
 
 import static com.google.android.gms.internal.zzid.runOnUiThread;
 
-public class ExitQrViewModel extends ViewModel {
+public class   ExitQrViewModel extends ViewModel {
 
     public static final String TAG = "ExitQrViewModel";
     private MutableLiveData<Boolean> car;
@@ -1528,6 +1528,14 @@ public class ExitQrViewModel extends ViewModel {
         }, Animation_Constant.ANIMATION_VALUE);
     }
 
+
+
+
+
+
+
+
+
     public void Motor_Car_Onclick(View view) {
         final Animation myAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.btn_rotate_animation);
         MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
@@ -1925,7 +1933,7 @@ public class ExitQrViewModel extends ViewModel {
 
 
                 ForgotEntranceRequest forgotEntranceRequest = new ForgotEntranceRequest();
-                forgotEntranceRequest.setImei(telephonyManager.getDeviceId().trim());
+                forgotEntranceRequest.setImei("968500040082191".trim());
                 forgotEntranceRequest.setPlate(pelakForAskFromServer);
 
                 parkbanRepository.forgotEntrance(forgotEntranceRequest, new ParkbanRepository.ServiceResultCallBack<ForgotRecordResponse>() {

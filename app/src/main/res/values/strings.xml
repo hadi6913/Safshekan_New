@@ -36,6 +36,9 @@
     <string name="submit_card_dialog_1">Submit on card</string>
     <string name="submit_card_dialog_2">Put card near nfc sensor</string>
     <string name="submit_card_dialog_3">Cancel</string>
+    <string name="exit_card_dialog_1">Read Card</string>
+    <string name="exit_card_dialog_2">Put card near nfc sensor</string>
+    <string name="exit_card_dialog_3">Cancel</string>
     <string name="submit_success">Success Submit</string>
     <string name="error_mifare">Invalid card</string>
     <string name="qr_null">QR barcode is empty</string>
@@ -43,7 +46,12 @@
     <string name="car_not_inserted">No vehicle found</string>
     <string name="return_title">Return</string>
     <string name="submit_title">Submit</string>
-
+    <string name="change_password_dialog_1">Change Password</string>
+    <string name="change_password_dialog_2">Current Password</string>
+    <string name="change_password_dialog_3">New Password</string>
+    <string name="change_password_dialog_4">Repeat New Password</string>
+    <string name="change_password_dialog_5">Confirm</string>
+    <string name="change_password_dialog_6">Cancel</string>
 
 
 

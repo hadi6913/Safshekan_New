@@ -53,7 +53,8 @@ public class EnterQrActivity extends BaseActivity {
     private EnterQrViewModel enterQrViewModel;
     private ActivityEnterQrBinding binding;
 
-
+    //**********************************************************************************************
+    //**********************************************************************************************
     static {
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
@@ -72,8 +73,18 @@ public class EnterQrActivity extends BaseActivity {
 
         enterQrViewModel = ViewModelProviders.of(this).get(EnterQrViewModel.class);
         binding.setViewModel(enterQrViewModel);
+
+
+
+
+
         EditText etxtCar = findViewById(R.id.etxt_car_plate_first_cell_enter_qr);
         EditText etxtMotor = findViewById(R.id.etxt_motor_plate_first_cell_enter_qr);
+
+
+
+
+
         enterQrViewModel.init(this, etxtCar, etxtMotor);
         enterQrViewModel.getHasPelak().setValue(true);
         binding.setLifecycleOwner(this);

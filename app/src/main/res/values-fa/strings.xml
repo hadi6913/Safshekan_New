@@ -36,6 +36,9 @@
     <string name="submit_card_dialog_1">ثبت روی کارت</string>
     <string name="submit_card_dialog_2">برای انجام عملیات ثبت ، کارت را نزدیک سنسور دستگاه قرار دهید</string>
     <string name="submit_card_dialog_3">انصراف</string>
+    <string name="exit_card_dialog_1">خواندن کارت</string>
+    <string name="exit_card_dialog_2">برای انجام عملیات خواندن ، کارت را نزدیک سنسور دستگاه قرار دهید</string>
+    <string name="exit_card_dialog_3">انصراف</string>
     <string name="submit_success">ثبت موفق</string>
     <string name="error_mifare">کارت نامعتبر</string>
     <string name="qr_null">شناسه اسکن شده خالی است</string>
@@ -43,6 +46,12 @@
     <string name="car_not_inserted">ورود وسیله نقلیه یافت نشد</string>
     <string name="return_title">بازگشت</string>
     <string name="submit_title">ثبت</string>
+    <string name="change_password_dialog_1">تغییر کلمه عبور</string>
+    <string name="change_password_dialog_2">کلمه عبور فعلی</string>
+    <string name="change_password_dialog_3">کلمه عبور جدید</string>
+    <string name="change_password_dialog_4">تکرار کلمه عبور جدید</string>
+    <string name="change_password_dialog_5">تایید</string>
+    <string name="change_password_dialog_6">انصراف</string>
 
 
 

@@ -57,7 +57,7 @@
                         android:gravity="center"
                         android:onClick="@{viewModel::Pelak_Khan_Onclick}" />
 
-                    <TextView
+                    <com.khodmohaseb.parkban.controls.PersianTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/btn_pelak_khan_exit_mifare"
@@ -70,33 +70,115 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="110dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btn_card_khan_exit_mifare"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/btn_card_khan_background"
+                        android:gravity="center"
+                        android:onClick="@{viewModel::Card_Khan_Onclick}" />
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/btn_card_khan_exit_mifare"
+                        android:layout_alignLeft="@id/btn_card_khan_exit_mifare"
+                        android:layout_alignRight="@id/btn_card_khan_exit_mifare"
+                        android:gravity="center_horizontal"
+                        android:text="کارت خوان"
+                        android:textColor="@android:color/darker_gray"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
 
 
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="100dp"-->
-<!--                    android:layout_height="110dp"-->
-<!--                    android:gravity="center">-->
 
-<!--                    <Button-->
-<!--                        android:id="@+id/btn_cart_khan"-->
-<!--                        android:layout_width="70dp"-->
-<!--                        android:layout_height="70dp"-->
-<!--                        android:background="@drawable/btn_card_khan_background"-->
-<!--                        android:gravity="center"-->
-<!--                        android:onClick="@{viewModel::Card_Khan_Onclick}" />-->
 
-<!--                    <TextView-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@id/btn_cart_khan"-->
-<!--                        android:layout_alignLeft="@id/btn_cart_khan"-->
-<!--                        android:layout_alignRight="@id/btn_cart_khan"-->
-<!--                        android:gravity="center_horizontal"-->
-<!--                        android:text="کارت خوان"-->
-<!--                        android:textColor="@android:color/darker_gray"-->
-<!--                        android:textStyle="bold" />-->
 
-<!--                </RelativeLayout>-->
+                <!--                <RelativeLayout-->
+                <!--                    android:layout_width="100dp"-->
+                <!--                    android:layout_height="110dp"-->
+                <!--                    android:gravity="center">-->
+
+                <!--                    <Button-->
+                <!--                        android:id="@+id/btn_cart_khan"-->
+                <!--                        android:layout_width="70dp"-->
+                <!--                        android:layout_height="70dp"-->
+                <!--                        android:background="@drawable/btn_card_khan_background"-->
+                <!--                        android:gravity="center"-->
+                <!--                        android:onClick="@{viewModel::Card_Khan_Onclick}" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_below="@id/btn_cart_khan"-->
+                <!--                        android:layout_alignLeft="@id/btn_cart_khan"-->
+                <!--                        android:layout_alignRight="@id/btn_cart_khan"-->
+                <!--                        android:gravity="center_horizontal"-->
+                <!--                        android:text="کارت خوان"-->
+                <!--                        android:textColor="@android:color/darker_gray"-->
+                <!--                        android:textStyle="bold" />-->
+
+                <!--                </RelativeLayout>-->
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/operator_door_information_layout"
+                android:layout_below="@+id/linear_button_container_main_exit_mifare"
+                android:orientation="vertical"
+                android:gravity="right"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@{viewModel.selectedUser.userName}"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:text="کاربر : "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:text="@{viewModel.selectedDoor.id.toString()}"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <com.khodmohaseb.parkban.controls.PersianTextView
+                        android:text="درب : "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
@@ -106,10 +188,10 @@
                 android:id="@+id/layout_pelak_main_exit_mifare"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_below="@id/linear_button_container_main_exit_mifare"
+                android:layout_below="@id/operator_door_information_layout"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="5dp"
-                android:visibility="@{viewModel.hasPelak ? View.VISIBLE : View.GONE}">
+                >
 
 
                 <LinearLayout
@@ -141,7 +223,7 @@
                         android:text="@={viewModel.plate__0}"
                         android:textColor="@color/text_color"
                         android:textSize="20sp"
-                         />
+                        />
 
                     <Spinner
                         android:id="@+id/spinner_exit_mifare"
@@ -169,7 +251,7 @@
                         android:text="@={viewModel.plate__2}"
                         android:textColor="@color/text_color"
                         android:textSize="20sp"
-                         />
+                        />
 
                     <com.khodmohaseb.parkban.controls.PersianEditText
                         android:id="@+id/etxt_car_plate_forth_cell_exit_mifare"
@@ -185,7 +267,7 @@
                         android:text="@={viewModel.plate__3}"
                         android:textColor="@color/text_color"
                         android:textSize="17sp"
-                         />
+                        />
 
                 </LinearLayout>
 
@@ -212,7 +294,7 @@
                         android:text="@={viewModel.mplate__0}"
                         android:textColor="@color/text_color"
                         android:textSize="17sp"
-                         />
+                        />
 
                     <com.khodmohaseb.parkban.controls.PersianEditText
                         android:id="@+id/etxt_motor_plate_second_cell_exit_mifare"
@@ -226,7 +308,7 @@
                         android:text="@={viewModel.mplate__1}"
                         android:textColor="@color/text_color"
                         android:textSize="17sp"
-                         />
+                        />
 
                 </LinearLayout>
 
@@ -251,35 +333,35 @@
 
 
 
-<!--            <RelativeLayout-->
-<!--                android:id="@+id/btn_gozaresh_layout"-->
-<!--                android:layout_width="100dp"-->
-<!--                android:layout_height="120dp"-->
-<!--                android:layout_above="@id/sendClick"-->
-<!--                android:layout_alignParentLeft="true"-->
-<!--                android:layout_marginLeft="12dp"-->
-<!--                android:gravity="center">-->
+            <!--            <RelativeLayout-->
+            <!--                android:id="@+id/btn_gozaresh_layout"-->
+            <!--                android:layout_width="100dp"-->
+            <!--                android:layout_height="120dp"-->
+            <!--                android:layout_above="@id/sendClick"-->
+            <!--                android:layout_alignParentLeft="true"-->
+            <!--                android:layout_marginLeft="12dp"-->
+            <!--                android:gravity="center">-->
 
-<!--                <Button-->
-<!--                    android:id="@+id/btn_gozaresh"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    android:background="@drawable/btn_gozaresh_background"-->
-<!--                    android:gravity="center"-->
-<!--                    android:onClick="@{viewModel::Gozaresh_Onclick}" />-->
+            <!--                <Button-->
+            <!--                    android:id="@+id/btn_gozaresh"-->
+            <!--                    android:layout_width="50dp"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:background="@drawable/btn_gozaresh_background"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:onClick="@{viewModel::Gozaresh_Onclick}" />-->
 
-<!--                <TextView-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_below="@id/btn_gozaresh"-->
-<!--                    android:layout_alignLeft="@id/btn_gozaresh"-->
-<!--                    android:layout_alignRight="@id/btn_gozaresh"-->
-<!--                    android:gravity="center_horizontal"-->
-<!--                    android:text="گزارش"-->
-<!--                    android:textColor="@android:color/darker_gray"-->
-<!--                    android:textStyle="bold" />-->
+            <!--                <TextView-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_below="@id/btn_gozaresh"-->
+            <!--                    android:layout_alignLeft="@id/btn_gozaresh"-->
+            <!--                    android:layout_alignRight="@id/btn_gozaresh"-->
+            <!--                    android:gravity="center_horizontal"-->
+            <!--                    android:text="گزارش"-->
+            <!--                    android:textColor="@android:color/darker_gray"-->
+            <!--                    android:textStyle="bold" />-->
 
-<!--            </RelativeLayout>-->
+            <!--            </RelativeLayout>-->
 
 
             <Button
@@ -291,6 +373,19 @@
                 android:background="@drawable/refresh"
                 android:gravity="center"
                 android:onClick="@{viewModel::Refresh_Page}" />
+
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_above="@+id/layout_pelak_main_exit_mifare"
+                android:layout_margin="10dp"
+                android:background="@drawable/settings"
+                android:elevation="20dp"
+                android:onClick="@{viewModel::Setting_Password_Page}"
+                android:shadowColor="@color/dark_grey"
+                android:text=""
+                />
 
 
             <!--<LinearLayout-->
@@ -317,19 +412,61 @@
 
             <!--</LinearLayout>-->
 
+
+            <LinearLayout
+                android:layout_above="@+id/submit_manual_exit_mifare"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/new_new_btn_background_layout"
+                    android:onClick="@{viewModel::Search_Memory_Onclick}"
+                    android:typeface="@{viewModel.mFont}"
+                    android:text="جستجوی حافظه"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:typeface="@{viewModel.mFont}"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/new_new_btn_background_layout"
+                    android:onClick="@{viewModel::Search_Server_Onclick}"
+                    android:text="استعلام از سرور"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
             <Button
-                android:id="@+id/sendClick_exit_mifare"
+                android:id="@+id/submit_manual_exit_mifare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
+                android:typeface="@{viewModel.mFont}"
                 android:background="@drawable/new_new_btn_background_layout"
-                android:onClick="@{viewModel::Taeed_Onclick}"
-                android:text="تایید"
+                android:onClick="@{viewModel::Enter_Manual_Onclick}"
+                android:text="ثبت ورود دستی"
                 android:textColor="@android:color/white"
-                android:textSize="21sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 

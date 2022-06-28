@@ -125,6 +125,7 @@
             android:screenOrientation="portrait"/>
 
         <service android:name=".services.EnterMifareReaderHandler"/>
+        <service android:name=".services.ExitMifareReaderHandler"/>
         <service android:name=".services.SendRecordHandler"/>
 
     </application>

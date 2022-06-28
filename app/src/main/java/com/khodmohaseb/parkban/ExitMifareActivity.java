@@ -26,6 +26,7 @@ import com.khodmohaseb.parkban.databinding.ActivityMainBinding;
 import com.khodmohaseb.parkban.helper.ShowToast;
 
 import com.khodmohaseb.parkban.services.ExitMifareReaderHandler;
+import com.khodmohaseb.parkban.utils.ByteUtils;
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
 import com.khodmohaseb.parkban.viewmodels.ExitMifareViewModel;
 import com.khodmohaseb.parkban.viewmodels.MainViewModel;
@@ -93,7 +94,13 @@ public class ExitMifareActivity extends BaseActivity implements ExitMifareReader
         EditText etxtCar = findViewById(R.id.etxt_car_plate_first_cell_exit_mifare);
         EditText etxtMotor = findViewById(R.id.etxt_motor_plate_first_cell_exit_mifare);
         exitMifareViewModel.init(this, etxtCar, etxtMotor);
-        exitMifareViewModel.getHasPelak().setValue(true);
+
+
+
+
+
+
+
         binding.setLifecycleOwner(this);
         exitMifareViewModel.mSpinner = binding.spinnerExitMifare;
         binding.spinnerExitMifare.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -195,7 +202,7 @@ public class ExitMifareActivity extends BaseActivity implements ExitMifareReader
     //**********************************************************************************************
     //**********************************************************************************************
 
-    private void startServices() {
+    public void startServices() {
         try {
             readerHandlerIntent = new Intent(getApplicationContext(), ExitMifareReaderHandler.class);
             startService(readerHandlerIntent);
@@ -226,20 +233,6 @@ public class ExitMifareActivity extends BaseActivity implements ExitMifareReader
     //**********************************************************************************************
     //**********************************************************************************************
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //******************************************************************************************
-        //******************************************************************************************
-        startServices();
-        //******************************************************************************************
-        //******************************************************************************************
-        if (PreferenceManager.getDefaultSharedPreferences(ExitMifareActivity.this).getBoolean("comFmPardakhtDialog", false)) {
-            PreferenceManager.getDefaultSharedPreferences(ExitMifareActivity.this).edit().putBoolean("comFmPardakhtDialog", false).apply();
-            //do refresh
-            exitMifareViewModel.doRefresh();
-        }
-    }
 
     @Override
     public void onBackPressed() {
@@ -330,14 +323,69 @@ public class ExitMifareActivity extends BaseActivity implements ExitMifareReader
         //******************************************************************************************
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        stopServicesForOperator();
-    }
 
     @Override
-    public void showOnUi(String serialNumber) {
+    public void exitMifareResult(boolean result, final byte[] bl16, final byte[] bl17, final byte[] bl18) {
+
+
+
+
+        if (result) {
+
+            stopServicesForOperator();
+
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    try {
+
+                        String pelak = Long.toString(ByteUtils.getValue(bl16,0,4));
+                        String electronicPaymentCode = Long.toString(ByteUtils.getValue(bl16,4,12)) ;
+                        String yyyyMMddHHmmEnterDateTime = Long.toString(ByteUtils.getValue(bl17,0,7)) ;
+                        String tarrifId = Integer.toString(ByteUtils.getInt(bl17[7]));
+                        String paymentType = Integer.toString(ByteUtils.getInt(bl17[8])) ;
+                        String paidAmount =  Long.toString(ByteUtils.getValue(bl17,9,7));
+                        String enterDoorId = Long.toString( ByteUtils.getValue(bl18,0,8));
+                        String enterOperatorId = Long.toString( ByteUtils.getValue(bl18,7,8));
+                        exitMifareViewModel.handelExit(
+                           pelak,
+                           yyyyMMddHHmmEnterDateTime,
+                           tarrifId,
+                           paidAmount,
+                           enterDoorId,
+                           enterOperatorId,
+                           paymentType,
+                           electronicPaymentCode
+                        );
+
+                    }catch (Exception e){
+                        ShowToast.getInstance().showError(ExitMifareActivity.this, R.string.error_mifare);
+                    }
+                    exitMifareViewModel.mifareAlertDialog.dismiss();
+
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ShowToast.getInstance().showError(ExitMifareActivity.this, R.string.error_mifare);
+                }
+            });
+
+
+        }
+
+
+
+
+
+
+
+
+
 
     }
 }

@@ -59,6 +59,10 @@ public class ExitQrActivity extends BaseActivity {
         System.loadLibrary("anpr_ndk");
     }
 
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +74,8 @@ public class ExitQrActivity extends BaseActivity {
         EditText etxtCar = findViewById(R.id.etxt_car_plate_first_cell_exit_qr);
         EditText etxtMotor = findViewById(R.id.etxt_motor_plate_first_cell_exit_qr);
         exitQrViewModel.init(this, etxtCar, etxtMotor);
+
+
         binding.setLifecycleOwner(this);
         exitQrViewModel.mSpinner = binding.spinnerExitQr;
         binding.spinnerExitQr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -156,6 +162,17 @@ public class ExitQrActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+
+
+
+
+
+
+
+
+
+
+
         if (getIntent().getBooleanExtra("isfromqr", false)) {
             String General_Qr_Code_String = getIntent().getStringExtra("scanned_string");
             Log.d(TAG, "General_Qr_Code_String_scanned >>>>>>>>>>>>>>>> " + General_Qr_Code_String);
