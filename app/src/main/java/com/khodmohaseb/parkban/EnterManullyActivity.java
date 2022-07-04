@@ -330,7 +330,7 @@ public class EnterManullyActivity extends BaseActivity implements DatePickerDial
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         Log.d(TAG, "onDateSet: year:" + year + " month:" + monthOfYear + "day:" + dayOfMonth);
         year_ = year;
-        month_ = monthOfYear;
+        month_ = monthOfYear+1;
         day_ = dayOfMonth;
 
         TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(

@@ -1,9 +1,18 @@
 <resources>
-    <string name="app_name">KhodMohaseb</string>
+    <string name="app_name">پارکینگ ابری علم وصنعت</string>
     <string name="setting_dialog_1">Your device does not have the default settings for use</string>
     <string name="setting_dialog_2">Please get the parking details after connecting the device to the internet</string>
     <string name="setting_dialog_3">Enter server address</string>
     <string name="setting_dialog_4">Get parking settings</string>
+
+    <string name="not_valid_dialog_1">Unregistered Device</string>
+    <string name="not_valid_dialog_2">Please get the parking details after subscription renewal and connecting the device to the internet</string>
+    <string name="not_valid_dialog_3">Enter server address</string>
+    <string name="not_valid_dialog_4">Get parking settings</string>
+
+
+
+
     <string name="exception_msg">Error occurrence</string>
     <string name="unregistered_device_msg">Unregistered Device</string>
     <string name="exception_msg_245">Calculation Error</string>
@@ -157,7 +166,7 @@
     <string name="unhandled_error_from_server">یک خطای غیر منتظره در سمت سرور اتفاق افتاده است</string>
     <string name="save_success">ذخیره اطلاعات با موفقیت انجام شد </string>
     <string name="save_failed">ذخیره اطلاعات با مشکل مواجه شد \n لطفا دوباره نسبت به ذخیره اطلاعات اقدام نمایید</string>
-    <string name="plate_not_detected">تشخیص پلاک با موفقیت انجام نشد</string>
+    <string name="plate_not_detected">Plate not detected</string>
     <string name="not_detect">پلاکی جهت شناسایی تشخیص داده نشده است</string>
     <string name="parking_space_busy">جایگاه انتخابی قبلا اشغال شده است \n آیا از انتخاب آن اطمینان دارید</string>
     <string name="space_not_selected">جایگاه پارک موردنظر را انتخاب نمایید</string>

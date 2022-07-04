@@ -239,7 +239,6 @@ public class ParkbanRepository {
         });
 
 
-
     }
 
 
@@ -248,7 +247,6 @@ public class ParkbanRepository {
 
         RequestBody body =
                 RequestBody.create(MediaType.parse("application/json"), imei.trim());
-
 
 
         ParkbanServiceProvider.getInstance().isNeedUpdate(body).enqueue(new Callback<Boolean>() {
@@ -275,7 +273,6 @@ public class ParkbanRepository {
         });
 
 
-
     }
 
 
@@ -284,7 +281,6 @@ public class ParkbanRepository {
 
         RequestBody body =
                 RequestBody.create(MediaType.parse("application/json"), imei.trim());
-
 
 
         ParkbanServiceProvider.getInstance().setUpdateDevice(body).enqueue(new Callback<Boolean>() {
@@ -311,10 +307,7 @@ public class ParkbanRepository {
         });
 
 
-
     }
-
-
 
 
     public void getParkingInformation(String imei, final ServiceResultCallBack<GetParkingInfoResponse> callBack) {

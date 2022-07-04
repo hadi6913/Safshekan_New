@@ -674,7 +674,7 @@ public class EnterManuallyViewModel extends ViewModel {
                 );
 
                 String year = Integer.toString(dateGeorg[0]);
-                String month = String.format("%02d", dateGeorg[1] + 1);
+                String month = String.format("%02d", dateGeorg[1]);
                 String day = String.format("%02d", dateGeorg[2]);
                 String hour = finalEntranceDate.substring(8, 10);
                 String min = finalEntranceDate.substring(10, 12);
@@ -917,6 +917,7 @@ public class EnterManuallyViewModel extends ViewModel {
                                                                             @Override
                                                                             public void onSuccess(long id) {
                                                                                 ShowToast.getInstance().showSuccess(myContext, R.string.submit_success);
+                                                                                doRefresh();
                                                                                 show.dismiss();
                                                                             }
 
@@ -971,127 +972,191 @@ public class EnterManuallyViewModel extends ViewModel {
                 long roundedTotalStayInMinutes = CalculateHelperUtility.roundStayLengthTime(totalStayInMinutes, getParkingInfoResponse.getTariffs());
                 Log.d(TAG, "rounded stay in minutes : " + roundedTotalStayInMinutes);
                 if (getParkingInfoResponse.getTariffs().getIsCircadian()) {
-                    // should calculate daily or daily-hourly
-                    if (getParkingInfoResponse.getTariffs().getCircadianCalcKind() == 0) {
-                        //daily
+
+                    if (roundedTotalStayInMinutes < getParkingInfoResponse.getTariffs().getCircadianCalcBase()) {
+                        //should calculate hourly
                         switch (tariffIdString.trim()) {
                             case "1":
                                 price = getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost() +
-                                        DailyFareCalculator.calculateDailyFareVehicle1(
+                                        HourlyFareCalculator.calculateStepFareVehicle1(
                                                 roundedTotalStayInMinutes,
                                                 getParkingInfoResponse.getTariffs()
                                         );
-
                                 break;
                             case "2":
                                 price = getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost() +
-                                        DailyFareCalculator.calculateDailyFareVehicle2(
+                                        HourlyFareCalculator.calculateStepFareVehicle2(
                                                 roundedTotalStayInMinutes,
                                                 getParkingInfoResponse.getTariffs()
                                         );
                                 break;
                             case "3":
                                 price = getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost() +
-                                        DailyFareCalculator.calculateDailyFareVehicle3(
+                                        HourlyFareCalculator.calculateStepFareVehicle3(
                                                 roundedTotalStayInMinutes,
                                                 getParkingInfoResponse.getTariffs()
                                         );
                                 break;
                             case "4":
                                 price = getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost() +
-                                        DailyFareCalculator.calculateDailyFareVehicle4(
+                                        HourlyFareCalculator.calculateStepFareVehicle4(
                                                 roundedTotalStayInMinutes,
                                                 getParkingInfoResponse.getTariffs()
                                         );
                                 break;
                             case "5":
                                 price = getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost() +
-                                        DailyFareCalculator.calculateDailyFareVehicle5(
+                                        HourlyFareCalculator.calculateStepFareVehicle5(
                                                 roundedTotalStayInMinutes,
                                                 getParkingInfoResponse.getTariffs()
                                         );
                                 break;
                             case "6":
                                 price = getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost() +
-                                        DailyFareCalculator.calculateDailyFareVehicle6(
+                                        HourlyFareCalculator.calculateStepFareVehicle6(
                                                 roundedTotalStayInMinutes,
                                                 getParkingInfoResponse.getTariffs()
                                         );
                                 break;
                             case "7":
                                 price = getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost() +
-                                        DailyFareCalculator.calculateDailyFareVehicle7(
+                                        HourlyFareCalculator.calculateStepFareVehicle7(
                                                 roundedTotalStayInMinutes,
                                                 getParkingInfoResponse.getTariffs()
                                         );
                                 break;
                             case "8":
                                 price = getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost() +
-                                        DailyFareCalculator.calculateDailyFareVehicle8(
+                                        HourlyFareCalculator.calculateStepFareVehicle8(
                                                 roundedTotalStayInMinutes,
                                                 getParkingInfoResponse.getTariffs()
                                         );
                                 break;
+
                         }
                     } else {
-                        //daily hourly
-                        switch (tariffIdString.trim()) {
-                            case "1":
-                                price = getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost() +
-                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle1(
-                                                roundedTotalStayInMinutes,
-                                                getParkingInfoResponse.getTariffs()
-                                        );
-                                break;
-                            case "2":
-                                price = getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost() +
-                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle2(
-                                                roundedTotalStayInMinutes,
-                                                getParkingInfoResponse.getTariffs()
-                                        );
-                                break;
-                            case "3":
-                                price = getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost() +
-                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle3(
-                                                roundedTotalStayInMinutes,
-                                                getParkingInfoResponse.getTariffs()
-                                        );
-                                break;
-                            case "4":
-                                price = getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost() +
-                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle4(
-                                                roundedTotalStayInMinutes,
-                                                getParkingInfoResponse.getTariffs()
-                                        );
-                                break;
-                            case "5":
-                                price = getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost() +
-                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle5(
-                                                roundedTotalStayInMinutes,
-                                                getParkingInfoResponse.getTariffs()
-                                        );
-                                break;
-                            case "6":
-                                price = getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost() +
-                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle6(
-                                                roundedTotalStayInMinutes,
-                                                getParkingInfoResponse.getTariffs()
-                                        );
-                                break;
-                            case "7":
-                                price = getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost() +
-                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle7(
-                                                roundedTotalStayInMinutes,
-                                                getParkingInfoResponse.getTariffs()
-                                        );
-                                break;
-                            case "8":
-                                price = getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost() +
-                                        DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle8(
-                                                roundedTotalStayInMinutes,
-                                                getParkingInfoResponse.getTariffs()
-                                        );
-                                break;
+                        // should calculate daily or daily-hourly
+                        if (getParkingInfoResponse.getTariffs().getCircadianCalcKind() == 0) {
+                            //daily
+                            switch (tariffIdString.trim()) {
+                                case "1":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost() +
+                                            DailyFareCalculator.calculateDailyFareVehicle1(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+
+                                    break;
+                                case "2":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost() +
+                                            DailyFareCalculator.calculateDailyFareVehicle2(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "3":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost() +
+                                            DailyFareCalculator.calculateDailyFareVehicle3(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "4":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost() +
+                                            DailyFareCalculator.calculateDailyFareVehicle4(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "5":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost() +
+                                            DailyFareCalculator.calculateDailyFareVehicle5(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "6":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost() +
+                                            DailyFareCalculator.calculateDailyFareVehicle6(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "7":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost() +
+                                            DailyFareCalculator.calculateDailyFareVehicle7(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "8":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost() +
+                                            DailyFareCalculator.calculateDailyFareVehicle8(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                            }
+                        } else {
+                            //daily hourly
+                            switch (tariffIdString.trim()) {
+                                case "1":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost() +
+                                            DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle1(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "2":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost() +
+                                            DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle2(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "3":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost() +
+                                            DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle3(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "4":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost() +
+                                            DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle4(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "5":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost() +
+                                            DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle5(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "6":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost() +
+                                            DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle6(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "7":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost() +
+                                            DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle7(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                                case "8":
+                                    price = getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost() +
+                                            DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle8(
+                                                    roundedTotalStayInMinutes,
+                                                    getParkingInfoResponse.getTariffs()
+                                            );
+                                    break;
+                            }
                         }
                     }
 
@@ -1309,6 +1374,7 @@ public class EnterManuallyViewModel extends ViewModel {
                                                                                     msg.obj = mBitmap;
                                                                                     msg.sendToTarget();
                                                                                     mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
+                                                                                    doRefresh();
                                                                                     show.dismiss();
 
                                                                                 } catch (Exception exception) {
@@ -1522,6 +1588,7 @@ public class EnterManuallyViewModel extends ViewModel {
                                                                         @Override
                                                                         public void onSuccess(long id) {
                                                                             ShowToast.getInstance().showSuccess(myContext, R.string.submit_success);
+                                                                            doRefresh();
                                                                             show.dismiss();
                                                                         }
 
@@ -1662,6 +1729,7 @@ public class EnterManuallyViewModel extends ViewModel {
                                                                             msg.obj = mBitmap;
                                                                             msg.sendToTarget();
                                                                             mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
+                                                                            doRefresh();
 
 
                                                                         } catch (Exception exception) {
@@ -2010,6 +2078,22 @@ public class EnterManuallyViewModel extends ViewModel {
             mPrinterManager.open();
         }
         return mPrinterManager;
+    }
+
+
+    public void doRefresh() {
+        mplate__0.setValue("");
+        mplate__1.setValue("");
+        plate__0.setValue("");
+        plate__1.setValue("الف");
+        plate__2.setValue("");
+        plate__3.setValue("");
+
+        car.setValue(true);
+        motor.setValue(false);
+        mSpinner.setSelection(0);
+        enteredDate.setValue("****");
+
     }
 
 

@@ -482,8 +482,10 @@ public class EnterMifareActivity extends BaseActivity implements EnterMifareRead
                 @Override
                 public void run() {
                     ShowToast.getInstance().showSuccess(EnterMifareActivity.this, R.string.submit_success);
+
+                   enterMifareViewModel.doRefresh();
                     enterMifareViewModel.mifareAlertDialog.dismiss();
-                    if(enterMifareViewModel.getShouldPayFirst().getValue()){
+                    if (enterMifareViewModel.getShouldPayFirst().getValue()) {
                         enterMifareViewModel.cashTypeAlertDialog.dismiss();
                     }
 

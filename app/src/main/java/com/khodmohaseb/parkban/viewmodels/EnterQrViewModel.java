@@ -596,6 +596,8 @@ public class EnterQrViewModel extends ViewModel {
                                 msg.sendToTarget();
                                 mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
 
+                                doRefresh();
+
                             }
 
                             @Override
@@ -1064,12 +1066,14 @@ public class EnterQrViewModel extends ViewModel {
                                             new ParkbanRepository.DataBaseResultCallBack() {
                                                 @Override
                                                 public void onSuccess(long id) {
+
                                                     Log.d(TAG, "onSuccess in save database , now print process begin");
                                                     mBitmap = generateBitmapByLayoutForPayment(myContext, finalPelak, true, getEntranceFeeFromTariffId(), " ");
                                                     Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
                                                     msg.obj = mBitmap;
                                                     msg.sendToTarget();
                                                     mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
+                                                    doRefresh();
                                                     show.dismiss();
 
                                                 }
@@ -1169,12 +1173,15 @@ public class EnterQrViewModel extends ViewModel {
                                         @Override
                                         public void onSuccess(long id) {
                                             Log.d(TAG, "onSuccess in save database , now print process begin");
+
                                             mBitmap = generateBitmapByLayoutForNonePayment(myContext, finalPelak);
                                             Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
                                             msg.obj = mBitmap;
                                             msg.sendToTarget();
                                             mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
 
+
+                                            doRefresh();
                                         }
 
                                         @Override

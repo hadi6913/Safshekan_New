@@ -42,17 +42,30 @@ import com.khodmohaseb.parkban.helper.Utility;
 import com.khodmohaseb.parkban.persistence.ParkbanDatabase;
 import com.khodmohaseb.parkban.persistence.models.ResponseResultType;
 import com.khodmohaseb.parkban.persistence.models.User;
+import com.khodmohaseb.parkban.persistence.models.khodmohaseb.EntranceRecord;
+import com.khodmohaseb.parkban.persistence.models.khodmohaseb.ExitRecord;
+import com.khodmohaseb.parkban.persistence.models.khodmohaseb.PasswordOperatorRecord;
+import com.khodmohaseb.parkban.persistence.models.khodmohaseb.TraffikRecord;
 import com.khodmohaseb.parkban.repositories.ParkbanRepository;
+import com.khodmohaseb.parkban.services.InternetConnection;
 import com.khodmohaseb.parkban.services.ParkbanServiceProvider;
 import com.khodmohaseb.parkban.services.dto.LoginResultDto;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.changepass.ChangePasswordRequestDto;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.changepass.OperatorUser;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Door;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.GetParkingInfoResponse;
 import com.khodmohaseb.parkban.services.dto.khodmohaseb.parkinginfo.Operator;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendiorecord.DeviceIORecord;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendiorecord.SendIoRecordRequest;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendtraffikrecord.SendTraffikRecordRequest;
+import com.khodmohaseb.parkban.services.dto.khodmohaseb.sendtraffikrecord.TrafficRecord;
 import com.khodmohaseb.parkban.utils.Animation_Constant;
 import com.khodmohaseb.parkban.utils.MyBounceInterpolator;
+import com.khodmohaseb.parkban.utils.PelakUtility;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 //917384265738265 qr - ورود خروج ورود/خروج  -  ورودی ندارد بدون پرداخت اولیه
@@ -60,7 +73,9 @@ import java.util.ArrayList;
 //968500040082191 mifare - ورود خروج ورود/خروج  -  ورودی ندارد بدون پرداخت اولیه
 //868588840082189 mifare - ورود خروج ورود/خروج  -  ورودی دارد با پرداخت اولیه
 //886597548936875 mifare - ورود خروج ورود/خروج  -  ورودی دارد بدون پرداخت اولیه - تعداد زیاد تعرفه با ورودی بدون ورودی
-//telephonyManager.getDeviceId()
+//"868500040082711"
+//868400040382195
+
 
 public class LoginViewModel extends ViewModel {
 
@@ -153,7 +168,6 @@ public class LoginViewModel extends ViewModel {
         mFont = Typeface.createFromAsset(context.getAssets(), "irsans.ttf");
 
 
-
         if (getParkingInfoResponse == null) {
 
 
@@ -193,15 +207,15 @@ public class LoginViewModel extends ViewModel {
                         //getting imei from device
 
                         final TelephonyManager telephonyManager = (TelephonyManager) (((LoginActivity) context).getSystemService(Context.TELEPHONY_SERVICE));
-                        Log.d(TAG, "IMEI : " + telephonyManager.getDeviceId());
-                        editor.putString("imei", telephonyManager.getDeviceId().trim());
+                        Log.d(TAG, "IMEI : " + "868400040382195");
+                        editor.putString("imei", "868400040382195".trim());
                         editor.commit();
 
 
                         try {
 
 
-                            parkbanRepository.getDeviceToken("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                            parkbanRepository.getDeviceToken("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
 
                                 @Override
                                 public void onSuccess(String deviceToken) {
@@ -215,7 +229,7 @@ public class LoginViewModel extends ViewModel {
                                     ParkbanServiceProvider.setInstanceNull();
 
 
-                                    parkbanRepository.getParkingInformation("\"" + telephonyManager.getDeviceId() + "\"",
+                                    parkbanRepository.getParkingInformation("\"" + "868400040382195" + "\"",
                                             new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                 @Override
                                                 public void onSuccess(GetParkingInfoResponse result) {
@@ -227,7 +241,7 @@ public class LoginViewModel extends ViewModel {
                                                             .serializeNulls()
                                                             .create();
                                                     String json = gson.toJson(result);
-                                                    SharedPreferences.Editor editor = preferences.edit();
+                                                    final SharedPreferences.Editor editor = preferences.edit();
                                                     editor.putString("parkinginfo", json);
                                                     editor.commit();
 
@@ -247,7 +261,7 @@ public class LoginViewModel extends ViewModel {
 
                                                     for (Door item : result.getDoors()) {
 
-                                                        userListArray.add(item.getDoorName());
+                                                        doorListArray.add(item.getDoorName());
 
                                                     }
 
@@ -266,11 +280,15 @@ public class LoginViewModel extends ViewModel {
                                                     langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
                                                     langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
 
-                                                    parkbanRepository.setUpdateDevice("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                                    parkbanRepository.setUpdateDevice("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
                                                         @Override
                                                         public void onSuccess(Boolean result) {
                                                             progress.setValue(0);
                                                             show.dismiss();
+
+                                                            editor.putBoolean("afterrecreate", true);
+                                                            editor.commit();
+
 
                                                             ((Activity) context).recreate();
 
@@ -369,40 +387,731 @@ public class LoginViewModel extends ViewModel {
 
         } else {
 
-//            parkingName = "پارکینگ " + getParkingInfoResponse.getParkingName();
-            parkingName = getParkingInfoResponse.getParkingName();
 
-            userListArray.clear();
-            doorListArray.clear();
+            if (InternetConnection.checkConnection(context.getApplicationContext())) {
+                // Internet Available...
 
 
-            for (Door item : getParkingInfoResponse.getDoors()) {
 
-                doorListArray.add(item.getDoorName());
+
+                boolean isAfterRecreate = preferences.getBoolean("afterrecreate", false);
+
+                if (!isAfterRecreate){
+
+
+                    Log.d(TAG, "run > Internet Available...");
+
+                    progress.setValue(10);
+                    final SharedPreferences.Editor editor = preferences.edit();
+                    // getting imei from device
+                    final TelephonyManager telephonyManager = (TelephonyManager) (((LoginActivity) context).getSystemService(Context.TELEPHONY_SERVICE));
+                    Log.d(TAG, "IMEI : " + "868400040382195");
+                    editor.putString("imei", "868400040382195".trim());
+                    editor.commit();
+
+
+                    parkbanRepository.getDeviceToken("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                        @Override
+                        public void onSuccess(String deviceToken) {
+
+
+                            final SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("devicetoken", deviceToken);
+                            editor.commit();
+
+
+                            ParkbanServiceProvider.setInstanceNull();
+
+                            parkbanRepository.isNeedUpdateDevice("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                @Override
+                                public void onSuccess(Boolean result) {
+                                    if (result) {
+                                        parkbanRepository.getParkingInformation("\"" + "868400040382195" + "\"",
+                                                new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
+                                                    @Override
+                                                    public void onSuccess(GetParkingInfoResponse result) {
+
+
+                                                        getParkingInfoResponse = result;
+
+                                                        Gson gson = new GsonBuilder()
+                                                                .serializeNulls()
+                                                                .create();
+                                                        String json = gson.toJson(result);
+                                                        final SharedPreferences.Editor editor = preferences.edit();
+                                                        editor.putString("parkinginfo", json);
+                                                        editor.commit();
+
+
+//                                            parkingName = "پارکینگ " + result.getParkingName();
+                                                        parkingName = result.getParkingName();
+
+                                                        userListArray.clear();
+                                                        doorListArray.clear();
+
+
+                                                        for (Operator item : result.getOperators()) {
+
+                                                            userListArray.add(item.getUserName());
+
+                                                        }
+
+                                                        for (Door item : result.getDoors()) {
+
+                                                            doorListArray.add(item.getDoorName());
+
+                                                        }
+
+
+                                                        userList = new String[userListArray.size()];
+                                                        userList = userListArray.toArray(userList);
+
+                                                        doorList = new String[doorListArray.size()];
+                                                        doorList = doorListArray.toArray(doorList);
+
+
+                                                        langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, userList);
+                                                        langAdapter_user.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+
+                                                        langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
+                                                        langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+                                                        parkbanRepository.setUpdateDevice("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                                            @Override
+                                                            public void onSuccess(Boolean result) {
+                                                                progress.setValue(0);
+
+                                                                editor.putBoolean("afterrecreate", true);
+                                                                editor.commit();
+
+
+                                                                ((Activity) context).recreate();
+                                                            }
+
+                                                            @Override
+                                                            public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+                                                                progress.setValue(0);
+                                                                ((Activity) context).recreate();
+                                                            }
+                                                        });
+
+
+                                                    }
+
+                                                    @Override
+                                                    public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+                                                        progress.setValue(0);
+
+
+                                                        if (errorCode == 401) {
+                                                            ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                                        } else {
+                                                            switch (resultType) {
+                                                                case RetrofitError:
+                                                                    ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                                                    break;
+                                                                case ServerError:
+                                                                    if (errorCode != 0)
+                                                                        ShowToast.getInstance().showError(context, errorCode);
+                                                                    else {
+                                                                        ShowToast.getInstance().showError(context, R.string.connection_failed);
+
+                                                                    }
+                                                                    break;
+                                                                default:
+                                                                    ShowToast.getInstance().showError(context, resultType.ordinal());
+                                                            }
+                                                        }
+
+                                                    }
+                                                });
+                                    } else {
+
+
+                                        parkingName = getParkingInfoResponse.getParkingName();
+
+                                        userListArray.clear();
+                                        doorListArray.clear();
+
+
+                                        for (Door item : getParkingInfoResponse.getDoors()) {
+
+                                            doorListArray.add(item.getDoorName());
+
+                                        }
+
+
+                                        for (Operator item : getParkingInfoResponse.getOperators()) {
+
+                                            userListArray.add(item.getUserName());
+
+                                        }
+
+
+                                        userList = new String[userListArray.size()];
+                                        userList = userListArray.toArray(userList);
+
+                                        doorList = new String[doorListArray.size()];
+                                        doorList = doorListArray.toArray(doorList);
+
+
+                                        langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, userList);
+                                        langAdapter_user.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+
+                                        langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
+                                        langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+
+                                        ShowToast.getInstance().showSuccess(context, R.string.updated_device);
+                                        progress.setValue(0);
+
+
+                                        editor.putBoolean("afterrecreate", true);
+                                        editor.commit();
+
+                                        ((Activity) context).recreate();
+
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+
+                                    switch (resultType) {
+                                        case RetrofitError:
+                                            ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                            break;
+                                        case ServerError:
+                                            if (errorCode != 0)
+                                                ShowToast.getInstance().showError(context, errorCode);
+                                            else {
+                                                ShowToast.getInstance().showError(context, R.string.connection_failed);
+
+                                            }
+                                            break;
+                                        default:
+                                            ShowToast.getInstance().showError(context, resultType.ordinal());
+                                    }
+
+                                    progress.setValue(0);
+
+
+                                }
+                            });
+
+
+                        }
+
+                        @Override
+                        public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+                            progress.setValue(0);
+                            if (errorCode == 401) {
+                                ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                editor.putBoolean("isvalid", false);
+                                editor.commit();
+                                //show non valid alert dialog
+                                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+                                LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+                                View alertView = inflater.inflate(R.layout.dialog_it_is_not_valid, null);
+                                alertDialog.setView(alertView);
+                                alertDialog.setCancelable(false);
+                                final AlertDialog show = alertDialog.show();
+                                LinearLayout button = alertView.findViewById(R.id.confirm_layout_settings_is_not_valid);
+                                final EditText serverEditText = (EditText) alertView.findViewById(R.id.server_address_edittext_is_not_valid);
+
+
+                                String serverAddress = preferences.getString("serveraddress", "");
+
+                                if (serverAddress.equals("")) {
+                                    serverAddress = "http://93.118.101.126:8046/DeviceApi/";
+                                }
+
+                                serverEditText.setText(serverAddress);
+
+
+                                button.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                        if ((serverEditText.getText().toString().trim() != null) && (!serverEditText.getText().toString().trim().equals(""))) {
+
+                                            SharedPreferences.Editor editor = preferences.edit();
+                                            editor.putString("serveraddress", serverEditText.getText().toString().trim());
+                                            editor.commit();
+
+
+                                            ParkbanServiceProvider.setInstanceNull();
+
+                                            progress.setValue(10);
+                                            //getting imei from device
+
+                                            final TelephonyManager telephonyManager = (TelephonyManager) (((LoginActivity) context).getSystemService(Context.TELEPHONY_SERVICE));
+                                            Log.d(TAG, "IMEI : " + "868400040382195");
+                                            editor.putString("imei", "868400040382195".trim());
+                                            editor.commit();
+
+
+                                            try {
+
+
+                                                parkbanRepository.getDeviceToken("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+
+                                                    @Override
+                                                    public void onSuccess(String deviceToken) {
+
+
+                                                        SharedPreferences.Editor editor = preferences.edit();
+                                                        editor.putString("devicetoken", deviceToken);
+                                                        editor.commit();
+
+
+                                                        editor.putBoolean("isvalid", true);
+                                                        editor.commit();
+
+
+                                                        ParkbanServiceProvider.setInstanceNull();
+
+
+                                                        parkbanRepository.getParkingInformation("\"" + "868400040382195" + "\"",
+                                                                new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
+                                                                    @Override
+                                                                    public void onSuccess(GetParkingInfoResponse result) {
+
+
+                                                                        getParkingInfoResponse = result;
+
+                                                                        Gson gson = new GsonBuilder()
+                                                                                .serializeNulls()
+                                                                                .create();
+                                                                        String json = gson.toJson(result);
+                                                                        final SharedPreferences.Editor editor = preferences.edit();
+                                                                        editor.putString("parkinginfo", json);
+                                                                        editor.commit();
+
+
+//                                            parkingName = "پارکینگ " + result.getParkingName();
+                                                                        parkingName = result.getParkingName();
+
+                                                                        userListArray.clear();
+                                                                        doorListArray.clear();
+
+
+                                                                        for (Operator item : result.getOperators()) {
+
+                                                                            userListArray.add(item.getUserName());
+
+                                                                        }
+
+                                                                        for (Door item : result.getDoors()) {
+
+                                                                            doorListArray.add(item.getDoorName());
+
+                                                                        }
+
+
+                                                                        userList = new String[userListArray.size()];
+                                                                        userList = userListArray.toArray(userList);
+
+                                                                        doorList = new String[doorListArray.size()];
+                                                                        doorList = doorListArray.toArray(doorList);
+
+
+                                                                        langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, userList);
+                                                                        langAdapter_user.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+
+                                                                        langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
+                                                                        langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+                                                                        parkbanRepository.setUpdateDevice("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                                                            @Override
+                                                                            public void onSuccess(Boolean result) {
+                                                                                progress.setValue(0);
+                                                                                show.dismiss();
+
+                                                                                editor.putBoolean("afterrecreate", true);
+                                                                                editor.commit();
+
+                                                                                ((Activity) context).recreate();
+
+                                                                            }
+
+                                                                            @Override
+                                                                            public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+
+                                                                                progress.setValue(0);
+                                                                                show.dismiss();
+
+                                                                                ((Activity) context).recreate();
+
+
+                                                                            }
+                                                                        });
+
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+                                                                        progress.setValue(0);
+
+
+                                                                        if (errorCode == 401) {
+                                                                            ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                                                        } else {
+                                                                            switch (resultType) {
+                                                                                case RetrofitError:
+                                                                                    ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                                                                    break;
+                                                                                case ServerError:
+                                                                                    if (errorCode != 0)
+                                                                                        ShowToast.getInstance().showError(context, errorCode);
+                                                                                    else {
+                                                                                        ShowToast.getInstance().showError(context, R.string.connection_failed);
+
+                                                                                    }
+                                                                                    break;
+                                                                                default:
+                                                                                    ShowToast.getInstance().showError(context, resultType.ordinal());
+                                                                            }
+                                                                        }
+
+
+                                                                    }
+                                                                });
+
+
+                                                    }
+
+                                                    @Override
+                                                    public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+                                                        progress.setValue(0);
+
+
+                                                        if (errorCode == 401) {
+                                                            ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                                        } else {
+                                                            switch (resultType) {
+                                                                case RetrofitError:
+                                                                    ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                                                    break;
+                                                                case ServerError:
+                                                                    if (errorCode != 0)
+                                                                        ShowToast.getInstance().showError(context, errorCode);
+                                                                    else {
+                                                                        ShowToast.getInstance().showError(context, R.string.connection_failed);
+
+                                                                    }
+                                                                    break;
+                                                                default:
+                                                                    ShowToast.getInstance().showError(context, resultType.ordinal());
+                                                            }
+                                                        }
+                                                    }
+                                                });
+
+
+                                            } catch (Exception e) {
+                                                progress.setValue(0);
+                                                ShowToast.getInstance().showError(context, R.string.error_server_address);
+                                            }
+
+
+                                        } else {
+
+
+                                            ShowToast.getInstance().showError(context, R.string.error_server_address);
+                                        }
+
+
+                                    }
+                                });
+
+
+                            }
+
+                        }
+                    });
+
+
+                }
+
+
+
+
+
+
+
+
+
+            } else {
+                // Internet Not Available...
+                Log.d(TAG, "run > Internet Not Available...");
+                boolean isValid = preferences.getBoolean("isvalid", true);
+                if (!isValid) {
+
+
+                    ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                    //show non valid alert dialog
+                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+                    LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+                    View alertView = inflater.inflate(R.layout.dialog_it_is_not_valid, null);
+                    alertDialog.setView(alertView);
+                    alertDialog.setCancelable(false);
+                    final AlertDialog show = alertDialog.show();
+                    LinearLayout button = alertView.findViewById(R.id.confirm_layout_settings_is_not_valid);
+                    final EditText serverEditText = (EditText) alertView.findViewById(R.id.server_address_edittext_is_not_valid);
+
+
+                    String serverAddress = preferences.getString("serveraddress", "");
+
+                    if (serverAddress.equals("")) {
+                        serverAddress = "http://93.118.101.126:8046/DeviceApi/";
+                    }
+
+                    serverEditText.setText(serverAddress);
+
+
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            if ((serverEditText.getText().toString().trim() != null) && (!serverEditText.getText().toString().trim().equals(""))) {
+
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("serveraddress", serverEditText.getText().toString().trim());
+                                editor.commit();
+
+
+                                ParkbanServiceProvider.setInstanceNull();
+
+                                progress.setValue(10);
+                                //getting imei from device
+
+                                final TelephonyManager telephonyManager = (TelephonyManager) (((LoginActivity) context).getSystemService(Context.TELEPHONY_SERVICE));
+                                Log.d(TAG, "IMEI : " + "868400040382195");
+                                editor.putString("imei", "868400040382195".trim());
+                                editor.commit();
+
+
+                                try {
+
+
+                                    parkbanRepository.getDeviceToken("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+
+                                        @Override
+                                        public void onSuccess(String deviceToken) {
+
+
+                                            SharedPreferences.Editor editor = preferences.edit();
+                                            editor.putString("devicetoken", deviceToken);
+                                            editor.commit();
+
+
+                                            editor.putBoolean("isvalid", true);
+                                            editor.commit();
+
+
+                                            ParkbanServiceProvider.setInstanceNull();
+
+
+                                            parkbanRepository.getParkingInformation("\"" + "868400040382195" + "\"",
+                                                    new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
+                                                        @Override
+                                                        public void onSuccess(GetParkingInfoResponse result) {
+
+
+                                                            getParkingInfoResponse = result;
+
+                                                            Gson gson = new GsonBuilder()
+                                                                    .serializeNulls()
+                                                                    .create();
+                                                            String json = gson.toJson(result);
+                                                            final SharedPreferences.Editor editor = preferences.edit();
+                                                            editor.putString("parkinginfo", json);
+                                                            editor.commit();
+
+
+//                                            parkingName = "پارکینگ " + result.getParkingName();
+                                                            parkingName = result.getParkingName();
+
+                                                            userListArray.clear();
+                                                            doorListArray.clear();
+
+
+                                                            for (Operator item : result.getOperators()) {
+
+                                                                userListArray.add(item.getUserName());
+
+                                                            }
+
+                                                            for (Door item : result.getDoors()) {
+
+                                                                doorListArray.add(item.getDoorName());
+
+                                                            }
+
+
+                                                            userList = new String[userListArray.size()];
+                                                            userList = userListArray.toArray(userList);
+
+                                                            doorList = new String[doorListArray.size()];
+                                                            doorList = doorListArray.toArray(doorList);
+
+
+                                                            langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, userList);
+                                                            langAdapter_user.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+
+                                                            langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
+                                                            langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+                                                            parkbanRepository.setUpdateDevice("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                                                @Override
+                                                                public void onSuccess(Boolean result) {
+                                                                    progress.setValue(0);
+                                                                    show.dismiss();
+
+                                                                    editor.putBoolean("afterrecreate", true);
+                                                                    editor.commit();
+
+                                                                    ((Activity) context).recreate();
+
+                                                                }
+
+                                                                @Override
+                                                                public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+
+                                                                    progress.setValue(0);
+                                                                    show.dismiss();
+
+                                                                    ((Activity) context).recreate();
+
+
+                                                                }
+                                                            });
+
+                                                        }
+
+                                                        @Override
+                                                        public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+                                                            progress.setValue(0);
+
+
+                                                            if (errorCode == 401) {
+                                                                ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                                            } else {
+                                                                switch (resultType) {
+                                                                    case RetrofitError:
+                                                                        ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                                                        break;
+                                                                    case ServerError:
+                                                                        if (errorCode != 0)
+                                                                            ShowToast.getInstance().showError(context, errorCode);
+                                                                        else {
+                                                                            ShowToast.getInstance().showError(context, R.string.connection_failed);
+
+                                                                        }
+                                                                        break;
+                                                                    default:
+                                                                        ShowToast.getInstance().showError(context, resultType.ordinal());
+                                                                }
+                                                            }
+
+
+                                                        }
+                                                    });
+
+
+                                        }
+
+                                        @Override
+                                        public void onFailed(ResponseResultType resultType, String message, int errorCode) {
+                                            progress.setValue(0);
+
+
+                                            if (errorCode == 401) {
+                                                ShowToast.getInstance().showError(context, R.string.unregistered_device_msg);
+                                            } else {
+                                                switch (resultType) {
+                                                    case RetrofitError:
+                                                        ShowToast.getInstance().showError(context, R.string.exception_msg);
+                                                        break;
+                                                    case ServerError:
+                                                        if (errorCode != 0)
+                                                            ShowToast.getInstance().showError(context, errorCode);
+                                                        else {
+                                                            ShowToast.getInstance().showError(context, R.string.connection_failed);
+
+                                                        }
+                                                        break;
+                                                    default:
+                                                        ShowToast.getInstance().showError(context, resultType.ordinal());
+                                                }
+                                            }
+                                        }
+                                    });
+
+
+                                } catch (Exception e) {
+                                    progress.setValue(0);
+                                    ShowToast.getInstance().showError(context, R.string.error_server_address);
+                                }
+
+
+                            } else {
+
+
+                                ShowToast.getInstance().showError(context, R.string.error_server_address);
+                            }
+
+
+                        }
+                    });
+
+
+                } else {
+                    parkingName = getParkingInfoResponse.getParkingName();
+
+                    userListArray.clear();
+                    doorListArray.clear();
+
+
+                    for (Door item : getParkingInfoResponse.getDoors()) {
+
+                        doorListArray.add(item.getDoorName());
+
+                    }
+
+
+                    for (Operator item : getParkingInfoResponse.getOperators()) {
+
+                        userListArray.add(item.getUserName());
+
+                    }
+
+
+                    userList = new String[userListArray.size()];
+                    userList = userListArray.toArray(userList);
+
+                    doorList = new String[doorListArray.size()];
+                    doorList = doorListArray.toArray(doorList);
+
+
+                    langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, userList);
+                    langAdapter_user.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+
+                    langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
+                    langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
+
+
+                }
+
 
             }
-
-
-            for (Operator item : getParkingInfoResponse.getOperators()) {
-
-                userListArray.add(item.getUserName());
-
-            }
-
-
-            userList = new String[userListArray.size()];
-            userList = userListArray.toArray(userList);
-
-            doorList = new String[doorListArray.size()];
-            doorList = doorListArray.toArray(doorList);
-
-
-            langAdapter_user = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, userList);
-            langAdapter_user.setDropDownViewResource(R.layout.simple_spinner_dropdown);
-
-
-            langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
-            langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
 
 
         }
@@ -625,15 +1334,15 @@ public class LoginViewModel extends ViewModel {
                             progress.setValue(10);
                             // getting imei from device
                             final TelephonyManager telephonyManager = (TelephonyManager) (((LoginActivity) context).getSystemService(Context.TELEPHONY_SERVICE));
-                            Log.d(TAG, "IMEI : " + telephonyManager.getDeviceId());
-                            editor.putString("imei", telephonyManager.getDeviceId().trim());
+                            Log.d(TAG, "IMEI : " + "868400040382195");
+                            editor.putString("imei", "868400040382195".trim());
                             editor.commit();
 
 
                             try {
 
 
-                                parkbanRepository.getDeviceToken("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
+                                parkbanRepository.getDeviceToken("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<String>() {
                                     @Override
                                     public void onSuccess(String deviceToken) {
 
@@ -645,11 +1354,11 @@ public class LoginViewModel extends ViewModel {
 
                                         ParkbanServiceProvider.setInstanceNull();
 
-                                        parkbanRepository.isNeedUpdateDevice("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                        parkbanRepository.isNeedUpdateDevice("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
                                             @Override
                                             public void onSuccess(Boolean result) {
                                                 if (result) {
-                                                    parkbanRepository.getParkingInformation("\"" + telephonyManager.getDeviceId() + "\"",
+                                                    parkbanRepository.getParkingInformation("\"" + "868400040382195" + "\"",
                                                             new ParkbanRepository.ServiceResultCallBack<GetParkingInfoResponse>() {
                                                                 @Override
                                                                 public void onSuccess(GetParkingInfoResponse result) {
@@ -661,7 +1370,7 @@ public class LoginViewModel extends ViewModel {
                                                                             .serializeNulls()
                                                                             .create();
                                                                     String json = gson.toJson(result);
-                                                                    SharedPreferences.Editor editor = preferences.edit();
+                                                                    final SharedPreferences.Editor editor = preferences.edit();
                                                                     editor.putString("parkinginfo", json);
                                                                     editor.commit();
 
@@ -681,7 +1390,7 @@ public class LoginViewModel extends ViewModel {
 
                                                                     for (Door item : result.getDoors()) {
 
-                                                                        userListArray.add(item.getDoorName());
+                                                                        doorListArray.add(item.getDoorName());
 
                                                                     }
 
@@ -700,11 +1409,16 @@ public class LoginViewModel extends ViewModel {
                                                                     langAdapter_door = new ArrayAdapter<CharSequence>(context, R.layout.spinner_text, doorList);
                                                                     langAdapter_door.setDropDownViewResource(R.layout.simple_spinner_dropdown);
 
-                                                                    parkbanRepository.setUpdateDevice("\"" + telephonyManager.getDeviceId() + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
+                                                                    parkbanRepository.setUpdateDevice("\"" + "868400040382195" + "\"", new ParkbanRepository.ServiceResultCallBack<Boolean>() {
                                                                         @Override
                                                                         public void onSuccess(Boolean result) {
                                                                             progress.setValue(0);
                                                                             show.dismiss();
+
+                                                                            editor.putBoolean("afterrecreate", true);
+                                                                            editor.commit();
+
+
                                                                             ((Activity) context).recreate();
                                                                         }
 

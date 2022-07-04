@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+
+    <com.khodmohaseb.parkban.controls.PersianTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:gravity="center"
+        android:text="@string/not_valid_dialog_1"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <com.khodmohaseb.parkban.controls.PersianTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="@dimen/margin_normal"
+       android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:text="@string/not_valid_dialog_2"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="13sp"
+        android:textStyle="normal" />
+
+
+
+
+
+
+
+
+
+
+
+    <com.khodmohaseb.parkban.controls.PersianTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:gravity="center"
+        android:text="@string/not_valid_dialog_3"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+
+
+    <com.khodmohaseb.parkban.controls.PersianEditText
+        android:id="@+id/server_address_edittext_is_not_valid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/login_edit_text_background"
+        android:hint="http://..."
+        android:paddingLeft="8dp"
+        android:paddingTop="12dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="12dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/light_grey"
+        android:textDirection="ltr"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/confirm_layout_settings_is_not_valid"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_all">
+
+        <com.khodmohaseb.parkban.controls.PersianTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/not_valid_dialog_4"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <!--<ImageView-->
+            <!--android:layout_width="25dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:src="@drawable/send" />-->
+
+    </LinearLayout>
+
+</LinearLayout>

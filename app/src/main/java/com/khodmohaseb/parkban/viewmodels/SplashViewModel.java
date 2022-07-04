@@ -5,8 +5,10 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 
 import com.khodmohaseb.parkban.BaseActivity;
@@ -118,6 +120,13 @@ public class SplashViewModel extends ViewModel {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+                    final SharedPreferences.Editor editor = preferences.edit();
+                    editor.putBoolean("afterrecreate",false);
+                    editor.commit();
+
+
+
                     Intent i = new Intent(context, LoginActivity.class);
                     context.startActivity(i);
                     context.finish();

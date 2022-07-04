@@ -1,9 +1,18 @@
 <resources>
-    <string name="app_name">KhodMohaseb</string>
+    <string name="app_name">پارکینگ ابری علم و صنعت</string>
     <string name="setting_dialog_1">دستگاه شما فاقد تنظیمات اولیه جهت استفاده می باشد</string>
     <string name="setting_dialog_2">لطفاً بعد از اتصال دستگاه به اینترنت ، مشخصات پارکینگ را دریافت کنید</string>
     <string name="setting_dialog_3">آدرس سرور را وارد کنید</string>
     <string name="setting_dialog_4">دریافت مشخصات پارکینگ</string>
+
+    <string name="not_valid_dialog_1">دستگاه مورد استفاده ، غیر مجاز میباشد</string>
+    <string name="not_valid_dialog_2">لطفاً بعد از تمدید اشتراک خود ، دستگاه را به اینترنت متصل و مشخصات پارکینگ را دریافت کنید</string>
+    <string name="not_valid_dialog_3">آدرس سرور را وارد کنید</string>
+    <string name="not_valid_dialog_4">دریافت مشخصات پارکینگ</string>
+
+
+
+
     <string name="exception_msg">بروز خطا</string>
     <string name="unregistered_device_msg">دستگاه مورد استفاده ، غیرمجاز میباشد</string>
     <string name="exception_msg_245">بروز خطای محاسباتی</string>
@@ -208,7 +217,7 @@
     <string name="unhandled_error_from_server">یک خطای غیر منتظره در سمت سرور اتفاق افتاده است</string>
     <string name="save_success">ذخیره اطلاعات با موفقیت انجام شد </string>
     <string name="save_failed">ذخیره اطلاعات با مشکل مواجه شد \n لطفا دوباره نسبت به ذخیره اطلاعات اقدام نمایید</string>
-    <string name="plate_not_detected">تشخیص پلاک با موفقیت انجام نشد</string>
+    <string name="plate_not_detected">خطا در تشخیص پلاک</string>
     <string name="not_detect">پلاکی جهت شناسایی تشخیص داده نشده است</string>
     <string name="parking_space_busy">جایگاه انتخابی قبلا اشغال شده است \n آیا از انتخاب آن اطمینان دارید</string>
     <string name="space_not_selected">جایگاه پارک موردنظر را انتخاب نمایید</string>
