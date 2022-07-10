@@ -438,277 +438,283 @@ public class EnterMifareViewModel extends ViewModel {
             data) {
 
 
-        if (requestCode == 103) {
+        try {
+            if (requestCode == 103) {
 
 
-            Bundle b = data.getBundleExtra("response");
+                Bundle b = data.getBundleExtra("response");
 
 
-            Log.d(TAG, "onActivityResult:  >>>>>>>>>>>>>>> " + getBundleString(b));
-            if (b.getString("result").trim().equals("succeed")) {
-                Log.d("e_pardakht >>>", "step 2 >>> GOOD_PAYMENT ");
-                Log.d(TAG, "now we should save in database and write on card");
-                final String rrn = b.getString("rrn").trim();
-                String pelak = "";
-                if (getCar().getValue()) {
+                Log.d(TAG, "onActivityResult:  >>>>>>>>>>>>>>> " + getBundleString(b));
+                if (b.getString("result").trim().equals("succeed")) {
+                    Log.d("e_pardakht >>>", "step 2 >>> GOOD_PAYMENT ");
+                    Log.d(TAG, "now we should save in database and write on card");
+                    final String rrn = b.getString("rrn").trim();
+                    String pelak = "";
+                    if (getCar().getValue()) {
 
-                    pelak = getPlate__0().getValue() + PelakUtility.convertToCode(getPlate__1().getValue()) + getPlate__2().getValue() + getPlate__3().getValue();
+                        pelak = getPlate__0().getValue() + PelakUtility.convertToCode(getPlate__1().getValue()) + getPlate__2().getValue() + getPlate__3().getValue();
+
+                    } else {
+
+                        pelak = getMplate__0().getValue() + getMplate__1().getValue();
+
+                    }
+                    //converting persian numbers to english
+                    pelak = FontHelper.removeEnter(FontHelper.convertArabicToPersian(pelak));
+                    Log.d(TAG, "UnChanged-Default pelak >>>  " + pelak);
+                    StringBuilder newPelak = new StringBuilder(pelak);
+                    for (int i = 0; i < pelak.length(); i++) {
+                        if (Character.isDigit(pelak.charAt(i))) {
+                            switch (pelak.charAt(i)) {
+                                case '۰':
+                                    newPelak.setCharAt(i, '0');
+                                    break;
+                                case '۱':
+                                    newPelak.setCharAt(i, '1');
+                                    break;
+                                case '۲':
+                                    newPelak.setCharAt(i, '2');
+                                    break;
+                                case '۳':
+                                    newPelak.setCharAt(i, '3');
+                                    break;
+                                case '۴':
+                                    newPelak.setCharAt(i, '4');
+                                    break;
+                                case '۵':
+                                    newPelak.setCharAt(i, '5');
+                                    break;
+                                case '۶':
+                                    newPelak.setCharAt(i, '6');
+                                    break;
+                                case '۷':
+                                    newPelak.setCharAt(i, '7');
+                                    break;
+                                case '۸':
+                                    newPelak.setCharAt(i, '8');
+                                    break;
+                                case '۹':
+                                    newPelak.setCharAt(i, '9');
+                                    break;
+                            }
+                        }
+                    }
+                    pelak = newPelak.toString();
+                    Log.d(TAG, "Changed-New pelak >>>  " + pelak);
+                    //************************************************************************************************************************
+                    // ************************************************************************************************************************
+                    final String finalPelak = pelak;
+
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
+                    final String currentDateandTime = sdf.format(new Date());
+                    Log.d(TAG, "current-date time >>>  " + currentDateandTime);
+                    //************************************************************************************************************************
+                    // ************************************************************************************************************************
+                    int tarrifId = 0;
+                    if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff1().getVehicleName().trim())) {
+                        tarrifId = 1;
+                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName().trim())) {
+                        tarrifId = 2;
+                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName().trim())) {
+                        tarrifId = 3;
+                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName().trim())) {
+                        tarrifId = 4;
+                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName().trim())) {
+                        tarrifId = 5;
+                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName().trim())) {
+                        tarrifId = 6;
+                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName().trim())) {
+                        tarrifId = 7;
+                    } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName().trim())) {
+                        tarrifId = 8;
+                    }
+                    Log.d(TAG, "current-tarrif id >>>  " + tarrifId);
+                    //************************************************************************************************************************
+                    // ************************************************************************************************************************
+                    Log.d(TAG, "paid-entrance >>>  " + getEntranceFeeFromTariffId());
+                    //************************************************************************************************************************
+                    // ************************************************************************************************************************
+                    Log.d(TAG, "operator id >>>  " + selectedUser.getId());
+                    //************************************************************************************************************************
+                    // ************************************************************************************************************************
+                    Log.d(TAG, "door id >>>  " + selectedDoor.getId());
+
+
+                    Log.d(TAG, "pelak for save in data base : " + finalPelak);
+
+
+                    parkbanRepository.saveEntranceRecord(
+                            getParkingInfoResponse.getDeviceId(),
+                            finalPelak,
+                            currentDateandTime,
+                            tarrifId,
+                            Long.parseLong(getEntranceFeeFromTariffId()),
+                            1,
+                            rrn,
+                            selectedDoor.getId().longValue(),
+                            selectedUser.getId().longValue(),
+                            0,
+                            new ParkbanRepository.DataBaseResultCallBack() {
+                                @Override
+                                public void onSuccess(long id) {
+                                    Log.d(TAG, "onSuccess in save database , now write card process begin");
+
+                                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
+                                    LayoutInflater inflater = ((Activity) myContext).getLayoutInflater();
+                                    View alertView = inflater.inflate(R.layout.dialog_put_card_near_to_device, null);
+                                    alertDialog.setView(alertView);
+                                    alertDialog.setCancelable(false);
+                                    mifareAlertDialog = alertDialog.show();
+                                    LinearLayout cancelButton = alertView.findViewById(R.id.cancel_layout_write_on_card);
+
+
+                                    List<Byte> block16ByteList = new ArrayList<>();
+                                    List<Byte> block17ByteList = new ArrayList<>();
+                                    List<Byte> block18ByteList = new ArrayList<>();
+
+                                    List<Byte> pelakByteArrayList = new ArrayList<>();
+                                    pelakByteArrayList = ByteUtils.longToFixedByteArray(Long.parseLong(finalPelak), 4);
+                                    List<Byte> perygiriCodeElectronicByteArrayList = new ArrayList<>();
+                                    perygiriCodeElectronicByteArrayList = ByteUtils.longToFixedByteArray(Long.parseLong(rrn), 12);
+                                    block16ByteList.addAll(pelakByteArrayList);
+                                    block16ByteList.addAll(perygiriCodeElectronicByteArrayList);
+
+
+                                    String idealCurrentDateTime = currentDateandTime.split("_")[0] + currentDateandTime.split("_")[1];
+                                    List<Byte> currentDateTimeByteArrayList = new ArrayList<>();
+                                    currentDateTimeByteArrayList = ByteUtils.longToFixedByteArray(Long.parseLong(idealCurrentDateTime), 7);
+                                    List<Byte> tariffIdByteArrayList = new ArrayList<>();
+                                    tariffIdByteArrayList = ByteUtils.longToFixedByteArray(selectedTarrifId.getValue().longValue(), 1);
+                                    List<Byte> paymentTypeByteArrayList = new ArrayList<>();
+                                    paymentTypeByteArrayList = ByteUtils.longToFixedByteArray(1L, 1);
+                                    List<Byte> paymentAmountByteArrayList = new ArrayList<>();
+                                    paymentAmountByteArrayList = ByteUtils.longToFixedByteArray(Long.parseLong(getEntranceFeeFromTariffId()), 7);
+                                    block17ByteList.addAll(currentDateTimeByteArrayList);
+                                    block17ByteList.addAll(tariffIdByteArrayList);
+                                    block17ByteList.addAll(paymentTypeByteArrayList);
+                                    block17ByteList.addAll(paymentAmountByteArrayList);
+
+
+                                    List<Byte> enterDoorIdByteArrayList = new ArrayList<Byte>();
+                                    enterDoorIdByteArrayList = ByteUtils.longToFixedByteArray(selectedDoor.getId().longValue(), 8);
+                                    List<Byte> enterOperatorIdByteArrayList = new ArrayList<Byte>();
+                                    enterOperatorIdByteArrayList = ByteUtils.longToFixedByteArray(selectedUser.getId().longValue(), 8);
+
+                                    block18ByteList.addAll(enterDoorIdByteArrayList);
+                                    block18ByteList.addAll(enterOperatorIdByteArrayList);
+
+
+                                    ((EnterMifareActivity) myContext).startServices(
+
+                                            ByteUtils.convertByteToPrimitive(block16ByteList),
+                                            ByteUtils.convertByteToPrimitive(block17ByteList),
+                                            ByteUtils.convertByteToPrimitive(block18ByteList)
+                                    );
+
+
+                                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            ((EnterMifareActivity) myContext).stopServicesForOperator();
+
+
+                                            List<String> forDeleteFromtable = new ArrayList<>();
+                                            forDeleteFromtable.add(finalPelak);
+
+                                            parkbanRepository.deleteEntranceRecord(finalPelak, new ParkbanRepository.DataBaseResultCallBack() {
+                                                @Override
+                                                public void onSuccess(long id) {
+                                                    mifareAlertDialog.dismiss();
+                                                }
+
+                                                @Override
+                                                public void onFailed() {
+
+                                                    mifareAlertDialog.dismiss();
+                                                }
+                                            });
+
+
+                                        }
+                                    });
+
+
+                                }
+
+                                @Override
+                                public void onFailed() {
+                                    ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+
+                                }
+                            }
+
+
+                    );
+
 
                 } else {
 
-                    pelak = getMplate__0().getValue() + getMplate__1().getValue();
 
+                    ShowToast.getInstance().showError(myContext, R.string.failed_payment);
                 }
-                //converting persian numbers to english
-                pelak = FontHelper.removeEnter(FontHelper.convertArabicToPersian(pelak));
-                Log.d(TAG, "UnChanged-Default pelak >>>  " + pelak);
-                StringBuilder newPelak = new StringBuilder(pelak);
-                for (int i = 0; i < pelak.length(); i++) {
-                    if (Character.isDigit(pelak.charAt(i))) {
-                        switch (pelak.charAt(i)) {
-                            case '۰':
-                                newPelak.setCharAt(i, '0');
-                                break;
-                            case '۱':
-                                newPelak.setCharAt(i, '1');
-                                break;
-                            case '۲':
-                                newPelak.setCharAt(i, '2');
-                                break;
-                            case '۳':
-                                newPelak.setCharAt(i, '3');
-                                break;
-                            case '۴':
-                                newPelak.setCharAt(i, '4');
-                                break;
-                            case '۵':
-                                newPelak.setCharAt(i, '5');
-                                break;
-                            case '۶':
-                                newPelak.setCharAt(i, '6');
-                                break;
-                            case '۷':
-                                newPelak.setCharAt(i, '7');
-                                break;
-                            case '۸':
-                                newPelak.setCharAt(i, '8');
-                                break;
-                            case '۹':
-                                newPelak.setCharAt(i, '9');
-                                break;
-                        }
-                    }
-                }
-                pelak = newPelak.toString();
-                Log.d(TAG, "Changed-New pelak >>>  " + pelak);
-                //************************************************************************************************************************
-                // ************************************************************************************************************************
-                final String finalPelak = pelak;
-
-
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
-                final String currentDateandTime = sdf.format(new Date());
-                Log.d(TAG, "current-date time >>>  " + currentDateandTime);
-                //************************************************************************************************************************
-                // ************************************************************************************************************************
-                int tarrifId = 0;
-                if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff1().getVehicleName().trim())) {
-                    tarrifId = 1;
-                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff2().getVehicleName().trim())) {
-                    tarrifId = 2;
-                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff3().getVehicleName().trim())) {
-                    tarrifId = 3;
-                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff4().getVehicleName().trim())) {
-                    tarrifId = 4;
-                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff5().getVehicleName().trim())) {
-                    tarrifId = 5;
-                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff6().getVehicleName().trim())) {
-                    tarrifId = 6;
-                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff7().getVehicleName().trim())) {
-                    tarrifId = 7;
-                } else if (getSelectedCarTypeName().getValue().trim().equals(getParkingInfoResponse.getTariffs().getVehicleTariff8().getVehicleName().trim())) {
-                    tarrifId = 8;
-                }
-                Log.d(TAG, "current-tarrif id >>>  " + tarrifId);
-                //************************************************************************************************************************
-                // ************************************************************************************************************************
-                Log.d(TAG, "paid-entrance >>>  " + getEntranceFeeFromTariffId());
-                //************************************************************************************************************************
-                // ************************************************************************************************************************
-                Log.d(TAG, "operator id >>>  " + selectedUser.getId());
-                //************************************************************************************************************************
-                // ************************************************************************************************************************
-                Log.d(TAG, "door id >>>  " + selectedDoor.getId());
-
-
-                Log.d(TAG, "pelak for save in data base : " + finalPelak);
-
-
-                parkbanRepository.saveEntranceRecord(
-                        getParkingInfoResponse.getDeviceId(),
-                        finalPelak,
-                        currentDateandTime,
-                        tarrifId,
-                        Long.parseLong(getEntranceFeeFromTariffId()),
-                        1,
-                        rrn,
-                        selectedDoor.getId().longValue(),
-                        selectedUser.getId().longValue(),
-                        0,
-                        new ParkbanRepository.DataBaseResultCallBack() {
-                            @Override
-                            public void onSuccess(long id) {
-                                Log.d(TAG, "onSuccess in save database , now write card process begin");
-
-                                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
-                                LayoutInflater inflater = ((Activity) myContext).getLayoutInflater();
-                                View alertView = inflater.inflate(R.layout.dialog_put_card_near_to_device, null);
-                                alertDialog.setView(alertView);
-                                alertDialog.setCancelable(false);
-                                mifareAlertDialog = alertDialog.show();
-                                LinearLayout cancelButton = alertView.findViewById(R.id.cancel_layout_write_on_card);
-
-
-                                List<Byte> block16ByteList = new ArrayList<>();
-                                List<Byte> block17ByteList = new ArrayList<>();
-                                List<Byte> block18ByteList = new ArrayList<>();
-
-                                List<Byte> pelakByteArrayList = new ArrayList<>();
-                                pelakByteArrayList = ByteUtils.longToFixedByteArray(Long.parseLong(finalPelak), 4);
-                                List<Byte> perygiriCodeElectronicByteArrayList = new ArrayList<>();
-                                perygiriCodeElectronicByteArrayList = ByteUtils.longToFixedByteArray(Long.parseLong(rrn), 12);
-                                block16ByteList.addAll(pelakByteArrayList);
-                                block16ByteList.addAll(perygiriCodeElectronicByteArrayList);
-
-
-                                String idealCurrentDateTime = currentDateandTime.split("_")[0] + currentDateandTime.split("_")[1];
-                                List<Byte> currentDateTimeByteArrayList = new ArrayList<>();
-                                currentDateTimeByteArrayList = ByteUtils.longToFixedByteArray(Long.parseLong(idealCurrentDateTime), 7);
-                                List<Byte> tariffIdByteArrayList = new ArrayList<>();
-                                tariffIdByteArrayList = ByteUtils.longToFixedByteArray(selectedTarrifId.getValue().longValue(), 1);
-                                List<Byte> paymentTypeByteArrayList = new ArrayList<>();
-                                paymentTypeByteArrayList = ByteUtils.longToFixedByteArray(1L, 1);
-                                List<Byte> paymentAmountByteArrayList = new ArrayList<>();
-                                paymentAmountByteArrayList = ByteUtils.longToFixedByteArray(Long.parseLong(getEntranceFeeFromTariffId()), 7);
-                                block17ByteList.addAll(currentDateTimeByteArrayList);
-                                block17ByteList.addAll(tariffIdByteArrayList);
-                                block17ByteList.addAll(paymentTypeByteArrayList);
-                                block17ByteList.addAll(paymentAmountByteArrayList);
-
-
-                                List<Byte> enterDoorIdByteArrayList = new ArrayList<Byte>();
-                                enterDoorIdByteArrayList = ByteUtils.longToFixedByteArray(selectedDoor.getId().longValue(), 8);
-                                List<Byte> enterOperatorIdByteArrayList = new ArrayList<Byte>();
-                                enterOperatorIdByteArrayList = ByteUtils.longToFixedByteArray(selectedUser.getId().longValue(), 8);
-
-                                block18ByteList.addAll(enterDoorIdByteArrayList);
-                                block18ByteList.addAll(enterOperatorIdByteArrayList);
-
-
-                                ((EnterMifareActivity) myContext).startServices(
-
-                                        ByteUtils.convertByteToPrimitive(block16ByteList),
-                                        ByteUtils.convertByteToPrimitive(block17ByteList),
-                                        ByteUtils.convertByteToPrimitive(block18ByteList)
-                                );
-
-
-                                cancelButton.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        ((EnterMifareActivity) myContext).stopServicesForOperator();
-
-
-                                        List<String> forDeleteFromtable = new ArrayList<>();
-                                        forDeleteFromtable.add(finalPelak);
-
-                                        parkbanRepository.deleteEntranceRecord(finalPelak, new ParkbanRepository.DataBaseResultCallBack() {
-                                            @Override
-                                            public void onSuccess(long id) {
-                                                mifareAlertDialog.dismiss();
-                                            }
-
-                                            @Override
-                                            public void onFailed() {
-
-                                                mifareAlertDialog.dismiss();
-                                            }
-                                        });
-
-
-                                    }
-                                });
-
-
-                            }
-
-                            @Override
-                            public void onFailed() {
-                                ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
-
-                            }
-                        }
-
-
-                );
 
 
             } else {
 
-
-                ShowToast.getInstance().showError(myContext, R.string.failed_payment);
-            }
-
-
-        } else {
-
-            if (requestCode == 1369 && resultCode == Activity.RESULT_OK) {
-                Log.d("xxxhhhhhhhhhhhh", "" + newPhotoFilePath);
-                plateBitmap = ImageLoadHelper.getInstance().loadImage(context, newPhotoFilePath);
-                //*****************************************************************************************************
-                try {
-                    idal = PrintParkbanApp.getInstance().getIdal();
-                    if (idal == null) {
-                        try {
-                            ExifInterface exif = new ExifInterface(newPhotoFilePath);
-                            int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-                            Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
-                            if (rotation == 1) {
-                            } else {
-                                Matrix matrix = new Matrix();
-                                matrix.setRotate(0, 0, 0);
-                                Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
-                                Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-                                plateBitmap = rotatedBitmap;
+                if (requestCode == 1369 && resultCode == Activity.RESULT_OK) {
+                    Log.d("xxxhhhhhhhhhhhh", "" + newPhotoFilePath);
+                    plateBitmap = ImageLoadHelper.getInstance().loadImage(context, newPhotoFilePath);
+                    //*****************************************************************************************************
+                    try {
+                        idal = PrintParkbanApp.getInstance().getIdal();
+                        if (idal == null) {
+                            try {
+                                ExifInterface exif = new ExifInterface(newPhotoFilePath);
+                                int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                                Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
+                                if (rotation == 1) {
+                                } else {
+                                    Matrix matrix = new Matrix();
+                                    matrix.setRotate(0, 0, 0);
+                                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
+                                    Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+                                    plateBitmap = rotatedBitmap;
+                                }
+                            } catch (Exception e) {
                             }
-                        } catch (Exception e) {
-                        }
-                    } else {
-                        try {
-                            ExifInterface exif = new ExifInterface(newPhotoFilePath);
-                            int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-                            Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
-                            if (rotation == 0) {
-                            } else {
-                                Matrix matrix = new Matrix();
-                                matrix.setRotate(-90, 0, 0);
-                                Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
-                                Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-                                plateBitmap = rotatedBitmap;
-                            }
-                        } catch (Exception e) {
+                        } else {
+                            try {
+                                ExifInterface exif = new ExifInterface(newPhotoFilePath);
+                                int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                                Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
+                                if (rotation == 0) {
+                                } else {
+                                    Matrix matrix = new Matrix();
+                                    matrix.setRotate(-90, 0, 0);
+                                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
+                                    Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+                                    plateBitmap = rotatedBitmap;
+                                }
+                            } catch (Exception e) {
 //
+                            }
                         }
+                    } catch (Exception e) {
                     }
-                } catch (Exception e) {
+                    //*****************************************************************************************************
+                    carPlateActual.setPlateImage(plateBitmap);
+                    doDetectPlate(context, plateBitmap);
+                } else if (resultCode == Activity.RESULT_CANCELED) {
                 }
-                //*****************************************************************************************************
-                carPlateActual.setPlateImage(plateBitmap);
-                doDetectPlate(context, plateBitmap);
-            } else if (resultCode == Activity.RESULT_CANCELED) {
+
             }
+        }catch (Exception e){
 
         }
+
+
 
 
     }

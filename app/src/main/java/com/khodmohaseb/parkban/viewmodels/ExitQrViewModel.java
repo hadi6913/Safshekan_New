@@ -739,6 +739,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "1":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff1().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle1(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -747,6 +749,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "2":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff2().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle2(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -754,6 +758,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "3":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff3().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle3(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -761,6 +767,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "4":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff4().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle4(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -768,6 +776,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "5":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff5().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle5(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -775,6 +785,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "6":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff6().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle6(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -782,6 +794,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "7":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff7().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle7(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -789,6 +803,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "8":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff8().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle8(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -800,6 +816,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "1":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff1().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle1(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -807,6 +825,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "2":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff2().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle2(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -814,6 +834,7 @@ public class ExitQrViewModel extends ViewModel {
                                 case "3":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff3().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle3(
+                                                    enterDateTime, currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -821,6 +842,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "4":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff4().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle4(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -828,6 +851,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "5":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff5().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle5(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -835,6 +860,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "6":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff6().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle6(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -842,6 +869,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "7":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff7().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle7(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -849,6 +878,8 @@ public class ExitQrViewModel extends ViewModel {
                                 case "8":
                                     price = getParkingInfoResponse.getValue().getTariffs().getVehicleTariff8().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle8(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getValue().getTariffs()
                                             );
@@ -1216,9 +1247,9 @@ public class ExitQrViewModel extends ViewModel {
                             pelakString,
                             exitDateTimeStringForDataBase,
                             tarrifId,
-                            Long.parseLong(paidAmountString.trim()),
-                            Integer.parseInt(paymentTypeString.trim()),
-                            electronicPaymentCodeString,
+                            0,
+                            0,
+                            "",
                             selectedDoor.getValue().getId().longValue(),
                             selectedUser.getValue().getId().longValue(),
                             0,
@@ -1373,169 +1404,179 @@ public class ExitQrViewModel extends ViewModel {
                         "message    :" + b.getString("message", null) + '\n';
     }
 
+    @SuppressLint("LongLogTag")
     public void processActivityResult(Context context, int requestCode, int resultCode, Intent
             data) {
 
 
-        if (requestCode == 103) {
+        try {
+
+            if (requestCode == 103) {
 
 
-            final Bundle b = data.getBundleExtra("response");
-            Log.d(TAG, "onActivityResult:  >>>>>>>>>>>>>>> " + getBundleString(b));
-            if (b.getString("result").trim().equals("succeed")) {
-                Log.d("e_pardakht >>>", "step 2 >>> GOOD_PAYMENT ");
+                final Bundle b = data.getBundleExtra("response");
+                Log.d(TAG, "onActivityResult:  >>>>>>>>>>>>>>> " + getBundleString(b));
+                if (b.getString("result").trim().equals("succeed")) {
+                    Log.d("e_pardakht >>>", "step 2 >>> GOOD_PAYMENT ");
 
-                Log.d(TAG, "save in exit_table then delete from entrance print recepit and paid by cash");
+                    Log.d(TAG, "save in exit_table then delete from entrance print recepit and paid by cash");
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
-                final String exitDateTimeStringForDataBase = sdf.format(currentDateTime);
-                final String enterDateTimeStringForDataBase = sdf.format(enterDateTime);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
+                    final String exitDateTimeStringForDataBase = sdf.format(currentDateTime);
+                    final String enterDateTimeStringForDataBase = sdf.format(enterDateTime);
 
-                final int tarrifId = Integer.parseInt(tariffIdString____);
-
-
-                parkbanRepository.saveExitRecord(
-                        getParkingInfoResponse.getValue().getDeviceId(),
-                        pelakString____,
-                        exitDateTimeStringForDataBase,
-                        tarrifId,
-                        Long.parseLong(paidAmount____),
-                        1,
-                        b.getString("rrn"),
-                        selectedDoor.getValue().getId().longValue(),
-                        selectedUser.getValue().getId().longValue(),
-                        0,
-                        new ParkbanRepository.DataBaseResultCallBack() {
-                            @Override
-                            public void onSuccess(long id) {
-
-                                parkbanRepository.saveTraffikRecord(
-                                        getParkingInfoResponse.getValue().getDeviceId(),
-                                        pelakString____,
-                                        enterDateTimeStringForDataBase,
-                                        exitDateTimeStringForDataBase,
-                                        tarrifId,
-                                        Long.parseLong(paidAmount____),
-                                        1,
-                                        b.getString("rrn"),
-                                        Long.parseLong(enterDoorIDString____),
-                                        selectedDoor.getValue().getId().longValue(),
-                                        Long.parseLong(enterOperatorIDString____),
-                                        selectedUser.getValue().getId().longValue(),
-                                        getTariffNameById(tariffIdString____), new ParkbanRepository.DataBaseResultCallBack() {
-                                            @Override
-                                            public void onSuccess(long id) {
+                    final int tarrifId = Integer.parseInt(tariffIdString____);
 
 
-                                                parkbanRepository.setExitEntranceRecord(pelakString____, new ParkbanRepository.DataBaseResultCallBack() {
-                                                    @Override
-                                                    public void onSuccess(long id) {
+                    parkbanRepository.saveExitRecord(
+                            getParkingInfoResponse.getValue().getDeviceId(),
+                            pelakString____,
+                            exitDateTimeStringForDataBase,
+                            tarrifId,
+                            Long.parseLong(paidAmount____),
+                            1,
+                            b.getString("rrn"),
+                            selectedDoor.getValue().getId().longValue(),
+                            selectedUser.getValue().getId().longValue(),
+                            0,
+                            new ParkbanRepository.DataBaseResultCallBack() {
+                                @Override
+                                public void onSuccess(long id) {
+
+                                    parkbanRepository.saveTraffikRecord(
+                                            getParkingInfoResponse.getValue().getDeviceId(),
+                                            pelakString____,
+                                            enterDateTimeStringForDataBase,
+                                            exitDateTimeStringForDataBase,
+                                            tarrifId,
+                                            Long.parseLong(paidAmount____),
+                                            1,
+                                            b.getString("rrn"),
+                                            Long.parseLong(enterDoorIDString____),
+                                            selectedDoor.getValue().getId().longValue(),
+                                            Long.parseLong(enterOperatorIDString____),
+                                            selectedUser.getValue().getId().longValue(),
+                                            getTariffNameById(tariffIdString____), new ParkbanRepository.DataBaseResultCallBack() {
+                                                @Override
+                                                public void onSuccess(long id) {
 
 
-                                                        Log.d(TAG, "onSuccess in save database , now print process begin");
-
-                                                        try {
-                                                            mBitmap = generateBitmapByLayoutForPayment(myContext, enterDateTimeStringForDataBase, exitDateTimeStringForDataBase, getTariffNameById(tariffIdString____), paidAmount____, pelakString____);
-                                                            Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
-                                                            msg.obj = mBitmap;
-                                                            msg.sendToTarget();
-                                                            mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
+                                                    parkbanRepository.setExitEntranceRecord(pelakString____, new ParkbanRepository.DataBaseResultCallBack() {
+                                                        @Override
+                                                        public void onSuccess(long id) {
 
 
-                                                        } catch (Exception exception) {
+                                                            Log.d(TAG, "onSuccess in save database , now print process begin");
+
+                                                            try {
+                                                                mBitmap = generateBitmapByLayoutForPayment(myContext, enterDateTimeStringForDataBase, exitDateTimeStringForDataBase, getTariffNameById(tariffIdString____), paidAmount____, pelakString____);
+                                                                Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
+                                                                msg.obj = mBitmap;
+                                                                msg.sendToTarget();
+                                                                mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
+
+
+                                                            } catch (Exception exception) {
+
+                                                            }
+
 
                                                         }
 
+                                                        @Override
+                                                        public void onFailed() {
+                                                            ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
 
-                                                    }
-
-                                                    @Override
-                                                    public void onFailed() {
-                                                        ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
-
-                                                    }
-                                                });
+                                                        }
+                                                    });
 
 
+                                                }
+
+                                                @Override
+                                                public void onFailed() {
+                                                    ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+
+                                                }
                                             }
 
-                                            @Override
-                                            public void onFailed() {
-                                                ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
 
-                                            }
-                                        }
+                                    );
 
 
-                                );
+                                }
 
+                                @Override
+                                public void onFailed() {
+                                    ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
 
+                                }
                             }
 
-                            @Override
-                            public void onFailed() {
-                                ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
 
-                            }
-                        }
+                    );
+
+                } else {
 
 
-                );
+                    ShowToast.getInstance().showError(myContext, R.string.failed_payment);
+                }
+
 
             } else {
-
-
-                ShowToast.getInstance().showError(myContext, R.string.failed_payment);
-            }
-
-
-        } else {
-            if (requestCode == 1369 && resultCode == Activity.RESULT_OK) {
-                Log.d("xxxhhhhhhhhhhhh", "" + newPhotoFilePath);
-                plateBitmap = ImageLoadHelper.getInstance().loadImage(context, newPhotoFilePath);
-                //*****************************************************************************************************
-                try {
-                    idal = PrintParkbanApp.getInstance().getIdal();
-                    if (idal == null) {
-                        try {
-                            ExifInterface exif = new ExifInterface(newPhotoFilePath);
-                            int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-                            Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
-                            if (rotation == 1) {
-                            } else {
-                                Matrix matrix = new Matrix();
-                                matrix.setRotate(0, 0, 0);
-                                Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
-                                Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-                                plateBitmap = rotatedBitmap;
+                if (requestCode == 1369 && resultCode == Activity.RESULT_OK) {
+                    Log.d("xxxhhhhhhhhhhhh", "" + newPhotoFilePath);
+                    plateBitmap = ImageLoadHelper.getInstance().loadImage(context, newPhotoFilePath);
+                    //*****************************************************************************************************
+                    try {
+                        idal = PrintParkbanApp.getInstance().getIdal();
+                        if (idal == null) {
+                            try {
+                                ExifInterface exif = new ExifInterface(newPhotoFilePath);
+                                int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                                Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
+                                if (rotation == 1) {
+                                } else {
+                                    Matrix matrix = new Matrix();
+                                    matrix.setRotate(0, 0, 0);
+                                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
+                                    Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+                                    plateBitmap = rotatedBitmap;
+                                }
+                            } catch (Exception e) {
                             }
-                        } catch (Exception e) {
-                        }
-                    } else {
-                        try {
-                            ExifInterface exif = new ExifInterface(newPhotoFilePath);
-                            int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-                            Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
-                            if (rotation == 0) {
-                            } else {
-                                Matrix matrix = new Matrix();
-                                matrix.setRotate(-90, 0, 0);
-                                Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
-                                Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-                                plateBitmap = rotatedBitmap;
-                            }
-                        } catch (Exception e) {
+                        } else {
+                            try {
+                                ExifInterface exif = new ExifInterface(newPhotoFilePath);
+                                int rotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                                Log.d("xeagle69", "camera XXX>>> rotation in int >>> " + rotation);
+                                if (rotation == 0) {
+                                } else {
+                                    Matrix matrix = new Matrix();
+                                    matrix.setRotate(-90, 0, 0);
+                                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(plateBitmap, plateBitmap.getWidth(), plateBitmap.getHeight(), true);
+                                    Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+                                    plateBitmap = rotatedBitmap;
+                                }
+                            } catch (Exception e) {
 //
+                            }
                         }
+                    } catch (Exception e) {
                     }
-                } catch (Exception e) {
+                    //*****************************************************************************************************
+                    carPlateActual.setPlateImage(plateBitmap);
+                    doDetectPlate(context, plateBitmap);
+                } else if (resultCode == Activity.RESULT_CANCELED) {
                 }
-                //*****************************************************************************************************
-                carPlateActual.setPlateImage(plateBitmap);
-                doDetectPlate(context, plateBitmap);
-            } else if (resultCode == Activity.RESULT_CANCELED) {
             }
+
+
+        }catch (Exception e){
+
         }
+
+
 
 
     }

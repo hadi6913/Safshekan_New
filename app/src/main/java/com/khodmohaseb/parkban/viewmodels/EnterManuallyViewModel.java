@@ -684,12 +684,58 @@ public class EnterManuallyViewModel extends ViewModel {
 
                 try {
 
+                    String paidAmount = "0";
+
+                    switch (Integer.toString(selectedTarrifId.getValue())) {
+                        case "1":
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff1().getIsReceiveUponEntrance()){
+                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost()) ;
+                            }
+
+                            break;
+                        case "2":
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff2().getIsReceiveUponEntrance()){
+                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost()) ;
+                            }
+                            break;
+                        case "3":
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff3().getIsReceiveUponEntrance()){
+                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost()) ;
+                            }
+                            break;
+                        case "4":
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff4().getIsReceiveUponEntrance()){
+                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost()) ;
+                            }
+                            break;
+                        case "5":
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff5().getIsReceiveUponEntrance()){
+                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost()) ;
+                            }
+                            break;
+                        case "6":
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff6().getIsReceiveUponEntrance()){
+                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost()) ;
+                            }
+                            break;
+                        case "7":
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff7().getIsReceiveUponEntrance()){
+                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost()) ;
+                            }
+                            break;
+                        case "8":
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff8().getIsReceiveUponEntrance()){
+                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost()) ;
+                            }
+                            break;
+                    }
+
 
                     handelExit(
                             finalPelak,
                             actualFinalDate,
                             Integer.toString(selectedTarrifId.getValue()),
-                            "0",
+                            paidAmount,
                             Long.toString(selectedDoor.getId()),
                             Long.toString(selectedUser.getId()),
                             "0",
@@ -1042,6 +1088,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "1":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle1(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1050,6 +1098,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "2":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle2(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1057,6 +1107,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "3":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle3(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1064,6 +1116,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "4":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle4(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1071,6 +1125,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "5":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle5(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1078,6 +1134,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "6":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle6(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1085,6 +1143,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "7":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle7(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1092,6 +1152,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "8":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost() +
                                             DailyFareCalculator.calculateDailyFareVehicle8(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1103,6 +1165,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "1":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle1(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1110,6 +1174,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "2":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle2(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1117,6 +1183,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "3":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle3(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1124,6 +1192,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "4":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle4(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1131,6 +1201,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "5":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle5(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1138,6 +1210,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "6":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle6(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1145,6 +1219,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "7":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle7(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1152,6 +1228,8 @@ public class EnterManuallyViewModel extends ViewModel {
                                 case "8":
                                     price = getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost() +
                                             DailyHourlyFareCalculator.calculateHourlyDailyFareVehicle8(
+                                                    enterDateTime,
+                                                    currentDateTime,
                                                     roundedTotalStayInMinutes,
                                                     getParkingInfoResponse.getTariffs()
                                             );
@@ -1453,6 +1531,11 @@ public class EnterManuallyViewModel extends ViewModel {
         } else {
             // should only show dialog and no need to pay he paid first at entrance
 
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
+            enterDateTime = dateFormat.parse(enterDateTimeString);
+            currentDateTime = new Date();
+
+
 
             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
             LayoutInflater inflater = ((Activity) myContext).getLayoutInflater();
@@ -1543,7 +1626,7 @@ public class EnterManuallyViewModel extends ViewModel {
                             pelakString,
                             enterDateTimeStringForDataBase,
                             tarrifId,
-                            0,
+                            Long.parseLong(paidAmountString),
                             0,
                             "",
                             selectedDoor.getId().longValue(),
@@ -1557,9 +1640,9 @@ public class EnterManuallyViewModel extends ViewModel {
                                             pelakString,
                                             exitDateTimeStringForDataBase,
                                             tarrifId,
-                                            Long.parseLong(paidAmountString.trim()),
-                                            Integer.parseInt(paymentTypeString.trim()),
-                                            electronicPaymentCodeString,
+                                            0,
+                                            0,
+                                            "",
                                             selectedDoor.getId().longValue(),
                                             selectedUser.getId().longValue(),
                                             1,
@@ -1650,152 +1733,161 @@ public class EnterManuallyViewModel extends ViewModel {
     public void processActivityResult(Context context, int requestCode, int resultCode, Intent
             data) {
 
-
-        if (requestCode == 103) {
-
-
-            final Bundle b = data.getBundleExtra("response");
-            Log.d(TAG, "onActivityResult:  >>>>>>>>>>>>>>> " + getBundleString(b));
-            if (b.getString("result").trim().equals("succeed")) {
-                Log.d("e_pardakht >>>", "step 2 >>> GOOD_PAYMENT ");
-
-                Log.d(TAG, "save in exit_table then delete from entrance print recepit and paid by cash");
-
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
-                final String exitDateTimeStringForDataBase = sdf.format(currentDateTime);
-                final String enterDateTimeStringForDataBase = sdf.format(enterDateTime);
-
-                final int tarrifId = Integer.parseInt(tariffIdString____);
+        try {
+            if (requestCode == 103) {
 
 
-                parkbanRepository.saveEntranceRecord(
 
 
-                        getParkingInfoResponse.getDeviceId(),
-                        pelakString____,
-                        enterDateTimeStringForDataBase,
-                        tarrifId,
-                        0,
-                        0,
-                        "",
-                        selectedDoor.getId().longValue(),
-                        selectedUser.getId().longValue(),
-                        1, new ParkbanRepository.DataBaseResultCallBack() {
-                            @Override
-                            public void onSuccess(long id) {
-                                parkbanRepository.saveExitRecord(
-                                        getParkingInfoResponse.getDeviceId(),
-                                        pelakString____,
-                                        exitDateTimeStringForDataBase,
-                                        tarrifId,
-                                        Long.parseLong(paidAmount____),
-                                        1,
-                                        b.getString("rrn"),
-                                        selectedDoor.getId().longValue(),
-                                        selectedUser.getId().longValue(),
-                                        1,
-                                        new ParkbanRepository.DataBaseResultCallBack() {
-                                            @Override
-                                            public void onSuccess(long id) {
+                final Bundle b = data.getBundleExtra("response");
 
-                                                parkbanRepository.saveTraffikRecord(
-                                                        getParkingInfoResponse.getDeviceId(),
-                                                        pelakString____,
-                                                        enterDateTimeStringForDataBase,
-                                                        exitDateTimeStringForDataBase,
-                                                        tarrifId,
-                                                        Long.parseLong(paidAmount____),
-                                                        1,
-                                                        b.getString("rrn"),
-                                                        Long.parseLong(enterDoorIDString____),
-                                                        selectedDoor.getId().longValue(),
-                                                        Long.parseLong(enterOperatorIDString____),
-                                                        selectedUser.getId().longValue(),
-                                                        getTariffNameById(tariffIdString____), new ParkbanRepository.DataBaseResultCallBack() {
-                                                            @Override
-                                                            public void onSuccess(long id) {
+                Log.d(TAG, "onActivityResult:  >>>>>>>>>>>>>>> " + getBundleString(b));
+                if (b.getString("result").trim().equals("succeed")) {
+                    Log.d("e_pardakht >>>", "step 2 >>> GOOD_PAYMENT ");
+
+                    Log.d(TAG, "save in exit_table then delete from entrance print recepit and paid by cash");
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault());
+                    final String exitDateTimeStringForDataBase = sdf.format(currentDateTime);
+                    final String enterDateTimeStringForDataBase = sdf.format(enterDateTime);
+
+                    final int tarrifId = Integer.parseInt(tariffIdString____);
 
 
-                                                                parkbanRepository.setExitEntranceRecord(pelakString____, new ParkbanRepository.DataBaseResultCallBack() {
-                                                                    @Override
-                                                                    public void onSuccess(long id) {
+                    parkbanRepository.saveEntranceRecord(
 
 
-                                                                        Log.d(TAG, "onSuccess in save database , now print process begin");
+                            getParkingInfoResponse.getDeviceId(),
+                            pelakString____,
+                            enterDateTimeStringForDataBase,
+                            tarrifId,
+                            0,
+                            0,
+                            "",
+                            selectedDoor.getId().longValue(),
+                            selectedUser.getId().longValue(),
+                            1, new ParkbanRepository.DataBaseResultCallBack() {
+                                @Override
+                                public void onSuccess(long id) {
+                                    parkbanRepository.saveExitRecord(
+                                            getParkingInfoResponse.getDeviceId(),
+                                            pelakString____,
+                                            exitDateTimeStringForDataBase,
+                                            tarrifId,
+                                            Long.parseLong(paidAmount____),
+                                            1,
+                                            b.getString("rrn"),
+                                            selectedDoor.getId().longValue(),
+                                            selectedUser.getId().longValue(),
+                                            1,
+                                            new ParkbanRepository.DataBaseResultCallBack() {
+                                                @Override
+                                                public void onSuccess(long id) {
 
-                                                                        try {
-                                                                            mBitmap = generateBitmapByLayoutForPayment(myContext, enterDateTimeStringForDataBase, exitDateTimeStringForDataBase, getTariffNameById(tariffIdString____), paidAmount____, pelakString____);
-                                                                            Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
-                                                                            msg.obj = mBitmap;
-                                                                            msg.sendToTarget();
-                                                                            mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
-                                                                            doRefresh();
+                                                    parkbanRepository.saveTraffikRecord(
+                                                            getParkingInfoResponse.getDeviceId(),
+                                                            pelakString____,
+                                                            enterDateTimeStringForDataBase,
+                                                            exitDateTimeStringForDataBase,
+                                                            tarrifId,
+                                                            Long.parseLong(paidAmount____),
+                                                            1,
+                                                            b.getString("rrn"),
+                                                            Long.parseLong(enterDoorIDString____),
+                                                            selectedDoor.getId().longValue(),
+                                                            Long.parseLong(enterOperatorIDString____),
+                                                            selectedUser.getId().longValue(),
+                                                            getTariffNameById(tariffIdString____), new ParkbanRepository.DataBaseResultCallBack() {
+                                                                @Override
+                                                                public void onSuccess(long id) {
 
 
-                                                                        } catch (Exception exception) {
+                                                                    parkbanRepository.setExitEntranceRecord(pelakString____, new ParkbanRepository.DataBaseResultCallBack() {
+                                                                        @Override
+                                                                        public void onSuccess(long id) {
+
+
+                                                                            Log.d(TAG, "onSuccess in save database , now print process begin");
+
+                                                                            try {
+                                                                                mBitmap = generateBitmapByLayoutForPayment(myContext, enterDateTimeStringForDataBase, exitDateTimeStringForDataBase, getTariffNameById(tariffIdString____), paidAmount____, pelakString____);
+                                                                                Message msg = mPrintHandler.obtainMessage(PRINT_BITMAP);
+                                                                                msg.obj = mBitmap;
+                                                                                msg.sendToTarget();
+                                                                                mPrintHandler.obtainMessage(PRINT_FORWARD).sendToTarget();
+                                                                                doRefresh();
+
+
+                                                                            } catch (Exception exception) {
+
+                                                                            }
+
 
                                                                         }
 
+                                                                        @Override
+                                                                        public void onFailed() {
+                                                                            ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
 
-                                                                    }
-
-                                                                    @Override
-                                                                    public void onFailed() {
-                                                                        ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
-
-                                                                    }
-                                                                });
+                                                                        }
+                                                                    });
 
 
+                                                                }
+
+                                                                @Override
+                                                                public void onFailed() {
+                                                                    ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
+
+                                                                }
                                                             }
 
-                                                            @Override
-                                                            public void onFailed() {
-                                                                ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
 
-                                                            }
-                                                        }
+                                                    );
 
 
-                                                );
+                                                }
 
+                                                @Override
+                                                public void onFailed() {
+                                                    ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
 
+                                                }
                                             }
 
-                                            @Override
-                                            public void onFailed() {
-                                                ShowToast.getInstance().showError(myContext, R.string.error_in_save_data_base);
 
-                                            }
-                                        }
+                                    );
+                                }
 
+                                @Override
+                                public void onFailed() {
 
-                                );
+                                }
                             }
 
-                            @Override
-                            public void onFailed() {
 
-                            }
-                        }
+                    );
 
 
-                );
+                } else {
 
 
-            } else {
+                    ShowToast.getInstance().showError(myContext, R.string.failed_payment);
+                }
 
 
-                ShowToast.getInstance().showError(myContext, R.string.failed_payment);
             }
 
+        }catch (Exception e){
 
         }
+
 
 
     }
 
 
+    @SuppressLint("LongLogTag")
     public Bitmap generateBitmapByLayoutForPayment(Context context, String enterTime, String exitTime, String vehicelName, String paidAmount, String pelak) throws ParseException {
 
         Log.d(TAG, "generateBitmapByLayoutForPayment:  pelak that recived for print : " + pelak);
@@ -1954,6 +2046,7 @@ public class EnterManuallyViewModel extends ViewModel {
      * @param type           PRINT_TEXT PRINT_BITMAP PRINT_BARCOD PRINT_FORWARD
      * @param content        content
      */
+    @SuppressLint("LongLogTag")
     private void doPrint(PrinterManager printerManager, int type, Object content) {
         int ret = printerManager.getStatus();
 
