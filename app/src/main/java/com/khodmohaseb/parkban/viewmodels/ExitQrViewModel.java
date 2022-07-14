@@ -2036,7 +2036,7 @@ public class ExitQrViewModel extends ViewModel {
 
 
                 ForgotEntranceRequest forgotEntranceRequest = new ForgotEntranceRequest();
-                forgotEntranceRequest.setImei(telephonyManager.getDeviceId().trim());
+                forgotEntranceRequest.setImei("868400040382195".trim());
                 forgotEntranceRequest.setPlate(pelakForAskFromServer);
 
                 parkbanRepository.forgotEntrance(forgotEntranceRequest, new ParkbanRepository.ServiceResultCallBack<ForgotRecordResponse>() {

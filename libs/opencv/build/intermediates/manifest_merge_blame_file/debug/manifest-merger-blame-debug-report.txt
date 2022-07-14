@@ -5,10 +5,10 @@
 5    android:versionName="3.1.0" >
 6
 7    <uses-sdk
-7-->C:\Users\Hadi Ghadiri\Desktop\Safshekan_New\libs\opencv\AndroidManifest.xml:7:5-74
+7-->C:\Users\USER_seven\StudioProjects\Safshekan_New\libs\opencv\AndroidManifest.xml:7:5-74
 8        android:minSdkVersion="15"
-8-->C:\Users\Hadi Ghadiri\Desktop\Safshekan_New\libs\opencv\AndroidManifest.xml:7:15-41
+8-->C:\Users\USER_seven\StudioProjects\Safshekan_New\libs\opencv\AndroidManifest.xml:7:15-41
 9        android:targetSdkVersion="27" />
-9-->C:\Users\Hadi Ghadiri\Desktop\Safshekan_New\libs\opencv\AndroidManifest.xml:7:42-71
+9-->C:\Users\USER_seven\StudioProjects\Safshekan_New\libs\opencv\AndroidManifest.xml:7:42-71
 10
 11</manifest>

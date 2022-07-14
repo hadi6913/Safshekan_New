@@ -688,44 +688,44 @@ public class EnterManuallyViewModel extends ViewModel {
 
                     switch (Integer.toString(selectedTarrifId.getValue())) {
                         case "1":
-                            if (getParkingInfoResponse.getTariffs().getVehicleTariff1().getIsReceiveUponEntrance()){
-                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost()) ;
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff1().getIsReceiveUponEntrance()) {
+                                paidAmount = Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff1().getEntranceCost());
                             }
 
                             break;
                         case "2":
-                            if (getParkingInfoResponse.getTariffs().getVehicleTariff2().getIsReceiveUponEntrance()){
-                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost()) ;
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff2().getIsReceiveUponEntrance()) {
+                                paidAmount = Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff2().getEntranceCost());
                             }
                             break;
                         case "3":
-                            if (getParkingInfoResponse.getTariffs().getVehicleTariff3().getIsReceiveUponEntrance()){
-                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost()) ;
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff3().getIsReceiveUponEntrance()) {
+                                paidAmount = Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff3().getEntranceCost());
                             }
                             break;
                         case "4":
-                            if (getParkingInfoResponse.getTariffs().getVehicleTariff4().getIsReceiveUponEntrance()){
-                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost()) ;
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff4().getIsReceiveUponEntrance()) {
+                                paidAmount = Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff4().getEntranceCost());
                             }
                             break;
                         case "5":
-                            if (getParkingInfoResponse.getTariffs().getVehicleTariff5().getIsReceiveUponEntrance()){
-                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost()) ;
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff5().getIsReceiveUponEntrance()) {
+                                paidAmount = Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff5().getEntranceCost());
                             }
                             break;
                         case "6":
-                            if (getParkingInfoResponse.getTariffs().getVehicleTariff6().getIsReceiveUponEntrance()){
-                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost()) ;
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff6().getIsReceiveUponEntrance()) {
+                                paidAmount = Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff6().getEntranceCost());
                             }
                             break;
                         case "7":
-                            if (getParkingInfoResponse.getTariffs().getVehicleTariff7().getIsReceiveUponEntrance()){
-                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost()) ;
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff7().getIsReceiveUponEntrance()) {
+                                paidAmount = Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff7().getEntranceCost());
                             }
                             break;
                         case "8":
-                            if (getParkingInfoResponse.getTariffs().getVehicleTariff8().getIsReceiveUponEntrance()){
-                                paidAmount =Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost()) ;
+                            if (getParkingInfoResponse.getTariffs().getVehicleTariff8().getIsReceiveUponEntrance()) {
+                                paidAmount = Long.toString(getParkingInfoResponse.getTariffs().getVehicleTariff8().getEntranceCost());
                             }
                             break;
                     }
@@ -820,6 +820,7 @@ public class EnterManuallyViewModel extends ViewModel {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
             enterDateTime = dateFormat.parse(enterDateTimeString);
             currentDateTime = new Date();
+//            currentDateTime = dateFormat.parse("202207121621");
             long totalStayInMinutes;
             long diffInMillisec = currentDateTime.getTime() - enterDateTime.getTime();
             totalStayInMinutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillisec);
@@ -1536,7 +1537,6 @@ public class EnterManuallyViewModel extends ViewModel {
             currentDateTime = new Date();
 
 
-
             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(myContext);
             LayoutInflater inflater = ((Activity) myContext).getLayoutInflater();
             View alertView = inflater.inflate(R.layout.dialog_no_need_pay, null);
@@ -1737,8 +1737,6 @@ public class EnterManuallyViewModel extends ViewModel {
             if (requestCode == 103) {
 
 
-
-
                 final Bundle b = data.getBundleExtra("response");
 
                 Log.d(TAG, "onActivityResult:  >>>>>>>>>>>>>>> " + getBundleString(b));
@@ -1878,10 +1876,9 @@ public class EnterManuallyViewModel extends ViewModel {
 
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
-
 
 
     }
