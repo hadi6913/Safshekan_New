@@ -820,7 +820,7 @@ public class EnterManuallyViewModel extends ViewModel {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
             enterDateTime = dateFormat.parse(enterDateTimeString);
             currentDateTime = new Date();
-//            currentDateTime = dateFormat.parse("202207121621");
+//            currentDateTime = dateFormat.parse("202207171658");
             long totalStayInMinutes;
             long diffInMillisec = currentDateTime.getTime() - enterDateTime.getTime();
             totalStayInMinutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillisec);

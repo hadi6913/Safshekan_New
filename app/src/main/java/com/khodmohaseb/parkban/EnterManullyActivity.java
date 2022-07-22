@@ -1,13 +1,16 @@
 package com.khodmohaseb.parkban;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -38,6 +41,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
+
+import saman.zamani.persiandate.PersianDate;
 
 import static ir.shahaabco.ANPRNDK.anpr_create;
 
@@ -326,11 +336,12 @@ public class EnterManullyActivity extends BaseActivity implements DatePickerDial
     }
 
 
+    @SuppressLint("LongLogTag")
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         Log.d(TAG, "onDateSet: year:" + year + " month:" + monthOfYear + "day:" + dayOfMonth);
         year_ = year;
-        month_ = monthOfYear+1;
+        month_ = monthOfYear + 1;
         day_ = dayOfMonth;
 
         TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(
@@ -343,6 +354,8 @@ public class EnterManullyActivity extends BaseActivity implements DatePickerDial
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @SuppressLint("LongLogTag")
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
 
@@ -353,7 +366,58 @@ public class EnterManullyActivity extends BaseActivity implements DatePickerDial
         String hour = String.format("%02d", hourOfDay);
         String min = String.format("%02d", minute);
 
-        enterManuallyViewModel.getEnteredDate().setValue(year + "/" + month + "/" + day + "   " + hour + " : " + min);
+
+
+
+
+
+
+
+
+
+        String temp = year + "/" + month + "/" + day + "   " + hour + " : " + min;
+        String temp1 = temp.replace("/", "");
+        String temp2 = temp1.replace(":", "");
+        String finalEntranceDate = temp2.replace(" ", "").trim();
+        Log.d(TAG, "final entranceDate >>>  " + finalEntranceDate);
+        PersianDate persianDate = new PersianDate();
+
+
+        int[] dateGeorg = persianDate.jalali_to_gregorian(
+                Integer.parseInt(finalEntranceDate.substring(0, 4)),
+                Integer.parseInt(finalEntranceDate.substring(4, 6)),
+                Integer.parseInt(finalEntranceDate.substring(6, 8))
+        );
+
+        String year__ = Integer.toString(dateGeorg[0]);
+        String month__ = String.format("%02d", dateGeorg[1]);
+        String day__ = String.format("%02d", dateGeorg[2]);
+        String hour__ = finalEntranceDate.substring(8, 10);
+        String min__ = finalEntranceDate.substring(10, 12);
+
+
+        String actualFinalDateGeorgian = year__ + month__ + day__ + hour__ + min__;
+
+
+
+
+        LocalDateTime NOW = LocalDateTime.now(); // e.g. 31.10.2016 15:20:45
+
+// parse given Date/Time
+        LocalDateTime input = LocalDateTime.parse(actualFinalDateGeorgian, DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
+
+// Check if input is before "now"
+        boolean isBefore = input.isBefore(NOW);
+
+
+        if(isBefore){
+            enterManuallyViewModel.getEnteredDate().setValue(year + "/" + month + "/" + day + "   " + hour + " : " + min);
+        }else {
+            ShowToast.getInstance().showError(this, R.string.incorrect_time);
+        }
+
+
+
 
 
         Log.d(TAG, "" + year_ + month_ + day_ + hourOfDay + minute);

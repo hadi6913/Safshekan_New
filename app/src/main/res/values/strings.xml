@@ -65,6 +65,7 @@
     <string name="change_password_dialog_5">Confirm</string>
     <string name="change_password_dialog_6">Cancel</string>
     <string name="updated_device">Your device is updated</string>
+    <string name="incorrect_time">Invalid input date - time</string>
 
 
 

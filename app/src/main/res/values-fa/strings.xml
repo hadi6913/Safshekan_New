@@ -224,6 +224,7 @@
     <string name="fake_location">موقعیت یافت شده معتبر نمی باشد</string>
     <string name="park_space_busy">این جایگاه توسط خودروی دیگری اشغال شده است \n آیا از انتخاب آن اطمینان دارید؟</string>
     <string name="anpr_not_load">کتابخانه تشخیص پلاک با مشکل مواجه شده است \n لطفا مجددا وارد برنامه شوید</string>
+    <string name="incorrect_time">زمان وارد شده نامعتبر است</string>
     <string name="no_shift">در این زمان شیفتی برای شما تعریف نشده است \n امکان ثبت عکس وجود ندارد</string>
     <string name="no_record_for_send">اطلاعات جدیدی جهت ارسال یافت نشد</string>pls
     <string name="update_failed">عملیات با مشکل مواجه شد لطفا مجددا تلاش نمایید</string>

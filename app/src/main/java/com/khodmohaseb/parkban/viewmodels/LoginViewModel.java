@@ -185,7 +185,7 @@ public class LoginViewModel extends ViewModel {
             String serverAddress = preferences.getString("serveraddress", "");
 
             if (serverAddress.equals("")) {
-                serverAddress = "http://93.118.101.126:8046/DeviceApi/";
+                serverAddress = "https://apicloudparking.elmosanat.com/DeviceApi/";
             }
 
             serverEditText.setText(serverAddress);
@@ -625,7 +625,7 @@ public class LoginViewModel extends ViewModel {
                                 String serverAddress = preferences.getString("serveraddress", "");
 
                                 if (serverAddress.equals("")) {
-                                    serverAddress = "http://93.118.101.126:8046/DeviceApi/";
+                                    serverAddress = "https://apicloudparking.elmosanat.com/DeviceApi/";
                                 }
 
                                 serverEditText.setText(serverAddress);
@@ -860,7 +860,7 @@ public class LoginViewModel extends ViewModel {
                     String serverAddress = preferences.getString("serveraddress", "");
 
                     if (serverAddress.equals("")) {
-                        serverAddress = "http://93.118.101.126:8046/DeviceApi/";
+                        serverAddress = "https://apicloudparking.elmosanat.com/DeviceApi/";
                     }
 
                     serverEditText.setText(serverAddress);
@@ -1304,7 +1304,7 @@ public class LoginViewModel extends ViewModel {
                 String serverAddress = preferences.getString("serveraddress", "");
 
                 if (serverAddress.equals("")) {
-                    serverAddress = "http://93.118.101.126:8046/DeviceApi/";
+                    serverAddress = "https://apicloudparking.elmosanat.com/DeviceApi/";
                 }
 
                 serverEditText.setText(serverAddress);

@@ -23,7 +23,7 @@ public class DailyHourlyFareCalculator {
 
         long price = 0;
 
-        if (roundedTotalStayLength < tariff.getCircadianCalcBase()) {
+        if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
             price = HourlyFareCalculator.calculateStepFareVehicle1(roundedTotalStayLength, tariff);
             return price;
         }
@@ -36,7 +36,7 @@ public class DailyHourlyFareCalculator {
         }
 
         totalDays = totalDays + 1;
-        long remainingAmountMinutes=0;
+        long remainingAmountMinutes = 0;
 
         Date enterTime = getDate(Integer.parseInt(sdfShow.format(enterDateTime).substring(11, 13)), Integer.parseInt(sdfShow.format(enterDateTime).substring(14, 16)));
         Date main24 = getDate(24, 00);
@@ -54,7 +54,7 @@ public class DailyHourlyFareCalculator {
 
         if (diff2 < tariff.getCircadianCalcBase()) {
             totalDays = totalDays - 1;
-            remainingAmountMinutes = remainingAmountMinutes+diff2;
+            remainingAmountMinutes = remainingAmountMinutes + diff2;
         }
 
         Log.d(TAG, "calculateHourlyDailyFareVehicle1 > totalDays:" + totalDays);
@@ -68,18 +68,18 @@ public class DailyHourlyFareCalculator {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff1().getDurationNight2()) * tariff.getVehicleTariff1().getCostNight2()) +
                         (((remainingNights % tariff.getVehicleTariff1().getDurationNight2()) * tariff.getVehicleTariff1().getCostNight2()) / tariff.getVehicleTariff1().getDurationNight2());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle1(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle1(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             } else {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff1().getDurationNight1()) * tariff.getVehicleTariff1().getCostNight1()) +
                         (((remainingNights % tariff.getVehicleTariff1().getDurationNight1()) * tariff.getVehicleTariff1().getCostNight1()) / tariff.getVehicleTariff1().getDurationNight1());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle1(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle1(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             }
         } else {
             price = price + ((totalDays * tariff.getVehicleTariff1().getCostNight1()) / tariff.getVehicleTariff1().getDurationNight1());
-            price = price + HourlyFareCalculator.calculateStepFareVehicle1(remainingAmountMinutes, tariff);
+            price = price + HourlyFareCalculator.calculateStepFareVehicle1(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
             return price;
         }
 
@@ -94,7 +94,7 @@ public class DailyHourlyFareCalculator {
 
         long price = 0;
 
-        if (roundedTotalStayLength < tariff.getCircadianCalcBase()) {
+        if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
             price = HourlyFareCalculator.calculateStepFareVehicle2(roundedTotalStayLength, tariff);
             return price;
         }
@@ -107,7 +107,7 @@ public class DailyHourlyFareCalculator {
         }
 
         totalDays = totalDays + 1;
-        long remainingAmountMinutes=0;
+        long remainingAmountMinutes = 0;
 
         Date enterTime = getDate(Integer.parseInt(sdfShow.format(enterDateTime).substring(11, 13)), Integer.parseInt(sdfShow.format(enterDateTime).substring(14, 16)));
         Date main24 = getDate(24, 00);
@@ -125,7 +125,7 @@ public class DailyHourlyFareCalculator {
 
         if (diff2 < tariff.getCircadianCalcBase()) {
             totalDays = totalDays - 1;
-            remainingAmountMinutes = remainingAmountMinutes+diff2;
+            remainingAmountMinutes = remainingAmountMinutes + diff2;
         }
 
         Log.d(TAG, "calculateHourlyDailyFareVehicle2 > totalDays:" + totalDays);
@@ -139,18 +139,18 @@ public class DailyHourlyFareCalculator {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff2().getDurationNight2()) * tariff.getVehicleTariff2().getCostNight2()) +
                         (((remainingNights % tariff.getVehicleTariff2().getDurationNight2()) * tariff.getVehicleTariff2().getCostNight2()) / tariff.getVehicleTariff2().getDurationNight2());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle2(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle2(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             } else {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff2().getDurationNight1()) * tariff.getVehicleTariff2().getCostNight1()) +
                         (((remainingNights % tariff.getVehicleTariff2().getDurationNight1()) * tariff.getVehicleTariff2().getCostNight1()) / tariff.getVehicleTariff2().getDurationNight1());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle2(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle2(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             }
         } else {
             price = price + ((totalDays * tariff.getVehicleTariff2().getCostNight1()) / tariff.getVehicleTariff2().getDurationNight1());
-            price = price + HourlyFareCalculator.calculateStepFareVehicle2(remainingAmountMinutes, tariff);
+            price = price + HourlyFareCalculator.calculateStepFareVehicle2(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
             return price;
         }
 
@@ -165,7 +165,7 @@ public class DailyHourlyFareCalculator {
 
         long price = 0;
 
-        if (roundedTotalStayLength < tariff.getCircadianCalcBase()) {
+        if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
             price = HourlyFareCalculator.calculateStepFareVehicle3(roundedTotalStayLength, tariff);
             return price;
         }
@@ -178,7 +178,7 @@ public class DailyHourlyFareCalculator {
         }
 
         totalDays = totalDays + 1;
-        long remainingAmountMinutes=0;
+        long remainingAmountMinutes = 0;
 
         Date enterTime = getDate(Integer.parseInt(sdfShow.format(enterDateTime).substring(11, 13)), Integer.parseInt(sdfShow.format(enterDateTime).substring(14, 16)));
         Date main24 = getDate(24, 00);
@@ -196,7 +196,7 @@ public class DailyHourlyFareCalculator {
 
         if (diff2 < tariff.getCircadianCalcBase()) {
             totalDays = totalDays - 1;
-            remainingAmountMinutes = remainingAmountMinutes+diff2;
+            remainingAmountMinutes = remainingAmountMinutes + diff2;
         }
 
         Log.d(TAG, "calculateHourlyDailyFareVehicle3 > totalDays:" + totalDays);
@@ -210,18 +210,18 @@ public class DailyHourlyFareCalculator {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff3().getDurationNight2()) * tariff.getVehicleTariff3().getCostNight2()) +
                         (((remainingNights % tariff.getVehicleTariff3().getDurationNight2()) * tariff.getVehicleTariff3().getCostNight2()) / tariff.getVehicleTariff3().getDurationNight2());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle3(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle3(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             } else {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff3().getDurationNight1()) * tariff.getVehicleTariff3().getCostNight1()) +
                         (((remainingNights % tariff.getVehicleTariff3().getDurationNight1()) * tariff.getVehicleTariff3().getCostNight1()) / tariff.getVehicleTariff3().getDurationNight1());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle3(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle3(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             }
         } else {
             price = price + ((totalDays * tariff.getVehicleTariff3().getCostNight1()) / tariff.getVehicleTariff3().getDurationNight1());
-            price = price + HourlyFareCalculator.calculateStepFareVehicle3(remainingAmountMinutes, tariff);
+            price = price + HourlyFareCalculator.calculateStepFareVehicle3(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
             return price;
         }
 
@@ -236,7 +236,7 @@ public class DailyHourlyFareCalculator {
 
         long price = 0;
 
-        if (roundedTotalStayLength < tariff.getCircadianCalcBase()) {
+        if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
             price = HourlyFareCalculator.calculateStepFareVehicle4(roundedTotalStayLength, tariff);
             return price;
         }
@@ -249,7 +249,7 @@ public class DailyHourlyFareCalculator {
         }
 
         totalDays = totalDays + 1;
-        long remainingAmountMinutes=0;
+        long remainingAmountMinutes = 0;
 
         Date enterTime = getDate(Integer.parseInt(sdfShow.format(enterDateTime).substring(11, 13)), Integer.parseInt(sdfShow.format(enterDateTime).substring(14, 16)));
         Date main24 = getDate(24, 00);
@@ -267,7 +267,7 @@ public class DailyHourlyFareCalculator {
 
         if (diff2 < tariff.getCircadianCalcBase()) {
             totalDays = totalDays - 1;
-            remainingAmountMinutes = remainingAmountMinutes+diff2;
+            remainingAmountMinutes = remainingAmountMinutes + diff2;
         }
 
         Log.d(TAG, "calculateHourlyDailyFareVehicle4 > totalDays:" + totalDays);
@@ -281,18 +281,18 @@ public class DailyHourlyFareCalculator {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff4().getDurationNight2()) * tariff.getVehicleTariff4().getCostNight2()) +
                         (((remainingNights % tariff.getVehicleTariff4().getDurationNight2()) * tariff.getVehicleTariff4().getCostNight2()) / tariff.getVehicleTariff4().getDurationNight2());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle4(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle4(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             } else {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff4().getDurationNight1()) * tariff.getVehicleTariff4().getCostNight1()) +
                         (((remainingNights % tariff.getVehicleTariff4().getDurationNight1()) * tariff.getVehicleTariff4().getCostNight1()) / tariff.getVehicleTariff4().getDurationNight1());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle4(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle4(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             }
         } else {
             price = price + ((totalDays * tariff.getVehicleTariff4().getCostNight1()) / tariff.getVehicleTariff4().getDurationNight1());
-            price = price + HourlyFareCalculator.calculateStepFareVehicle4(remainingAmountMinutes, tariff);
+            price = price + HourlyFareCalculator.calculateStepFareVehicle4(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
             return price;
         }
 
@@ -307,7 +307,7 @@ public class DailyHourlyFareCalculator {
 
         long price = 0;
 
-        if (roundedTotalStayLength < tariff.getCircadianCalcBase()) {
+        if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
             price = HourlyFareCalculator.calculateStepFareVehicle5(roundedTotalStayLength, tariff);
             return price;
         }
@@ -320,7 +320,7 @@ public class DailyHourlyFareCalculator {
         }
 
         totalDays = totalDays + 1;
-        long remainingAmountMinutes=0;
+        long remainingAmountMinutes = 0;
 
         Date enterTime = getDate(Integer.parseInt(sdfShow.format(enterDateTime).substring(11, 13)), Integer.parseInt(sdfShow.format(enterDateTime).substring(14, 16)));
         Date main24 = getDate(24, 00);
@@ -338,7 +338,7 @@ public class DailyHourlyFareCalculator {
 
         if (diff2 < tariff.getCircadianCalcBase()) {
             totalDays = totalDays - 1;
-            remainingAmountMinutes = remainingAmountMinutes+diff2;
+            remainingAmountMinutes = remainingAmountMinutes + diff2;
         }
 
         Log.d(TAG, "calculateHourlyDailyFareVehicle5 > totalDays:" + totalDays);
@@ -352,18 +352,18 @@ public class DailyHourlyFareCalculator {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff5().getDurationNight2()) * tariff.getVehicleTariff5().getCostNight2()) +
                         (((remainingNights % tariff.getVehicleTariff5().getDurationNight2()) * tariff.getVehicleTariff5().getCostNight2()) / tariff.getVehicleTariff5().getDurationNight2());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle5(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle5(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             } else {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff5().getDurationNight1()) * tariff.getVehicleTariff5().getCostNight1()) +
                         (((remainingNights % tariff.getVehicleTariff5().getDurationNight1()) * tariff.getVehicleTariff5().getCostNight1()) / tariff.getVehicleTariff5().getDurationNight1());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle5(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle5(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             }
         } else {
             price = price + ((totalDays * tariff.getVehicleTariff5().getCostNight1()) / tariff.getVehicleTariff5().getDurationNight1());
-            price = price + HourlyFareCalculator.calculateStepFareVehicle5(remainingAmountMinutes, tariff);
+            price = price + HourlyFareCalculator.calculateStepFareVehicle5(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
             return price;
         }
 
@@ -379,7 +379,7 @@ public class DailyHourlyFareCalculator {
 
         long price = 0;
 
-        if (roundedTotalStayLength < tariff.getCircadianCalcBase()) {
+        if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
             price = HourlyFareCalculator.calculateStepFareVehicle6(roundedTotalStayLength, tariff);
             return price;
         }
@@ -392,7 +392,7 @@ public class DailyHourlyFareCalculator {
         }
 
         totalDays = totalDays + 1;
-        long remainingAmountMinutes=0;
+        long remainingAmountMinutes = 0;
 
         Date enterTime = getDate(Integer.parseInt(sdfShow.format(enterDateTime).substring(11, 13)), Integer.parseInt(sdfShow.format(enterDateTime).substring(14, 16)));
         Date main24 = getDate(24, 00);
@@ -410,7 +410,7 @@ public class DailyHourlyFareCalculator {
 
         if (diff2 < tariff.getCircadianCalcBase()) {
             totalDays = totalDays - 1;
-            remainingAmountMinutes = remainingAmountMinutes+diff2;
+            remainingAmountMinutes = remainingAmountMinutes + diff2;
         }
 
         Log.d(TAG, "calculateHourlyDailyFareVehicle6 > totalDays:" + totalDays);
@@ -424,18 +424,18 @@ public class DailyHourlyFareCalculator {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff6().getDurationNight2()) * tariff.getVehicleTariff6().getCostNight2()) +
                         (((remainingNights % tariff.getVehicleTariff6().getDurationNight2()) * tariff.getVehicleTariff6().getCostNight2()) / tariff.getVehicleTariff6().getDurationNight2());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle6(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle6(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             } else {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff6().getDurationNight1()) * tariff.getVehicleTariff6().getCostNight1()) +
                         (((remainingNights % tariff.getVehicleTariff6().getDurationNight1()) * tariff.getVehicleTariff6().getCostNight1()) / tariff.getVehicleTariff6().getDurationNight1());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle6(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle6(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             }
         } else {
             price = price + ((totalDays * tariff.getVehicleTariff6().getCostNight1()) / tariff.getVehicleTariff6().getDurationNight1());
-            price = price + HourlyFareCalculator.calculateStepFareVehicle6(remainingAmountMinutes, tariff);
+            price = price + HourlyFareCalculator.calculateStepFareVehicle6(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
             return price;
         }
 
@@ -451,7 +451,7 @@ public class DailyHourlyFareCalculator {
 
         long price = 0;
 
-        if (roundedTotalStayLength < tariff.getCircadianCalcBase()) {
+        if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
             price = HourlyFareCalculator.calculateStepFareVehicle7(roundedTotalStayLength, tariff);
             return price;
         }
@@ -464,7 +464,7 @@ public class DailyHourlyFareCalculator {
         }
 
         totalDays = totalDays + 1;
-        long remainingAmountMinutes=0;
+        long remainingAmountMinutes = 0;
 
         Date enterTime = getDate(Integer.parseInt(sdfShow.format(enterDateTime).substring(11, 13)), Integer.parseInt(sdfShow.format(enterDateTime).substring(14, 16)));
         Date main24 = getDate(24, 00);
@@ -482,7 +482,7 @@ public class DailyHourlyFareCalculator {
 
         if (diff2 < tariff.getCircadianCalcBase()) {
             totalDays = totalDays - 1;
-            remainingAmountMinutes = remainingAmountMinutes+diff2;
+            remainingAmountMinutes = remainingAmountMinutes + diff2;
         }
 
         Log.d(TAG, "calculateHourlyDailyFareVehicle7 > totalDays:" + totalDays);
@@ -496,18 +496,18 @@ public class DailyHourlyFareCalculator {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff7().getDurationNight2()) * tariff.getVehicleTariff7().getCostNight2()) +
                         (((remainingNights % tariff.getVehicleTariff7().getDurationNight2()) * tariff.getVehicleTariff7().getCostNight2()) / tariff.getVehicleTariff7().getDurationNight2());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle7(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle7(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             } else {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff7().getDurationNight1()) * tariff.getVehicleTariff7().getCostNight1()) +
                         (((remainingNights % tariff.getVehicleTariff7().getDurationNight1()) * tariff.getVehicleTariff7().getCostNight1()) / tariff.getVehicleTariff7().getDurationNight1());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle7(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle7(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             }
         } else {
             price = price + ((totalDays * tariff.getVehicleTariff7().getCostNight1()) / tariff.getVehicleTariff7().getDurationNight1());
-            price = price + HourlyFareCalculator.calculateStepFareVehicle7(remainingAmountMinutes, tariff);
+            price = price + HourlyFareCalculator.calculateStepFareVehicle7(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
             return price;
         }
 
@@ -524,7 +524,7 @@ public class DailyHourlyFareCalculator {
 
         long price = 0;
 
-        if (roundedTotalStayLength < tariff.getCircadianCalcBase()) {
+        if (roundedTotalStayLength <= tariff.getCircadianCalcBase()) {
             price = HourlyFareCalculator.calculateStepFareVehicle8(roundedTotalStayLength, tariff);
             return price;
         }
@@ -537,7 +537,7 @@ public class DailyHourlyFareCalculator {
         }
 
         totalDays = totalDays + 1;
-        long remainingAmountMinutes=0;
+        long remainingAmountMinutes = 0;
 
         Date enterTime = getDate(Integer.parseInt(sdfShow.format(enterDateTime).substring(11, 13)), Integer.parseInt(sdfShow.format(enterDateTime).substring(14, 16)));
         Date main24 = getDate(24, 00);
@@ -555,7 +555,7 @@ public class DailyHourlyFareCalculator {
 
         if (diff2 < tariff.getCircadianCalcBase()) {
             totalDays = totalDays - 1;
-            remainingAmountMinutes = remainingAmountMinutes+diff2;
+            remainingAmountMinutes = remainingAmountMinutes + diff2;
         }
 
         Log.d(TAG, "calculateHourlyDailyFareVehicle8 > totalDays:" + totalDays);
@@ -569,18 +569,18 @@ public class DailyHourlyFareCalculator {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff8().getDurationNight2()) * tariff.getVehicleTariff8().getCostNight2()) +
                         (((remainingNights % tariff.getVehicleTariff8().getDurationNight2()) * tariff.getVehicleTariff8().getCostNight2()) / tariff.getVehicleTariff8().getDurationNight2());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle8(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle8(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             } else {
                 price = price +
                         ((remainingNights / tariff.getVehicleTariff8().getDurationNight1()) * tariff.getVehicleTariff8().getCostNight1()) +
                         (((remainingNights % tariff.getVehicleTariff8().getDurationNight1()) * tariff.getVehicleTariff8().getCostNight1()) / tariff.getVehicleTariff8().getDurationNight1());
-                price = price + HourlyFareCalculator.calculateStepFareVehicle8(remainingAmountMinutes, tariff);
+                price = price + HourlyFareCalculator.calculateStepFareVehicle8(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
                 return price;
             }
         } else {
             price = price + ((totalDays * tariff.getVehicleTariff8().getCostNight1()) / tariff.getVehicleTariff8().getDurationNight1());
-            price = price + HourlyFareCalculator.calculateStepFareVehicle8(remainingAmountMinutes, tariff);
+            price = price + HourlyFareCalculator.calculateStepFareVehicle8(CalculateHelperUtility.roundStayLengthTime(remainingAmountMinutes,tariff), tariff);
             return price;
         }
 
