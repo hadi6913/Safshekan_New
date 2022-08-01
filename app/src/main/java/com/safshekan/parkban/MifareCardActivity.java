@@ -223,7 +223,7 @@ public class MifareCardActivity extends BaseActivity {
                                 outPut = new String(result, StandardCharsets.UTF_8);
                             }
                             Log.d(TAG, "actual conveted value in block , in INTEGER format >>> "+outPut );
-                            if (outPut.equals(null)) {
+                            if (outPut==null) {
                                 outPut = "";
                             }
                             Intent intent = new Intent(MifareCardActivity.this, MainActivity.class);

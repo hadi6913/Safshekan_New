@@ -218,7 +218,7 @@ public class MifareCardViewModel extends ViewModel {
             @Override
             public void run() {
                 //your code
-                if (lastScannedText.equals(null)) {
+                if (lastScannedText==null) {
                     lastScannedText = "";
                 }
                 Intent intent = new Intent(mContext, MainActivity.class);

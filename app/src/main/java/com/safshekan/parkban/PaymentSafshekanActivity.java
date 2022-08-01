@@ -43,18 +43,18 @@ public class PaymentSafshekanActivity extends BaseActivity  {
             viewModel.getCardNumber().setValue(getIntent().getStringExtra("CardNumber"));
             viewModel.getMemberCode().setValue(getIntent().getStringExtra("MemberCode"));
             viewModel.getDumpIdId().setValue(getIntent().getLongExtra("DumpId", 0));
-            if (getIntent().getStringExtra("MemberCode").equals("") || getIntent().getStringExtra("MemberCode").equals(null)) {
+            if (getIntent().getStringExtra("MemberCode").equals("") || getIntent().getStringExtra("MemberCode")==null) {
                 viewModel.getMember().setValue(false);
             } else {
                 viewModel.getMember().setValue(true);
             }
-            if (getIntent().getStringExtra("CardNumber").equals("") || getIntent().getStringExtra("CardNumber").equals(null)) {
+            if (getIntent().getStringExtra("CardNumber").equals("") || getIntent().getStringExtra("CardNumber")==null) {
                 viewModel.getKart().setValue(false);
             } else {
                 viewModel.getKart().setValue(true);
             }
             String pure_pelak = getIntent().getStringExtra("AbsolutCarPlate");
-            if (pure_pelak.equals("") || pure_pelak.equals(null)) {
+            if (pure_pelak==null ||pure_pelak.equals("") ) {
                 viewModel.getPelak().setValue(false);
             } else {
                 viewModel.getPelak().setValue(true);

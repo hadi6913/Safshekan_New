@@ -86,7 +86,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/login_edit_text_background"
-                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%\'()*+€£¥×÷,-./\:;=?@[]_`{};|~^"
+                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%\'()*+€£¥×÷,-./\:;=?@[]_`{};|~^۰۱۲۳۴۵۶۷۸۹"
                 android:drawableLeft="@drawable/ic_key_circular_button"
                 android:hint="@string/password"
                 android:inputType="textPassword"

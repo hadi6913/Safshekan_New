@@ -185,7 +185,7 @@ public class MainActivity extends BaseActivity implements ReaderHandler.Callback
             viewModel.getHasPelak().setValue(true);
             String General_Qr_Code_String = getIntent().getStringExtra("scanned_string");
             Log.d(TAG, "General_Qr_Code_String_scanned >>>>>>>>>>>>>>>> " + General_Qr_Code_String);
-            if (General_Qr_Code_String.equals("") || General_Qr_Code_String.equals(null)) {
+            if (General_Qr_Code_String.equals("") || General_Qr_Code_String==null) {
                 viewModel.getOzv_code_string().setValue("");
                 viewModel.getCard_code_string().setValue("");
                 viewModel.getCar().setValue(true);
@@ -718,7 +718,7 @@ public class MainActivity extends BaseActivity implements ReaderHandler.Callback
 //            viewModel.getHasPelak().setValue(true);
 //            String General_Mifare_Code_String = getIntent().getStringExtra("scanned_string");
 //            Log.d(TAG, "General_Mifare_Code_String_scanned >>>>>>>>>>>>>>>> " + General_Mifare_Code_String);
-//            if (General_Mifare_Code_String.equals("") || General_Mifare_Code_String.equals(null)) {
+//            if (General_Mifare_Code_String.equals("") || General_Mifare_Code_String==null) {
 //                ShowToast.getInstance().showWarning(this, R.string.error_mifare);
 //                viewModel.getEdit_text_imageview_ozv_status().setValue(false);
 //                viewModel.getEdit_text_imageview_kart_status().setValue(false);

@@ -481,24 +481,24 @@ public class MainViewModel extends ViewModel {
                 boolean is_pelak_empty = false;
                 if (getCar().getValue()) {
                     //test car plate
-                    if (getPlate__0().getValue().equals("") || getPlate__0().getValue().equals(null))
+                    if (getPlate__0().getValue().equals("") || getPlate__0().getValue()==null)
                         is_pelak_empty = true;
-                    if (getPlate__2().getValue().equals("") || getPlate__2().getValue().equals(null))
+                    if (getPlate__2().getValue().equals("") || getPlate__2().getValue()==null)
                         is_pelak_empty = true;
-                    if (getPlate__3().getValue().equals("") || getPlate__3().getValue().equals(null))
+                    if (getPlate__3().getValue().equals("") || getPlate__3().getValue()==null)
                         is_pelak_empty = true;
                 } else {
                     //test motor plate
-                    if (getMplate__0().getValue().equals("") || getMplate__0().getValue().equals(null))
+                    if (getMplate__0().getValue().equals("") || getMplate__0().getValue()==null)
                         is_pelak_empty = true;
-                    if (getMplate__1().getValue().equals("") || getMplate__1().getValue().equals(null))
+                    if (getMplate__1().getValue().equals("") || getMplate__1().getValue()==null)
                         is_pelak_empty = true;
                 }
                 boolean is_membercode_empty = false;
                 if (getOzv_code_string().getValue().isEmpty())
                     is_membercode_empty = true;
                 boolean is_cardcode_empty = false;
-                if ((getCard_code_string().getValue().equals("")) || (getCard_code_string().getValue().equals(null)))
+                if ((getCard_code_string().getValue().equals("")) || (getCard_code_string().getValue()==null))
                     is_cardcode_empty = true;
                 Log.d(TAG, "pelak status >>> " + is_pelak_empty);
                 Log.d(TAG, "member number status >>> " + is_membercode_empty);
@@ -656,7 +656,7 @@ public class MainViewModel extends ViewModel {
                     @Override
                     public void onSuccess(ExitBillDto.ExitBillDtoResponse result) {
                         progress.setValue(0);
-                        if (!result.equals(null)) {
+                        if (!(result==null)) {
                             Intent intent = new Intent(myContext, PaymentSafshekanActivity.class);
                             intent.putExtra("isfromtaeed", true);
                             intent.putExtra("CommonCost", result.getCommonCost()); // long
