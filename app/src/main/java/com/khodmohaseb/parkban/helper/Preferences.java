@@ -5,6 +5,10 @@ import android.content.SharedPreferences;
 
 public class Preferences {
 
+
+//    "https://apicloudparking.elmosanat.com/DeviceApi/"
+//    "http://93.118.101.126:8075/DeviceApi/"
+
     private static String User_Name = "username";
     private static String Password = "password";
     private static String First = "First";
@@ -82,7 +86,7 @@ public class Preferences {
 
         return (serverAddress != null && !serverAddress.isEmpty())
                 ? serverAddress
-                : "https://apicloudparking.elmosanat.com/DeviceApi/";
+                : "http://93.118.101.126:8075/DeviceApi/";
 
     }
 

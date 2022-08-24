@@ -33,7 +33,9 @@
         android:roundIcon="@drawable/application_elm_icon"
         android:supportsRtl="false"
         android:theme="@style/FullscreenTheme"
+        android:manageSpaceActivity=".ActivityOfMyChoice"
         tools:replace="android:supportsRtl">
+        <activity android:name=".ActivityOfMyChoice"/>
         <activity android:name="com.khodmohaseb.parkban.ReportActivity"></activity>
         <activity android:name="com.khodmohaseb.parkban.PaymentSafshekanActivity" />
         <activity android:name="com.khodmohaseb.parkban.MifareCardActivity" />
