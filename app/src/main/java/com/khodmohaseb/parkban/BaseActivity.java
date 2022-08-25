@@ -1,6 +1,7 @@
 package com.khodmohaseb.parkban;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -124,13 +125,15 @@ public class BaseActivity extends AppCompatActivity implements SendRecordHandler
             locationTracker = new LocationTracker(BaseActivity.this);
 
 
-
-
         sendRecordHandlerIntent = new Intent(getApplicationContext(), SendRecordHandler.class);
-        Log.d("BaseActivity", "onCreate: MainActivity >>>> Service has been started");
 
-        startService(sendRecordHandlerIntent);
-        getApplicationContext().bindService(sendRecordHandlerIntent, sendRecordHandlerConnection, Context.BIND_AUTO_CREATE);
+        if(!isMyServiceRunning(SendRecordHandler.class)){
+
+            startService(sendRecordHandlerIntent);
+            getApplicationContext().bindService(sendRecordHandlerIntent, sendRecordHandlerConnection, Context.BIND_AUTO_CREATE);
+
+
+        }
 
 
 
@@ -138,12 +141,23 @@ public class BaseActivity extends AppCompatActivity implements SendRecordHandler
     }
 
 
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.d("BaseActivity", "onCreate: MainActivity >>>> Service has been stoped");
-        stopService(sendRecordHandlerIntent);
-        getApplicationContext().unbindService( sendRecordHandlerConnection);
+//        stopService(sendRecordHandlerIntent);
+//        getApplicationContext().unbindService( sendRecordHandlerConnection);
     }
 
     public void showProgress(final boolean show) {

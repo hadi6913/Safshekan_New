@@ -86,7 +86,7 @@ public class Preferences {
 
         return (serverAddress != null && !serverAddress.isEmpty())
                 ? serverAddress
-                : "http://93.118.101.126:8075/DeviceApi/";
+                : "https://apicloudparking.elmosanat.com/DeviceApi/";
 
     }
 

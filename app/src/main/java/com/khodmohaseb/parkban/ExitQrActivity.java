@@ -60,9 +60,6 @@ public class ExitQrActivity extends BaseActivity {
     }
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,15 +161,6 @@ public class ExitQrActivity extends BaseActivity {
         });
 
 
-
-
-
-
-
-
-
-
-
         if (getIntent().getBooleanExtra("isfromqr", false)) {
             String General_Qr_Code_String = getIntent().getStringExtra("scanned_string");
             Log.d(TAG, "General_Qr_Code_String_scanned >>>>>>>>>>>>>>>> " + General_Qr_Code_String);
@@ -195,8 +183,8 @@ public class ExitQrActivity extends BaseActivity {
                         String enterDateTime = qrItems[2];
                         String tariffId = qrItems[3];
                         String paidAmount = qrItems[4];
-                        String enterDoorId = qrItems[5];
-                        String enterOperatorId = qrItems[6];
+                        String enterDoorId = qrItems[6];
+                        String enterOperatorId = qrItems[5];
                         String paymentType = qrItems[7];
                         String paymentCode = qrItems[8];
 
